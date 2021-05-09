@@ -1,20 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 
-interface Inputs {
+interface ISignUpData {
     account: string;
     password: string;
     check: string;
 }
 const SignUpBox: React.FC = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<ISignUpData>();
+    const [isAlready, setIsAlready] = useState<boolean>(false); // is account checked duplicated ?
 
-    const onSubmit: SubmitHandler<Inputs> = data => {
-        alert(JSON.stringify(data));
+    useEffect(() => {
+        setIsAlready(false);
+    }, [watch('account')]);
+
+    const onSubmit: SubmitHandler<ISignUpData> = signUpData => {
+        if (!isAlready) {
+            alert('중복확인을 해주세요');
+            return;
+        }
+        alert(JSON.stringify(signUpData));
     };
 
     return (
@@ -33,7 +42,7 @@ const SignUpBox: React.FC = () => {
                     })}
                     placeholder='아이디'
                     />
-                    <DupliBtn onClick={handleSubmit(onSubmit)} > 중복확인 </DupliBtn>
+                    <DupliBtn onClick={() => setIsAlready(true)}> 중복확인 </DupliBtn>
                 </AccountRow>
                 {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
             </Column>
@@ -44,6 +53,7 @@ const SignUpBox: React.FC = () => {
                           />
                     <Input {...register('password', {
                        required: '비밀번호를 입력해주세요',
+                       minLength: { value: 8, message: '비밀번호는 최소 8자 입니다' }
                     })}
                        type='password'
                        placeholder='비밀번호'
@@ -64,7 +74,7 @@ const SignUpBox: React.FC = () => {
                        placeholder='비밀번호 확인'
                     />
                 </Row>
-                {errors.check ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : 'ㅤ'}
+                {!errors.password && errors.check ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : 'ㅤ'}
             </Column>
                 <Button onClick={handleSubmit(onSubmit)} > 회원가입 </Button>
         </Box>

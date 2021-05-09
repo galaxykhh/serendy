@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import { useHistorys } from '../../Hooks/useHistorys';
 
-interface Inputs {
+interface ILoginData {
     account: string;
     password: string;
 }
 const LoginBox: React.FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ mode: 'onChange' });
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginData>({ mode: 'onChange' });
     const history = useHistorys();
+
+    const onSubmit: SubmitHandler<ILoginData> = loginData => {
+        alert(JSON.stringify(loginData));
+    }
 
     return (
         <Box>
@@ -47,11 +51,11 @@ const LoginBox: React.FC = () => {
             </Column>
             <ButtonBox>
                 <Button onClick={history.pushSignUp} > 회원가입 </Button>
-                <Button> 로그인 </Button>
+                <Button onClick={handleSubmit(onSubmit)} > 로그인 </Button>
             </ButtonBox>
             
             <ForgotPW onClick={history.pushFindPW} >
-                비밀번호가 기억이 안나세요?
+                비밀번호가 기억이 안나시나요?
             </ForgotPW>
         </Box>
     )

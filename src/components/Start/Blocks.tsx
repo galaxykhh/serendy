@@ -21,17 +21,17 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
                 서로를 모르는 상대와 이야기에만 집중할 수 있습니다
             </Block>
             <Space />
-            <Text size='70px'
+            <Text size='50px'
                   data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='500'>
-                # Serendipity
+                경험해보세요 <br/><br/>
             </Text>
             <Space />
             <Text data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='500'>
-                # 뜻밖의 행운을 발견하는 능력
+                당신의 우연 또는 행운을 위한
             </Text>
             <Space />
             <Space />
@@ -59,7 +59,7 @@ const Block: React.FC<{ title: string }>= ({ children, title }) => {
         <>
             <Text data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
-                  data-aos-duration='500'>
+                  data-aos-duration='900'>
                 {title}
             </Text>
             <Text size='28px'

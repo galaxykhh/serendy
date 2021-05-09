@@ -4,18 +4,23 @@ const serendyInstance = axios.create({
     baseURL: 'http://localhost:8000',
 });
 
+interface IAuth {
+    account: string;
+    password: string;
+}
+
 class SerendyRepository {
 
-    test() {
-        return serendyInstance.get('/');
+    checkDuplicate(account: string) {
+        return serendyInstance.get(`/api/auth/check/${account}`);
     }
 
-    signIn() {
-        return serendyInstance.post
+    signUp(data: IAuth) {
+        return serendyInstance.post('/api/auth/signup', data);
     }
 
-    signUp() {
-        return serendyInstance.post
+    signIn(data: IAuth) {
+        return serendyInstance.post('/api/auth/signin', data);
     }
 }
 

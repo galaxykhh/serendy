@@ -20,6 +20,9 @@ function App() {
                         <Route exact path='/main'>
                             <Main />
                         </Route>
+                        <Route exact path='/login'>
+                            login
+                        </Route>
                     </Switch>
                 </BrowserRouter>
             </ThemeProvider>

@@ -17,7 +17,7 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             </Block>
             <Space />
             <Block title='걱정마세요'>
-                모든 서비스는 익명입니다<br/><br/>
+                상대방과의 모든 대화는 익명입니다<br/><br/>
                 서로를 모르는 상대와 이야기에만 집중할 수 있습니다
             </Block>
             <Space />
@@ -25,20 +25,20 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
                   data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='500'>
-                Serendipity
+                # Serendipity
             </Text>
             <Space />
             <Text data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='500'>
-                뜻밖의 행운을 발견하는 능력
+                # 뜻밖의 행운을 발견하는 능력
             </Text>
             <Space />
-            <>
+            <Space />
             <TextLogo URL={logoURL}
                       data-aos='fade-down-right'
                       data-aos-duration='1000'
-                      data-aos-anchor-placement='top-center'
+                      data-aos-anchor-placement='bottom-bottom'
                       />
             <StartBtn onClick={push}
                       data-aos='fade-in'
@@ -46,7 +46,8 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
                       >
                 시작하기
             </StartBtn>
-            </>
+            <Space />
+            <Space />
         </BlockContainer>
     )
 }
@@ -89,7 +90,7 @@ const Text = styled.div<{ size?: string, mb?: string }>`
 `;
 
 const Space = styled.div`
-    width: 100%;
+    width: 400px;
     height: 250px;
 `;
 

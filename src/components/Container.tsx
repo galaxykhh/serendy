@@ -16,4 +16,9 @@ const Flex = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(
+        white, ${({ theme }) => theme.colors.mainBlue}
+    );
+    width: 100vw;
+    height: 100vh;
 `;

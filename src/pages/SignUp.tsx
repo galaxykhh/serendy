@@ -1,29 +1,26 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Container from '../components/Container';
-import LoginBox from '../components/Login/LoginBox';
+import SignUpBox from '../components/SignUp/SignUpBox';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 const logoURL = '/images/serendy_text.png';
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
 
     useEffect(() => {
-        Aos.init();
+        Aos.init({ duration: 800 });
     }, []);
 
     return (
         <Container>
-            <TextLogo URL={logoURL}
-                      data-aos='fade-down'
-                      data-aos-duration='1000'
-                      />
-            <LoginBox />
+            <TextLogo URL={logoURL}/>
+            <SignUpBox />
         </Container>
     )
 }
 
-export default Login;
+export default SignUp;
 
 const TextLogo = styled.div<{ URL: string }>`
     width: 600px;
@@ -31,5 +28,4 @@ const TextLogo = styled.div<{ URL: string }>`
     background-image: url(${({ URL }) => URL});
     background-size: cover;
     background-position: center;
-    margin-bottom: 40px;
 `;

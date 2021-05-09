@@ -44,13 +44,18 @@ const Arrow = styled.div`
 
 const StartBtn = styled.button`
     all: unset;
-    width: 200px;
+    width: 160px;
     height: 70px;
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
     margin-bottom: 50px;
     cursor: pointer;
+    transition: .3s ease;
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.white};
+        color: ${({ theme }) => theme.colors.mainBlue};
+    }
 `;

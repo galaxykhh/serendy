@@ -4,8 +4,10 @@ export const theme = {
         black: '#282c37',
         white: '#ffffff',
         grey: '#a4b0be',
+        red: '#ff4d4d',
+        green: '#3ae374',
+        salmon: '#ffb8b8',
     },
-    fontSizes: {
-        
-    }
 }
+
+export type ThemeType = typeof theme;

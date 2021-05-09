@@ -1,27 +1,37 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/global';
+// PrivateRoute
+import PrivateRoute from './components/PrivateRoute';
 // theme
 import { theme } from './style/theme';
 // pages
-import Start from './pages/start';
-import Main from './pages/main';
+import Start from './pages/Start';
+import Main from './pages/Main';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 function App() {
     return (
         <>
-            <GlobalStyle />
             <ThemeProvider theme={theme} >
+                <GlobalStyle />
                 <BrowserRouter>
                     <Switch>
                         <Route exact path='/'>
                             <Start />
                         </Route>
-                        <Route exact path='/main'>
+                        <PrivateRoute exact path='/main'>
                             <Main />
-                        </Route>
+                        </PrivateRoute>
                         <Route exact path='/login'>
-                            login
+                            <Login />
+                        </Route>
+                        <Route exact path='/signup'>
+                            <SignUp />
+                        </Route>
+                        <Route exact path='/findpw'>
+                            Find Password
                         </Route>
                     </Switch>
                 </BrowserRouter>

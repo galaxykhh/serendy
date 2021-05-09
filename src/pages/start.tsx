@@ -34,6 +34,8 @@ const Wallpaper = styled.div`
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        white, ${({ theme }) => theme.colors.mainBlue} 60%, white 100%
+        ${({ theme }) => theme.colors.white},
+        ${({ theme }) => theme.colors.mainBlue} 60%,
+        ${({ theme }) => theme.colors.white}
     );
 `;

@@ -6,15 +6,22 @@ interface IAccount {
     password: string;
 }
 
+interface IUser extends IAccount {
+    name: string;
+}
+
 class AuthStore implements IAccount {
 
     private _account: string = '';
     private _password: string = '';
+    isLogged: boolean = false;
+    user: IUser | null = null;
 
     constructor() {
         makeObservable<AuthStore, '_account' | '_password'>(this, {
             _account: observable,
             _password: observable,
+            user: observable,
             account: computed,
             password: computed,
             setAccount: action,
@@ -29,11 +36,11 @@ class AuthStore implements IAccount {
         return this._password;
     };
 
-    setAccount(account: string) {
+    setAccount(account: string): void {
         this._account = account;
     };
 
-    setPassword(password: string) {
+    setPassword(password: string): void {
         this._password = password;
     };
 }

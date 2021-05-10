@@ -8,7 +8,7 @@ import 'aos/dist/aos.css';
 const logoURL = '/images/serendy_text.png';
 
 const SignUp: React.FC = () => {
-    const [isSuccess, setIsSuccess] = useState<boolean>(true); // is sign up success ?
+    const [isSuccess, setIsSuccess] = useState<boolean>(false); // is sign up success ?
 
     useEffect(() => {
         Aos.init({ duration: 700 });

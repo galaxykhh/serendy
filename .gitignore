@@ -8,9 +8,6 @@
 # Image
 /public/images
 
-# back-end
-/server
-
 # testing
 /coverage
 

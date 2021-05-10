@@ -5,6 +5,7 @@ import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import { useHistorys } from '../../Hooks/useHistorys';
+import serendyRepository from '../../repository/serendyRepository';
 
 export interface ISignInData {
     account: string;
@@ -12,11 +13,30 @@ export interface ISignInData {
 }
 
 const SignIn: React.FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<ISignInData>();
+    const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
     const history = useHistorys();
 
-    const onSubmit: SubmitHandler<ISignInData> = loginData => {
-        alert(JSON.stringify(loginData));
+    const signIn = async (data: ISignInData): Promise<any> => {
+        try {
+            const response = await serendyRepository.signIn(data);
+            if ((response.data.message === 'SignIn Fail')) {
+                setError('account', {
+                    type: 'invalid',
+                });
+                setError('password', {
+                    type: 'invalid',
+                    message: '아이디나 비밀번호를 다시 확인해주세요',
+                });
+            } else if ((response.data.message === 'SignIn Success')) {
+                alert('로그인 성공');
+            };
+        } catch(err) {
+            alert('현재 서버 점검중입니다');
+        }
+    }
+
+    const onSubmit: SubmitHandler<ISignInData> = (data) => {
+        signIn(data)
     }
 
     return (
@@ -134,7 +154,7 @@ const Button = styled.button`
 const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 35px;
     transform: translateY(-5px);
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ color }) => color};
 `;
 
 const ErrorMsg = styled.div`

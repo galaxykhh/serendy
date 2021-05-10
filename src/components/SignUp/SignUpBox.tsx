@@ -209,7 +209,7 @@ const DupliBtn = styled(Button)`
 const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 35px;
     transform: translateY(-5px);
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ color }) => color};
 `;
 
 const ErrorMsg = styled.div`

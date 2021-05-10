@@ -14,10 +14,7 @@ const SignIn: React.FC = () => {
 
     return (
         <Container>
-            <TextLogo URL={logoURL}
-                      data-aos='fade-down'
-                      data-aos-duration='800'
-                      />
+            <TextLogo URL={logoURL}/>
             <LoginBox />
         </Container>
     )

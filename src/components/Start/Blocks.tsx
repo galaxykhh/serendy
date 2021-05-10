@@ -24,13 +24,13 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             <Text size='50px'
                   data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
-                  data-aos-duration='500'>
+                  data-aos-duration='800'>
                 경험해보세요 <br/><br/>
             </Text>
             <Space />
             <Text data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
-                  data-aos-duration='500'>
+                  data-aos-duration='800'>
                 당신의 행운 또는 우연을 위한
             </Text>
             <Space />

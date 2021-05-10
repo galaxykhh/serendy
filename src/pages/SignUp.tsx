@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Container from '../components/Container';
 import SignUpBox from '../components/SignUp/SignUpBox';
+import Success from '../components/SignUp/Success';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 const logoURL = '/images/serendy_text.png';
 
 const SignUp: React.FC = () => {
+    const [isSuccess, setIsSuccess] = useState<boolean>(true); // is sign up success ?
 
     useEffect(() => {
         Aos.init({ duration: 700 });
@@ -15,7 +17,7 @@ const SignUp: React.FC = () => {
     return (
         <Container>
             <TextLogo URL={logoURL}/>
-            <SignUpBox />
+            {isSuccess ? <Success /> : <SignUpBox success={() => setIsSuccess(true)} />}
         </Container>
     )
 }

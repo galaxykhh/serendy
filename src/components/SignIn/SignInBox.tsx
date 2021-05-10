@@ -20,7 +20,7 @@ const SignIn: React.FC = () => {
     }
 
     return (
-        <Box>
+        <Box data-aos='zoom-in'>
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
@@ -115,6 +115,7 @@ const Button = styled.button`
     all: unset;
     width: 200px;
     height: 65px;
+    border: 1px solid ${({ theme }) => theme.colors.white};
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};

@@ -8,7 +8,7 @@ const serendyInstance = axios.create({
 
 class SerendyRepository {
 
-    checkDuplicate(account: string): Promise<AxiosResponse> {
+    accountCheck(account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`/api/auth/check/${account}`);
     }
 

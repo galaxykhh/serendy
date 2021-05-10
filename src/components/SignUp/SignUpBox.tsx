@@ -12,23 +12,39 @@ export interface ISignUpData {
     check: string;
     secretMessage: string;
 }
-const SignUpBox: React.FC = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<ISignUpData>();
-    const [isAlready, setIsAlready] = useState<boolean>(false); // is account checked duplicated ?
+const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
+    const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
+    const [isAlready, setIsAlready] = useState<boolean>(false); // 계정 중복체크
 
+    // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
         try{
             const response = await serendyRepository.signUp(data);
             if ((response.data.message = 'SignUp Success')) {
-                alert('회원가입이 완료되었습니다');
+                success();
             }
         } catch(err) {
             alert('현재 서버가 점검중입니다');
         };
     };
 
-    const accountCheck = () => {
-
+    // 중복체크
+    const accountCheck = async () => {
+        await trigger('account');
+        if (errors.account) {
+            return
+        } else {
+            const account = watch('account');
+            const response = await serendyRepository.accountCheck(account);
+            if ((response.data.message === 'available' )) {
+                return setIsAlready(true);
+            } else if ((response.data.message === 'already exist')){
+                setError('account', {
+                    message: '이미 사용중인 아이디입니다'
+                });
+                setIsAlready(false);
+            };
+        };
     };
 
     const onSubmit: SubmitHandler<ISignUpData> = (data) => {
@@ -39,6 +55,7 @@ const SignUpBox: React.FC = () => {
         signUp(data);
     };
 
+    // account 인풋창 변경시 중복확인 해제
     useEffect(() => {
         setIsAlready(false);
     }, [watch('account')]); // eslint-disable-line
@@ -58,9 +75,9 @@ const SignUpBox: React.FC = () => {
                                maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
                            })}
                            />
-                    <DupliBtn onClick={() => setIsAlready(true)}> 중복확인 </DupliBtn>
+                    <DupliBtn onClick={accountCheck}> 중복확인 </DupliBtn>
                 </Row>
-                {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : <Msg>ㅤ</Msg>}
+                {!isAlready ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg> 사용가능한 아이디입니다 </Msg> }
             </Column>
             <Column>
                 <Row>
@@ -165,6 +182,7 @@ const Button = styled.button`
     all: unset;
     width: 200px;
     height: 55px;
+    border: 1px solid ${({ theme }) => theme.colors.white};
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};
@@ -182,7 +200,7 @@ const Button = styled.button`
 
 const DupliBtn = styled(Button)`
     width: 170px;
-    height: 40px;
+    height: 45px;
     margin-bottom: 10px;
     margin-top: 0;
     transform: trans

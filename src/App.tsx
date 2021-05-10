@@ -10,20 +10,19 @@ import Start from './pages/Start';
 import Main from './pages/Main';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import SideBar from './components/SideBar/SideBar';
 
 function App() {
     return (
         <>
             <ThemeProvider theme={theme} >
                 <GlobalStyle />
+                <SideBar />
                 <BrowserRouter>
                     <Switch>
                         <Route exact path='/'>
                             <Start />
                         </Route>
-                        <PrivateRoute exact path='/main'>
-                            <Main />
-                        </PrivateRoute>
                         <Route exact path='/login'>
                             <SignIn />
                         </Route>
@@ -33,6 +32,9 @@ function App() {
                         <Route exact path='/findpw'>
                             Find Password
                         </Route>
+                        <PrivateRoute exact path='/main'>
+                            <Main />
+                        </PrivateRoute>
                     </Switch>
                 </BrowserRouter>
             </ThemeProvider>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Container from '../components/Container';
+import AuthContainer from '../components/AuthContainer';
 import SignUpBox from '../components/SignUp/SignUpBox';
 import Success from '../components/SignUp/Success';
 import Aos from 'aos';
@@ -15,10 +15,10 @@ const SignUp: React.FC = () => {
     }, []);
 
     return (
-        <Container>
+        <AuthContainer>
             <TextLogo URL={logoURL}/>
             {isSuccess ? <Success /> : <SignUpBox success={() => setIsSuccess(true)} />}
-        </Container>
+        </AuthContainer>
     )
 }
 

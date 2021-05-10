@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fadeIn } from '../style/keyframes';
 
-const Container: React.FC = ({ children }) => {
+const MainContainer: React.FC = ({ children }) => {
     return (
 
         <Flex>
@@ -10,7 +11,7 @@ const Container: React.FC = ({ children }) => {
     )
 }
 
-export default Container;
+export default MainContainer;
 
 const Flex = styled.div`
     position: fixed;
@@ -22,7 +23,6 @@ const Flex = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        white, ${({ theme }) => theme.colors.mainBlue}
-    );
+    background-color: ${({ theme }) => theme.colors.main40};
+    animation: ${fadeIn} .5s ease;
 `;

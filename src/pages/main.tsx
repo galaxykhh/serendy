@@ -1,13 +1,12 @@
 import React from 'react'
-import Container from '../components/Container';
+import MainContainer from '../components/MainContainer';
 
 const Main: React.FC = () => {
     return (
-        <Container>
-            안녕하세요
-        </Container>
+        <MainContainer>
+            
+        </MainContainer>
     )
 }
 
 export default Main;
-

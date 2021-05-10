@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Container from '../components/Container';
+import AuthContainer from '../components/AuthContainer';
 import LoginBox from '../components/SignIn/SignInBox';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -13,10 +13,10 @@ const SignIn: React.FC = () => {
     }, []);
 
     return (
-        <Container>
+        <AuthContainer>
             <TextLogo URL={logoURL}/>
             <LoginBox />
-        </Container>
+        </AuthContainer>
     )
 }
 

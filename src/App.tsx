@@ -8,7 +8,7 @@ import { theme } from './style/theme';
 // pages
 import Start from './pages/Start';
 import Main from './pages/Main';
-import Login from './pages/Login';
+import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
                             <Main />
                         </PrivateRoute>
                         <Route exact path='/login'>
-                            <Login />
+                            <SignIn />
                         </Route>
                         <Route exact path='/signup'>
                             <SignUp />

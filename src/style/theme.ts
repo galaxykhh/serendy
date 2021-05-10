@@ -6,7 +6,7 @@ export const theme = {
         grey: '#a4b0be',
         red: '#ff4d4d',
         green: '#3ae374',
-        salmon: '#ffb8b8',
+        orange: '#fa8231',
     },
 }
 

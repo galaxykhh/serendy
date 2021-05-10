@@ -6,15 +6,16 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import { useHistorys } from '../../Hooks/useHistorys';
 
-interface ILoginData {
+export interface ISignInData {
     account: string;
     password: string;
 }
-const LoginBox: React.FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<ILoginData>({ mode: 'onChange' });
+
+const SignIn: React.FC = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm<ISignInData>();
     const history = useHistorys();
 
-    const onSubmit: SubmitHandler<ILoginData> = loginData => {
+    const onSubmit: SubmitHandler<ISignInData> = loginData => {
         alert(JSON.stringify(loginData));
     }
 
@@ -25,13 +26,14 @@ const LoginBox: React.FC = () => {
                     <Icon icon={faUserAlt}
                           color={errors.account ? (theme.colors.red) : (theme.colors.black)}
                           />
-                    <Input {...register('account', {
-                        required: '아이디를 입력해주세요',
-                        pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
-                        minLength: { value: 5, message: '아이디가 너무 짧습니다' },
-                        maxLength: { value: 19, message: '아이디가 너무 깁니다' },
-                    })}
-                    />
+                    <Input placeholder='아이디'
+                           {...register('account', {
+                               required: '아이디를 입력해주세요',
+                               pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
+                               minLength: { value: 5, message: '아이디가 너무 짧습니다' },
+                               maxLength: { value: 19, message: '아이디가 너무 깁니다' },
+                            })}
+                            />
                 </Row>
                 {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
             </Column>
@@ -41,11 +43,12 @@ const LoginBox: React.FC = () => {
                     <Icon icon={faLock}
                           color={errors.password ? (theme.colors.red) : (theme.colors.black)}
                           />
-                    <Input {...register('password', {
-                       required: '비밀번호를 입력해주세요',
-                    })}
-                       type='password'
-                    />
+                    <Input placeholder='비밀번호'
+                           type='password'
+                           {...register('password', {
+                               required: '비밀번호를 입력해주세요',
+                           })}
+                           />
                 </Row>
                 {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : 'ㅤ'}
             </Column>
@@ -61,7 +64,7 @@ const LoginBox: React.FC = () => {
     )
 }
 
-export default LoginBox;
+export default SignIn;
 
 const Box = styled.div`
     display: flex;
@@ -77,14 +80,18 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 `;
 
 const Row = styled.div`
-    width: 600px;
+    width: 420px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
 `;
 
 const ButtonBox = styled.div`
@@ -98,14 +105,10 @@ const ButtonBox = styled.div`
 const Input = styled.input`
     all: unset;
     width: 400px;
-    height: 60px;
-    font-size: 23px;
+    height: 40px;
+    font-size: 21px;
+    padding-left: 20px;
     color: ${({ theme }) => theme.colors.black};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
-    padding-left: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
 `;
 
 const Button = styled.button`
@@ -129,10 +132,8 @@ const Button = styled.button`
 
 const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 35px;
-    height: 52px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
-    color: ${({ color }) => color}
+    transform: translateY(-5px);
+    color: ${({ theme }) => theme.colors.black};
 `;
 
 const ErrorMsg = styled.div`

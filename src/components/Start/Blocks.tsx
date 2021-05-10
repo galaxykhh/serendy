@@ -31,7 +31,7 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             <Text data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='500'>
-                당신의 우연 또는 행운을 위한
+                당신의 행운 또는 우연을 위한
             </Text>
             <Space />
             <Space />

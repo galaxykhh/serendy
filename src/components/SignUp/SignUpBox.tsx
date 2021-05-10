@@ -1,82 +1,123 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
+import serendyRepository from '../../repository/serendyRepository';
 
-interface ISignUpData {
+export interface ISignUpData {
     account: string;
     password: string;
     check: string;
+    secretMessage: string;
 }
 const SignUpBox: React.FC = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<ISignUpData>();
     const [isAlready, setIsAlready] = useState<boolean>(false); // is account checked duplicated ?
 
-    useEffect(() => {
-        setIsAlready(false);
-    }, [watch('account')]);
+    const signUp = async (data: ISignUpData): Promise<void> => {
+        try{
+            const response = await serendyRepository.signUp(data);
+            if ((response.data.message = 'SignUp Success')) {
+                alert('회원가입이 완료되었습니다');
+            }
+        } catch(err) {
+            alert('현재 서버가 점검중입니다');
+        };
+    };
 
-    const onSubmit: SubmitHandler<ISignUpData> = signUpData => {
+    const accountCheck = () => {
+
+    };
+
+    const onSubmit: SubmitHandler<ISignUpData> = (data) => {
         if (!isAlready) {
             alert('중복확인을 해주세요');
             return;
         }
-        alert(JSON.stringify(signUpData));
+        signUp(data);
     };
 
+    useEffect(() => {
+        setIsAlready(false);
+    }, [watch('account')]); // eslint-disable-line
+
     return (
-        <Box data-aos='zoom-in-down'>
-            <div style={{ fontSize: '24px', marginBottom: '35px', marginTop: '5px' }} > 사용하고 싶은 아이디와 비밀번호를 입력해주세요 </div>
+        <Box data-aos='zoom-in'>
             <Column>
-                <AccountRow>
+                <Row>
                     <Icon icon={faUserAlt}
                           color={errors.account ? (theme.colors.red) : (theme.colors.black)}
                           />
-                    <Input {...register('account', {
-                        required: '아이디를 입력해주세요',
-                        pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
-                        minLength: { value: 5, message: '아이디는 최소 5자 이상입니다' },
-                        maxLength: { value: 17, message: '아이디는 최대 17자 입니다' },
-                    })}
-                    placeholder='아이디'
-                    />
+                    <Input placeholder='아이디'
+                           {...register('account', {
+                               required: '아이디를 입력해주세요',
+                               pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
+                               minLength: { value: 6, message: '아이디는 최소 6자리입니다' },
+                               maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
+                           })}
+                           />
                     <DupliBtn onClick={() => setIsAlready(true)}> 중복확인 </DupliBtn>
-                </AccountRow>
-                {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
+                </Row>
+                {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
             <Column>
                 <Row>
                     <Icon icon={faLock}
                           color={errors.password ? (theme.colors.red) : (theme.colors.black)}
                           />
-                    <Input {...register('password', {
-                       required: '비밀번호를 입력해주세요',
-                       minLength: { value: 8, message: '비밀번호는 최소 8자 입니다' }
-                    })}
-                       type='password'
-                       placeholder='비밀번호'
-                    />
+                    <Input placeholder='비밀번호'
+                           type='password'
+                           {...register('password', {
+                               required: '비밀번호를 입력해주세요',
+                               minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
+                               maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' }
+                           })}
+                           />
                 </Row>
-                {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : 'ㅤ'}
+                {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
             <Column>
                 <Row>
                     <Icon icon={faCheck}
                           color={errors.check ? (theme.colors.red) : (theme.colors.black)}
                           />
-                    <Input {...register('check', {
-                        required: true,
-                        validate: check => check === watch('password'),
-                    })}
-                       type='password'
-                       placeholder='비밀번호 확인'
-                    />
+                    <Input placeholder='비밀번호 확인'
+                           type='password'
+                           {...register('check', {
+                               required: true,
+                               validate: check => check === watch('password'),
+                           })}
+                           />
                 </Row>
-                {!errors.password && errors.check ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : 'ㅤ'}
+                {!errors.password && errors.check ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
-                <Button onClick={handleSubmit(onSubmit)} > 회원가입 </Button>
+            <Column>
+                <Row>
+                    <Icon icon={faUserSecret}
+                          color={errors.secretMessage ? (theme.colors.red) : (theme.colors.black)}
+                          />
+                    <Input placeholder='암호 메세지'
+                           {...register('secretMessage', {
+                               required: '암호 메세지를 작성해주세요',
+                               minLength: { value: 3, message: '암호 메세지는 최소 3자 입니다' },
+                               maxLength: { value: 20, message: '암호 메시지는 최대 20자 입니다' }
+                           })}
+                           />
+                </Row>
+                {errors.secretMessage ? 
+                                        <>
+                                            <ErrorMsg> {errors.secretMessage.message} </ErrorMsg>
+                                            <Msg>ㅤ</Msg>
+                                        </> :
+                                        <>
+                                            <Msg> 암호 메세지는 나중에 비밀번호 찾기에 사용됩니다 </Msg>
+                                            <Msg> 자신만의 개성 넘치는 단어로 설정해보세요! </Msg>
+                                        </>
+                }
+            </Column>
+                <Button onClick={handleSubmit(onSubmit)} > 확인 </Button>
         </Box>
     )
 }
@@ -97,41 +138,33 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 `;
 
 const Row = styled.div`
-    width: 600px;
+    width: 420px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-`;
-
-const AccountRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 460px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
 `;
 
 const Input = styled.input`
     all: unset;
     width: 400px;
-    height: 60px;
-    font-size: 23px;
+    height: 40px;
+    font-size: 21px;
+    padding-left: 20px;
     color: ${({ theme }) => theme.colors.black};
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
-    padding-left: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
 `;
 
 const Button = styled.button`
     all: unset;
     width: 200px;
-    height: 65px;
+    height: 55px;
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};
@@ -149,21 +182,24 @@ const Button = styled.button`
 
 const DupliBtn = styled(Button)`
     width: 170px;
-    height: 50px;
+    height: 40px;
     margin-bottom: 10px;
     margin-top: 0;
+    transform: trans
 `;
 
 const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 35px;
-    height: 52px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
-    color: ${({ color }) => color}
+    transform: translateY(-5px);
+    color: ${({ theme }) => theme.colors.black};
 `;
 
 const ErrorMsg = styled.div`
-    font-size: 16px;
-    text-align: center;
+    font-size: 15px;
+    transform: translateY(-10px);
     color: ${({ theme }) => theme.colors.red};
+`;
+
+const Msg = styled(ErrorMsg)`
+    color: ${({ theme }) => theme.colors.black};
 `;

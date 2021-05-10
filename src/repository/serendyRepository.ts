@@ -1,25 +1,22 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { ISignUpData } from '../components/SignUp/SignUpBox';
+import { ISignInData } from '../components/SignIn/SignInBox';
 
 const serendyInstance = axios.create({
     baseURL: 'http://localhost:8000',
 });
 
-interface IAuth {
-    account: string;
-    password: string;
-}
-
 class SerendyRepository {
 
-    checkDuplicate(account: string) {
+    checkDuplicate(account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`/api/auth/check/${account}`);
     }
 
-    signUp(data: IAuth) {
+    signUp(data: ISignUpData): Promise<AxiosResponse> {
         return serendyInstance.post('/api/auth/signup', data);
     }
 
-    signIn(data: IAuth) {
+    signIn(data: ISignInData): Promise<AxiosResponse> {
         return serendyInstance.post('/api/auth/signin', data);
     }
 }

@@ -9,7 +9,7 @@ const logoURL = '/images/serendy_text.png';
 const SignUp: React.FC = () => {
 
     useEffect(() => {
-        Aos.init({ duration: 800 });
+        Aos.init({ duration: 700 });
     }, []);
 
     return (

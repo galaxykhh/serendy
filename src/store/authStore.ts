@@ -1,48 +1,46 @@
 import { action, computed, makeObservable, observable } from "mobx";
 import serendyRepository from "../repository/serendyRepository";
 
-interface IAccount {
-    account: string;
-    password: string;
+interface IUser {
+    nickName: string;
 }
 
-interface IUser extends IAccount {
-    name: string;
+interface IAuthStore {
+    isLogged: boolean;
+    user: IUser | null;
 }
 
-class AuthStore implements IAccount {
+class AuthStore implements IAuthStore {
 
-    private _account: string = '';
-    private _password: string = '';
-    isLogged: boolean = false;
-    user: IUser | null = null;
+    private _isLogged: boolean = false;
+    private _user: IUser | null = null;
 
     constructor() {
-        makeObservable<AuthStore, '_account' | '_password'>(this, {
-            _account: observable,
-            _password: observable,
-            user: observable,
-            account: computed,
-            password: computed,
-            setAccount: action,
-            setPassword: action,
+        makeObservable<AuthStore, '_isLogged' | '_user'>(this, {
+            _isLogged: observable,
+            _user: observable,
+            isLogged: computed,
+            user: computed,
+            setIsLogged: action,
+            setUser: action,
         })
     }
-    get account(): string {
-        return this._account;
-    };
 
-    get password(): string {
-        return this._password;
-    };
+    get isLogged(): boolean {
+        return this._isLogged;
+    }
 
-    setAccount(account: string): void {
-        this._account = account;
-    };
+    get user(): IUser | null {
+        return this._user;
+    }
 
-    setPassword(password: string): void {
-        this._password = password;
-    };
+    setIsLogged(status: boolean): void {
+        this._isLogged = status;
+    }
+
+    setUser(user: IUser): void {
+        this._user = user;
+    }
 }
 
 const authStore = new AuthStore();

@@ -1,12 +1,17 @@
 import axios, { AxiosResponse } from 'axios';
 import { ISignUpData } from '../components/SignUp/SignUpBox';
 import { ISignInData } from '../components/SignIn/SignInBox';
+import { BASE_URL } from '../config';
 
 const serendyInstance = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: BASE_URL,
 });
 
 class SerendyRepository {
+
+    test() {
+        return serendyInstance.get('/api/auth/auth');
+    }
 
     accountCheck(account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`/api/auth/check/${account}`);

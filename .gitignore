@@ -8,6 +8,9 @@
 # Image
 /public/images
 
+#server
+/src/config.ts
+
 # testing
 /coverage
 

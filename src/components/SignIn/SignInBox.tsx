@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import { useHistorys } from '../../Hooks/useHistorys';
 import serendyRepository from '../../repository/serendyRepository';
+import authStore from '../../store/authStore';
 
 export interface ISignInData {
     account: string;
@@ -14,7 +15,19 @@ export interface ISignInData {
 
 const SignIn: React.FC = () => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
+    const signInBtn = useRef<HTMLButtonElement>(null);
     const history = useHistorys();
+
+    const entered = (e: React.KeyboardEvent): void => {
+        if (e.key === 'Enter') {
+            signInBtn.current?.click();
+        }
+    }
+
+    const setUser = (user: { nickName: string }): void => {
+        authStore.setUser(user);
+        authStore.setIsLogged();
+    }
 
     const signIn = async (data: ISignInData): Promise<any> => {
         try {
@@ -28,7 +41,9 @@ const SignIn: React.FC = () => {
                     message: '아이디나 비밀번호를 다시 확인해주세요',
                 });
             } else if ((response.data.message === 'SignIn Success')) {
-                alert('로그인 성공');
+                const user = response.data.nickName;
+                setUser(user);
+                history.pushMain();
             };
         } catch(err) {
             alert('현재 서버 점검중입니다');
@@ -65,6 +80,7 @@ const SignIn: React.FC = () => {
                           />
                     <Input placeholder='비밀번호'
                            type='password'
+                           onKeyPress={entered}
                            {...register('password', {
                                required: '비밀번호를 입력해주세요',
                            })}
@@ -74,7 +90,12 @@ const SignIn: React.FC = () => {
             </Column>
             <ButtonBox>
                 <Button onClick={history.pushSignUp} > 회원가입 </Button>
-                <Button onClick={handleSubmit(onSubmit)} > 로그인 </Button>
+
+                <Button onClick={handleSubmit(onSubmit)}
+                        ref={signInBtn}
+                        >
+                    로그인
+                </Button>
             </ButtonBox>
             
             <ForgotPW onClick={history.pushFindPW} >

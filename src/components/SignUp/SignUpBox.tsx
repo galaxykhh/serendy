@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
@@ -15,13 +15,21 @@ export interface ISignUpData {
 const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
     const [isAlready, setIsAlready] = useState<boolean>(false); // 계정 중복체크
+    const signUpBtn = useRef<HTMLButtonElement>(null);
+
+    // 엔터 누를시 버튼 클릭
+    const entered = (e: React.KeyboardEvent): void => {
+        if (e.key === 'Enter') {
+            signUpBtn.current?.click();
+        }
+    }
 
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
         try{
             const response = await serendyRepository.signUp(data);
             if ((response.data.message = 'SignUp Success')) {
-                success();
+                success(); // SignIn props
             }
         } catch(err) {
             alert('현재 서버가 점검중입니다');
@@ -116,6 +124,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
                           color={errors.secretMessage ? (theme.colors.red) : (theme.colors.black)}
                           />
                     <Input placeholder='암호 메세지'
+                           onKeyPress={entered}
                            {...register('secretMessage', {
                                required: '암호 메세지를 작성해주세요',
                                minLength: { value: 3, message: '암호 메세지는 최소 3자 입니다' },
@@ -134,7 +143,11 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
                                         </>
                 }
             </Column>
-                <Button onClick={handleSubmit(onSubmit)} > 확인 </Button>
+                <Button onClick={handleSubmit(onSubmit)}
+                        ref={signUpBtn}
+                        >
+                    확인
+                </Button>
         </Box>
     )
 }
@@ -203,7 +216,7 @@ const DupliBtn = styled(Button)`
     height: 45px;
     margin-bottom: 10px;
     margin-top: 0;
-    transform: trans
+    transform: translateY(8px);
 `;
 
 const Icon = styled(FontAwesomeIcon)<{ color: string }>`

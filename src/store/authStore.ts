@@ -21,7 +21,7 @@ class AuthStore implements IAuthStore {
             _user: observable,
             isLogged: computed,
             user: computed,
-            setIsLogged: action,
+            setIsLogged: action.bound,
             setUser: action,
         })
     }
@@ -34,8 +34,8 @@ class AuthStore implements IAuthStore {
         return this._user;
     }
 
-    setIsLogged(status: boolean): void {
-        this._isLogged = status;
+    setIsLogged(): void {
+        this._isLogged = true;
     }
 
     setUser(user: IUser): void {

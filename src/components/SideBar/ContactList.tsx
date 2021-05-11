@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Message from './Message';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInbox } from '@fortawesome/free-solid-svg-icons';
 
 const Test = [
     {
@@ -61,26 +63,76 @@ const Test = [
 ]
 
 const ContactList: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(true);
+
+    const handleStorage = ():void => {
+        setIsOpen(!isOpen);
+    }
+
     return (
-        <Container>
-            {Test.map((item, index) => (
-                <Message item={item} key={index} />
-            ))}
+        <>
+        <Container height={isOpen ? '68%' : '80px'} >
+            <StorageHandler onClick={handleStorage} >
+                <StorageIcon icon={faInbox} />
+            </StorageHandler>
+            <MessageContainer>
+                {Test.map((item, index) => (
+                    <Message item={item} key={index} />
+                ))}
+            </MessageContainer>
         </Container>
+        </>
     )
 }
 
 export default ContactList;
 
-const Container = styled.div`
+type HeightType = '68%' | '80px';
+
+const Container = styled.div<{ height: HeightType }>`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     margin-top: 10px;
     width: 100%;
-    height: 64%;
+    height: ${({ height }) => height};
+    min-width: 80px;
     border-radius: 30px;
     overflow: auto;
     background-color: ${({ theme }) => theme.colors.black20};
+    transition: .6s ease;
+`;
+
+const MessageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    min-width: 80px;
+    margin-bottom: 8px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: auto;
+`;
+
+const StorageHandler = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 80px;
+    cursor: pointer;
+    transition: .3s ease;
+    border-radius: 30px;
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.white50};
+    }
+`;
+
+const StorageIcon = styled(FontAwesomeIcon)`
+    font-size: 50px;
+    text-align: center;
 `;

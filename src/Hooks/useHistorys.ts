@@ -4,24 +4,28 @@ export const useHistorys = () => {
     const history = useHistory();
 
     const pushStart = ():void => {
-        return history.push('/');
+        history.push('/');
     };
 
     const pushMain = (): void => {
-        return history.push('/main');
+        history.push('/main');
     };
 
     const pushSignUp = (): void => {
-        return history.push('/signup');
+        history.push('/signup');
     };
 
     const pushLogin = (): void => {
-        return history.push('/login');
+        history.push('/login');
     };
 
     const pushFindPW = (): void => {
-        return history.push('/findpw');
+        history.push('/findpw');
     };
+
+    const pushMyPage = ():void => {
+        history.push('/mypage');
+    }
 
     return {
         pushStart,
@@ -29,5 +33,6 @@ export const useHistorys = () => {
         pushSignUp,
         pushLogin,
         pushFindPW,
+        pushMyPage,
     }
 }

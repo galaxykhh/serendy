@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 interface IChatRoom {
     item: {
@@ -14,7 +14,7 @@ const Message: React.FC<IChatRoom> = ({ item }) => {
     const { messageContent, stranger } = item;
     return (
         <Box>
-            <Icon icon={faComment} />
+            <Icon icon={faEnvelope} />
             <Column>
                 <Stranger> {stranger} </Stranger>
                 <RoomTitle> {messageContent}  </RoomTitle>
@@ -46,8 +46,9 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    overflow: hidden;
+    max-width: 200px;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
 `;
 

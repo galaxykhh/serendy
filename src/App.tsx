@@ -12,8 +12,10 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import SideBar from './components/SideBar/SideBar';
 import Header from './components/Header/Header';
+import MyPage from './pages/MyPage';
 
 function App() {
+
     return (
         <>
             <ThemeProvider theme={theme} >
@@ -36,6 +38,9 @@ function App() {
                         </Route>
                         <PrivateRoute exact path='/main'>
                             <Main />
+                        </PrivateRoute>
+                        <PrivateRoute exact path='/mypage'>
+                            <MyPage />
                         </PrivateRoute>
                     </Switch>
                 </BrowserRouter>

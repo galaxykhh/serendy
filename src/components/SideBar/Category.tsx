@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 const Category: React.FC = () => {
     return (
@@ -14,7 +14,7 @@ const Category: React.FC = () => {
             </Box>
             <Box>
                 <IconBox>
-                    <Icon icon={faEnvelope} />
+                    <Icon icon={faPaperPlane} />
                 </IconBox>
                 <Text> 편지 보내기 </Text>
             </Box>
@@ -32,10 +32,13 @@ const Container = styled.div`
     margin-top: 10px;
     width: 100%;
     height: 15%;
-    min-height: 136px;
+    min-width: 80px;
+    min-height: 40px;
     border-radius: 30px;
     background-color: ${({ theme }) => theme.colors.black20};
-
+    @media only screen and (max-height: 620px) {
+        flex-direction: row;
+    };
 `;
 
 const IconBox = styled.div`
@@ -52,6 +55,12 @@ const Text = styled.div`
     font-size: 18px;
     color: ${({ theme }) => theme.colors.black};
     margin-left: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media only screen and (max-height: 620px) {
+        font-size: 12px;
+    }
 `;
 
 const Box = styled.div`
@@ -59,10 +68,11 @@ const Box = styled.div`
     justify-content: flex-start;
     align-items: center;
     padding: 25px;
-    margin-top: 4px;
-    margin-bottom: 6px;
+    margin-top: 3px;
+    margin-bottom: 5px;
     width: 95%;
     height: 40%;
+    min-width: 80px;
     min-height: 30px;
     cursor: pointer;
     border-radius: 40px;

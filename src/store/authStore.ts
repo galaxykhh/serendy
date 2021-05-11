@@ -42,8 +42,10 @@ class AuthStore implements IAuthStore {
         this._user = user;
     }
 
-    signOut(): void {
+    signOut(push: () => void): void {
         this._isSignIn = false;
+        this._user = null;
+        push();
     }
 }
 

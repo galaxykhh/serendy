@@ -29,6 +29,9 @@ const LogoBox = styled.div<{ visible: DisplayType }>`
     display: ${({ visible }) => visible};
     cursor: pointer;
     z-index: 1;
+    @media only screen and (max-height: 640px) {
+        display: none;
+    }
 `
 
 const Logo = styled.div`

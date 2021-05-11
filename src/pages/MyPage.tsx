@@ -1,18 +1,16 @@
-import { observer } from 'mobx-react';
-import React from 'react'
+import React from 'react';
 import Container from '../components/publicComponents/Container';
-import Manual from '../components/Main/Manual';
 import CenterView from '../components/publicComponents/CenterView';
 
-const Main: React.FC = observer(() => {
+const MyPage: React.FC = () => {
 
     return (
         <Container>
             <CenterView>
-                <Manual />
+                asdasd
             </CenterView>
         </Container>
-    );
-});
+    )
+}
 
-export default Main;
+export default MyPage;

@@ -8,13 +8,14 @@ import { useHistorys } from '../../Hooks/useHistorys';
 import serendyRepository from '../../repository/serendyRepository';
 import authStore from '../../store/authStore';
 import { zoomIn } from '../../style/keyframes';
+import { observer } from 'mobx-react';
 
 export interface ISignInData {
     account: string;
     password: string;
 }
 
-const SignInBox: React.FC = () => {
+const SignInBox: React.FC = observer(() => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
     const signInBtn = useRef<HTMLButtonElement>(null);
     const history = useHistorys();
@@ -107,8 +108,8 @@ const SignInBox: React.FC = () => {
                 비밀번호가 기억이 안나시나요?
             </ForgotPW>
         </Box>
-    )
-}
+    );
+});
 
 export default SignInBox;
 

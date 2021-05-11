@@ -1,31 +1,31 @@
 import { observer } from 'mobx-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import AuthContainer from '../components/AuthContainer';
+import Container from '../components/publicComponents/Container';
 import SignInBox from '../components/SignIn/SignInBox';
 import authStore from '../store/authStore';
-import AlreadySignIn from '../components/SignIn/AlreadySignIn';
-const logoURL = '/images/serendy_text.png';
+import AlreadySignIn from '../components/publicComponents/AlreadySignIn';
+import { TEXTLOGO_URL } from '../config';
 
 const SignIn: React.FC = observer(() => {
 
     return (
-        <AuthContainer>
+        <Container>
             {authStore.isSignIn ? <AlreadySignIn /> : 
                                   <>
-                                    <TextLogo URL={logoURL}/>
+                                    <TextLogo />
                                     <SignInBox />
                                   </>}
-        </AuthContainer>
+        </Container>
     );
 });
 
 export default SignIn;
 
-const TextLogo = styled.div<{ URL: string }>`
+const TextLogo = styled.div`
     width: 600px;
     height: 200px;
-    background-image: url(${({ URL }) => URL});
+    background-image: url(${TEXTLOGO_URL});
     background-size: cover;
     background-position: center;
     margin-bottom: 40px;

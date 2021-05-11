@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import React, { useEffect } from 'react'
 import authStore from '../store/authStore';
 import { useHistorys } from '../Hooks/useHistorys';
-import AuthContainer from '../components/AuthContainer';
+import Container from '../components/publicComponents/Container';
 
 const Main: React.FC = observer(() => {
 
@@ -21,9 +21,9 @@ const Main: React.FC = observer(() => {
     }, [authStore.isSignIn]); // eslint-disable-line
 
     return (
-        <AuthContainer>
-
-        </AuthContainer>
+        <Container>
+            
+        </Container>
     );
 });
 

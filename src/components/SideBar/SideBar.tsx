@@ -28,8 +28,8 @@ const Bar = styled.div<{visible: VisibleType}>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 300px;
-    height: 98%;
+    min-width: 300px;
+    height: 99%;
     border-radius: 30px;
     display: ${({ visible }) => visible};
     animation: ${tabOpen} 1s ease;

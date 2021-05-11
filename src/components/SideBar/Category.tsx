@@ -10,13 +10,13 @@ const Category: React.FC = () => {
                 <IconBox>
                     <Icon icon={faComments} />
                 </IconBox>
-                <Text> 대화하기 </Text>
+                <Text> 대화 광장 </Text>
             </Box>
             <Box>
                 <IconBox>
                     <Icon icon={faEnvelope} />
                 </IconBox>
-                <Text> 편지쓰기 </Text>
+                <Text> 편지 보내기 </Text>
             </Box>
         </Container>
     )
@@ -34,7 +34,7 @@ const Container = styled.div`
     height: 15%;
     min-height: 136px;
     border-radius: 30px;
-    background-color: ${({ theme }) => theme.colors.black10};
+    background-color: ${({ theme }) => theme.colors.black20};
 
 `;
 
@@ -59,7 +59,8 @@ const Box = styled.div`
     justify-content: flex-start;
     align-items: center;
     padding: 25px;
-    margin-bottom: 7px;
+    margin-top: 4px;
+    margin-bottom: 6px;
     width: 95%;
     height: 40%;
     min-height: 30px;

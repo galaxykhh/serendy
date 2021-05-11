@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AuthContainer: React.FC = ({ children }) => {
+const Container: React.FC = ({ children }) => {
     return (
 
         <Flex>
@@ -10,7 +10,7 @@ const AuthContainer: React.FC = ({ children }) => {
     )
 }
 
-export default AuthContainer;
+export default Container;
 
 const Flex = styled.div`
     position: fixed;

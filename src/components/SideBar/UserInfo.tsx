@@ -43,8 +43,9 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
     height: 20%;
+    min-height: 180px;
     border-radius: 30px;
-    background-color: ${({ theme }) => theme.colors.black10};
+    background-color: ${({ theme }) => theme.colors.black20};
 `;
 
 const Icon = styled(FontAwesomeIcon)<{ iconsize: string }>`
@@ -70,6 +71,7 @@ const Box = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    min-width: 68px;
     padding: 10px;
     margin: 5px;
     transition: .3s ease;

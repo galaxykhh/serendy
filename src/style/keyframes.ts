@@ -5,7 +5,7 @@ export const arrowPop = keyframes`
     transform: translateY(20px);
   }
   to {
-    transform: translateY(-20px);
+    transform: translateY(-35px);
   }
 `;
 

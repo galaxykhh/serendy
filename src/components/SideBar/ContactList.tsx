@@ -82,5 +82,5 @@ const Container = styled.div`
     height: 64%;
     border-radius: 30px;
     overflow: auto;
-    background-color: ${({ theme }) => theme.colors.black10};
+    background-color: ${({ theme }) => theme.colors.black20};
 `;

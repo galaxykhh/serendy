@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { LOGO_URL } from '../../config';
 import { arrowPop } from '../../style/keyframes';
-const logoURL = '/images/start_logo.png';
 
 const StartLogo: React.FC<{ push: () => void }>= ({ push }) => {
 
@@ -9,7 +9,6 @@ const StartLogo: React.FC<{ push: () => void }>= ({ push }) => {
         <LogoBox>
             <Logo data-aos='zoom-in-down'
                   data-aos-duration='1000'
-                  URL={logoURL}
                   />
             <StartBtn onClick={push}> 시작하기 </StartBtn>
             <Arrow> ∨ </Arrow>
@@ -29,10 +28,10 @@ const LogoBox = styled.div`
     margin-bottom: 300px;
 `;
 
-const Logo = styled.div<{ URL: string }>`
+const Logo = styled.div`
     width: 800px;
     height: 800px;
-    background-image: url(${({ URL }) => URL});
+    background-image: url(${LOGO_URL});
     background-size: cover;
     background-position: center;
 `;

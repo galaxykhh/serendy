@@ -4,32 +4,23 @@ export const useHistorys = () => {
     const history = useHistory();
 
     const pushStart = ():void => {
-        history.push('/')
-    }
+        return history.push('/');
+    };
 
     const pushMain = (): void => {
-        history.push('/main');
+        return history.push('/main');
     };
 
     const pushSignUp = (): void => {
-        history.push('/signup');
+        return history.push('/signup');
     };
 
     const pushLogin = (): void => {
-        history.push('/login');
+        return history.push('/login');
     };
 
     const pushFindPW = (): void => {
-        history.push('/findpw');
-    };
-
-    const pushSignInUser = (userStatus: boolean): void => {
-        if (!userStatus) {
-            return;
-        } else {
-            alert('이미 로그인이 되었어요!');
-            history.push('/main');;
-        };
+        return history.push('/findpw');
     };
 
     return {
@@ -38,6 +29,5 @@ export const useHistorys = () => {
         pushSignUp,
         pushLogin,
         pushFindPW,
-        pushSignInUser,
     }
 }

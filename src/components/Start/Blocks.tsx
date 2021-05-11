@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TEXTLOGO_URL } from '../../config';
 
-const logoURL = '/images/serendy_text.png';
 
 const Blocks: React.FC<{push: () => void}>= ({push}) => {
     return (
@@ -35,8 +35,7 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             </Text>
             <Space />
             <Space />
-            <TextLogo URL={logoURL}
-                      data-aos='fade-down-right'
+            <TextLogo data-aos='fade-down-right'
                       data-aos-duration='1000'
                       data-aos-anchor-placement='bottom-bottom'
                       />
@@ -107,10 +106,10 @@ const StartBtn = styled.button`
     cursor: pointer;
 `;
 
-const TextLogo = styled.div<{ URL: string }>`
+const TextLogo = styled.div`
     width: 800px;
     height: 300px;
-    background-image: url(${({ URL }) => URL});
+    background-image: url(${TEXTLOGO_URL});
     background-size: cover;
     background-position: center;
 `;

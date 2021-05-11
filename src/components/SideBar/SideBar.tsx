@@ -23,16 +23,14 @@ export default SideBar;
 
 const Bar = styled.div<{visible: VisibleType}>`
     position: fixed;
-    top: 10px;
-    right: 10px;
+    right: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 20%;
+    max-width: 300px;
     height: 98%;
     border-radius: 30px;
-    background-color: ${({ theme }) => theme.colors.black10};
     display: ${({ visible }) => visible};
     animation: ${tabOpen} 1s ease;
     padding: 10px;

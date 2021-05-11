@@ -40,9 +40,9 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
                       data-aos-duration='1000'
                       data-aos-anchor-placement='bottom-bottom'
                       />
-            <StartBtn onClick={push}
-                      data-aos='fade-in'
+            <StartBtn data-aos='fade-in'
                       data-aos-duration='1000'
+                      onClick={push}
                       >
                 시작하기
             </StartBtn>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { Keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const AuthContainer: React.FC = ({ children }) => {
     return (

@@ -1,24 +1,19 @@
-import React, { useEffect } from 'react';
+import { observer } from 'mobx-react';
+import React from 'react';
 import styled from 'styled-components';
 import AuthContainer from '../components/AuthContainer';
-import LoginBox from '../components/SignIn/SignInBox';
-import Aos from 'aos';
-import 'aos/dist/aos.css';
+import SignInBox from '../components/SignIn/SignInBox';
 const logoURL = '/images/serendy_text.png';
 
-const SignIn: React.FC = () => {
-
-    useEffect(() => {
-        Aos.init();
-    }, []);
+const SignIn: React.FC = observer(() => {
 
     return (
         <AuthContainer>
             <TextLogo URL={logoURL}/>
-            <LoginBox />
+            <SignInBox />
         </AuthContainer>
-    )
-}
+    );
+});
 
 export default SignIn;
 

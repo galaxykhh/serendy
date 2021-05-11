@@ -5,6 +5,7 @@ import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-soli
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import serendyRepository from '../../repository/serendyRepository';
+import { zoomIn } from '../../style/keyframes';
 
 export interface ISignUpData {
     account: string;
@@ -69,7 +70,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
     }, [watch('account')]); // eslint-disable-line
 
     return (
-        <Box data-aos='zoom-in'>
+        <Box>
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
@@ -161,6 +162,7 @@ const Box = styled.div`
     align-items: center;
     width: 600px;
     height: 640px;
+    animation: ${zoomIn} .6s ease;
 `;
 
 const Column = styled.div`

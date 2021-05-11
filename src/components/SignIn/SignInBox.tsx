@@ -7,13 +7,14 @@ import { theme } from '../../style/theme';
 import { useHistorys } from '../../Hooks/useHistorys';
 import serendyRepository from '../../repository/serendyRepository';
 import authStore from '../../store/authStore';
+import { zoomIn } from '../../style/keyframes';
 
 export interface ISignInData {
     account: string;
     password: string;
 }
 
-const SignIn: React.FC = () => {
+const SignInBox: React.FC = () => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
     const signInBtn = useRef<HTMLButtonElement>(null);
     const history = useHistorys();
@@ -35,6 +36,7 @@ const SignIn: React.FC = () => {
             if ((response.data.message === 'SignIn Fail')) {
                 setError('account', {
                     type: 'invalid',
+                    message: 'ㅤ'
                 });
                 setError('password', {
                     type: 'invalid',
@@ -55,7 +57,7 @@ const SignIn: React.FC = () => {
     }
 
     return (
-        <Box data-aos='zoom-in'>
+        <Box>
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
@@ -105,7 +107,7 @@ const SignIn: React.FC = () => {
     )
 }
 
-export default SignIn;
+export default SignInBox;
 
 const Box = styled.div`
     display: flex;
@@ -114,6 +116,7 @@ const Box = styled.div`
     align-items: center;
     width: 600px;
     height: 600px;
+    animation: ${zoomIn} .6s ease;
 `;
 
 const Column = styled.div`

@@ -1,5 +1,4 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import serendyRepository from "../repository/serendyRepository";
 
 interface IUser {
     nickName: string;

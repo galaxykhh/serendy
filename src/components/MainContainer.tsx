@@ -23,6 +23,6 @@ const Flex = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: ${({ theme }) => theme.colors.main40};
+    background-color: ${({ theme }) => theme.colors.main80};
     animation: ${fadeIn} .5s ease;
 `;

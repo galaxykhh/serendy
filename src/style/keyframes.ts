@@ -2,10 +2,10 @@ import {keyframes} from 'styled-components';
 
 export const arrowPop = keyframes`
   from {
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
 `;
 
@@ -14,7 +14,7 @@ export const tabOpen = keyframes`
         right: -900px;
     }
     to {
-        right: 10px;
+        right: 0px;
     }
 `;
 

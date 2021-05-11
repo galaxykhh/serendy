@@ -1,8 +1,11 @@
 import { useHistory } from 'react-router-dom';
-import authStore from '../store/authStore';
 
 export const useHistorys = () => {
     const history = useHistory();
+
+    const pushStart = ():void => {
+        history.push('/')
+    }
 
     const pushMain = (): void => {
         history.push('/main');
@@ -18,22 +21,23 @@ export const useHistorys = () => {
 
     const pushFindPW = (): void => {
         history.push('/findpw');
-    }
+    };
 
-    const pushLoggedUser = (): void => {
-        const isLogged = authStore.isLogged;
-        if (isLogged === true) {
-            pushMain();
-        } else {
+    const pushSignInUser = (userStatus: boolean): void => {
+        if (!userStatus) {
             return;
-        }
-    }
+        } else {
+            alert('이미 로그인이 되었어요!');
+            history.push('/main');;
+        };
+    };
 
     return {
+        pushStart,
         pushMain,
         pushSignUp,
         pushLogin,
         pushFindPW,
-        pushLoggedUser,
+        pushSignInUser,
     }
 }

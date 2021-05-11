@@ -19,17 +19,20 @@ const SignInBox: React.FC = () => {
     const signInBtn = useRef<HTMLButtonElement>(null);
     const history = useHistorys();
 
+    // 엔터 인지
     const entered = (e: React.KeyboardEvent): void => {
         if (e.key === 'Enter') {
             signInBtn.current?.click();
         }
     }
 
+    // 유저 로그인처리
     const setUser = (user: { nickName: string }): void => {
         authStore.setUser(user);
-        authStore.setIsLogged();
+        authStore.setIsSignIn();
     }
 
+    // 로그인 시도
     const signIn = async (data: ISignInData): Promise<any> => {
         try {
             const response = await serendyRepository.signIn(data);

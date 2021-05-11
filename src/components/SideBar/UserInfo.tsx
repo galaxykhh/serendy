@@ -3,34 +3,36 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faDoorOpen, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import authStore from '../../store/authStore';
+import { observer } from 'mobx-react';
 
-const UserInfo: React.FC = () => {
+const UserInfo: React.FC = observer(() => {
+
     return (
         <Container>
             <Row>
-                <Icon icon={faUserAlt} iconSize='24px' />
+                <Icon icon={faUserAlt} iconsize='24px' />
                 <Text ml='7px' size='16px' > {authStore.user} </Text>
             </Row>
             <Row>
                 <Box>
-                    <Icon icon={faClipboard} iconSize='24px' />
-                    <Text mt='8px' size='14px' > 내정보 </Text>
+                    <Icon icon={faClipboard} iconsize='24px' />
+                    <Text mt='8px' size='14px' > 내 정보 </Text>
                 </Box>
-                <Box>
-                    <Icon icon={faDoorOpen} iconSize='24px' />
+                <Box onClick={() => authStore.signOut()} >
+                    <Icon icon={faDoorOpen} iconsize='24px' />
                     <Text mt='8px' size='14px' > 로그아웃 </Text>
                 </Box>                
             </Row>
         </Container>
-    )
-}
+    );
+});
 
 export default UserInfo;
 
 const Row = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `;
 
@@ -45,8 +47,9 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.black10};
 `;
 
-const Icon = styled(FontAwesomeIcon)<{ iconSize: string }>`
-    font-size: ${({ iconSize }) => iconSize};
+const Icon = styled(FontAwesomeIcon)<{ iconsize: string }>`
+    font-size: ${({ iconsize }) => iconsize};
+    color: ${({ theme }) => theme.colors.black};
 `;
 
 const Text = styled.span<{ 
@@ -56,7 +59,7 @@ const Text = styled.span<{
     mt?: string;
 }>`
     font-size: ${({ size }) => size};
-    color: ${({ color }) => color};
+    color: ${({ theme }) => theme.colors.black};
     margin-left: ${({ ml }) => ml};
     margin-top: ${({ mt }) => mt};
 `;
@@ -68,9 +71,10 @@ const Box = styled.div`
     align-items: center;
     border-radius: 20px;
     padding: 10px;
+    margin: 5px;
     transition: .3s ease;
     cursor: pointer;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white20};
+        background-color: ${({ theme }) => theme.colors.white50};
     }
 `;

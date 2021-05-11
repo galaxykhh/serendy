@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { arrowPop, zoomIn } from '../../style/keyframes';
+import { arrowPop } from '../../style/keyframes';
 const logoURL = '/images/start_logo.png';
 
 const StartLogo: React.FC<{ push: () => void }>= ({ push }) => {
 
     return (
         <LogoBox>
-            <Logo URL={logoURL} />
+            <Logo data-aos='zoom-in-down'
+                  data-aos-duration='1000'
+                  URL={logoURL}
+                  />
             <StartBtn onClick={push}> 시작하기 </StartBtn>
             <Arrow> ∨ </Arrow>
         </LogoBox>
@@ -32,7 +35,6 @@ const Logo = styled.div<{ URL: string }>`
     background-image: url(${({ URL }) => URL});
     background-size: cover;
     background-position: center;
-    animation: ${zoomIn} 1s ease;
 `;
 
 const Arrow = styled.div`

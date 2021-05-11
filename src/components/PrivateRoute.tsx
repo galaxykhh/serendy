@@ -4,9 +4,10 @@ import { Route, Redirect } from 'react-router-dom';
 import authStore from '../store/authStore';
 
 const PrivateRoute: React.FC<any>= observer(({ children }) => {
+
     return (
         <Route
-            render={() => authStore.isLogged ? (children) : (<Redirect to='/login' />)}
+            render={() => authStore.isSignIn ? (children) : (<Redirect to='/login' />)}
         />
     );
 });

@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import authStore from '../../store/authStore';
 import { tabOpen } from '../../style/keyframes';
-import ChatList from './ChatList';
+import ContactList from './ContactList';
 import Category from './Category';
 import UserInfo from './UserInfo';
 
@@ -11,10 +11,10 @@ type VisibleType = 'block' | 'none';
 
 const SideBar: React.FC = observer(() => {
     return (
-        <Bar visible={authStore.isLogged ? 'block' : 'none'} >
+        <Bar visible={authStore.isSignIn ? 'block' : 'none'} >
             <UserInfo />
             <Category />
-            <ChatList />
+            <ContactList />
         </Bar>
     )
 });

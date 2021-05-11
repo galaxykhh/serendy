@@ -1,25 +1,21 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import StartLogo from '../components/Start/StartLogo';
 import Blocks from '../components/Start/Blocks';
+import { useHistorys } from '../Hooks/useHistorys';
 
 const Start: React.FC = () => {
-    const history = useHistory();
+    const history = useHistorys();
     useEffect(() => {
         Aos.init();
     },[]);
-    
-    const pushMain = () => {
-        history.push('/main');
-    }
 
     return (
         <Wallpaper>
-            <StartLogo push={pushMain} />
-            <Blocks push={pushMain} />
+            <StartLogo push={history.pushMain} />
+            <Blocks push={history.pushMain} />
         </Wallpaper>
     )
 }

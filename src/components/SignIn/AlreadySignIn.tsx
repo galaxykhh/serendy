@@ -3,33 +3,39 @@ import styled from 'styled-components';
 import { useHistorys } from '../../Hooks/useHistorys';
 import { zoomIn } from '../../style/keyframes';
 
-const Success: React.FC = () => {
+const AlreadySignIn: React.FC = () => {
 
     const history = useHistorys();
 
     return (
         <Box>
             <Msg>
-                <BoldMsg>회원가입</BoldMsg>
+                회원님은 이미
+                <BoldMsg> 로그인</BoldMsg>
                 {`이 `}
-                <BoldMsg>완료</BoldMsg>
-                되었습니다
+                <BoldMsg></BoldMsg>
+                 되어 있습니다
             </Msg>
-            <Button onClick={history.pushLogin} > 시작하기 </Button>
+            <Button onClick={history.pushMain} > 메인페이지 </Button>
         </Box>
     )
 }
 
-export default Success;
+export default AlreadySignIn;
 
 const Box = styled.div`
+    position: absolute;
+    left: 50%;
+    top: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     width: 600px;
     height: 640px;
-    animation: ${zoomIn} .5s ease;
+    margin-left: -300px;
+    margin-top: -300px;
+    animation: ${zoomIn} .7s ease;
 `;
 
 const Msg = styled.div`

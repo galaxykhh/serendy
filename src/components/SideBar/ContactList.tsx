@@ -12,7 +12,7 @@ const Test = [
     },
     {
         id: 2,
-        messageContent: '긴글자가제대로가려지는지테스트하는방',
+        messageContent: '긴글자가제대로가려지는지테스트하는방인데너무짧다',
         stranger: '외로운사람2'
     },
     {
@@ -22,12 +22,12 @@ const Test = [
     },
     {
         id: 4,
-        messageContent: '긴글자가제대로가려지는지테스트하는방',
+        messageContent: '긴글자가잘나오는지테스트하는겸써보는중인데잘될지모르겠다아아아아아',
         stranger: '외로운사람4',
     },
     {
         id: 5,
-        messageContent: '긴글자가제대로가려지는지테스트하는방',
+        messageContent: '긴글자가잘나오는지테스트하는겸써보는중인데잘될지모르겠다아아아아아',
         stranger: '외로운사람5',
     },
     {
@@ -52,12 +52,12 @@ const Test = [
     },
     {
         id: 10,
-        messageContent: '긴글자가제대로가려지는지테스트하는방',
+        messageContent: '긴글자가잘나오는지테스트하는겸써보는중인데잘될지모르겠다아아아아아',
         stranger: '긴글자맨',
     },
     {
         id: 11,
-        messageContent: '긴글자가제대로가려지는지테스트하는방',
+        messageContent: '긴글자가잘나오는지테스트하는겸써보는중인데잘될지모르겠다아아아아아',
         stranger: '긴글자맨2',
     },
 ]

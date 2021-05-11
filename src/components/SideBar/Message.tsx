@@ -46,7 +46,7 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    max-width: 200px;
+    width: 220px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

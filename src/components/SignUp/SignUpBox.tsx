@@ -39,8 +39,8 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
 
     // 중복체크
     const accountCheck = async () => {
-        await trigger('account');
-        if (errors.account) {
+        await trigger('account'); // 트리거 호출해서 에러 확인
+        if (errors.account) { // 아이디 형식에 문제가 있으면 리턴
             return
         } else {
             const account = watch('account');

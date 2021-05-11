@@ -25,7 +25,6 @@ const Screen = styled.div`
     height: 81.5%;
     border-radius: 30px;
     padding: 10px;
-    overflow: auto;
     background-color: ${({ theme }) => theme.colors.black20};
     transition: 1s ease;
     z-index: 1;

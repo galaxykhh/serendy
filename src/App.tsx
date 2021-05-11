@@ -13,6 +13,8 @@ import SignUp from './pages/SignUp';
 import SideBar from './components/SideBar/SideBar';
 import Header from './components/Header/Header';
 import MyPage from './pages/MyPage';
+import ChatPage from './pages/ChatPage';
+import PostPage from './pages/PostPage';
 
 function App() {
 
@@ -41,6 +43,12 @@ function App() {
                         </PrivateRoute>
                         <PrivateRoute exact path='/mypage'>
                             <MyPage />
+                        </PrivateRoute>
+                        <PrivateRoute exact path='/chat'>
+                            <ChatPage />
+                        </PrivateRoute>
+                        <PrivateRoute exact path='/post'>
+                            <PostPage />
                         </PrivateRoute>
                     </Switch>
                 </BrowserRouter>

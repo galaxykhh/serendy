@@ -23,6 +23,6 @@ const Flex = styled.div`
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        white, ${({ theme }) => theme.colors.mainBlue}
+        ${({ theme }) => theme.colors.white}, ${({ theme }) => theme.colors.mainBlue}
     );
 `;

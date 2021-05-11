@@ -23,8 +23,16 @@ export const useHistorys = () => {
         history.push('/findpw');
     };
 
-    const pushMyPage = ():void => {
+    const pushMyPage = (): void => {
         history.push('/mypage');
+    }
+
+    const pushChatPage = (): void => {
+        history.push('/chat');
+    };
+
+    const pushPostPage = (): void => {
+        history.push('/post');
     }
 
     return {
@@ -34,5 +42,7 @@ export const useHistorys = () => {
         pushLogin,
         pushFindPW,
         pushMyPage,
+        pushChatPage,
+        pushPostPage,
     }
 }

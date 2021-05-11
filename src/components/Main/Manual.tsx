@@ -5,7 +5,7 @@ const Manual: React.FC = () => {
 
     return (
         <FlexBox>
-            <div style={{ fontSize: '40px' }} > 여기다가 대충 설명 해줌 </div>
+            여기다가 설명 해줌
         </FlexBox>
 
     )

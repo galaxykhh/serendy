@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { useHistorys } from '../../Hooks/useHistorys';
 
 const Category: React.FC = () => {
+
+    const history = useHistorys();
+
     return (
         <Container>
-            <Box>
+            <Box onClick={history.pushChatPage}>
                 <IconBox>
                     <Icon icon={faComments} />
                 </IconBox>
-                <Text> 대화 광장 </Text>
+                <Text> 대화 하기 </Text>
             </Box>
-            <Box>
+            <Box onClick={history.pushPostPage} >
                 <IconBox>
                     <Icon icon={faPaperPlane} />
                 </IconBox>
@@ -30,6 +34,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    padding-top: 2px;
     width: 100%;
     height: 15%;
     min-width: 80px;

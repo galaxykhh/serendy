@@ -29,20 +29,11 @@ export const fadeIn = keyframes`
 
 export const slideUp = keyframes`
     from {
-        bottom: -1300px;
+        transform: translateY(1300px);
         
     }
     to {
-        bottom: 18px;
-    }
-`;
-
-export const stop = keyframes`
-    from {
-        bottom: 18px;
-    }
-    to {
-        bottom: 18px;
+        transform: translateY(0px);
     }
 `;
 

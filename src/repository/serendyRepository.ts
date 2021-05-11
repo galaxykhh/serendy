@@ -4,7 +4,7 @@ import { ISignInData } from '../components/SignIn/SignInBox';
 import { BASE_URL } from '../config';
 
 const serendyInstance = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: BASE_URL,
 });
 
 class SerendyRepository {

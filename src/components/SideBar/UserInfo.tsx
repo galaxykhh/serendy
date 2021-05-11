@@ -30,10 +30,10 @@ const UserInfo: React.FC = observer(() => {
                     <Icon icon={faQuestion} iconsize='24px' />
                     <Text mt='8px' size='14px' > 뭐로할까 </Text>
                 </Box>
-                <Box onClick={() => authStore.signOut(() => history.pushStart)} >
+                <Box onClick={() => authStore.signOut(history.pushStart)} >
                     <Icon icon={faDoorOpen} iconsize='24px' />
                     <Text mt='8px' size='14px' > 로그아웃 </Text>
-                </Box>                
+                </Box>
             </Row>
         </Container>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { zoomIn } from '../../style/keyframes';
+import { slideUp } from '../../style/keyframes';
 
 const ChatWindow: React.FC = () => {
     return (
@@ -41,7 +41,6 @@ const Row = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    min-width: 200px;
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
     }
@@ -54,25 +53,23 @@ const Column = styled.div`
     align-items: center;
     margin-right: 20px;
     width: 100%;
-    height: 100%;
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
-        height: 800px;
+        height: 90%;
     }
 `;
 
 const Screen = styled.div`
     width: 740px;
-    min-width: 500px;
     height: 680px;
+    min-width: 500px;
     background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 30px;
     border: 1px solid ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1450px) {
         width: 99%;
+        height: 70%;
         min-width: 300px;
-        height: 310px;
-        transform: translateY(-5px);
     };
 `;
 
@@ -139,7 +136,11 @@ const HandlerContainer = styled.div`
     height: 740px;
     background-color: ${({ theme }) => theme.colors.white20};
     border: 1px solid ${({ theme }) => theme.colors.white};
+    animation: ${slideUp} .7s ease;
     border-radius: 30px;
+    @media only screen and (max-width: 1450px) {
+        height: 70%;
+    }
 `;
 
 const Rule = styled.div`
@@ -152,7 +153,6 @@ const Rule = styled.div`
 const Ment = styled.div<{ size?: string }>`
     font-size: 18px;
     margin-bottom: 10px;
-    animation: ${zoomIn} .5s ease;
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
     }

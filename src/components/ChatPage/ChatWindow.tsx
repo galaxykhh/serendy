@@ -90,9 +90,8 @@ const Screen = styled.div`
     width: 740px;
     height: 680px;
     min-width: 500px;
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
-    border: 1px solid ${({ theme }) => theme.colors.black};
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;
@@ -114,15 +113,16 @@ const SenderBox = styled.div`
     }
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs(({
+    placeholder: '내용을 입력해주세요'
+}))`
     all: unset;
     width: 84%;
     min-height: 50px;
     padding-left: 30px;
     font-size: 18px;
     color: ${({ theme }) => theme.colors.black};
-    background-color: ${({ theme }) => theme.colors.white20};
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
     @media only screen and (max-width: 400px) {
         width: 99%;
@@ -135,15 +135,14 @@ const SendBtn = styled.button`
     height: 50px;
     font-size: 18px;
     text-align: center;
-    border: 1px solid ${({ theme }) => theme.colors.black};
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
     color: ${({ theme }) => theme.colors.black};
     cursor: pointer;
     transition: .3s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white};
-        color: ${({ theme }) => theme.colors.black};
+        background-color: ${({ theme }) => theme.colors.mainBlue};
+        color: ${({ theme }) => theme.colors.white};
     }
     @media only screen and (max-width: 1450px) {
         width: 11%;
@@ -160,9 +159,8 @@ const HandlerContainer = styled.div`
     align-items: center;
     width: 100%;
     min-width: 300px;
-    height: 740px;
-    background-color: ${({ theme }) => theme.colors.white20};
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    height: 96%;
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
     @media only screen and (max-width: 1450px) {
         height: 70%;
@@ -194,8 +192,10 @@ const BigMent = styled(Ment)`
 const StartBtn = styled(SendBtn)`
     width: 150px;
     height: 70px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    border: 1px solid ${({ theme }) => theme.colors.black20};
+    &:hover {
+        border: none;
+    }
     @media only screen and (max-width: 1450px) {
         width: 100px;
         height: 50px;

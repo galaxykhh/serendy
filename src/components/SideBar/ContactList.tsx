@@ -71,16 +71,16 @@ const ContactList: React.FC = () => {
 
     return (
         <>
-        <Container height={isOpen ? '68%' : '80px'} >
-            <StorageHandler onClick={handleStorage} >
-                <StorageIcon icon={faInbox} />
-            </StorageHandler>
-            <MessageContainer>
-                {Test.map((item, index) => (
-                    <Message item={item} key={index} />
-                ))}
-            </MessageContainer>
-        </Container>
+            <Container height={isOpen ? '68%' : '80px'} >
+                <StorageHandler onClick={handleStorage} >
+                    <StorageIcon icon={faInbox} />
+                </StorageHandler>
+                <MessageContainer>
+                    {Test.map((item, index) => (
+                        <Message item={item} key={index} />
+                    ))}
+                </MessageContainer>
+            </Container>
         </>
     )
 }
@@ -99,7 +99,7 @@ const Container = styled.div<{ height: HeightType }>`
     height: ${({ height }) => height};
     min-width: 80px;
     border-radius: 30px;
-    overflow: auto;
+    overflow: hidden;
     background-color: ${({ theme }) => theme.colors.black20};
     transition: .6s ease;
 `;
@@ -133,6 +133,6 @@ const StorageHandler = styled.div`
 `;
 
 const StorageIcon = styled(FontAwesomeIcon)`
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
 `;

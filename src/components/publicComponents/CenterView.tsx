@@ -25,7 +25,7 @@ const Screen = styled.div`
     height: 81.5%;
     border-radius: 30px;
     padding: 10px;
-    background-color: ${({ theme }) => theme.colors.black10};
+    background-color: ${({ theme }) => theme.colors.black20};
     transition: 1s ease;
     z-index: 1;
     @media only screen and (max-width: 500px) {

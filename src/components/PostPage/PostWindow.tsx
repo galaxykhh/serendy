@@ -8,7 +8,9 @@ const PostWindow: React.FC = () => {
     return (
         <Row>
             <LetterBox>
-                <Letter />
+                <Letter>
+                    <TextArea />
+                </Letter>
                 <SenderBox>
                     <SendBtn ref={chat.sendBtn} >
                         편지 보내기
@@ -60,19 +62,31 @@ const LetterBox = styled.div`
     }
 `;
 
-const Letter = styled.input`
-    all: unset;
+const Letter = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 740px;
     height: 680px;
     min-width: 500px;
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
-    border: 1px solid ${({ theme }) => theme.colors.black};
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;
         min-width: 300px;
     };
+`;
+
+const TextArea = styled.textarea.attrs(({
+    placeholder: '여기서부터 이야기를 들려주세요'
+}))`
+    all: unset;
+    width: 80%;
+    height: 80%;
+    font-size: 17px;
+    padding: 60px;
+    border-radius: 30px;
 `;
 
 const SenderBox = styled.div`
@@ -95,14 +109,14 @@ const SendBtn = styled.button`
     height: 50px;
     font-size: 18px;
     text-align: center;
-    border: 1px solid ${({ theme }) => theme.colors.black};
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
     color: ${({ theme }) => theme.colors.black};
     cursor: pointer;
     transition: .3s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white50};
+        background-color: ${({ theme }) => theme.colors.mainBlue};
+        color: ${({ theme }) => theme.colors.white};
     }
 `;
 
@@ -114,8 +128,7 @@ const RuleContainer = styled.div`
     width: 100%;
     min-width: 300px;
     height: 740px;
-    background-color: ${({ theme }) => theme.colors.white20};
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.white50};
     border-radius: 30px;
     @media only screen and (max-width: 1450px) {
         height: 70%;

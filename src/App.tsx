@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/global';
+import { useEffect } from 'react';
 // PrivateRoute
 import PrivateRoute from './components/publicComponents/PrivateRoute';
 // theme
@@ -15,8 +16,14 @@ import Header from './components/Header/Header';
 import MyPage from './pages/MyPage';
 import ChatPage from './pages/ChatPage';
 import PostPage from './pages/PostPage';
+import authStore from './store/authStore';
 
 function App() {
+
+    useEffect(() => {
+        
+        authStore.signInWithToken();
+    }, []);
 
     return (
         <>

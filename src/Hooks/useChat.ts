@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { VisibilityType } from '../config';
 
+
 export const useChat = () => {
     const [isSearching, setIsSearching] = useState<boolean>(false);
     const [isMatched, setIsMatched] = useState<boolean>(false);

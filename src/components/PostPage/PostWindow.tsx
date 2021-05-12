@@ -62,7 +62,7 @@ const LetterBox = styled.div`
     align-items: center;
     margin-right: 20px;
     width: 100%;
-    height: 99%;
+    height: 740px;
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         height: 90%;

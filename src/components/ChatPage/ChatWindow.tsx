@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { Keyframes } from 'styled-components';
 import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
 import { theme } from '../../style/theme';
 import { useChat } from '../../Hooks/useChat';
 import { VisibilityType } from '../../config';
+import { observer } from 'mobx-react';
+// import authStore from '../../store/authStore';
 
-const ChatWindow: React.FC = () => {
+const ChatWindow: React.FC = observer(() => {
     const chat = useChat();
 
     return (
@@ -17,14 +19,16 @@ const ChatWindow: React.FC = () => {
                 <Screen />
                 <SenderBox>
                     <Input ref={chat.inputBox} />
-                    <SendBtn ref={chat.sendBtn} >
+                    <SendBtn ref={chat.sendBtn}
+                             
+                             >
                         전송
                     </SendBtn>
                 </SenderBox>
             </ChatBox>
 
             <HandlerContainer>
-                {chat.isSearching ? 
+                {chat.isSearching ?
                     <>
                         <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있습니다 </BigMent>
                         <Loader type="Circles" color={theme.colors.plum} height={60} width={60} />
@@ -51,7 +55,7 @@ const ChatWindow: React.FC = () => {
             
         </Row>
     );
-};
+});
 
 export default ChatWindow;
 
@@ -77,7 +81,7 @@ const ChatBox = styled.div<{
     align-items: center;
     margin-right: 20px;
     width: 100%;
-    height: 99%;
+    height: 740px;
     visibility: ${({ visibility }) => visibility};
     animation: ${({ animation }) => animation} .7s ease forwards;
     @media only screen and (max-width: 1450px) {

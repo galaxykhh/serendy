@@ -167,7 +167,7 @@ const IconBox = styled.div`
 
 const StorageIcon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.yellow};
-    font-size: 36px;
+    font-size: 35px;
 `;
 
 const Text = styled.div<{ size?: string }>`

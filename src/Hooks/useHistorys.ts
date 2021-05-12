@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import authStore from '../store/authStore';
 
 export const useHistorys = () => {
     const history = useHistory();
@@ -34,6 +36,18 @@ export const useHistorys = () => {
     const pushPostPage = (): void => {
         history.push('/post');
     }
+
+    const pushLoggedUser = (): void => {
+        if (authStore.isSignIn) {
+            history.push('/main');
+        } else {
+            return 
+        }
+    }
+
+    useEffect(() => {
+        pushLoggedUser();
+    }, [authStore.isSignIn]); // eslint-disable-line
 
     return {
         pushStart,

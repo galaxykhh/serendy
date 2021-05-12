@@ -45,5 +45,15 @@ export const zoomIn = keyframes`
     to {
         opacity: 1;
         transform: scale(1);
+    };
+`;
+
+export const zoomOut = keyframes`
+    60% {
+        opacity: 1;
+        transform: scale(1.05);
+    } 100% {
+        opacity: 0;
+        transform: scale(0);
     }
 `;

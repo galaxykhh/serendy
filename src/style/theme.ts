@@ -3,6 +3,7 @@ export const theme = {
         mainBlue: 'rgb(84, 185, 209)',
         main80: 'rgba(84, 185, 209, 0.8)',
         black: '#282c37',
+        black10: 'rgba(20, 20, 20, 0.1)',
         black20: 'rgba(20, 20, 20, 0.2)',
         white: '#ffffff',
         white20: 'rgba(255, 255, 255, 0.2)',

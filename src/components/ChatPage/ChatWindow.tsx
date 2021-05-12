@@ -1,33 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
-import { slideUp } from '../../style/keyframes';
+import React, { useEffect } from 'react';
+import styled, { Keyframes } from 'styled-components';
+import { zoomIn, zoomOut } from '../../style/keyframes';
+import Loader from 'react-loader-spinner';
+import { theme } from '../../style/theme';
+import { useChat } from '../../Hooks/useChat';
+import { VisibilityType } from '../../config';
 
 const ChatWindow: React.FC = () => {
+    const chat = useChat();
+
     return (
         <Row>
-            <Column>
-            <Screen />
-            <SenderBox>
-                <Input />
-                <SendBtn>
-                    전송
-                </SendBtn>
-            </SenderBox>
-            </Column>
+            <ChatBox animation={chat.isMatched ? zoomIn : zoomOut}
+                     visibility={chat.display}
+                     >
+                <Screen />
+                <SenderBox>
+                    <Input ref={chat.inputBox} />
+                    <SendBtn ref={chat.sendBtn} >
+                        전송
+                    </SendBtn>
+                </SenderBox>
+            </ChatBox>
+
             <HandlerContainer>
-                <BigMent> 버튼을 눌러 상대를 찾게되면 </BigMent>
-                <BigMent> 낯선 누군가와 대화가 시작됩니다! </BigMent>
-                <br />
-                
-                <Rule>
-                    <Ment size='18px'> · 서로의 이름은 각각 설정된 닉네임으로 진행됩니다 </Ment>
-                    <Ment size='18px'> · 상대가 마음에 들면 쪽지 요청을 보낼 수 있습니다 </Ment>
-                    <Ment size='18px'> · 요청이 수락되면 채팅이 끝나도 쪽지를 주고 받을 수 있습니다 </Ment>
-                    <Ment size='18px'> · 한명이라도 채팅방을 나가게되면 더 진행되지 않습니다 </Ment>
-                </Rule>
-                <br />
-                <StartBtn> 상대 찾기 </StartBtn>
+                {chat.isSearching ? 
+                    <>
+                        <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있습니다 </BigMent>
+                        <Loader type="Circles" color={theme.colors.orange} height={60} width={60} />
+                        <BtnBox>
+                            <CancelBtn onClick={chat.handleSearch} > 취소하기 </CancelBtn>
+                        </BtnBox>
+                    </> :
+                    <>
+                        <BigMent> 상대를 찾고 대화를 시작하세요 ! </BigMent>
+                        <br />
+                        
+                        <Rule>
+                            <Ment size='18px'> · 채팅은 서로가 설정한 이름으로 진행돼요 </Ment>
+                            <Ment size='18px'> · 상대와 대화가 통하면 쪽지 요청을 보낼 수 있어요 </Ment>
+                            <Ment size='18px'> · 요청이 수락되면 채팅이 끝나도 쪽지를 보낼 수 있어요 </Ment>
+                            <Ment size='18px'> · 누군가 채팅방을 나가게되면 채팅은 종료돼요 </Ment>
+                        </Rule>
+                        <br />
+                        <BtnBox>
+                            <StartBtn onClick={chat.handleSearch} > 상대 찾기 </StartBtn>
+                        </BtnBox>
+                    </>}
             </HandlerContainer>
+            
         </Row>
     );
 };
@@ -46,13 +67,19 @@ const Row = styled.div`
     }
 `;
 
-const Column = styled.div`
+const ChatBox = styled.div<{
+    animation: Keyframes,
+    visibility: VisibilityType,
+}>`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-right: 20px;
     width: 100%;
+    height: 99%;
+    visibility: ${({ visibility }) => visibility};
+    animation: ${({ animation }) => animation} .7s ease forwards;
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         height: 90%;
@@ -65,7 +92,7 @@ const Screen = styled.div`
     min-width: 500px;
     background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 30px;
-    border: 1px solid ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.black};
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;
@@ -95,7 +122,7 @@ const Input = styled.input`
     font-size: 18px;
     color: ${({ theme }) => theme.colors.black};
     background-color: ${({ theme }) => theme.colors.white20};
-    border: 1px solid ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.black};
     border-radius: 30px;
     @media only screen and (max-width: 400px) {
         width: 99%;
@@ -108,10 +135,10 @@ const SendBtn = styled.button`
     height: 50px;
     font-size: 18px;
     text-align: center;
-    border: 1px solid ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.black};
     background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 30px;
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.black};
     cursor: pointer;
     transition: .3s ease;
     &:hover {
@@ -135,8 +162,7 @@ const HandlerContainer = styled.div`
     min-width: 300px;
     height: 740px;
     background-color: ${({ theme }) => theme.colors.white20};
-    border: 1px solid ${({ theme }) => theme.colors.white};
-    animation: ${slideUp} .7s ease;
+    border: 1px solid ${({ theme }) => theme.colors.black};
     border-radius: 30px;
     @media only screen and (max-width: 1450px) {
         height: 70%;
@@ -169,5 +195,28 @@ const StartBtn = styled(SendBtn)`
     width: 150px;
     height: 70px;
     background-color: rgba(0, 0, 0, 0);
-    border: 1px solid ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.black};
+    @media only screen and (max-width: 1450px) {
+        width: 100px;
+        height: 50px;
+    }
+`;
+
+const CancelBtn = styled(StartBtn)`
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.red};
+        color: ${({ theme }) => theme.colors.white};
+    }
+`;
+
+const BtnBox = styled.div`
+    position: absolute;
+    bottom: 90px;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media only screen and (max-width: 1450px) {
+        bottom: -60px;
+    }
 `;

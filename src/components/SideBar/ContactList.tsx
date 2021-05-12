@@ -63,7 +63,7 @@ const Test = [
 ]
 
 const ContactList: React.FC = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(true);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const handleStorage = ():void => {
         setIsOpen(!isOpen);

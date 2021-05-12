@@ -74,7 +74,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
-                          color={errors.account ? (theme.colors.red) : (theme.colors.black)}
+                          color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                           />
                     <Input placeholder='아이디'
                            {...register('account', {
@@ -86,12 +86,12 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
                            />
                     <DupliBtn onClick={accountCheck}> 중복확인 </DupliBtn>
                 </Row>
-                {!isAlready ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg> 사용가능한 아이디입니다 </Msg> }
+                {!isAlready ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg style={{ color: theme.colors.green }}> 사용가능한 아이디입니다 </Msg> }
             </Column>
             <Column>
                 <Row>
                     <Icon icon={faLock}
-                          color={errors.password ? (theme.colors.red) : (theme.colors.black)}
+                          color={errors.password ? (theme.colors.red) : (theme.colors.white)}
                           />
                     <Input placeholder='비밀번호'
                            type='password'
@@ -107,7 +107,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
             <Column>
                 <Row>
                     <Icon icon={faCheck}
-                          color={errors.check ? (theme.colors.red) : (theme.colors.black)}
+                          color={errors.check ? (theme.colors.red) : (theme.colors.white)}
                           />
                     <Input placeholder='비밀번호 확인'
                            type='password'
@@ -122,7 +122,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
             <Column>
                 <Row>
                     <Icon icon={faUserSecret}
-                          color={errors.secretMessage ? (theme.colors.red) : (theme.colors.black)}
+                          color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
                           />
                     <Input placeholder='암호 메세지'
                            onKeyPress={entered}
@@ -181,7 +181,7 @@ const Row = styled.div`
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 10px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.white};
 `;
 
 const Input = styled.input`
@@ -190,14 +190,13 @@ const Input = styled.input`
     height: 40px;
     font-size: 21px;
     padding-left: 20px;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const Button = styled.button`
     all: unset;
     width: 200px;
     height: 55px;
-    border: 1px solid ${({ theme }) => theme.colors.white};
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};
@@ -218,7 +217,6 @@ const DupliBtn = styled(Button)`
     height: 45px;
     margin-bottom: 10px;
     margin-top: 0;
-    transform: translateY(8px);
 `;
 
 const Icon = styled(FontAwesomeIcon)<{ color: string }>`
@@ -234,5 +232,5 @@ const ErrorMsg = styled.div`
 `;
 
 const Msg = styled(ErrorMsg)`
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;

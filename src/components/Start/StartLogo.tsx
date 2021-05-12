@@ -39,6 +39,7 @@ const Logo = styled.div`
 const Arrow = styled.div`
     font-size: 30px;
     text-align: center;
+    color: ${({ theme }) => theme.colors.white};
     animation: ${arrowPop} 0.5s alternate infinite;
 `;
 

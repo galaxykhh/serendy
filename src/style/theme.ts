@@ -1,19 +1,14 @@
 export const theme = {
     colors: {
         mainBlue: 'rgb(84, 185, 209)',
-        main80: 'rgba(84, 185, 209, 0.8)',
+        main60: 'rgba(84, 185, 209, 0.6)',
         black: '#282c37',
-        black10: 'rgba(20, 20, 20, 0.1)',
-        black20: 'rgba(20, 20, 20, 0.2)',
-        black60: 'rgba(0, 0, 0, 0.6)',
+        yellow: '#EFDC05',
         white: '#ffffff',
-        white20: 'rgba(255, 255, 255, 0.2)',
         white50: 'rgba(255, 255, 255, 0.5)',
         grey: '#a4b0be',
-        red: '#ff4d4d',
+        plum: '#efb8e4',
+        red: '#E53A40',
         green: '#3ae374',
-        orange: '#fa8231',
     },
 }
-
-export type ThemeType = typeof theme;

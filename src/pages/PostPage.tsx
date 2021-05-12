@@ -3,12 +3,21 @@ import React from 'react'
 import CenterView from '../components/publicComponents/CenterView'
 import Container from '../components/publicComponents/Container'
 import PostWindow from '../components/PostPage/PostWindow';
+import PostSent from '../components/PostPage/PostSent';
+import { usePost } from '../Hooks/usePost';
 
 const PostPage: React.FC = observer(() => {
+
+    const post = usePost();
+
     return (
         <Container>
             <CenterView>
-                <PostWindow />
+                {post.isSent ? <PostSent /> : 
+                               <PostWindow postSend={post.handlePost}
+                                           textArea={post.textArea}
+                                           />
+                }
             </CenterView>
         </Container>
     );

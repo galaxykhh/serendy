@@ -65,7 +65,7 @@ const SignInBox: React.FC = observer(() => {
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
-                          color={errors.account ? (theme.colors.red) : (theme.colors.black)}
+                          color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                           />
                     <Input placeholder='아이디'
                            {...register('account', {
@@ -82,7 +82,7 @@ const SignInBox: React.FC = observer(() => {
             <Column>
                 <Row>
                     <Icon icon={faLock}
-                          color={errors.password ? (theme.colors.red) : (theme.colors.black)}
+                          color={errors.password ? (theme.colors.red) : (theme.colors.white)}
                           />
                     <Input placeholder='비밀번호'
                            type='password'
@@ -139,7 +139,7 @@ const Row = styled.div`
     align-items: center;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.white};
 `;
 
 const ButtonBox = styled.div`
@@ -156,14 +156,13 @@ const Input = styled.input`
     height: 40px;
     font-size: 21px;
     padding-left: 20px;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const Button = styled.button`
     all: unset;
     width: 200px;
     height: 65px;
-    border: 1px solid ${({ theme }) => theme.colors.white};
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};
@@ -192,7 +191,7 @@ const ErrorMsg = styled.div`
 
 const ForgotPW = styled.div`
     font-size: 16px;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white50};
     cursor: pointer;
     &:hover {
         text-decoration: underline;

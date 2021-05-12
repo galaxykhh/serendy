@@ -22,7 +22,5 @@ const Flex = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        ${({ theme }) => theme.colors.white}, ${({ theme }) => theme.colors.mainBlue}
-    );
+    background-color: ${({ theme }) => theme.colors.black};
 `;

@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { ThemeType } from '../style/theme';
 
-const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
+const GlobalStyle = createGlobalStyle`
 
     @font-face {
         font-family: 'MGothic';

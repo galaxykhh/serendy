@@ -63,8 +63,6 @@ const Container = styled.div`
     height: 15%;
     min-width: 80px;
     min-height: 120px;
-    border-radius: 30px;
-    background-color: ${({ theme }) => theme.colors.black20};
 `;
 
 const Icon = styled(FontAwesomeIcon)<{
@@ -72,7 +70,7 @@ const Icon = styled(FontAwesomeIcon)<{
     visible?: DisplayType;
 }>`
     font-size: ${({ iconsize }) => iconsize};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
 `;
 
@@ -89,7 +87,7 @@ const Text = styled.span<{
     mt?: string;
 }>`
     font-size: ${({ size }) => size};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
     margin-left: ${({ ml }) => ml};
     margin-top: ${({ mt }) => mt};
     white-space: nowrap;
@@ -110,7 +108,7 @@ const Box = styled.div`
     transition: .3s ease;
     cursor: pointer;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white50};
+        background-color: ${({ theme }) => theme.colors.main60};
     }
     @media only screen and (max-width: 720px) {
         min-width: 20px;

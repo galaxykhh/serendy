@@ -29,7 +29,8 @@ const Bar = styled.div<{visible: DisplayType}>`
     align-items: center;
     width: 19%;
     height: 99%;
-    border-radius: 30px;
+    border-radius: 5px;
+    border-left: 1px solid ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
     animation: ${tabOpen} 1s ease;
     transition: 1s ease;

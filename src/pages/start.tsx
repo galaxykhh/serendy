@@ -29,9 +29,5 @@ const Wallpaper = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        ${({ theme }) => theme.colors.white},
-        ${({ theme }) => theme.colors.mainBlue} 60%,
-        ${({ theme }) => theme.colors.white}
-    );
+    background-color: ${({ theme }) => theme.colors.black};
 `;

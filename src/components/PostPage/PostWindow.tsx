@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
-import styled, { Keyframes } from 'styled-components';
-import { useChat } from '../../Hooks/useChat';
+import React from 'react';
+import styled  from 'styled-components';
+import { fadeIn } from '../../style/keyframes';
 
-const PostWindow: React.FC = () => {
-    const chat = useChat();
+interface IPostWindow {
+    postSend: () => void;
+    textArea: React.RefObject<HTMLTextAreaElement>;
+}
+
+const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
 
     return (
         <Row>
             <LetterBox>
                 <Letter>
-                    <TextArea />
+                    <TextArea ref={textArea}
+                              onChange={() => console.log('change')}
+                              />
                 </Letter>
                 <SenderBox>
-                    <SendBtn ref={chat.sendBtn} >
+                    <SendBtn onClick={postSend} >
                         편지 보내기
                     </SendBtn>
                 </SenderBox>
@@ -43,6 +49,7 @@ const Row = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
+    animation: ${fadeIn} .8s ease;
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
     }
@@ -70,7 +77,7 @@ const Letter = styled.div`
     height: 680px;
     min-width: 500px;
     background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
+    border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;
@@ -78,9 +85,9 @@ const Letter = styled.div`
     };
 `;
 
-const TextArea = styled.textarea.attrs(({
-    placeholder: '여기서부터 이야기를 들려주세요'
-}))`
+const TextArea = styled.textarea.attrs({
+    placeholder: '여기서부터 이야기를 들려주세요',
+})`
     all: unset;
     width: 80%;
     height: 80%;
@@ -109,14 +116,14 @@ const SendBtn = styled.button`
     height: 50px;
     font-size: 18px;
     text-align: center;
-    background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
-    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.main60};
+    border-radius: 10px;
+    color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
     transition: .3s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.mainBlue};
-        color: ${({ theme }) => theme.colors.white};
+        background-color: ${({ theme }) => theme.colors.plum};
+        color: ${({ theme }) => theme.colors.black};
     }
 `;
 
@@ -128,8 +135,8 @@ const RuleContainer = styled.div`
     width: 100%;
     min-width: 300px;
     height: 740px;
-    background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
+    background-color: ${({ theme }) => theme.colors.main60};
+    border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         height: 70%;
     }
@@ -145,6 +152,7 @@ const Rule = styled.div`
 const Ment = styled.div<{ size?: string }>`
     font-size: 18px;
     margin-bottom: 10px;
+    color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
     }

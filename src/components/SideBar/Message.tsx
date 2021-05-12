@@ -17,7 +17,7 @@ const Message: React.FC<IChatRoom> = ({ item }) => {
             <Icon icon={faEnvelope} />
             <Column>
                 <Stranger> {stranger} </Stranger>
-                <RoomTitle> {messageContent}  </RoomTitle>
+                <MessagePreview> {messageContent}  </MessagePreview>
             </Column>
         </Box>
     )
@@ -54,7 +54,7 @@ const Column = styled.div`
 
 const Icon = styled(FontAwesomeIcon)`
     font-size: 25px;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const Stranger = styled.div`
@@ -64,15 +64,15 @@ const Stranger = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
-const RoomTitle = styled.div`
+const MessagePreview = styled.div`
     font-size: 13px;
     margin-left: 10px;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.black};
 `;

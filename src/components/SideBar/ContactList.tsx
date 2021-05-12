@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Message from './Message';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInbox } from '@fortawesome/free-solid-svg-icons';
+import { faFolder, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { theme } from '../../style/theme';
 
 const Test = [
     {
@@ -36,29 +37,49 @@ const Test = [
         stranger: '외로운사람6',
     },
     {
+        id: 8,
+        messageContent: '후..',
+        stranger: '외로운사람7',
+    },
+    {
         id: 7,
         messageContent: '후..',
         stranger: '외로운사람7',
     },
     {
-        id: 8,
-        messageContent: '반갑습니다',
-        stranger: '외로운사람8',
-    },
-    {
         id: 9,
-        messageContent: '뭐하시나요',
-        stranger: '외로운사람9',
+        messageContent: '후..',
+        stranger: '외로운사람7',
     },
     {
         id: 10,
-        messageContent: '긴글자가잘나오는지테스트하는겸써보는중인데잘될지모르겠다아아아아아',
-        stranger: '긴글자맨',
+        messageContent: '후..',
+        stranger: '외로운사람7',
     },
     {
         id: 11,
-        messageContent: '긴글자가잘나오는지테스트하는겸써보는중인데잘될지모르겠다아아아아아',
-        stranger: '긴글자맨2',
+        messageContent: '후..',
+        stranger: '외로운사람7',
+    },
+    {
+        id: 12,
+        messageContent: '후..',
+        stranger: '외로운사람7',
+    },
+    {
+        id: 13,
+        messageContent: '후..',
+        stranger: '외로운사람7',
+    },
+    {
+        id: 14,
+        messageContent: '후..',
+        stranger: '외로운사람7',
+    },
+    {
+        id: 15,
+        messageContent: '후..',
+        stranger: '외로운사람7',
     },
 ]
 
@@ -72,8 +93,13 @@ const ContactList: React.FC = () => {
     return (
         <>
             <Container height={isOpen ? '68%' : '80px'} >
-                <StorageHandler onClick={handleStorage} >
-                    <StorageIcon icon={faInbox} />
+                <StorageHandler onClick={handleStorage}
+                                bgcolor={isOpen ? theme.colors.main60 : theme.colors.black}
+                                >
+                    <IconBox>
+                        <StorageIcon icon={isOpen ? faFolderOpen : faFolder} />
+                    </IconBox>
+                    <Text> 보관함 </Text>
                 </StorageHandler>
                 <MessageContainer>
                     {Test.map((item, index) => (
@@ -97,10 +123,10 @@ const Container = styled.div<{ height: HeightType }>`
     margin-top: 10px;
     width: 100%;
     height: ${({ height }) => height};
+    min-height: 80px;
     min-width: 80px;
     border-radius: 30px;
     overflow: hidden;
-    background-color: ${({ theme }) => theme.colors.black20};
     transition: .6s ease;
 `;
 
@@ -115,24 +141,40 @@ const MessageContainer = styled.div`
     margin-bottom: 8px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+    background-color: ${({ theme }) => theme.colors.main60};
     overflow: auto;
 `;
 
-const StorageHandler = styled.div`
+const StorageHandler = styled.div<{ bgcolor: string }>`
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     min-height: 80px;
     cursor: pointer;
     transition: .3s ease;
-    border-radius: 30px;
+    background-color: ${({ bgcolor }) => bgcolor};
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white50};
+        background-color: ${({ theme }) => theme.colors.main60};
     }
 `;
 
+const IconBox = styled.div`
+    width: 40px;
+    height: 40px;
+    margin-left: 30px;
+`;
+
 const StorageIcon = styled(FontAwesomeIcon)`
-    font-size: 40px;
-    text-align: center;
+    color: ${({ theme }) => theme.colors.yellow};
+    font-size: 36px;
+`;
+
+const Text = styled.div<{ size?: string }>`
+    font-size: 18px;
+    color: ${({ theme }) => theme.colors.white};
+    margin-left: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;

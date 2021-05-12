@@ -6,8 +6,9 @@ import Success from '../components/SignUp/Success';
 import authStore from '../store/authStore';
 import AlreadySignIn from '../components/publicComponents/AlreadySignIn';
 import { TEXTLOGO_URL } from '../config';
+import { observer } from 'mobx-react';
 
-const SignUp: React.FC = () => {
+const SignUp: React.FC = observer(() => {
     const [isSuccess, setIsSuccess] = useState<boolean>(false); // is sign up success ?
 
     return (
@@ -19,8 +20,8 @@ const SignUp: React.FC = () => {
             </> : 
             <AlreadySignIn />}
         </Container>
-    )
-}
+    );
+});
 
 export default SignUp;
 

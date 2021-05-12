@@ -24,7 +24,7 @@ export default Header;
 
 const LogoBox = styled.div<{ visible: DisplayType }>`
     position: fixed;
-    top: 10px;
+    top: 5px;
     left: 10px;
     display: ${({ visible }) => visible};
     cursor: pointer;

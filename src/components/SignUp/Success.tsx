@@ -36,20 +36,19 @@ const Msg = styled.div`
     margin-top: 40px;
     margin-bottom: 30px;
     font-size: 35px;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const BoldMsg = styled.span`
     font-size: 35px;
     font-weight: 900;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 const Button = styled.button`
     all: unset;
-    width: 220px;
-    height: 110px;
-    border: 1px solid ${({ theme }) => theme.colors.white};
+    width: 180px;
+    height: 90px;
     border-radius: 40px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};

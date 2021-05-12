@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled, { Keyframes } from 'styled-components';
-import { zoomIn, zoomOut } from '../../style/keyframes';
+import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
 import { theme } from '../../style/theme';
 import { useChat } from '../../Hooks/useChat';
@@ -27,7 +27,7 @@ const ChatWindow: React.FC = () => {
                 {chat.isSearching ? 
                     <>
                         <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있습니다 </BigMent>
-                        <Loader type="Circles" color={theme.colors.orange} height={60} width={60} />
+                        <Loader type="Circles" color={theme.colors.plum} height={60} width={60} />
                         <BtnBox>
                             <CancelBtn onClick={chat.handleSearch} > 취소하기 </CancelBtn>
                         </BtnBox>
@@ -91,7 +91,7 @@ const Screen = styled.div`
     height: 680px;
     min-width: 500px;
     background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
+    border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;
@@ -123,7 +123,7 @@ const Input = styled.input.attrs(({
     font-size: 18px;
     color: ${({ theme }) => theme.colors.black};
     background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
+    border-radius: 10px;
     @media only screen and (max-width: 400px) {
         width: 99%;
     }
@@ -135,20 +135,17 @@ const SendBtn = styled.button`
     height: 50px;
     font-size: 18px;
     text-align: center;
-    background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
-    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.mainBlue};
+    border-radius: 10px;
+    color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
     transition: .3s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.mainBlue};
+        background-color: ${({ theme }) => theme.colors.plum};
         color: ${({ theme }) => theme.colors.white};
     }
     @media only screen and (max-width: 1450px) {
         width: 11%;
-    }
-    @media only screen and (max-width: 400px) {
-        display: none;
     }
 `;
 
@@ -159,9 +156,10 @@ const HandlerContainer = styled.div`
     align-items: center;
     width: 100%;
     min-width: 300px;
-    height: 96%;
-    background-color: ${({ theme }) => theme.colors.white50};
-    border-radius: 30px;
+    height: 740px;
+    border-radius: 10px;
+    background-color: ${({ theme }) => theme.colors.main60};
+    animation: ${fadeIn} .8s ease;
     @media only screen and (max-width: 1450px) {
         height: 70%;
     }
@@ -175,8 +173,10 @@ const Rule = styled.div`
 `;
 
 const Ment = styled.div<{ size?: string }>`
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 10px;
+    white-space: nowrap;
+    color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
     }
@@ -184,6 +184,7 @@ const Ment = styled.div<{ size?: string }>`
 
 const BigMent = styled(Ment)`
     font-size: 30px;
+    color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
     }
@@ -192,9 +193,9 @@ const BigMent = styled(Ment)`
 const StartBtn = styled(SendBtn)`
     width: 150px;
     height: 70px;
-    border: 1px solid ${({ theme }) => theme.colors.black20};
+    font-size: 20px;
     &:hover {
-        border: none;
+        color: ${({ theme }) => theme.colors.black};
     }
     @media only screen and (max-width: 1450px) {
         width: 100px;
@@ -211,8 +212,8 @@ const CancelBtn = styled(StartBtn)`
 
 const BtnBox = styled.div`
     position: absolute;
-    bottom: 90px;
-    height: 30%;
+    bottom: 70px;
+    height: 35%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -14,8 +14,8 @@ export default CenterView;
 
 const Screen = styled.div`
     position: absolute;
-    left: 10px;
-    bottom: 18px;
+    left: 5px;
+    bottom: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +25,6 @@ const Screen = styled.div`
     height: 81.5%;
     border-radius: 30px;
     padding: 10px;
-    background-color: ${({ theme }) => theme.colors.black20};
     transition: 1s ease;
     z-index: 1;
     @media only screen and (max-width: 500px) {

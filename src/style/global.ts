@@ -14,8 +14,12 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'MGothic';
+        -ms-overflow-style: none;
+        ::-webkit-scrollbar {
+            display: none;
+        }
     }
-    
+
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,

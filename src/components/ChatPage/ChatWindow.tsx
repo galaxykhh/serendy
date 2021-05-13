@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import styled, { Keyframes } from 'styled-components';
 import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
@@ -7,15 +7,17 @@ import { useChat } from '../../Hooks/useChat';
 import { VisibilityType } from '../../type';
 import { observer } from 'mobx-react';
 import MessageBox from './MessageBox';
-import { IRecentChat } from '../../pages/ChatPage';
 
-interface IChatWindow {
-    chatlog: IRecentChat[],
-};
-
-
-const ChatWindow: React.FC<IChatWindow>= observer(({ chatlog }) => {
+const ChatWindow: React.FC = observer(() => {
     const chat = useChat();
+
+    useEffect(() => {
+        chat.handleReceive();
+    }, []); // eslint-disable-line
+
+    useEffect(() => {
+        chat.handlePushChat();
+    }, [chat.recentChat.message]); // eslint-disable-line
 
     return (
         <Row>
@@ -23,7 +25,7 @@ const ChatWindow: React.FC<IChatWindow>= observer(({ chatlog }) => {
                      visibility={chat.display}
                      >
                 <Screen>
-                    {chatlog.map((data, index) => (
+                    {chat.chatLog.map((data, index) => (
                         <MessageBox message={data.message}
                                     nickName={data.nickName}
                                     key={index}
@@ -97,18 +99,19 @@ const ChatBox = styled.div<{
     margin-right: 20px;
     width: 100%;
     height: 740px;
+    min-height: 740px;
     visibility: ${({ visibility }) => visibility};
     animation: ${({ animation }) => animation} .7s ease forwards;
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
-        height: 90%;
+        min-height: 340px;
     }
 `;
 
 const Screen = styled.ul`
     width: 740px;
     height: 680px;
-    min-width: 500px;
+    max-height: 680px;
     background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
     overflow: auto;
@@ -223,6 +226,8 @@ const StartBtn = styled(SendBtn)`
     @media only screen and (max-width: 1450px) {
         width: 100px;
         height: 50px;
+        font-size: 17px;
+        margin-top: 15px;
     }
 `;
 

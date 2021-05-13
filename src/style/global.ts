@@ -15,6 +15,15 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'MGothic';
     }
+    
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+	 transition: background-color 5000s ease-in-out 0s;
+	 -webkit-transition: background-color 9999s ease-out;
+     -webkit-text-fill-color: #fff !important;
+   }
 `;
 
 export default GlobalStyle;

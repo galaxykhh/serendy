@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { Keyframes } from 'styled-components';
 import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
@@ -6,9 +6,13 @@ import { theme } from '../../style/theme';
 import { useChat } from '../../Hooks/useChat';
 import { VisibilityType } from '../../type';
 import { observer } from 'mobx-react';
-// import userStore from '../../store/userStore';
+import MessageBox from './MessageBox';
 
-const ChatWindow: React.FC = observer(() => {
+interface IChatWindow {
+    chatlog: string[]
+}
+
+const ChatWindow: React.FC<IChatWindow>= observer(({ chatlog }) => {
     const chat = useChat();
 
     return (
@@ -16,11 +20,17 @@ const ChatWindow: React.FC = observer(() => {
             <ChatBox animation={chat.isMatched ? zoomIn : zoomOut}
                      visibility={chat.display}
                      >
-                <Screen />
+                <Screen>
+                    {chatlog.map((x, i) => (
+                        <MessageBox message={x} key={i} />
+                    ))}
+                </Screen>
                 <SenderBox>
-                    <Input ref={chat.inputBox} />
+                    <Input ref={chat.input}
+                           onKeyPress={chat.handleEnter}
+                           />
                     <SendBtn ref={chat.sendBtn}
-                             
+                             onClick={chat.handleSendMsg}
                              >
                         전송
                     </SendBtn>
@@ -90,12 +100,13 @@ const ChatBox = styled.div<{
     }
 `;
 
-const Screen = styled.div`
+const Screen = styled.ul`
     width: 740px;
     height: 680px;
     min-width: 500px;
     background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
+    overflow: auto;
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;
@@ -118,7 +129,9 @@ const SenderBox = styled.div`
 `;
 
 const Input = styled.input.attrs(({
-    placeholder: '내용을 입력해주세요'
+    type: 'text',
+    placeholder: '내용을 입력해주세요',
+    autocomplete: 'off',
 }))`
     all: unset;
     width: 84%;

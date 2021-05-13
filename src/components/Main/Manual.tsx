@@ -1,18 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdjust, faPaperPlane, faQuestion, faSearchDollar } from '@fortawesome/free-solid-svg-icons';
+import { faAdjust, faPaperPlane, faComments, faSearchDollar } from '@fortawesome/free-solid-svg-icons';
 
 const Manual: React.FC = () => {
 
     return (
         <Container>
-            <Box> <Icon icon={faPaperPlane} /> 가가가각 </Box>
-            <Box> <Icon icon={faQuestion} /> </Box>
-            <Box> <Icon icon={faAdjust} /> </Box>
-            <Box> <Icon icon={faSearchDollar} /> </Box>
-            <Box> <Icon icon={faSearchDollar} /> </Box>
-            <Box> <Icon icon={faSearchDollar} /> </Box>
+            <Box>
+                <Icon icon={faPaperPlane} />
+                <Text> 비행기 </Text>
+            </Box>
+            <Box>
+                <Icon icon={faComments} />
+                <Text> 잡담 </Text>
+            </Box>
+            <Box>
+                <Icon icon={faAdjust} />
+                <Text> 반달 </Text>
+            </Box>
+            <Box>
+                <Icon icon={faSearchDollar} />
+                <Text> 돈찾는중 </Text>
+            </Box>
+            <Box>
+                <Icon icon={faSearchDollar} />
+                <Text> 돈찾는중 </Text>
+            </Box>
+            <Box>
+                <Icon icon={faSearchDollar} />
+                <Text> 돈찾는중 </Text>
+            </Box>
         </Container>
     )
 }
@@ -49,4 +67,9 @@ const FlexBox = styled.div`
 const Icon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.white};
     font-size: 40px;
+`;
+
+const Text = styled.div`
+    margin-top: 15px;
+    color: ${({ theme }) => theme.colors.white};
 `;

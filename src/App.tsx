@@ -16,17 +16,16 @@ import ChatPage from './pages/ChatPage';
 import PostPage from './pages/PostPage';
 import userStore from './store/userStore';
 import { io } from 'socket.io-client';
+import { BASE_URL } from './config';
 
 const App: React.FC = observer(() => {
 
     useEffect(() => {
         if (userStore.isSignIn) {
-            userStore.setUserSocket(io('http://localhost:8000'));
-            console.log(userStore.userSocket);
+            userStore.setUserSocket(io(BASE_URL));
         } else {
             userStore.userSocket?.disconnect();
             userStore.setUserSocket(null);
-            console.log(userStore.userSocket);
         }
     }, [userStore.isSignIn]); //eslint-disable-line
 

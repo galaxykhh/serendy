@@ -182,7 +182,7 @@ const ErrorMsg = styled.div`
 
 const ForgotPW = styled.div`
     font-size: 16px;
-    color: ${({ theme }) => theme.colors.white50};
+    color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
     &:hover {
         text-decoration: underline;

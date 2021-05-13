@@ -4,9 +4,9 @@ import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
 import { theme } from '../../style/theme';
 import { useChat } from '../../Hooks/useChat';
-import { VisibilityType } from '../../config';
+import { VisibilityType } from '../../type';
 import { observer } from 'mobx-react';
-// import authStore from '../../store/authStore';
+// import userStore from '../../store/userStore';
 
 const ChatWindow: React.FC = observer(() => {
     const chat = useChat();
@@ -94,7 +94,7 @@ const Screen = styled.div`
     width: 740px;
     height: 680px;
     min-width: 500px;
-    background-color: ${({ theme }) => theme.colors.white50};
+    background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         width: 99%;
@@ -112,7 +112,7 @@ const SenderBox = styled.div`
     min-width: 500px;
     height: 50px;
     @media only screen and (max-width: 1450px) {
-        width: 98%;
+        width: 99%;
         min-width: 200px;
     }
 `;
@@ -125,8 +125,8 @@ const Input = styled.input.attrs(({
     min-height: 50px;
     padding-left: 30px;
     font-size: 18px;
-    color: ${({ theme }) => theme.colors.black};
-    background-color: ${({ theme }) => theme.colors.white50};
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
     @media only screen and (max-width: 400px) {
         width: 99%;
@@ -139,17 +139,18 @@ const SendBtn = styled.button`
     height: 50px;
     font-size: 18px;
     text-align: center;
-    background-color: ${({ theme }) => theme.colors.mainBlue};
+    background-color: ${({ theme }) => theme.colors.main60};
     border-radius: 10px;
     color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
     transition: .3s ease;
     &:hover {
         background-color: ${({ theme }) => theme.colors.plum};
-        color: ${({ theme }) => theme.colors.white};
+        color: ${({ theme }) => theme.colors.black};
     }
     @media only screen and (max-width: 1450px) {
-        width: 11%;
+        font-size: 15px;
+        width: 10%;
     }
 `;
 

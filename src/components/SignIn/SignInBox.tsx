@@ -5,7 +5,7 @@ import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import { useHistorys } from '../../Hooks/useHistorys';
-import authStore from '../../store/authStore';
+import userStore from '../../store/userStore';
 import { zoomIn } from '../../style/keyframes';
 import { observer } from 'mobx-react';
 import Loader from 'react-loader-spinner';
@@ -39,12 +39,12 @@ const SignInBox: React.FC = observer(() => {
     }
 
     const onSubmit: SubmitHandler<ISignInData> = (data) => {
-        authStore.signIn(data, invalid, history.pushMain);
+        userStore.signIn(data, invalid, history.pushMain);
     }
 
     return (
         <>
-            {!authStore.isLogging ? 
+            {!userStore.isLogging ? 
                 <Box>
                 <Column>
                     <Row>

@@ -22,7 +22,7 @@ const Screen = styled.div`
     align-items: center;
     width: 80.5%;
     min-width: 300px;
-    height: 81.5%;
+    height: 80%;
     border-radius: 30px;
     padding: 10px;
     transition: 1s ease;

@@ -5,12 +5,6 @@
 /.pnp
 .pnp.js
 
-# Image
-/public/images
-
-#server
-/src/config.ts
-
 # testing
 /coverage
 

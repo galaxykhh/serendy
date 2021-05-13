@@ -3,15 +3,16 @@ import React from 'react';
 import styled from 'styled-components';
 import Container from '../components/publicComponents/Container';
 import SignInBox from '../components/SignIn/SignInBox';
-import { DisplayType, TEXTLOGO_URL } from '../config';
-import authStore from '../store/authStore';
+import { TEXTLOGO_URL } from '../config';
+import { DisplayType } from '../type';
+import userStore from '../store/userStore';
 
 const SignIn: React.FC = observer(() => {
 
     return (
         <Container>
             <>
-                <TextLogo display={authStore.isLogging ? 'none' : 'block'} />
+                <TextLogo display={userStore.isLogging ? 'none' : 'block'} />
                 <SignInBox />
             </>
         </Container>

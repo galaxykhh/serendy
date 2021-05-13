@@ -5,6 +5,7 @@ import CenterView from '../components/publicComponents/CenterView'
 import Container from '../components/publicComponents/Container'
 
 const ChatPage: React.FC = observer(() => {
+
     return (
         <Container>
             <CenterView>

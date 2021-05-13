@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faDoorOpen, faQuestion, faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import authStore from '../../store/authStore';
+import userStore from '../../store/userStore';
 import { observer } from 'mobx-react';
-import { DisplayType } from '../../config';
+import { DisplayType } from '../../type';
 import { useHistorys } from '../../Hooks/useHistorys';
 
 const UserInfo: React.FC = observer(() => {
@@ -15,7 +15,7 @@ const UserInfo: React.FC = observer(() => {
         <Container>
             <Row style={{ marginTop: '10px' }} >
                 <UserIcon icon={faUserAlt} iconsize='24px' />
-                <Text ml='7px' size='16px' > {authStore.user} </Text>
+                <Text ml='7px' size='16px' > {userStore.user} </Text>
             </Row>
             <Row>
                 <Box onClick={history.pushMyPage} >
@@ -30,7 +30,7 @@ const UserInfo: React.FC = observer(() => {
                     <Icon icon={faQuestion} iconsize='24px' />
                     <Text mt='8px' size='14px' > 뭐로할까 </Text>
                 </Box>
-                <Box onClick={() => authStore.signOut(history.pushStart)} >
+                <Box onClick={() => userStore.signOut(history.pushStart)} >
                     <Icon icon={faDoorOpen} iconsize='24px' />
                     <Text mt='8px' size='14px' > 로그아웃 </Text>
                 </Box>
@@ -101,7 +101,7 @@ const Box = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 10px;
     min-width: 60px;
     padding: 5px;
     margin: 5px;

@@ -1,12 +1,10 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { observer } from 'mobx-react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/global';
 import { useEffect } from 'react';
-// PrivateRoute
 import PrivateRoute from './components/publicComponents/PrivateRoute';
-// theme
 import { theme } from './style/theme';
-
 import Start from './pages/Start';
 import Main from './pages/Main';
 import SignIn from './pages/SignIn';
@@ -16,13 +14,24 @@ import Header from './components/Header/Header';
 import MyPage from './pages/MyPage';
 import ChatPage from './pages/ChatPage';
 import PostPage from './pages/PostPage';
-import authStore from './store/authStore';
+import userStore from './store/userStore';
+import { io } from 'socket.io-client';
 
-function App() {
+const App: React.FC = observer(() => {
 
     useEffect(() => {
-        
-        authStore.signInWithToken();
+        if (userStore.isSignIn) {
+            userStore.setUserSocket(io('http://localhost:8000'));
+            console.log(userStore.userSocket);
+        } else {
+            userStore.userSocket?.disconnect();
+            userStore.setUserSocket(null);
+            console.log(userStore.userSocket);
+        }
+    }, [userStore.isSignIn]); //eslint-disable-line
+
+    useEffect(() => {
+        userStore.signInWithToken();
     }, []);
 
     return (
@@ -62,6 +71,6 @@ function App() {
             </ThemeProvider>
         </>
     );
-}
+});
 
 export default App;

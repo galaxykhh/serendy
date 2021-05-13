@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { TEXTLOGO_URL } from '../../config';
-import authStore from '../../store/authStore';
+import userStore from '../../store/userStore';
 import { useHistorys } from '../../Hooks/useHistorys';
 
 type DisplayType = 'block' | 'none';
@@ -12,7 +12,7 @@ const Header: React.FC = observer(() => {
     const history = useHistorys();
 
     return (
-        <LogoBox visible={authStore.isSignIn ? 'block' : 'none'}
+        <LogoBox visible={userStore.isSignIn ? 'block' : 'none'}
                  onClick={history.pushMain}
                  >
             <Logo />
@@ -29,7 +29,7 @@ const LogoBox = styled.div<{ visible: DisplayType }>`
     display: ${({ visible }) => visible};
     cursor: pointer;
     z-index: 1;
-    @media only screen and (max-height: 640px) {
+    @media only screen and (max-height: 800px) {
         display: none;
     }
 `

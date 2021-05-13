@@ -61,6 +61,9 @@ const Text = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media only screen and (max-width: 880px) {
+        display: none;
+    }
     @media only screen and (max-height: 620px) {
         font-size: 12px;
     }
@@ -78,7 +81,7 @@ const Box = styled.div`
     min-width: 80px;
     min-height: 30px;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 10px;
     transition: .3s ease;
     &:hover {
         background-color: ${({ theme }) => theme.colors.main60};

@@ -11,18 +11,18 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
 
     return (
         <Row>
-            <LetterBox>
+            <LetterContainer>
                 <Letter>
                     <TextArea ref={textArea}
                               onChange={() => console.log('change')}
                               />
                 </Letter>
-                <SenderBox>
+                <SendBtnBox>
                     <SendBtn onClick={postSend} >
                         편지 보내기
                     </SendBtn>
-                </SenderBox>
-            </LetterBox>
+                </SendBtnBox>
+            </LetterContainer>
 
             <RuleContainer>
                         <BigMent> 어떤 사람이 내 편지를 받게 될까요 ? </BigMent>
@@ -55,7 +55,7 @@ const Row = styled.div`
     }
 `;
 
-const LetterBox = styled.div`
+const LetterContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,7 +76,7 @@ const Letter = styled.div`
     width: 740px;
     height: 680px;
     min-width: 500px;
-    background-color: ${({ theme }) => theme.colors.white50};
+    background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         width: 99%;
@@ -92,11 +92,12 @@ const TextArea = styled.textarea.attrs({
     width: 80%;
     height: 80%;
     font-size: 17px;
+    color: ${({ theme }) => theme.colors.white};
     padding: 60px;
     border-radius: 30px;
 `;
 
-const SenderBox = styled.div`
+const SendBtnBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -105,7 +106,7 @@ const SenderBox = styled.div`
     min-width: 500px;
     height: 50px;
     @media only screen and (max-width: 1450px) {
-        width: 98%;
+        width: 99%;
         min-width: 200px;
     }
 `;

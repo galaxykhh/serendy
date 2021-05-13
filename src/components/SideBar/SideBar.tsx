@@ -1,16 +1,16 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import styled from 'styled-components';
-import authStore from '../../store/authStore';
+import userStore from '../../store/userStore';
 import { tabOpen } from '../../style/keyframes';
 import ContactList from './ContactList';
 import Category from './Category';
 import UserInfo from './UserInfo';
-import { DisplayType } from '../../config';
+import { DisplayType } from '../../type';
 
 const SideBar: React.FC = observer(() => {
     return (
-        <Bar visible={authStore.isSignIn ? 'block' : 'none'} >
+        <Bar visible={userStore.isSignIn ? 'block' : 'none'} >
             <UserInfo />
             <Category />
             <ContactList />

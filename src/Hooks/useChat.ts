@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
-import { VisibilityType } from '../config';
-
+import { VisibilityType } from '../type';
+const ENDPOINT = 'http://localhost:8000';
 
 export const useChat = () => {
     const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -11,6 +11,9 @@ export const useChat = () => {
 
     const showChat = (): void => {
         setDisplay('visible');
+    }
+
+    const sendMsg = (): void => {
     }
 
     const handleBtn = (): void => {

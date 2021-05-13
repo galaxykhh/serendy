@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MessageBox: React.FC<{ message: string }>= ({ message }) => {
+interface IMessageBox {
+    nickName: string,
+    message: string,
+};
+
+const MessageBox: React.FC<IMessageBox>= ({ nickName, message }) => {
     return (
         <Message>
-            {message}
+            {nickName} : {message}
         </Message>
+        
     )
 }
 
@@ -16,7 +22,7 @@ const Message = styled.li`
     height: 30px;
     margin-bottom: 10px;
     background-color: ${({ theme }) => theme.colors.white20};
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.black};
     font-size: 17px;
     text-align: center;
 `;

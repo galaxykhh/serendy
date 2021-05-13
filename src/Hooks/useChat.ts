@@ -39,7 +39,13 @@ export const useChat = () => {
 
     const handleSendMsg = (): void => {
         if (input.current?.value.length !== 0) {
-            userStore.userSocket?.emit('chat', input.current?.value);
+            const nickName = userStore.user;
+            const message = input.current?.value;
+            const data = {
+                nickName: nickName,
+                message: message,
+            }
+            userStore.userSocket?.emit('chat', data);
             input.current!.value = ''
         } else {
             return;

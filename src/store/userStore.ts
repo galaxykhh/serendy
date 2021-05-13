@@ -10,14 +10,14 @@ interface IUser {
 interface IUserStore {
     isLogging: boolean;
     isSignIn: boolean;
-    user: IUser | undefined;
+    user: IUser | null;
     userSocket: Socket | null;
 }
 
 class UserStore implements IUserStore {
 
     private _isSignIn: boolean = false;
-    private _user: IUser | undefined = undefined;
+    private _user: IUser | null = null;
     private _isLogging: boolean = false;
     private _userSocket: Socket | null = null;
 
@@ -45,7 +45,7 @@ class UserStore implements IUserStore {
         return this._isSignIn;
     }
 
-    get user(): IUser | undefined {
+    get user(): IUser | null {
         return this._user;
     }
 
@@ -123,7 +123,7 @@ class UserStore implements IUserStore {
 
     signOut(push: () => void): void {
         this._isSignIn = false;
-        this._user = undefined;
+        this._user = null;
         localStorage.removeItem('SerendyToken');
         push();
     }

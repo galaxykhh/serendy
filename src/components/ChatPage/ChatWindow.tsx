@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import styled, { Keyframes } from 'styled-components';
 import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
@@ -7,10 +7,12 @@ import { useChat } from '../../Hooks/useChat';
 import { VisibilityType } from '../../type';
 import { observer } from 'mobx-react';
 import MessageBox from './MessageBox';
+import { IRecentChat } from '../../pages/ChatPage';
 
 interface IChatWindow {
-    chatlog: string[]
-}
+    chatlog: IRecentChat[],
+};
+
 
 const ChatWindow: React.FC<IChatWindow>= observer(({ chatlog }) => {
     const chat = useChat();
@@ -21,8 +23,11 @@ const ChatWindow: React.FC<IChatWindow>= observer(({ chatlog }) => {
                      visibility={chat.display}
                      >
                 <Screen>
-                    {chatlog.map((x, i) => (
-                        <MessageBox message={x} key={i} />
+                    {chatlog.map((data, index) => (
+                        <MessageBox message={data.message}
+                                    nickName={data.nickName}
+                                    key={index}
+                                    />
                     ))}
                 </Screen>
                 <SenderBox>

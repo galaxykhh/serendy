@@ -13,6 +13,7 @@ interface IUserStore {
     user: IUser | null;
     userSocket: Socket | null;
     socketID: string | null;
+    othersID: string | null;
 }
 
 class UserStore implements IUserStore {
@@ -22,19 +23,22 @@ class UserStore implements IUserStore {
     private _isLogging: boolean = false;
     private _userSocket: Socket | null = null;
     private _socketID: string | null = null;
+    private _othersID: string | null = null;
 
     constructor() {
-        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket' | '_socketID'>(this, {
+        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket' | '_socketID' | '_othersID'>(this, {
             _isLogging: observable,
             _isSignIn: observable,
             _user: observable,
             _userSocket: observable,
             _socketID: observable,
+            _othersID: observable,
             isLogging: computed,
             isSignIn: computed,
             user: computed,
             userSocket: computed,
             socketID: computed,
+            othersID: computed,
             setIsSignIn: action,
             setUser: action,
             signInWithToken: action,
@@ -66,6 +70,10 @@ class UserStore implements IUserStore {
         return this._socketID;
     }
 
+    public get othersID(): string | null {
+        return this._othersID;
+    }
+
     public setIsSignIn(): void {
         this._isSignIn = true;
     }
@@ -85,13 +93,18 @@ class UserStore implements IUserStore {
     public setSocketID(data: string | null): void {
         this._socketID = data;
     }
+    public setOthersID(id: string | null): void {
+        this._othersID = id;
+    }
 
-    public saveSocketID() {
+    public saveSocketID(): void {
         this.userSocket?.emit('enter');
         this.userSocket?.on('enter', myID => {
             this.setSocketID(myID);
         });
     }
+
+    
 
     // 유효한 토큰을 가지고 있을 시 로그인을 유지하며 새로운 토큰을 발급받아 저장 (expiresIn 30m)
     // 서버쪽 토큰 유효성검사를 하는 미들웨어에서 토큰이 만료되었거나 없으면 403을 띄우면서 종료되어서

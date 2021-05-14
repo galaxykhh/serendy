@@ -48,6 +48,16 @@ export const zoomIn = keyframes`
     };
 `;
 
+export const fadeUp = keyframes`
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    } to {
+        opactiy: 1;
+        transform: translateY(0);
+    }
+`;
+
 export const zoomOut = keyframes`
     60% {
         opacity: 1;

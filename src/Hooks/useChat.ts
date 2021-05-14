@@ -12,10 +12,11 @@ export const useChat = () => {
     const [isSearching, setIsSearching] = useState<boolean>(false);
     const [isMatched, setIsMatched] = useState<boolean>(false);
     const [display, setDisplay] = useState<VisibilityType>('hidden');
-    // 소켓에서 오는 메세지를 그대로 넣었을 때 렌더링이 통째로 되는 문제가 있어서
+    // 서버에서 오는 메세지를 그대로 넣었을 때 렌더링이 통째로 되는 문제가 있어서
     // 해결방법을 찾다가 스테이트를 나눠서 동작하기로 했다.
     const [chatLog, setChatLog] = useState<IRecentChat[]>([]); // 메세지 내역을 담아두는 배열
     const [recentChat, setRecentChat] = useState<IRecentChat>({ nickName: '', message: '', socketID: '' }); // 서버에서 보내주는 메세지를 담는 state
+    const [chatFinished, setChatFinished] = useState<boolean>(false);
     const sendBtn = useRef<HTMLButtonElement>(null);
     const input = useRef<HTMLInputElement>(null);
 
@@ -25,26 +26,27 @@ export const useChat = () => {
         }
     }
 
-    const showChat = (): void => {
-        setDisplay('visible');
+    const handleSearch = (): void => {
+        if (!isSearching) {
+            setIsSearching(true);
+            handleFind();
+        } else { // 도중 취소
+            setIsSearching(false);
+            handleCancel();
+        }
     }
 
-    const handleBtn = (): void => {
-        setIsSearching(!isSearching);
-        setIsMatched(!isMatched); // 채팅개발하게되면 수정
-    };
-
-    const handleSearch = (): void => {
-        if (display === 'hidden') {
-            showChat();
-            handleBtn();
-        } else {
-            handleBtn();
-        }
-    };
-
-    const handleMatch = (): void => {
-        setIsMatched(true);
+    const getMatchedUser = (): void => {
+        userStore.userSocket?.on('matched', strangerId => {
+            setIsMatched(true);
+            userStore.setOthersID(strangerId);
+            setDisplay('visible');
+            setChatLog([{
+                nickName: 'SERENDY',
+                message: '상대와 대화가 시작되었어요!',
+                socketID: 'admin',
+            }]);
+        })
     }
 
     const handleSendMsg = (): void => {
@@ -55,7 +57,7 @@ export const useChat = () => {
                 nickName: nickName,
                 message: message,
             }
-            userStore.userSocket?.emit('chat', data);
+            userStore.userSocket?.emit('chat', data, userStore.othersID);
             input.current!.value = ''
 
         } else {
@@ -63,7 +65,7 @@ export const useChat = () => {
         }
     }
 
-    const handleReceive = () => {
+    const handleReceiveMsg = () => {
         userStore.userSocket?.on('receive', (data, socketID)=> {
             setRecentChat({
                 nickName: data.nickName,
@@ -73,11 +75,34 @@ export const useChat = () => {
         })
     }
 
-    const handlePushChat = () => {
+    const handlePushChat = (): void => {
         recentChat.message.length > 0 && setChatLog([...chatLog, recentChat]);
     }
-    
 
+    const handleCancel = (): void => {
+        userStore.userSocket?.emit('cancel');
+    }
+
+    const handleFind = (): void => {
+        userStore.userSocket?.emit('find');
+    }
+
+    const stopChat = (): void => {
+        setChatFinished(true);
+        userStore.setOthersID(null);
+        setChatLog([{
+            nickName: 'SERENDY',
+            message: '대화가 종료되었어요!',
+            socketID: 'admin',
+        }]);
+    }
+
+    const reStart = (): void => {
+        setChatLog([]);
+        setIsSearching(false);
+        setChatFinished(false);
+        setIsMatched(false);
+    }
 
     return {
         isSearching,
@@ -87,13 +112,19 @@ export const useChat = () => {
         input,
         chatLog,
         recentChat,
+        chatFinished,
         setRecentChat,
         setChatLog,
         handleEnter,
         handleSendMsg,
         handleSearch,
-        handleMatch,
-        handleReceive,
+        handleReceiveMsg,
         handlePushChat,
+        getMatchedUser,
+        stopChat,
+        setChatFinished,
+        reStart,
+        // startFind,
+        // handleFind
     }
 }

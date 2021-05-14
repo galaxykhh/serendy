@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fadeUp } from '../../style/keyframes';
 
 interface IMessageBox {
     nickName: string;
@@ -29,9 +30,6 @@ const MessageBox: React.FC<IMessageBox>= ({ nickName, message, socketID }) => {
 };
 
 export default MessageBox;
-// 내가보내면
-// fd: row-reverse
-// 아니면 row
 
 const Row = styled.div<{fd: string}>`
     position: relative;
@@ -40,11 +38,12 @@ const Row = styled.div<{fd: string}>`
     width: 100%;
     min-height: 60px;
     margin-bottom: 10px;
+    animation: ${fadeUp} .5s ease;
 `;
 
 const OthersBalloon = styled.div`
     position: relative;
-    min-width: 100px;
+    min-width: 80px;
     max-width: 350px;
     padding: 20px;
     margin-top: 29px;
@@ -60,7 +59,7 @@ const OthersBalloon = styled.div`
 
 const OwnBalloon = styled.div`
     position: relative;
-    min-width: 100px;
+    min-width: 80px;
     max-width: 350px;
     padding: 20px;
     margin-top: 29px;

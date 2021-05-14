@@ -13,7 +13,8 @@ const ChatWindow: React.FC = observer(() => {
     const chat = useChat();
 
     useEffect(() => {
-        chat.handleReceive();
+        chat.handleReceiveMsg();
+        chat.getMatchedUser();
     }, []); // eslint-disable-line
 
     useEffect(() => {
@@ -50,13 +51,40 @@ const ChatWindow: React.FC = observer(() => {
             </ChatBox>
 
             <HandlerContainer>
-                {chat.isSearching ?
+                {chat.isSearching ? 
                     <>
-                        <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있습니다 </BigMent>
-                        <Loader type="Circles" color={theme.colors.plum} height={60} width={60} />
-                        <BtnBox>
-                            <CancelBtn onClick={chat.handleSearch} > 취소하기 </CancelBtn>
-                        </BtnBox>
+                        {chat.isMatched ? 
+                            <>
+                                {chat.chatFinished ? 
+                                    <>
+                                        <BigMent> 대화가 종료되었어요 </BigMent>
+                                        <br />
+                                        <Ment size='18px' > 어떤 사람이었을까요? </Ment>
+                                        <BtnBox>
+                                            <StartBtn onClick={chat.reStart} > 괜찮았어요 </StartBtn>
+                                        </BtnBox>
+                                    </> :
+                                    <>
+                                        <BigMent> 상대와 연결되었어요 ! </BigMent>
+                                        <br />
+                                        <Ment size='18px'> 먼저 인사 해보시는건 어떠세요? </Ment>
+                                        <br />
+                                        <br />
+                                        <Ment> 서로에게 편지 요청을 할 경우에는</Ment>
+                                        <Ment> 채팅이 끝나도 편지를 주고 받을 수 있어요 </Ment>
+                                        <BtnBox>
+                                            <CancelBtn onClick={chat.stopChat}> 대화 그만하기 </CancelBtn>
+                                            <StartBtn style={{ marginLeft: '20px' }} > 편지 요청하기 </StartBtn>
+                                        </BtnBox>
+                                    </>}
+                            </> : 
+                            <>
+                                <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있어요 </BigMent>
+                                <Loader type="Circles" color={theme.colors.plum} height={60} width={60} />
+                                <BtnBox>
+                                    <CancelBtn onClick={chat.handleSearch} > 취소하기 </CancelBtn>
+                                </BtnBox>
+                            </>}
                     </> :
                     <>
                         <BigMent> 상대를 찾고 대화를 시작하세요 ! </BigMent>
@@ -71,6 +99,7 @@ const ChatWindow: React.FC = observer(() => {
                         <br />
                         <BtnBox>
                             <StartBtn onClick={chat.handleSearch} > 상대 찾기 </StartBtn>
+                            {/* <button onClick={} > join room </button> */}
                         </BtnBox>
                     </>}
             </HandlerContainer>
@@ -230,7 +259,7 @@ const StartBtn = styled(SendBtn)`
     }
     @media only screen and (max-width: 1450px) {
         width: 100px;
-        height: 50px;
+        height: 40px;
         font-size: 17px;
         margin-top: 15px;
     }

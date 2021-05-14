@@ -4,7 +4,7 @@ import { ISignInData } from '../components/SignIn/SignInBox';
 import { BASE_URL } from '../config'; // eslint-disable-line
 
 const serendyInstance = axios.create({
-    baseURL: BASE_URL,
+    baseURL: 'http://localhost:8000',
 });
 serendyInstance.defaults.headers.common['authorization'] = localStorage.getItem('SerendyToken');
 

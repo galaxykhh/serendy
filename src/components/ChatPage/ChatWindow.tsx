@@ -7,6 +7,7 @@ import { useChat } from '../../Hooks/useChat';
 import { VisibilityType } from '../../type';
 import { observer } from 'mobx-react';
 import MessageBox from './MessageBox';
+import userStore from '../../store/userStore';
 
 const ChatWindow: React.FC = observer(() => {
     const chat = useChat();
@@ -17,6 +18,9 @@ const ChatWindow: React.FC = observer(() => {
 
     useEffect(() => {
         chat.handlePushChat();
+        return () => {
+            chat.setRecentChat({ nickName: '', message: '', socketID: '' });
+        };
     }, [chat.recentChat.message]); // eslint-disable-line
 
     return (
@@ -27,8 +31,9 @@ const ChatWindow: React.FC = observer(() => {
                 <Screen>
                     {chat.chatLog.map((data, index) => (
                         <MessageBox message={data.message}
-                                    nickName={data.nickName}
-                                    key={index}
+                                       nickName={data.nickName}
+                                       socketID={data.socketID === userStore.socketID}
+                                       key={index}
                                     />
                     ))}
                 </Screen>
@@ -108,7 +113,7 @@ const ChatBox = styled.div<{
     }
 `;
 
-const Screen = styled.ul`
+const Screen = styled.div`
     width: 740px;
     height: 680px;
     max-height: 680px;

@@ -5,6 +5,7 @@ import userStore from '../store/userStore';
 export interface IRecentChat {
     nickName: string;
     message: string;
+    socketID: string;
 }
 
 export const useChat = () => {
@@ -14,8 +15,7 @@ export const useChat = () => {
     // 소켓에서 오는 메세지를 그대로 넣었을 때 렌더링이 통째로 되는 문제가 있어서
     // 해결방법을 찾다가 스테이트를 나눠서 동작하기로 했다.
     const [chatLog, setChatLog] = useState<IRecentChat[]>([]); // 메세지 내역을 담아두는 배열
-    const [recentChat, setRecentChat] = useState<IRecentChat>({ nickName: '', message: '' }); // 서버에서 갱신된 메세지를 담는 state
-    const [othersChat, setOthersChat] = useState<IRecentChat>({ nickName: '', message: '' });; // 다른사람의 메세지
+    const [recentChat, setRecentChat] = useState<IRecentChat>({ nickName: '', message: '', socketID: '' }); // 서버에서 보내주는 메세지를 담는 state
     const sendBtn = useRef<HTMLButtonElement>(null);
     const input = useRef<HTMLInputElement>(null);
 
@@ -57,26 +57,24 @@ export const useChat = () => {
             }
             userStore.userSocket?.emit('chat', data);
             input.current!.value = ''
+
         } else {
             return;
         }
     }
 
     const handleReceive = () => {
-        userStore.userSocket?.on('receive', data => {
+        userStore.userSocket?.on('receive', (data, socketID)=> {
             setRecentChat({
                 nickName: data.nickName,
                 message: data.message,
+                socketID: socketID,
             })
         })
     }
 
     const handlePushChat = () => {
         recentChat.message.length > 0 && setChatLog([...chatLog, recentChat]);
-        // cleanup for useEffect
-        return () => {
-            setRecentChat({ nickName: '', message: '' });
-        }
     }
     
 
@@ -89,8 +87,6 @@ export const useChat = () => {
         input,
         chatLog,
         recentChat,
-        othersChat,
-        setOthersChat,
         setRecentChat,
         setChatLog,
         handleEnter,

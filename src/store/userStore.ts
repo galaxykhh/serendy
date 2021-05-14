@@ -12,6 +12,7 @@ interface IUserStore {
     isSignIn: boolean;
     user: IUser | null;
     userSocket: Socket | null;
+    socketID: string | null;
 }
 
 class UserStore implements IUserStore {
@@ -20,57 +21,76 @@ class UserStore implements IUserStore {
     private _user: IUser | null = null;
     private _isLogging: boolean = false;
     private _userSocket: Socket | null = null;
+    private _socketID: string | null = null;
 
     constructor() {
-        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket'>(this, {
+        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket' | '_socketID'>(this, {
             _isLogging: observable,
             _isSignIn: observable,
             _user: observable,
             _userSocket: observable,
+            _socketID: observable,
             isLogging: computed,
             isSignIn: computed,
             user: computed,
             userSocket: computed,
-            setIsSignIn: action.bound,
+            socketID: computed,
+            setIsSignIn: action,
             setUser: action,
-            signInWithToken: action.bound,
-            signIn: action.bound,
-            signOut: action.bound,
-            setIsLogging: action.bound,
-            setUserSocket: action.bound,
+            signInWithToken: action,
+            signIn: action,
+            signOut: action,
+            setIsLogging: action,
+            setUserSocket: action,
+            setSocketID: action.bound,
         })
     }
 
-    get isSignIn(): boolean {
+    public get isSignIn(): boolean {
         return this._isSignIn;
     }
 
-    get user(): IUser | null {
+    public get user(): IUser | null {
         return this._user;
     }
 
-    get isLogging(): boolean {
+    public get isLogging(): boolean {
         return this._isLogging;
     }
 
-    get userSocket(): Socket | null {
+    public get userSocket(): Socket | null {
         return this._userSocket;
     }
 
-    setIsSignIn(): void {
+    public get socketID(): string | null {
+        return this._socketID;
+    }
+
+    public setIsSignIn(): void {
         this._isSignIn = true;
     }
 
-    setUser(user: IUser): void {
+    public setUser(user: IUser): void {
         this._user = user;
     }
 
-    setIsLogging(boolean: boolean): void {
+    public setIsLogging(boolean: boolean): void {
         this._isLogging = boolean;
     }
 
-    setUserSocket(data: Socket | null): void {
+    public setUserSocket(data: Socket | null): void {
         this._userSocket = data;
+    }
+
+    public setSocketID(data: string | null): void {
+        this._socketID = data;
+    }
+
+    public saveSocketID() {
+        this.userSocket?.emit('enter');
+        this.userSocket?.on('enter', myID => {
+            this.setSocketID(myID);
+        });
     }
 
     // 유효한 토큰을 가지고 있을 시 로그인을 유지하며 새로운 토큰을 발급받아 저장 (expiresIn 30m)

@@ -15,6 +15,7 @@ const ChatWindow: React.FC = observer(() => {
     useEffect(() => {
         chat.handleReceiveMsg();
         chat.getMatchedUser();
+        chat.chatStopped();
     }, []); // eslint-disable-line
 
     useEffect(() => {

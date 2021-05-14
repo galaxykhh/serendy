@@ -87,7 +87,7 @@ export const useChat = () => {
         userStore.userSocket?.emit('find');
     }
 
-    const stopChat = (): void => {
+    const handleFinished = () => {
         setChatFinished(true);
         userStore.setOthersID(null);
         setChatLog([{
@@ -95,6 +95,17 @@ export const useChat = () => {
             message: '대화가 종료되었어요!',
             socketID: 'admin',
         }]);
+    }
+
+    const stopChat = (): void => {
+        userStore.userSocket?.emit('end chat', userStore.othersID);
+        handleFinished();
+    }
+
+    const chatStopped = (): void => {
+        userStore.userSocket?.on('is ended', () => {
+            handleFinished();
+        })
     }
 
     const reStart = (): void => {
@@ -124,7 +135,7 @@ export const useChat = () => {
         stopChat,
         setChatFinished,
         reStart,
-        // startFind,
+        chatStopped,
         // handleFind
     }
 }

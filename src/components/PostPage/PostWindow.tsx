@@ -150,7 +150,9 @@ const Rule = styled.div`
     align-items: flex-start;
 `;
 
-const Ment = styled.div<{ size?: string }>`
+const Ment = styled.div<{
+    size?: string
+}>`
     font-size: 18px;
     margin-bottom: 10px;
     color: ${({ theme }) => theme.colors.white};

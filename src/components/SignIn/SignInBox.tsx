@@ -55,8 +55,8 @@ const SignInBox: React.FC = observer(() => {
                             {...register('account', {
                                 required: '아이디를 입력해주세요',
                                 pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
-                                minLength: { value: 5, message: '아이디가 너무 짧습니다' },
-                                maxLength: { value: 19, message: '아이디가 너무 깁니다' },
+                                minLength: { value: 5, message: '아이디가 너무 짧아요' },
+                                maxLength: { value: 19, message: '아이디가 너무 길어요' },
                                 })}
                                 />
                     </Row>
@@ -169,7 +169,9 @@ const Button = styled.button`
     }
 `;
 
-const Icon = styled(FontAwesomeIcon)<{ color: string }>`
+const Icon = styled(FontAwesomeIcon)<{
+    color: string
+}>`
     font-size: 35px;
     transform: translateY(-5px);
     color: ${({ color }) => color};

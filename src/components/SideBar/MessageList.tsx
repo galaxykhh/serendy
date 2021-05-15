@@ -115,7 +115,9 @@ export default MessageList;
 
 type HeightType = '68%' | '80px';
 
-const Container = styled.div<{ height: HeightType }>`
+const Container = styled.div<{
+    height: HeightType
+}>`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -145,7 +147,9 @@ const MessageContainer = styled.div`
     overflow: auto;
 `;
 
-const StorageHandler = styled.div<{ bgcolor: string }>`
+const StorageHandler = styled.div<{
+    bgcolor: string
+}>`
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -170,7 +174,9 @@ const StorageIcon = styled(FontAwesomeIcon)`
     font-size: 35px;
 `;
 
-const Text = styled.div<{ size?: string }>`
+const Text = styled.div<{
+    size?: string
+}>`
     font-size: 18px;
     color: ${({ theme }) => theme.colors.white};
     margin-left: 8px;

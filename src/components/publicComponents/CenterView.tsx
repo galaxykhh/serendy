@@ -15,7 +15,7 @@ export default CenterView;
 const Screen = styled.div`
     position: absolute;
     left: 5px;
-    bottom: 50px;
+    bottom: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;

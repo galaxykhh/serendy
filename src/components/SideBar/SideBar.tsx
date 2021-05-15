@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import styled from 'styled-components';
 import userStore from '../../store/userStore';
-import { tabOpen } from '../../style/keyframes';
+import { slideLeft } from '../../style/keyframes';
 import ContactList from './ContactList';
 import Category from './Category';
 import UserInfo from './UserInfo';
@@ -20,7 +20,9 @@ const SideBar: React.FC = observer(() => {
 
 export default SideBar;
 
-const Bar = styled.div<{visible: DisplayType}>`
+const Bar = styled.div<{
+    visible: DisplayType
+}>`
     position: fixed;
     right: 0;
     display: flex;
@@ -32,7 +34,7 @@ const Bar = styled.div<{visible: DisplayType}>`
     border-radius: 5px;
     border-left: 1px solid ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
-    animation: ${tabOpen} 1s ease;
+    animation: ${slideLeft} 1s ease;
     transition: 1s ease;
     padding: 10px;
     z-index: 1;

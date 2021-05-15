@@ -219,7 +219,9 @@ const DupliBtn = styled(Button)`
     margin-top: 0;
 `;
 
-const Icon = styled(FontAwesomeIcon)<{ color: string }>`
+const Icon = styled(FontAwesomeIcon)<{
+    color: string
+}>`
     font-size: 35px;
     transform: translateY(-5px);
     color: ${({ color }) => color};

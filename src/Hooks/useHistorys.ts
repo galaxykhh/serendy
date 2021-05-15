@@ -39,15 +39,12 @@ export const useHistorys = () => {
 
     const pushLoggedUser = (): void => {
         if (userStore.isSignIn) {
+            console.log('ㅋㅋ ㅃ')
             history.push('/main');
         } else {
             return 
         }
     }
-
-    useEffect(() => {
-        pushLoggedUser();
-    }, [userStore.isSignIn]); // eslint-disable-line
 
     return {
         pushStart,
@@ -58,5 +55,6 @@ export const useHistorys = () => {
         pushMyPage,
         pushChatPage,
         pushPostPage,
+        pushLoggedUser,
     }
 }

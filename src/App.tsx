@@ -21,6 +21,11 @@ import { BASE_URL } from './config';
 const App: React.FC = observer(() => {
 
     useEffect(() => {
+        console.log(userStore.user);
+        console.log(userStore.isSignIn);
+    }, [userStore.isSignIn])
+
+    useEffect(() => {
         if (userStore.isSignIn) {
             userStore.setUserSocket(io('http://localhost:8000'));
             userStore.saveSocketID();

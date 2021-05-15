@@ -22,10 +22,12 @@ const Header: React.FC = observer(() => {
 
 export default Header;
 
-const LogoBox = styled.div<{ visible: DisplayType }>`
+const LogoBox = styled.div<{
+    visible: DisplayType
+}>`
     position: fixed;
     top: 5px;
-    left: 10px;
+    left: 20px;
     display: ${({ visible }) => visible};
     cursor: pointer;
     z-index: 1;

@@ -1,10 +1,12 @@
 import { action, computed, makeObservable, observable } from "mobx";
 import { ISignInData } from '../components/SignIn/SignInBox';
+import { IPassword } from '../components/MyPage/ChangePWBox';
 import serendyRepository from '../repository/serendyRepository';
 import { Socket } from 'socket.io-client';
-
+import { INickName } from '../components/MyPage/ChangeNameBox';
 interface IUser {
-    nickName: string;
+    account: string | null,
+    nickName: string | null,
 }
 
 interface IUserStore {
@@ -40,6 +42,7 @@ class UserStore implements IUserStore {
             signInWithToken: action,
             signIn: action,
             signOut: action,
+            changePW: action,
             setIsLogging: action,
             setUserSocket: action,
             setSocketID: action,
@@ -66,8 +69,8 @@ class UserStore implements IUserStore {
         return this._socketID;
     }
 
-    public setIsSignIn(): void {
-        this._isSignIn = true;
+    public setIsSignIn(status: boolean): void {
+        this._isSignIn = status;
     }
 
     public setUser(user: IUser): void {
@@ -92,9 +95,6 @@ class UserStore implements IUserStore {
             this.setSocketID(myID);
         });
     }
-
-    
-
     // 유효한 토큰을 가지고 있을 시 로그인을 유지하며 새로운 토큰을 발급받아 저장 (expiresIn 30m)
     // 서버쪽 토큰 유효성검사를 하는 미들웨어에서 토큰이 만료되었거나 없으면 403을 띄우면서 종료되어서
     // App 컴포넌트에서 쓰이는 이 메소드와 아래의 signIn 메소드를 따로 분리해서 만들었음.
@@ -111,8 +111,11 @@ class UserStore implements IUserStore {
                     this.setIsLogging(false);
                     return;
                 } else if ((response.data.message === 'SignIn Success')) {
-                    this.setUser(response.data.nickName);
-                    this.setIsSignIn();
+                    this.setUser({
+                        account: response.data.account,
+                        nickName: response.data.nickName,
+                    });
+                    this.setIsSignIn(true);
                     localStorage.setItem('SerendyToken', response.data.token);
                     this.setIsLogging(false);
                 }
@@ -131,25 +134,54 @@ class UserStore implements IUserStore {
                 this.setIsLogging(false);
                 setError();
             } else if ((response.data.message === 'SignIn Success')) {
-                this.setUser(response.data.nickName);
-                this.setIsSignIn();
+                this.setUser({
+                    account: response.data.account,
+                    nickName: response.data.nickName,
+                });
+                this.setIsSignIn(true);
                 localStorage.setItem('SerendyToken', response.data.token);
                 this.setIsLogging(false);
                 push();
             }
         } catch(err) {
+            console.log(5);
             this.setIsLogging(false);
             alert('서버 점검중입니다');
         }
     }
 
     signOut(push: () => void): void {
-        this._isSignIn = false;
-        this._user = null;
+        this.setIsSignIn(false);
+        this.setUser({ account: null, nickName: null });
         localStorage.removeItem('SerendyToken');
         push();
     }
-}
+
+    async changePW(data: IPassword, push: () => void): Promise<void> {
+        try {
+            const response = await serendyRepository.changePassword(data);
+            if ((response.data.message === 'Changed')) {
+                alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
+                this.signOut(push);
+            }
+        } catch(err) {
+            alert('서버가 점검중이에요');
+        };
+    };
+
+    async changeName(nickName: INickName, push: () => void): Promise<void> {
+        try {
+            const response = await serendyRepository.changeName(nickName);
+            if ((response.data.message === 'Changed')) {
+                alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
+                this.signOut(push);
+            }
+        } catch(err) {
+            console.log(err);
+            alert('서버가 점검중이에요');
+        };
+    };
+};
 
 const userStore = new UserStore();
 export default userStore;

@@ -1,75 +1,71 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdjust, faPaperPlane, faComments, faSearchDollar } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faComments, faUsers, faPlus, faEquals} from '@fortawesome/free-solid-svg-icons';
+import { WHALE } from '../../config';
+import { whalePop, zoomIn } from '../../style/keyframes';
 
 const Manual: React.FC = () => {
 
     return (
-        <Container>
-            <Box>
-                <Icon icon={faPaperPlane} />
-                <Text> 비행기 </Text>
-            </Box>
-            <Box>
-                <Icon icon={faComments} />
-                <Text> 잡담 </Text>
-            </Box>
-            <Box>
-                <Icon icon={faAdjust} />
-                <Text> 반달 </Text>
-            </Box>
-            <Box>
-                <Icon icon={faSearchDollar} />
-                <Text> 돈찾는중 </Text>
-            </Box>
-            <Box>
-                <Icon icon={faSearchDollar} />
-                <Text> 돈찾는중 </Text>
-            </Box>
-            <Box>
-                <Icon icon={faSearchDollar} />
-                <Text> 돈찾는중 </Text>
-            </Box>
-        </Container>
+        <Column>
+            <LogoBox>
+            <Logo />
+            </LogoBox>
+                <Box>
+                    <Icon icon={faPaperPlane} />
+                    <Icon icon={faPlus} />
+                    <Icon icon={faComments} />
+                    <Icon icon={faEquals} />
+                    <Icon icon={faUsers} />
+                </Box>
+        </Column>
     )
 }
 
 export default Manual;
 
-const Box: React.FC = ({ children }) => {
-    return (
-        <FlexBox>
-            {children}
-        </FlexBox>
-    )
-}
-
-const Container = styled.div`
-    display: grid;
-    grid-template-areas:
-    'a b c'
-    'd e f';
-    width: 100%;
-    min-width: 300px;
-    height: 740px;
-    border-radius: 10px;
-    background-color: ${({ theme }) => theme.colors.black};
-`;
-
-const FlexBox = styled.div`
+const Column = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 100%;
+    animation: ${zoomIn} .8s
+`;
+
+const Box = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 400px;
+    margin-top: 20px;
 `;
 
 const Icon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.white};
-    font-size: 40px;
+    margin-right: 20px;
+    font-size: 60px;
 `;
 
-const Text = styled.div`
-    margin-top: 15px;
-    color: ${({ theme }) => theme.colors.white};
+const LogoBox = styled.div`
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    margin-bottom: 50px;
+`;
+
+
+const Logo = styled.div`
+    width: 500px;
+    min-width: 500px;
+    height: 500px;
+    margin-right: 150px;
+    background-image: url(${WHALE});
+    background-size: cover;
+    background-position: center;
+    animation: ${whalePop} .5s ease-out alternate infinite;
 `;

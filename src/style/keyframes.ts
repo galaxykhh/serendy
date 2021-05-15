@@ -9,7 +9,7 @@ export const arrowPop = keyframes`
   }
 `;
 
-export const tabOpen = keyframes`
+export const slideLeft = keyframes`
     from {
         right: -900px;
     }
@@ -46,6 +46,15 @@ export const zoomIn = keyframes`
         opacity: 1;
         transform: scale(1);
     };
+`;
+
+export const whalePop = keyframes`
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
 `;
 
 export const zoomOut = keyframes`

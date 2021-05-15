@@ -15,7 +15,7 @@ const UserInfo: React.FC = observer(() => {
         <Container>
             <Row style={{ marginTop: '10px' }} >
                 <UserIcon icon={faUserAlt} iconsize='24px' />
-                <Text ml='7px' size='16px' > {userStore.user} </Text>
+                <Text ml='7px' size='16px' > {userStore.user?.nickName} </Text>
             </Row>
             <Row>
                 <Box onClick={history.pushMyPage} >

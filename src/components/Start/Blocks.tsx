@@ -80,7 +80,9 @@ const BlockContainer = styled.div`
     height: 3000px;
 `;
 
-const Text = styled.div<{ size?: string, mb?: string }>`
+const Text = styled.div<{
+    size?: string, mb?: string
+}>`
     font-size: ${({ size }) => size || '50px'};
     color: ${({ theme }) => theme.colors.white};
     margin-bottom: ${({ mb }) => mb};

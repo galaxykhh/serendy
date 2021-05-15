@@ -58,7 +58,7 @@ export const useChat = () => {
 
     const handleSendMsg = (): void => {
         if (input.current?.value.length !== 0) {
-            const nickName = userStore.user;
+            const nickName = userStore.user?.nickName;
             const message = input.current?.value;
             const data = {
                 nickName: nickName,
@@ -97,25 +97,27 @@ export const useChat = () => {
 
     const handleFinished = () => {
         setChatFinished(true);
-        setChatLog([{
+        setRecentChat({
             nickName: 'SERENDY',
             message: '대화가 종료되었어요!',
             socketID: 'admin',
-        }]);
+        });
     }
 
     const stopChat = (): void => {
-        console.log('시작되고')
         userStore.userSocket?.emit('stop chat');
-        console.log('소켓 보내고');
         handleFinished();
-        console.log('마무리');
     }
 
     const chatStopped = (): void => {
         userStore.userSocket?.on('is ended', () => {
             handleFinished();
         })
+    }
+
+    const report = (): void => {
+        alert('신고 접수되었습니다');
+        reStart();
     }
 
     const reStart = (): void => {
@@ -145,6 +147,7 @@ export const useChat = () => {
         getMatchedUser,
         stopChat,
         setChatFinished,
+        report,
         reStart,
         chatStopped,
         scrollToBottom,

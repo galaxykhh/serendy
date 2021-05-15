@@ -19,11 +19,19 @@ export const useChat = () => {
     const [chatFinished, setChatFinished] = useState<boolean>(false);
     const sendBtn = useRef<HTMLButtonElement>(null);
     const input = useRef<HTMLInputElement>(null);
-
+    const screen = useRef<HTMLDivElement>(null);
     const handleEnter = (e: React.KeyboardEvent): void => {
         if (e.key === 'Enter') {
             sendBtn.current?.click();
         }
+    }
+
+    const handleCancel = (): void => {
+        userStore.userSocket?.emit('cancel');
+    }
+
+    const handleFind = (): void => {
+        userStore.userSocket?.emit('find');
     }
 
     const handleSearch = (): void => {
@@ -37,9 +45,9 @@ export const useChat = () => {
     }
 
     const getMatchedUser = (): void => {
-        userStore.userSocket?.on('matched', strangerId => {
+        userStore.userSocket?.on('matched', othersID => {
             setIsMatched(true);
-            userStore.setOthersID(strangerId);
+            userStore.setOthersID(othersID);
             setDisplay('visible');
             setChatLog([{
                 nickName: 'SERENDY',
@@ -65,6 +73,11 @@ export const useChat = () => {
         }
     }
 
+    const scrollToBottom = (): void => {
+        const scroll = screen.current!.scrollHeight - screen.current!.clientHeight;
+        screen.current?.scrollTo(0, scroll);
+    }
+
     const handleReceiveMsg = () => {
         userStore.userSocket?.on('receive', (data, socketID)=> {
             setRecentChat({
@@ -79,14 +92,6 @@ export const useChat = () => {
         recentChat.message.length > 0 && setChatLog([...chatLog, recentChat]);
     }
 
-    const handleCancel = (): void => {
-        userStore.userSocket?.emit('cancel');
-    }
-
-    const handleFind = (): void => {
-        userStore.userSocket?.emit('find');
-    }
-
     const handleFinished = () => {
         setChatFinished(true);
         userStore.setOthersID(null);
@@ -98,7 +103,7 @@ export const useChat = () => {
     }
 
     const stopChat = (): void => {
-        userStore.userSocket?.emit('end chat', userStore.othersID);
+        userStore.userSocket?.emit('stop chat', userStore.othersID);
         handleFinished();
     }
 
@@ -121,6 +126,7 @@ export const useChat = () => {
         display,
         sendBtn,
         input,
+        screen,
         chatLog,
         recentChat,
         chatFinished,
@@ -136,6 +142,6 @@ export const useChat = () => {
         setChatFinished,
         reStart,
         chatStopped,
-        // handleFind
+        scrollToBottom,
     }
 }

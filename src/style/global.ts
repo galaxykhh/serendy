@@ -14,12 +14,12 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'MGothic';
-        -ms-overflow-style: none;
+        -ms-overflow-style: none; // 스크롤바 없애기
         ::-webkit-scrollbar {
             display: none;
         }
     }
-
+    // 자동완성 박스 색
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,

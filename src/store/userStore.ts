@@ -46,7 +46,7 @@ class UserStore implements IUserStore {
             signOut: action,
             setIsLogging: action,
             setUserSocket: action,
-            setSocketID: action.bound,
+            setSocketID: action,
         })
     }
 
@@ -90,16 +90,16 @@ class UserStore implements IUserStore {
         this._userSocket = data;
     }
 
-    public setSocketID(data: string | null): void {
-        this._socketID = data;
+    public setSocketID(myID: string | null): void {
+        this._socketID = myID;
     }
-    public setOthersID(id: string | null): void {
-        this._othersID = id;
+    public setOthersID(othersID: string | null): void {
+        this._othersID = othersID;
     }
 
     public saveSocketID(): void {
         this.userSocket?.emit('enter');
-        this.userSocket?.on('enter', myID => {
+        this.userSocket?.on('entered', myID => {
             this.setSocketID(myID);
         });
     }

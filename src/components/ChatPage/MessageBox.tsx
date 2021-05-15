@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fadeUp } from '../../style/keyframes';
 
 interface IMessageBox {
     nickName: string;
@@ -38,7 +37,6 @@ const Row = styled.div<{fd: string}>`
     width: 100%;
     min-height: 60px;
     margin-bottom: 10px;
-    animation: ${fadeUp} .5s ease;
 `;
 
 const OthersBalloon = styled.div`

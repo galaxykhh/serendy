@@ -13,15 +13,22 @@ const ChatWindow: React.FC = observer(() => {
     const chat = useChat();
 
     useEffect(() => {
-        chat.handleReceiveMsg();
         chat.getMatchedUser();
-        chat.chatStopped();
+        chat.handleReceiveMsg();
+        chat.chatStopped(); // 상대방이 대화종료를 했을때
     }, []); // eslint-disable-line
+
+    useEffect(() => { // 다른 페이지로 가면 대화종료
+        return () => {
+            chat.stopChat();
+        }
+    }, []);
 
     useEffect(() => {
         chat.handlePushChat();
         return () => {
             chat.setRecentChat({ nickName: '', message: '', socketID: '' });
+            chat.scrollToBottom();
         };
     }, [chat.recentChat.message]); // eslint-disable-line
 
@@ -30,7 +37,7 @@ const ChatWindow: React.FC = observer(() => {
             <ChatBox animation={chat.isMatched ? zoomIn : zoomOut}
                      visibility={chat.display}
                      >
-                <Screen>
+                <Screen ref={chat.screen} >
                     {chat.chatLog.map((data, index) => (
                         <MessageBox message={data.message}
                                        nickName={data.nickName}
@@ -45,6 +52,7 @@ const ChatWindow: React.FC = observer(() => {
                            />
                     <SendBtn ref={chat.sendBtn}
                              onClick={chat.handleSendMsg}
+                             disabled={chat.chatFinished ? true : false}
                              >
                         전송
                     </SendBtn>
@@ -149,7 +157,7 @@ const Screen = styled.div`
     max-height: 680px;
     background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
-    overflow: auto;
+    overflow-y: auto;
     @media only screen and (max-width: 1450px) {
         width: 99%;
         height: 70%;

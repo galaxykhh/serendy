@@ -10,6 +10,7 @@ import MessageBox from './MessageBox';
 import userStore from '../../store/userStore';
 
 const ChatWindow: React.FC = observer(() => {
+
     const chat = useChat();
 
     useEffect(() => {
@@ -18,11 +19,11 @@ const ChatWindow: React.FC = observer(() => {
         chat.chatStopped(); // 상대방이 대화종료를 했을때
     }, []); // eslint-disable-line
 
-    useEffect(() => { // 다른 페이지로 가면 대화종료
+    useEffect(() => { 
         return () => {
             chat.stopChat();
         }
-    }, []);
+    }, []); // eslint-disable-line
 
     useEffect(() => {
         chat.handlePushChat();
@@ -101,14 +102,13 @@ const ChatWindow: React.FC = observer(() => {
                         
                         <Rule>
                             <Ment size='18px'> · 채팅은 서로가 설정한 이름으로 진행돼요 </Ment>
-                            <Ment size='18px'> · 상대와 대화가 통하면 쪽지 요청을 보낼 수 있어요 </Ment>
+                            <Ment size='18px'> · 상대가 마음에 든다면 쪽지 요청을 보내보세요 </Ment>
                             <Ment size='18px'> · 요청이 수락되면 채팅이 끝나도 쪽지를 보낼 수 있어요 </Ment>
                             <Ment size='18px'> · 누군가 채팅방을 나가게되면 채팅은 종료돼요 </Ment>
                         </Rule>
                         <br />
                         <BtnBox>
                             <StartBtn onClick={chat.handleSearch} > 상대 찾기 </StartBtn>
-                            {/* <button onClick={} > join room </button> */}
                         </BtnBox>
                     </>}
             </HandlerContainer>

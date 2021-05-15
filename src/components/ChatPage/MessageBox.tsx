@@ -41,8 +41,8 @@ const Row = styled.div<{fd: string}>`
 
 const OthersBalloon = styled.div`
     position: relative;
-    min-width: 80px;
-    max-width: 350px;
+    min-width: 60px;
+    max-width: 340px;
     padding: 20px;
     margin-top: 29px;
     margin-right: 10px;
@@ -57,8 +57,8 @@ const OthersBalloon = styled.div`
 
 const OwnBalloon = styled.div`
     position: relative;
-    min-width: 80px;
-    max-width: 350px;
+    min-width: 60px;
+    max-width: 340px;
     padding: 20px;
     margin-top: 29px;
     margin-right: 10px;

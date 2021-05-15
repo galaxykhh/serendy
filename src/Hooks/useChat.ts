@@ -45,9 +45,8 @@ export const useChat = () => {
     }
 
     const getMatchedUser = (): void => {
-        userStore.userSocket?.on('matched', othersID => {
+        userStore.userSocket?.on('matched', () => {
             setIsMatched(true);
-            userStore.setOthersID(othersID);
             setDisplay('visible');
             setChatLog([{
                 nickName: 'SERENDY',
@@ -65,7 +64,7 @@ export const useChat = () => {
                 nickName: nickName,
                 message: message,
             }
-            userStore.userSocket?.emit('chat', data, userStore.othersID);
+            userStore.userSocket?.emit('chat', data);
             input.current!.value = ''
 
         } else {
@@ -74,8 +73,12 @@ export const useChat = () => {
     }
 
     const scrollToBottom = (): void => {
-        const scroll = screen.current!.scrollHeight - screen.current!.clientHeight;
-        screen.current?.scrollTo(0, scroll);
+        if (screen.current?.scrollHeight && screen.current?.clientHeight) {
+            const scroll = screen.current.scrollHeight - screen.current.clientHeight;
+            screen.current?.scrollTo(0, scroll);
+        } else {
+            return;
+        }
     }
 
     const handleReceiveMsg = () => {
@@ -94,7 +97,6 @@ export const useChat = () => {
 
     const handleFinished = () => {
         setChatFinished(true);
-        userStore.setOthersID(null);
         setChatLog([{
             nickName: 'SERENDY',
             message: '대화가 종료되었어요!',
@@ -103,8 +105,11 @@ export const useChat = () => {
     }
 
     const stopChat = (): void => {
-        userStore.userSocket?.emit('stop chat', userStore.othersID);
+        console.log('시작되고')
+        userStore.userSocket?.emit('stop chat');
+        console.log('소켓 보내고');
         handleFinished();
+        console.log('마무리');
     }
 
     const chatStopped = (): void => {

@@ -13,7 +13,6 @@ interface IUserStore {
     user: IUser | null;
     userSocket: Socket | null;
     socketID: string | null;
-    othersID: string | null;
 }
 
 class UserStore implements IUserStore {
@@ -23,22 +22,19 @@ class UserStore implements IUserStore {
     private _isLogging: boolean = false;
     private _userSocket: Socket | null = null;
     private _socketID: string | null = null;
-    private _othersID: string | null = null;
 
     constructor() {
-        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket' | '_socketID' | '_othersID'>(this, {
+        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket' | '_socketID'>(this, {
             _isLogging: observable,
             _isSignIn: observable,
             _user: observable,
             _userSocket: observable,
             _socketID: observable,
-            _othersID: observable,
             isLogging: computed,
             isSignIn: computed,
             user: computed,
             userSocket: computed,
             socketID: computed,
-            othersID: computed,
             setIsSignIn: action,
             setUser: action,
             signInWithToken: action,
@@ -70,10 +66,6 @@ class UserStore implements IUserStore {
         return this._socketID;
     }
 
-    public get othersID(): string | null {
-        return this._othersID;
-    }
-
     public setIsSignIn(): void {
         this._isSignIn = true;
     }
@@ -92,9 +84,6 @@ class UserStore implements IUserStore {
 
     public setSocketID(myID: string | null): void {
         this._socketID = myID;
-    }
-    public setOthersID(othersID: string | null): void {
-        this._othersID = othersID;
     }
 
     public saveSocketID(): void {

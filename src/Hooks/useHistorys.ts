@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import userStore from '../store/userStore';
 
@@ -39,7 +38,6 @@ export const useHistorys = () => {
 
     const pushLoggedUser = (): void => {
         if (userStore.isSignIn) {
-            console.log('ㅋㅋ ㅃ')
             history.push('/main');
         } else {
             return 

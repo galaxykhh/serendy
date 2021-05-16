@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClipboard, faDoorOpen, faQuestion, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faClipboard, faDoorOpen, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import userStore from '../../store/userStore';
 import { observer } from 'mobx-react';
 import { DisplayType } from '../../type';
@@ -20,15 +20,7 @@ const UserInfo: React.FC = observer(() => {
             <Row>
                 <Box onClick={history.pushMyPage} >
                     <Icon icon={faClipboard} iconsize='24px' />
-                    <Text mt='8px' size='14px' > 내 정보 </Text>
-                </Box>
-                <Box>
-                    <Icon icon={faQuestion} iconsize='24px' />
-                    <Text mt='8px' size='14px' > 뭐로할까 </Text>
-                </Box>
-                <Box>
-                    <Icon icon={faQuestion} iconsize='24px' />
-                    <Text mt='8px' size='14px' > 뭐로할까 </Text>
+                    <Text mt='8px' size='14px' > 정보변경 </Text>
                 </Box>
                 <Box onClick={() => userStore.signOut(history.pushStart)} >
                     <Icon icon={faDoorOpen} iconsize='24px' />
@@ -49,8 +41,7 @@ const Row = styled.div`
     @media only screen and (max-width: 1450px) {
         display: grid;
         grid-template-areas:
-        'a b'
-        'c d';
+        'a b';
     }
 `;
 

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Container from '../components/publicComponents/Container';
 import SignInBox from '../components/SignIn/SignInBox';
@@ -9,10 +9,13 @@ import userStore from '../store/userStore';
 import { useHistorys } from '../Hooks/useHistorys';
 
 const SignIn: React.FC = observer(() => {
+
     const history = useHistorys();
 
-    history.pushLoggedUser();
-    
+    useEffect(() => {
+        userStore.signInWithToken(history.pushLoggedUser);
+    }, []); //eslint-disable-line
+
     return (
         <Container>
             <>

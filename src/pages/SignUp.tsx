@@ -5,14 +5,10 @@ import SignUpBox from '../components/SignUp/SignUpBox';
 import Success from '../components/SignUp/Success';
 import { TEXTLOGO_URL } from '../config';
 import { observer } from 'mobx-react';
-import { useHistorys } from '../Hooks/useHistorys';
 
 const SignUp: React.FC = observer(() => {
     const [isSuccess, setIsSuccess] = useState<boolean>(false); // is sign up success ?
-    const history = useHistorys();
 
-    history.pushLoggedUser();
-    
     return (
         <Container>
             <>

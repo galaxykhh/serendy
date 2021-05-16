@@ -31,7 +31,7 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
                             <Ment size='18px'> · 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요 </Ment>
                             <Ment size='18px'> · 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요 </Ment>
                             <Ment size='18px'> · 답장이 끊기지 않는 한 계속 편지를 주고 받을 수 있어요 </Ment>
-                            <Ment size='18px'> · 편지는 대화 형식으로 보관함에 저장돼요 </Ment>
+                            <Ment size='18px'> · 편지를 받으면 자동으로 보관함에 저장돼요 </Ment>
                         </Rule>
                         <br />
             </RuleContainer>

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faPaperPlane, faFolder } from '@fortawesome/free-solid-svg-icons';
 import { useHistorys } from '../../Hooks/useHistorys';
+import { theme } from '../../style/theme';
 
 const Category: React.FC = () => {
 
@@ -12,15 +13,24 @@ const Category: React.FC = () => {
         <Container>
             <Box onClick={history.pushChatPage}>
                 <IconBox>
-                    <Icon icon={faComments} />
+                    <Icon color={theme.colors.plum}
+                          icon={faComments} />
                 </IconBox>
                 <Text> 대화 하기 </Text>
             </Box>
             <Box onClick={history.pushPostPage} >
                 <IconBox>
-                    <Icon icon={faPaperPlane} />
+                    <Icon color={theme.colors.plum}
+                          icon={faPaperPlane} />
                 </IconBox>
                 <Text> 편지 보내기 </Text>
+            </Box>
+            <Box onClick={history.pushPostPage} >
+                <IconBox>
+                    <Icon color={theme.colors.yellow}
+                          icon={faFolder} />
+                </IconBox>
+                <Text> 편지 보관함 </Text>
             </Box>
         </Container>
     )
@@ -31,12 +41,12 @@ export default Category;
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 10px;
     padding-top: 2px;
     width: 100%;
-    height: 15%;
+    height: 70%;
     min-width: 80px;
     min-height: 40px;
     @media only screen and (max-height: 620px) {
@@ -49,9 +59,11 @@ const IconBox = styled.div`
     min-height: 26px;
 `;
 
-const Icon = styled(FontAwesomeIcon)`
+const Icon = styled(FontAwesomeIcon)<{
+    color: string,
+}>`
     font-size: 26px;
-    color: ${({ theme }) => theme.colors.plum};
+    color: ${({ color }) => color};
 `;
 
 const Text = styled.div`
@@ -77,7 +89,8 @@ const Box = styled.div`
     margin-top: 3px;
     margin-bottom: 5px;
     width: 95%;
-    height: 40%;
+    min-height: 50px;
+    max-height: 60px;
     min-width: 80px;
     min-height: 30px;
     cursor: pointer;

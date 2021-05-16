@@ -70,24 +70,24 @@ const ChatWindow: React.FC = observer(() => {
                                         <BigMent> 대화가 종료되었어요 </BigMent>
                                         <br />
                                         <br />
-                                        <Ment size='18px' > 상대방이 폭언 또는 욕설을 했다면 신고해주세요 </Ment>
+                                        <Ment size='18px' > 상대방은 어떤 사람이었을까요? </Ment>
+                                        <br />
+                                        <br />
+                                        <br />
                                         <BtnBox>
-                                            <StartBtn onClick={chat.reStart} > 괜찮아요 </StartBtn>
-                                            <CancelBtn style={{ marginLeft: '20px' }}
-                                                       onClick={chat.report}
-                                                       >
-                                                신고하기
-                                            </CancelBtn>
+                                            <StartBtn onClick={chat.reStart} > 다시하기 </StartBtn>
                                         </BtnBox>
                                     </> :
                                     <>
                                         <BigMent> 상대와 연결되었어요 </BigMent>
                                         <br />
                                         <br />
-                                        <br />
                                         <Ment size='18px'> 먼저 인사 해보시는건 어떠세요? </Ment>
+                                        <br />
+                                        <br />
+                                        <br />
                                         <BtnBox>
-                                            <CancelBtn onClick={chat.stopChat}> 대화 그만하기 </CancelBtn>
+                                            <CancelBtn onClick={chat.stopChat}> 대화방 나가기 </CancelBtn>
                                             <StartBtn style={{ marginLeft: '20px' }} > 편지 요청하기 </StartBtn>
                                         </BtnBox>
                                     </>}
@@ -105,10 +105,10 @@ const ChatWindow: React.FC = observer(() => {
                         <br />
                         
                         <Rule>
-                            <Ment size='18px'> · 채팅은 서로가 설정한 이름으로 진행돼요 </Ment>
+                            <Ment size='18px'> · 대화는 서로가 설정한 이름으로 진행돼요 </Ment>
                             <Ment size='18px'> · 상대가 마음에 든다면 쪽지 요청을 보내보세요 </Ment>
                             <Ment size='18px'> · 서로 요청을 하면 채팅이 끝나도 쪽지를 보낼 수 있어요 </Ment>
-                            <Ment size='18px'> · 누군가 채팅방을 나가게되면 채팅은 종료돼요 </Ment>
+                            <Ment size='18px'> · 누군가 대화방을 나가게되면 채팅은 종료돼요 </Ment>
                         </Rule>
                         <br />
                         <BtnBox>

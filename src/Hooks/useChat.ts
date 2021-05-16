@@ -115,11 +115,6 @@ export const useChat = () => {
         })
     }
 
-    const report = (): void => {
-        alert('신고 접수되었습니다');
-        reStart();
-    }
-
     const reStart = (): void => {
         setChatLog([]);
         setIsSearching(false);
@@ -147,7 +142,6 @@ export const useChat = () => {
         getMatchedUser,
         stopChat,
         setChatFinished,
-        report,
         reStart,
         chatStopped,
         scrollToBottom,

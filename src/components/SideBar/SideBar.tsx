@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import userStore from '../../store/userStore';
 import { slideLeft } from '../../style/keyframes';
-import ContactList from './ContactList';
 import Category from './Category';
 import UserInfo from './UserInfo';
 import { DisplayType } from '../../type';
@@ -13,7 +12,6 @@ const SideBar: React.FC = observer(() => {
         <Bar visible={userStore.isSignIn ? 'block' : 'none'} >
             <UserInfo />
             <Category />
-            <ContactList />
         </Bar>
     )
 });
@@ -31,6 +29,7 @@ const Bar = styled.div<{
     align-items: center;
     width: 19%;
     height: 99%;
+    background-color: ${({ theme }) => theme.colors.black};
     border-radius: 5px;
     border-left: 1px solid ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
@@ -38,7 +37,4 @@ const Bar = styled.div<{
     transition: 1s ease;
     padding: 10px;
     z-index: 1;
-    @media only screen and (max-width: 500px) {
-        right: -300px;
-    }
 `;

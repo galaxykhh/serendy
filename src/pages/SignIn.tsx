@@ -18,10 +18,8 @@ const SignIn: React.FC = observer(() => {
 
     return (
         <Container>
-            <>
-                <TextLogo display={userStore.isLogging ? 'none' : 'block'} />
-                <SignInBox />
-            </>
+            <TextLogo display={userStore.isLogging ? 'none' : 'block'} />
+            <SignInBox />
         </Container>
     );
 });

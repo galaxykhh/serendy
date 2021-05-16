@@ -174,6 +174,7 @@ const Column = styled.div`
 `;
 
 const Row = styled.div`
+    position: relative;
     width: 420px;
     display: flex;
     flex-direction: row;
@@ -213,7 +214,9 @@ const Button = styled.button`
 `;
 
 const DupliBtn = styled(Button)`
-    width: 170px;
+    position: absolute;
+    right: 0px;
+    width: 120px;
     height: 45px;
     margin-bottom: 10px;
     margin-top: 0;

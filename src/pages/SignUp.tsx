@@ -11,10 +11,8 @@ const SignUp: React.FC = observer(() => {
 
     return (
         <Container>
-            <>
-                <TextLogo />
-                {isSuccess ? <Success /> : <SignUpBox success={() => setIsSuccess(true)} />}
-            </>
+            <TextLogo />
+            {isSuccess ? <Success /> : <SignUpBox success={() => setIsSuccess(true)} />}
         </Container>
     );
 });

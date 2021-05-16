@@ -17,6 +17,7 @@ import PostPage from './pages/PostPage';
 import userStore from './store/userStore';
 import { io } from 'socket.io-client';
 import { BASE_URL } from './config';
+import FindPW from './pages/FindPW';
 
 const App: React.FC = observer(() => {
 
@@ -48,7 +49,7 @@ const App: React.FC = observer(() => {
                             <SignUp />
                         </Route>
                         <Route exact path='/findpw'>
-                            Find Password
+                            <FindPW />
                         </Route>
                         <PrivateRoute exact path='/main'>
                             <Main />

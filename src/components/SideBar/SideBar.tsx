@@ -27,7 +27,8 @@ const Bar = styled.div<{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 19%;
+    min-width: 300px;
+    max-width: 300px;
     height: 99%;
     background-color: ${({ theme }) => theme.colors.black};
     border-radius: 5px;
@@ -37,4 +38,12 @@ const Bar = styled.div<{
     transition: 1s ease;
     padding: 10px;
     z-index: 1;
+    @media only screen and (max-width: 1450px) {
+        min-width: 220px;
+        max-width: 220px;
+    }
+    @media only screen and (max-width: 1115px) {
+        min-width: 100px;
+        max-width: 100px;
+    }
 `;

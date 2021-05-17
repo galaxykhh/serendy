@@ -21,13 +21,10 @@ const Screen = styled.div`
     justify-content: center;
     align-items: center;
     width: 80.5%;
-    min-width: 300px;
+    min-width: 390px;
     height: 80%;
     border-radius: 30px;
     padding: 10px;
     transition: 1s ease;
     z-index: 1;
-    @media only screen and (max-width: 500px) {
-        width: 96%;
-    }
 `;

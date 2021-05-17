@@ -41,9 +41,9 @@ const ChatWindow: React.FC = observer(() => {
                 <Screen ref={chat.screen} >
                     {chat.chatLog.map((data, index) => (
                         <MessageBox message={data.message}
-                                       nickName={data.nickName}
-                                       socketID={data.socketID === userStore.socketID}
-                                       key={index}
+                                    nickName={data.nickName}
+                                    socketID={data.socketID === userStore.socketID}
+                                    key={index}
                                     />
                     ))}
                 </Screen>
@@ -88,7 +88,6 @@ const ChatWindow: React.FC = observer(() => {
                                         <br />
                                         <BtnBox>
                                             <CancelBtn onClick={chat.stopChat}> 대화방 나가기 </CancelBtn>
-                                            <StartBtn style={{ marginLeft: '20px' }} > 편지 요청하기 </StartBtn>
                                         </BtnBox>
                                     </>}
                             </> : 
@@ -106,9 +105,8 @@ const ChatWindow: React.FC = observer(() => {
                         
                         <Rule>
                             <Ment size='18px'> · 대화는 서로가 설정한 이름으로 진행돼요 </Ment>
-                            <Ment size='18px'> · 상대가 마음에 든다면 쪽지 요청을 보내보세요 </Ment>
-                            <Ment size='18px'> · 서로 요청을 하면 채팅이 끝나도 쪽지를 보낼 수 있어요 </Ment>
-                            <Ment size='18px'> · 누군가 대화방을 나가게되면 채팅은 종료돼요 </Ment>
+                            <Ment size='18px'> · 중간에 대화를 나가지 않으면 대화를 계속 할 수 있어요 </Ment>
+                            <Ment size='18px'> · 누군가 대화방을 나가게되면 대화가 종료돼요 </Ment>
                         </Rule>
                         <br />
                         <BtnBox>
@@ -152,6 +150,7 @@ const ChatBox = styled.div<{
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         min-height: 340px;
+        width: 80%;
     }
 `;
 

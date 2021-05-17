@@ -5,6 +5,7 @@ import { BASE_URL } from '../config'; // eslint-disable-line
 import { IPassword } from '../components/MyPage/ChangePWBox';
 import { INickName } from '../components/MyPage/ChangeNameBox';
 import { IFindPW } from '../components/FindPW/FindPWBox';
+import { IPost } from '../Hooks/usePost';
 
 const serendyInstance = axios.create({
     baseURL: 'http://localhost:8000',
@@ -26,20 +27,32 @@ class SerendyRepository {
         return serendyInstance.post('/api/auth/signin', data);
     };
 
-    signInWidthToken() {
+    signInWidthToken(): Promise<AxiosResponse> {
         return serendyInstance.post('/api/auth/refresh');
     };
 
-    changePassword(data: IPassword) {
+    changePassword(data: IPassword): Promise<AxiosResponse> {
         return serendyInstance.post('api/auth/changepw', data);
     };
 
-    changeName(nickName: INickName) {
+    changeName(nickName: INickName): Promise<AxiosResponse> {
         return serendyInstance.post('api/auth/changename', nickName);
     };
 
-    findPW(data: IFindPW) {
+    findPW(data: IFindPW): Promise<AxiosResponse> {
         return serendyInstance.post('api/auth/findpw', data);
+    };
+
+    sendPost(data: IPost): Promise<AxiosResponse> {
+        return serendyInstance.post('api/post/send', data);
+    }
+
+    getSentPosts(account: string | null | undefined): Promise<AxiosResponse> {
+        return serendyInstance.get(`api/post/sentposts/${account}`);
+    };
+
+    getReceivePosts(account: string | null | undefined): Promise<AxiosResponse> {
+        return serendyInstance.get(`api/post/receiveposts/${account}`);
     };
 };
 

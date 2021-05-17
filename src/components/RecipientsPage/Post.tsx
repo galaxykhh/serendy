@@ -3,27 +3,26 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-interface IChatRoom {
-    item: {
-        messageContent: string;
-        stranger: string;
-    }
+export interface IPostList {
+    nickName: string;
+    content: string;
+    onClick: () => void;
 }
 
-const Message: React.FC<IChatRoom> = ({ item }) => {
-    const { messageContent, stranger } = item;
+const Post: React.FC<IPostList> = ({ nickName, content, onClick }) => {
+
     return (
-        <Box>
+        <Box onClick={onClick} >
             <Icon icon={faEnvelope} />
             <Column>
-                <Stranger> {stranger} </Stranger>
-                <MessagePreview> {messageContent}  </MessagePreview>
+                <Stranger> 보낸 사람 : {nickName} </Stranger>
+                <MessagePreview> {content}  </MessagePreview>
             </Column>
         </Box>
     )
 }
 
-export default Message;
+export default Post;
 
 const Box = styled.div`
     display: flex;
@@ -37,7 +36,7 @@ const Box = styled.div`
     border-radius: 40px;
     transition: .3s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white50};
+        background-color: ${({ theme }) => theme.colors.white20};
     }
 `;
 
@@ -46,14 +45,15 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    width: 220px;
+    width: 400px;
+    margin-left: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-    font-size: 25px;
+    font-size: 30px;
     color: ${({ theme }) => theme.colors.white};
 `;
 

@@ -36,6 +36,14 @@ export const useHistorys = () => {
         history.push('/post');
     }
 
+    const pushSenderPage = (): void => {
+        history.push('/sender');
+    };
+
+    const pushRecipientsPage = (): void => {
+        history.push('/recipients');
+    };
+
     const pushLoggedUser = (): void => {
         if (userStore.isSignIn) {
             history.push('/main');
@@ -53,6 +61,8 @@ export const useHistorys = () => {
         pushMyPage,
         pushChatPage,
         pushPostPage,
+        pushSenderPage,
+        pushRecipientsPage,
         pushLoggedUser,
     }
 }

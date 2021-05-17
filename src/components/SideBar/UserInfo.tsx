@@ -41,7 +41,8 @@ const Row = styled.div`
     @media only screen and (max-width: 1450px) {
         display: grid;
         grid-template-areas:
-        'a b';
+        'a'
+        'b';
     }
 `;
 

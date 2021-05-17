@@ -14,10 +14,12 @@ import Header from './components/Header/Header';
 import MyPage from './pages/MyPage';
 import ChatPage from './pages/ChatPage';
 import PostPage from './pages/PostPage';
+import RecipientsPage from './pages/RecipientsPage';
+import FindPW from './pages/FindPW';
 import userStore from './store/userStore';
 import { io } from 'socket.io-client';
 import { BASE_URL } from './config';
-import FindPW from './pages/FindPW';
+import SenderPage from './pages/SenderPage';
 
 const App: React.FC = observer(() => {
 
@@ -62,6 +64,12 @@ const App: React.FC = observer(() => {
                         </PrivateRoute>
                         <PrivateRoute exact path='/post'>
                             <PostPage />
+                        </PrivateRoute>
+                        <PrivateRoute exact path='/recipients' >
+                            <RecipientsPage />
+                        </PrivateRoute>
+                        <PrivateRoute exact path='/sender' >
+                            <SenderPage />
                         </PrivateRoute>
                     </Switch>
                 </BrowserRouter>

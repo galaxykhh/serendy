@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faPaperPlane, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faPaperPlane, faSignInAlt, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 import { useHistorys } from '../../Hooks/useHistorys';
 import { theme } from '../../style/theme';
 
@@ -25,12 +25,19 @@ const Category: React.FC = () => {
                 </IconBox>
                 <Text> 편지 보내기 </Text>
             </Box>
-            <Box onClick={history.pushPostPage} >
+            <Box onClick={history.pushRecipientsPage} >
                 <IconBox>
                     <Icon color={theme.colors.yellow}
-                          icon={faFolder} />
+                          icon={faEnvelopeOpenText} />
                 </IconBox>
-                <Text> 편지 보관함 </Text>
+                <Text> 받은 편지함 </Text>
+            </Box>
+            <Box onClick={history.pushSenderPage} >
+                <IconBox>
+                    <Icon color={theme.colors.yellow}
+                          icon={faSignInAlt} />
+                </IconBox>
+                <Text> 보낸 편지함 </Text>
             </Box>
         </Container>
     )
@@ -73,11 +80,8 @@ const Text = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    @media only screen and (max-width: 880px) {
+    @media only screen and (max-width: 1115px) {
         display: none;
-    }
-    @media only screen and (max-height: 620px) {
-        font-size: 12px;
     }
 `;
 

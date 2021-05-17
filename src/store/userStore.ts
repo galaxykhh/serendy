@@ -6,8 +6,8 @@ import { Socket } from 'socket.io-client';
 import { INickName } from '../components/MyPage/ChangeNameBox';
 import { IFindPW } from '../components/FindPW/FindPWBox';
 interface IUser {
-    account: string | null,
-    nickName: string | null,
+    account: string | null;
+    nickName: string | null;
 }
 
 interface IUserStore {
@@ -185,7 +185,7 @@ class UserStore implements IUserStore {
     async findPW(data: IFindPW, push: () => void): Promise<void> {
         try {
             const response = await serendyRepository.findPW(data);
-            if ((response.data.message == 'Not Exist')) {
+            if ((response.data.message === 'Not Exist')) {
                 return alert('일치하는 정보가 없습니다');
             } else if ((response.data.message === 'Valid User')) {
                 alert(`임시로 암호 메세지가\n비밀번호로 설정되었습니다\n비밀번호 변경을 꼭 해주세요`);

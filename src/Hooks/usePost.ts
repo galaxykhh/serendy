@@ -1,7 +1,7 @@
 
 import { useRef, useState } from 'react'
-import serendyRepository from '../repository/serendyRepository';
 import userStore from '../store/userStore';
+import postRepository from '../repository/postRepository';
 
 export interface IPost {
     account: string | null | undefined;
@@ -13,7 +13,7 @@ export const usePost = () => {
     const [isSent, setIsSent] = useState<boolean>(false);
     const textArea = useRef<HTMLTextAreaElement>(null);
     const [sentPosts, setSentPosts] = useState<any[]>([]);
-    const [receivePosts, setReceivePosts] = useState<any[]>([]);
+    const [receivedPosts, setReceivedPosts] = useState<any[]>([]);
 
     const handlePost = async (): Promise<void> => {
         try {
@@ -22,7 +22,7 @@ export const usePost = () => {
                 nickName: userStore.user?.nickName,
                 content: textArea.current?.value,
             }
-            const response = await serendyRepository.sendPost(data);
+            const response = await postRepository.sendPost(data);
             if ((response.data.message === 'Send Success')) {
                 setIsSent(true);
             }
@@ -33,7 +33,7 @@ export const usePost = () => {
 
     const getSentPosts = async (): Promise<void> => {
         try {
-            const response = await serendyRepository.getSentPosts(userStore.user?.account);
+            const response = await postRepository.getSentPosts(userStore.user?.account);
             const posts = response.data;
             setSentPosts(posts);
         } catch(err) {
@@ -42,24 +42,32 @@ export const usePost = () => {
         }
     }
 
-    const getReceivePosts = async (): Promise<void> => {
+    const getReceivedPosts = async (): Promise<void> => {
         try {
-            const response = await serendyRepository.getReceivePosts(userStore.user?.account);
+            const response = await postRepository.getReceivePosts(userStore.user?.account);
             const posts = response.data;
-            setReceivePosts(posts);
+            setReceivedPosts(posts);
         } catch(err) {
             console.log(err);
             return;
         }
     }
 
+    const showReceivedPost = (): void => {
+        
+    }
+
+    const showSentPost = async (postId: string): Promise<void> => {
+        
+    }
+
     return {
         isSent,
         textArea,
         sentPosts,
-        receivePosts,
+        receivedPosts,
         handlePost,
         getSentPosts,
-        getReceivePosts,
+        getReceivedPosts,
     }
 }

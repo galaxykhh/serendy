@@ -47,13 +47,14 @@ const Column = styled.div`
     align-items: flex-start;
     width: 400px;
     margin-left: 20px;
+    margin-top: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-    font-size: 30px;
+    font-size: 40px;
     color: ${({ theme }) => theme.colors.white};
 `;
 

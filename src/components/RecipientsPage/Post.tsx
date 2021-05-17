@@ -53,7 +53,7 @@ const Column = styled.div`
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-    font-size: 30px;
+    font-size: 40px;
     color: ${({ theme }) => theme.colors.white};
 `;
 

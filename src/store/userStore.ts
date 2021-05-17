@@ -1,7 +1,7 @@
 import { action, computed, makeObservable, observable } from "mobx";
 import { ISignInData } from '../components/SignIn/SignInBox';
 import { IPassword } from '../components/MyPage/ChangePWBox';
-import serendyRepository from '../repository/serendyRepository';
+import authRepository from '../repository/authRepository';
 import { Socket } from 'socket.io-client';
 import { INickName } from '../components/MyPage/ChangeNameBox';
 import { IFindPW } from '../components/FindPW/FindPWBox';
@@ -107,7 +107,7 @@ class UserStore implements IUserStore {
                 this.setIsLogging(false);
                 return;
             } else if (token) {
-                const response = await serendyRepository.signInWidthToken();
+                const response = await authRepository.signInWidthToken();
                 if ((response.data.message === 'Invalid Token')) { // 토큰만료 또는 없음
                     this.setIsLogging(false);
                     return;
@@ -131,7 +131,7 @@ class UserStore implements IUserStore {
     async signIn(userData: ISignInData, setError: () => void, push: () => void): Promise<void> {
         this.setIsLogging(true);
         try {
-            const response = await serendyRepository.signIn(userData);
+            const response = await authRepository.signIn(userData);
             if ((response.data.message === 'SignIn Fail')) {
                 this.setIsLogging(false);
                 setError();
@@ -160,7 +160,7 @@ class UserStore implements IUserStore {
 
     async changePW(data: IPassword, push: () => void): Promise<void> {
         try {
-            const response = await serendyRepository.changePassword(data);
+            const response = await authRepository.changePassword(data);
             if ((response.data.message === 'Changed')) {
                 alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
                 this.signOut(push);
@@ -172,7 +172,7 @@ class UserStore implements IUserStore {
 
     async changeName(nickName: INickName, push: () => void): Promise<void> {
         try {
-            const response = await serendyRepository.changeName(nickName);
+            const response = await authRepository.changeName(nickName);
             if ((response.data.message === 'Changed')) {
                 alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
                 this.signOut(push);
@@ -184,7 +184,7 @@ class UserStore implements IUserStore {
 
     async findPW(data: IFindPW, push: () => void): Promise<void> {
         try {
-            const response = await serendyRepository.findPW(data);
+            const response = await authRepository.findPW(data);
             if ((response.data.message === 'Not Exist')) {
                 return alert('일치하는 정보가 없습니다');
             } else if ((response.data.message === 'Valid User')) {

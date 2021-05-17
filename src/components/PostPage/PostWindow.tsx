@@ -13,9 +13,7 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
         <Row>
             <LetterContainer>
                 <Letter>
-                    <TextArea ref={textArea}
-                              onChange={() => console.log('change')}
-                              />
+                    <TextArea ref={textArea} />
                 </Letter>
                 <SendBtnBox>
                     <SendBtn onClick={postSend} >
@@ -49,7 +47,6 @@ const Row = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-    animation: ${fadeIn} .8s ease;
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
     }

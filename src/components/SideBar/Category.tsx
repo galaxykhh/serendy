@@ -56,9 +56,6 @@ const Container = styled.div`
     height: 70%;
     min-width: 80px;
     min-height: 40px;
-    @media only screen and (max-height: 620px) {
-        flex-direction: row;
-    };
 `;
 
 const IconBox = styled.div`

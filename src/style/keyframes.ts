@@ -66,3 +66,29 @@ export const zoomOut = keyframes`
         transform: scale(0);
     }
 `;
+
+export const paperPlane = keyframes`
+    50% {
+        transform: scale(1.3) translateY(100px) translateX(-100px);
+        opacity: 1
+    }
+
+    100% {
+        transform: scale(1) translateY(-1000px) translateX(1000px);
+        opacity: 0;
+    }
+`;
+
+export const setTimeFade = keyframes`
+    0% {
+        opacity: 0;
+    }
+    60% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+`;

@@ -231,7 +231,6 @@ const HandlerContainer = styled.div`
     height: 740px;
     border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.main60};
-    animation: ${fadeIn} .8s ease;
     @media only screen and (max-width: 1450px) {
         height: 70%;
     }

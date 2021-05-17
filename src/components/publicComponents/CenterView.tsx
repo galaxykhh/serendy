@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fadeIn } from '../../style/keyframes';
 
 const CenterView: React.FC = ({ children }) => {
 
@@ -26,5 +27,6 @@ const Screen = styled.div`
     border-radius: 30px;
     padding: 10px;
     transition: 1s ease;
+    animation:${fadeIn} .8s ease;
     z-index: 1;
 `;

@@ -8,17 +8,18 @@ const PostBox: React.FC = () => {
     const post = usePost();
 
     useEffect(() => {
-        post.getReceivePosts();
+        post.getReceivedPosts();
     }, []); //eslint-disable-line
 
     return (
         <>
             <ListBox>
-                {post.receivePosts !== null && post.receivePosts.length > 0 ? 
-                    post.receivePosts.map((x: any) => (
-                        x.map((x: any) => (
+                {post.receivedPosts !== null && post.receivedPosts.length > 0 ? 
+                    post.receivedPosts.map((x: any) => (
+                        x.map((x: any, i: number) => (
                             <Post nickName={x.nickName}
                                   content={x.content}
+                                  key={i}
                                   onClick={() => console.log('dd')}
                                   />
                         ))
@@ -41,7 +42,8 @@ const ListBox = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 30%;
-    height: 95%;
+    min-height: 95%;
+    max-height: 740px;
     border-radius: 10px;
     overflow: auto;
     background-color: ${({ theme }) => theme.colors.white20};

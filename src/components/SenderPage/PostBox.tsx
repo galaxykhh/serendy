@@ -16,9 +16,10 @@ const PostBox: React.FC = () => {
             <ListBox>
                 {post.sentPosts !== null && post.sentPosts.length > 0 ? 
                     post.sentPosts.map((x: any) => (
-                        x.map((x: any) => (
+                        x.map((x: any, i: number) => (
                             <Post nickName={x.nickName}
                                   content={x.content}
+                                  key={i}
                                   onClick={() => console.log('gg')}
                                   />
                         ))
@@ -40,7 +41,8 @@ const ListBox = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 30%;
-    height: 95%;
+    min-height: 95%;
+    max-height: 740px;
     border-radius: 10px;
     overflow: auto;
     background-color: ${({ theme }) => theme.colors.white20};

@@ -75,5 +75,5 @@ const MessagePreview = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.mainBlue};
 `;

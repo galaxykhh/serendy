@@ -4,6 +4,8 @@ import PostBox from '../components/SenderPage/PostBox';
 import CenterView from '../components/publicComponents/CenterView';
 import Container from '../components/publicComponents/Container';
 import { usePost } from '../Hooks/usePost';
+import Loader from 'react-loader-spinner';
+import { theme } from '../style/theme';
 
 const SenderPage: React.FC = () => {
 
@@ -17,13 +19,22 @@ const SenderPage: React.FC = () => {
         <Container>
             <CenterView>
                     <Row>
-                        <PostBox sentPosts={post.sentPosts}
-                                 currentPost={post.currentPost!}
-                                 onClick={post.showSentOne}
-                                 content={post.currentPost?.content}
-                                 nickName={post.currentPost?.nickName}
-                                 comment={post.currentPost?.comment}
-                                 />
+                        {!post.isLoading ? 
+                            <PostBox sentPosts={post.sentPosts}
+                            currentPost={post.currentPost!}
+                            onClick={post.showSentOne}
+                            content={post.currentPost?.content}
+                            nickName={post.currentPost?.nickName}
+                            comment={post.currentPost?.comment}
+                            /> :
+                            <LoaderBox>
+                                <Loader type="Circles"
+                                        color={theme.colors.plum}
+                                        height={60}
+                                        width={60}
+                                        />
+                            </LoaderBox>
+                        }
                     </Row>
             </CenterView>
         </Container>
@@ -39,5 +50,13 @@ const Row = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+`;
+
+const LoaderBox = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
 `;

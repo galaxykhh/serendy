@@ -29,8 +29,9 @@ const PostBox: React.FC<IPostBox>= ({
                               onClick={() => onClick(x._id)}
                               />
                     )) :
-                    <>
-                    </>
+                    <Ment>
+                        아직 보낸 편지가 없어요
+                    </Ment>
                 }
             </ListBox>
             <View currentPost={currentPost}
@@ -57,4 +58,11 @@ const ListBox = styled.div`
     border-radius: 10px;
     overflow: auto;
     background-color: ${({ theme }) => theme.colors.white10};
+`;
+
+const Ment = styled.div`
+    color: ${({ theme }) => theme.colors.white};
+    font-size: 18px;
+    text-align: center;
+    margin-top: 50px;
 `;

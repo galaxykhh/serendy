@@ -1,13 +1,13 @@
 import { serendyInstance } from './serendyInstance';
 import { AxiosResponse } from 'axios';
-import { IPost } from '../Hooks/usePost';
+import { ISendPost } from '../Hooks/usePost';
 
 
 class PostRepository {
 
     private path='/api/post'
 
-    sendPost(data: IPost): Promise<AxiosResponse> {
+    sendPost(data: ISendPost): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/send`, data);
     }
 
@@ -16,7 +16,11 @@ class PostRepository {
     };
 
     getReceivePosts(account: string | null | undefined): Promise<AxiosResponse> {
-        return serendyInstance.get(`${this.path}/receiveposts/${account}`);
+        return serendyInstance.get(`${this.path}/receivedposts/${account}`);
+    };
+
+    showClickedOne(_Id: string, account: string): Promise<AxiosResponse> {
+        return serendyInstance.get(`${this.path}/showone/${_Id}/${account}`);
     };
 };
 

@@ -1,34 +1,43 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { usePost } from '../../Hooks/usePost';
 import Post from './Post';
 import View from './View';
+import { ICurrentPost } from '../../Hooks/usePost';
+import { IComment } from './View';
 
-const PostBox: React.FC = () => {
-    const post = usePost();
+interface IPostBox {
+    sentPosts: Array<any>;
+    currentPost: ICurrentPost;
+    content: string | undefined;
+    nickName: string | undefined;
+    comment: IComment | undefined;
+    onClick: (_id: string) => void;
+}
 
-    useEffect(() => {
-        post.getSentPosts();
-    }, []); //eslint-disable-line
+const PostBox: React.FC<IPostBox>= ({
+    sentPosts, currentPost, content, nickName, onClick, comment,
+}) => {
 
     return (
         <>
             <ListBox>
-                {post.sentPosts !== null && post.sentPosts.length > 0 ? 
-                    post.sentPosts.map((x: any) => (
-                        x.map((x: any, i: number) => (
-                            <Post nickName={x.nickName}
-                                  content={x.content}
-                                  key={i}
-                                  onClick={() => console.log('gg')}
-                                  />
-                        ))
+                {sentPosts !== null && sentPosts.length > 0 ? 
+                    sentPosts.map((x, i) => (
+                        <Post nickName={x.nickName}
+                              content={x.content}
+                              key={i}
+                              onClick={() => onClick(x._id)}
+                              />
                     )) :
                     <>
                     </>
                 }
             </ListBox>
-            <View />
+            <View currentPost={currentPost}
+                  content={content}
+                  nickName={nickName}
+                  comment={comment}
+                  />
         </>
     )
 }
@@ -41,8 +50,10 @@ const ListBox = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 30%;
-    min-height: 95%;
+    height: 740px;
+    min-height: 740px;
     max-height: 740px;
+    margin-top: 10px;
     border-radius: 10px;
     overflow: auto;
     background-color: ${({ theme }) => theme.colors.white20};

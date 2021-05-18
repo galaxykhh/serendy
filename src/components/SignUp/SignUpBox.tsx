@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
-import serendyRepository from '../../repository/serendyRepository';
+import serendyRepository from '../../repository/authRepository';
 import { zoomIn } from '../../style/keyframes';
 
 export interface ISignUpData {

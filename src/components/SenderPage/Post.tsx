@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export interface IPostList {
-    nickName: string,
-    content: string,
-    onClick: () => void
+    nickName: string;
+    content: string;
+    onClick: () => void;
 }
 
 const Post: React.FC<IPostList> = ({ nickName, content, onClick }) => {

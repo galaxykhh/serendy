@@ -1,6 +1,5 @@
 import React from 'react';
 import styled  from 'styled-components';
-import { fadeIn } from '../../style/keyframes';
 
 interface IPostWindow {
     postSend: () => void;
@@ -28,7 +27,6 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
                         <Rule>
                             <Ment size='18px'> · 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요 </Ment>
                             <Ment size='18px'> · 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요 </Ment>
-                            <Ment size='18px'> · 편지를 받은 사람은 답장을 한 번만 할 수 있어요 </Ment>
                             <Ment size='18px'> · 편지를 받으면 자동으로 보관함에 저장돼요 </Ment>
                         </Rule>
                         <br />

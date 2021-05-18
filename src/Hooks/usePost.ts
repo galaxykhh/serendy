@@ -1,12 +1,22 @@
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import userStore from '../store/userStore';
 import postRepository from '../repository/postRepository';
+import { IComment } from '../components/SenderPage/View';
 
-export interface IPost {
+export interface ISendPost {
     account: string | null | undefined;
     nickName: string | null | undefined;
     content: string | undefined;
+}
+
+export interface ICurrentPost {
+    _id: string;
+    toAccount: string;
+    nickName: string;
+    fromAccount: string;
+    content: string;
+    comment: IComment | undefined;
 }
 
 export const usePost = () => {
@@ -14,6 +24,7 @@ export const usePost = () => {
     const textArea = useRef<HTMLTextAreaElement>(null);
     const [sentPosts, setSentPosts] = useState<any[]>([]);
     const [receivedPosts, setReceivedPosts] = useState<any[]>([]);
+    const [currentPost, setCurrentPost] = useState<ICurrentPost>();
 
     const handlePost = async (): Promise<void> => {
         try {
@@ -34,8 +45,8 @@ export const usePost = () => {
     const getSentPosts = async (): Promise<void> => {
         try {
             const response = await postRepository.getSentPosts(userStore.user?.account);
-            const posts = response.data;
-            setSentPosts(posts);
+            const data = response.data;
+            setSentPosts(data);
         } catch(err) {
             console.log(err);
             return;
@@ -53,12 +64,10 @@ export const usePost = () => {
         }
     }
 
-    const showReceivedPost = (): void => {
-        
-    }
-
-    const showSentPost = async (postId: string): Promise<void> => {
-        
+    const showSentOne = (_id: string): void => {
+        const post = sentPosts.find(x => x._id === _id);
+        setCurrentPost(post);
+        console.log(post);
     }
 
     return {
@@ -66,8 +75,10 @@ export const usePost = () => {
         textArea,
         sentPosts,
         receivedPosts,
+        currentPost,
         handlePost,
         getSentPosts,
         getReceivedPosts,
+        showSentOne,
     }
 }

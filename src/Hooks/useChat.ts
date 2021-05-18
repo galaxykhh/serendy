@@ -120,6 +120,7 @@ export const useChat = () => {
         setIsSearching(false);
         setChatFinished(false);
         setIsMatched(false);
+        input.current!.value = '';
     }
 
     return {

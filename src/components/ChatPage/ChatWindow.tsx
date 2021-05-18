@@ -1,6 +1,6 @@
 import React, { useEffect }  from 'react';
 import styled, { Keyframes } from 'styled-components';
-import { fadeIn, zoomIn, zoomOut } from '../../style/keyframes';
+import { zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
 import { theme } from '../../style/theme';
 import { useChat } from '../../Hooks/useChat';
@@ -82,7 +82,7 @@ const ChatWindow: React.FC = observer(() => {
                                         <BigMent> 상대와 연결되었어요 </BigMent>
                                         <br />
                                         <br />
-                                        <Ment size='18px'> 먼저 인사 해보시는건 어떠세요? </Ment>
+                                        <Ment size='18px'> 먼저 인사 해보시는 건 어떠세요? </Ment>
                                         <br />
                                         <br />
                                         <br />
@@ -106,7 +106,7 @@ const ChatWindow: React.FC = observer(() => {
                         <Rule>
                             <Ment size='18px'> · 대화는 서로가 설정한 이름으로 진행돼요 </Ment>
                             <Ment size='18px'> · 중간에 대화를 나가지 않으면 대화를 계속 할 수 있어요 </Ment>
-                            <Ment size='18px'> · 누군가 대화방을 나가게되면 대화가 종료돼요 </Ment>
+                            <Ment size='18px'> · 누군가 대화방을 나가게 되면 대화가 종료돼요 </Ment>
                         </Rule>
                         <br />
                         <BtnBox>
@@ -150,7 +150,6 @@ const ChatBox = styled.div<{
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         min-height: 340px;
-        width: 80%;
     }
 `;
 

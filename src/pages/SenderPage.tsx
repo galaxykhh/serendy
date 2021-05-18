@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PostBox from '../components/SenderPage/PostBox';
 import CenterView from '../components/publicComponents/CenterView';
 import Container from '../components/publicComponents/Container';
+import { usePost } from '../Hooks/usePost';
 
 const SenderPage: React.FC = () => {
+
+    const post = usePost();
+
+    useEffect(() => {
+        post.getSentPosts();
+    }, []); //eslint-disable-line
+
     return (
         <Container>
             <CenterView>
-                <Top> 보낸 편지함 </Top>
                     <Row>
-                        <PostBox />
+                        <PostBox sentPosts={post.sentPosts}
+                                 currentPost={post.currentPost!}
+                                 onClick={post.showSentOne}
+                                 content={post.currentPost?.content}
+                                 nickName={post.currentPost?.nickName}
+                                 comment={post.currentPost?.comment}
+                                 />
                     </Row>
             </CenterView>
         </Container>
@@ -27,16 +40,4 @@ const Row = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-`;
-
-const Top = styled.div`
-    min-width: 100%;
-    min-height: 60px;
-    max-height: 60px;
-    line-height: 60px;
-    border-radius: 10px;
-    background-color: ${({ theme }) => theme.colors.main60};
-    font-size: 24px;
-    color: ${({ theme }) => theme.colors.white};
-    text-align: center;
 `;

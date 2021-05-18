@@ -1,5 +1,5 @@
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import userStore from '../store/userStore';
 import postRepository from '../repository/postRepository';
 import { IComment } from '../components/SenderPage/View';
@@ -70,15 +70,23 @@ export const usePost = () => {
         console.log(post);
     }
 
+    const showReceivedOne = (_id: string): void => {
+        const post = receivedPosts.find(x => x._id === _id);
+        setCurrentPost(post);
+        console.log(post);
+    }
+
     return {
         isSent,
         textArea,
         sentPosts,
         receivedPosts,
         currentPost,
+        setIsSent,
         handlePost,
         getSentPosts,
         getReceivedPosts,
         showSentOne,
+        showReceivedOne,
     }
 }

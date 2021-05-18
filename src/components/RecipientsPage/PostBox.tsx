@@ -3,8 +3,21 @@ import styled from 'styled-components';
 import { usePost } from '../../Hooks/usePost';
 import Post from './Post';
 import View from './View';
+import { ICurrentPost } from '../../Hooks/usePost';
+import { IComment } from './View';
 
-const PostBox: React.FC = () => {
+interface IPostBox {
+    receivedPosts: Array<any>;
+    currentPost: ICurrentPost;
+    content: string | undefined;
+    nickName: string | undefined;
+    comment: IComment | undefined;
+    onClick: (_id: string) => void;
+}
+
+const PostBox: React.FC<IPostBox> = ({
+    receivedPosts, currentPost, content, nickName, comment, onClick
+}) => {
     const post = usePost();
 
     useEffect(() => {
@@ -14,19 +27,23 @@ const PostBox: React.FC = () => {
     return (
         <>
             <ListBox>
-                {post.receivedPosts !== null && post.receivedPosts.length > 0 ? 
-                    post.receivedPosts.map((x, i) => (
+                {receivedPosts !== null && receivedPosts.length > 0 ? 
+                    receivedPosts.map((x, i) => (
                         <Post nickName={x.nickName}
                               content={x.content}
                               key={i}
-                              onClick={() => console.log('dd')}
+                              onClick={() => onClick(x._id)}
                               />
                     )) :
                     <>
                     </>
                 }
             </ListBox>
-            <View />
+            <View currentPost={currentPost}
+                  content={content}
+                  nickName={nickName}
+                  comment={comment}
+                  />
         </>
     )
 }
@@ -45,5 +62,5 @@ const ListBox = styled.div`
     margin-top: 10px;
     border-radius: 10px;
     overflow: auto;
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white10};
 `;

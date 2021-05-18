@@ -13,7 +13,7 @@ const PostPage: React.FC = observer(() => {
     return (
         <Container>
             <CenterView>
-                {post.isSent ? <PostSent /> : 
+                {post.isSent ? <PostSent onClick={() => post.setIsSent(false)}  /> : 
                                <PostWindow postSend={post.handlePost}
                                            textArea={post.textArea}
                                            />

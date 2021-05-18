@@ -36,7 +36,7 @@ const Box = styled.div`
     border-radius: 40px;
     transition: .3s ease;
     &:hover {
-        background-color: ${({ theme }) => theme.colors.white20};
+        background-color: ${({ theme }) => theme.colors.white10};
     }
 `;
 

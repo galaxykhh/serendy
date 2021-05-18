@@ -157,7 +157,7 @@ const Screen = styled.div`
     width: 740px;
     height: 680px;
     max-height: 680px;
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white10};
     border-radius: 10px;
     overflow-y: auto;
     @media only screen and (max-width: 1450px) {
@@ -192,7 +192,7 @@ const Input = styled.input.attrs(({
     padding-left: 30px;
     font-size: 18px;
     color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white10};
     border-radius: 10px;
     @media only screen and (max-width: 400px) {
         width: 99%;

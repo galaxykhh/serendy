@@ -64,7 +64,7 @@ const LETTER = styled.div`
     margin-top: 10px;
     border-radius: 10px;
     overflow: auto;
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white10};
 `;
 
 const NickName = styled.div`
@@ -84,6 +84,7 @@ const Content = styled.div`
     width: 80%;
     min-height: 400px;
     font-size: 20px;
+    white-space: pre;
     color: ${({ theme }) => theme.colors.white};
 `;
 

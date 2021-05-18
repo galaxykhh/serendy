@@ -28,6 +28,7 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
                             <Ment size='18px'> · 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요 </Ment>
                             <Ment size='18px'> · 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요 </Ment>
                             <Ment size='18px'> · 편지를 받으면 자동으로 보관함에 저장돼요 </Ment>
+                            <Ment size='18px'> · 한 편지에 답장은 한 번만 가능해요 </Ment>
                         </Rule>
                         <br />
             </RuleContainer>
@@ -71,7 +72,6 @@ const Letter = styled.div`
     width: 740px;
     height: 680px;
     min-width: 500px;
-    background-color: ${({ theme }) => theme.colors.white20};
     border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         width: 99%;
@@ -83,13 +83,16 @@ const Letter = styled.div`
 const TextArea = styled.textarea.attrs({
     placeholder: '여기서부터 이야기를 들려주세요',
 })`
-    all: unset;
-    width: 80%;
-    height: 80%;
+    outline-style: none;
+    -webkit-appearance: none;
+    background-color: ${({ theme }) => theme.colors.white10};
+    width: 100%;
+    height: 100%;
     font-size: 17px;
     color: ${({ theme }) => theme.colors.white};
     padding: 60px;
-    border-radius: 30px;
+    resize: none;
+    border-radius: 10px;
 `;
 
 const SendBtnBox = styled.div`

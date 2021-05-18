@@ -56,5 +56,5 @@ const ListBox = styled.div`
     margin-top: 10px;
     border-radius: 10px;
     overflow: auto;
-    background-color: ${({ theme }) => theme.colors.white20};
+    background-color: ${({ theme }) => theme.colors.white10};
 `;

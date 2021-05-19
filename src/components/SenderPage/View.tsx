@@ -69,13 +69,12 @@ const NickName = styled.div`
 `;
 
 const Content = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 80%;
-    min-height: 400px;
-    font-size: 20px;
+    min-height: 500px;
+    font-size: 18px;
     white-space: pre;
+    border-radius: 10px;
+    padding: 20px;
     color: ${({ theme }) => theme.colors.white};
 `;
 

@@ -6,6 +6,7 @@ import Container from '../components/publicComponents/Container';
 import { usePost } from '../Hooks/usePost';
 import Loader from 'react-loader-spinner';
 import { theme } from '../style/theme';
+import View from '../components/SenderPage/View';
 
 const SenderPage: React.FC = () => {
 
@@ -21,12 +22,8 @@ const SenderPage: React.FC = () => {
                     <Row>
                         {!post.isLoading ? 
                             <PostBox sentPosts={post.sentPosts}
-                            currentPost={post.currentPost!}
-                            onClick={post.showSentOne}
-                            content={post.currentPost?.content}
-                            nickName={post.currentPost?.nickName}
-                            comment={post.currentPost?.comment}
-                            /> :
+                                     onClick={post.handleSentOne}
+                                     /> :
                             <LoaderBox>
                                 <Loader type="Circles"
                                         color={theme.colors.plum}
@@ -35,6 +32,8 @@ const SenderPage: React.FC = () => {
                                         />
                             </LoaderBox>
                         }
+                        <View currentSentPost={post.currentSentPost}
+                              />
                     </Row>
             </CenterView>
         </Container>

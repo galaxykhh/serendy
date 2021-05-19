@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -11,33 +11,32 @@ export interface IComment {
 }
 
 interface IView {
-    currentPost: ICurrentPost
-    nickName: string | undefined;
-    content: string | undefined;
-    comment: IComment | undefined;
+    currentReceivedPost: ICurrentPost | undefined;
+    commentArea: React.RefObject<HTMLTextAreaElement>;
+    sendComment: () => Promise<void>,
 }
 
-const View: React.FC<IView>= ({ currentPost, nickName, content, comment }) => {
+const View: React.FC<IView>= ({ currentReceivedPost, commentArea, sendComment }) => {
     return (
         <LETTER>
-            {currentPost ?
+            {currentReceivedPost ?
                 <>
-                    <NickName> {nickName}님의 편지 </NickName>
+                    <NickName> {currentReceivedPost.nickName}님의 편지 </NickName>
                     <Content>
-                        {content}
+                        {currentReceivedPost.content}
                     </Content>
                     <CommentBox>
-                        {comment?.nickName && comment?.content ? 
+                        {currentReceivedPost.comment ? 
                             <>
                                 <Column>
                                     <Icon icon={faUser} />
-                                    <UserName> 유저 누구누구 </UserName>
+                                    <UserName> {currentReceivedPost.comment.nickName} </UserName>
                                 </Column>
-                                <Comment> 대충 코멘트 적혀있음 </Comment>
+                                <Comment> {currentReceivedPost.comment.content} </Comment>
                             </> :
                             <>
-                                <Input />
-                                <SendBtn>
+                                <Input ref={commentArea} />
+                                <SendBtn onClick={sendComment} >
                                     답장하기
                                 </SendBtn>
                             </>
@@ -81,13 +80,12 @@ const NickName = styled.div`
 `;
 
 const Content = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 80%;
     min-height: 500px;
-    font-size: 20px;
+    font-size: 18px;
     white-space: pre;
+    border-radius: 10px;
+    padding: 20px;
     color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -111,6 +109,7 @@ const Column = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 120px;
 `;
 
 const Icon = styled(FontAwesomeIcon)`

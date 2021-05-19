@@ -25,7 +25,6 @@ const Icon = styled(FontAwesomeIcon)`
 const Text = styled.div`
     color: ${({ theme }) => theme.colors.white};
     font-size: 30px;
-    margin-bottom: 140px;
     animation: ${setTimeFade} 2s ease;
 `;
 
@@ -34,12 +33,12 @@ const Button = styled.button`
     width: 200px;
     height: 65px;
     border-radius: 40px;
+    margin-top: 30px;
+    margin-bottom: 120px;
     background-color: ${({ theme }) => theme.colors.mainBlue};
     color: ${({ theme }) => theme.colors.white};
     font-size: 20px;
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
     cursor: pointer;
     transition: .4s ease;
     animation: ${setTimeFade} 2s ease;

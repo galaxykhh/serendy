@@ -1,6 +1,6 @@
 import { serendyInstance } from './serendyInstance';
 import { AxiosResponse } from 'axios';
-import { ISendPost } from '../Hooks/usePost';
+import { ISendPost, ISendComment } from '../Hooks/usePost';
 
 
 class PostRepository {
@@ -21,6 +21,10 @@ class PostRepository {
 
     showClickedOne(_Id: string, account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/showone/${_Id}/${account}`);
+    };
+
+    sendComment(data: ISendComment): Promise<AxiosResponse> {
+        return serendyInstance.post(`${this.path}/sendcomment`, data);
     };
 };
 

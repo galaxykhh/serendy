@@ -6,6 +6,7 @@ import Container from '../components/publicComponents/Container';
 import { usePost } from '../Hooks/usePost';
 import { theme } from '../style/theme';
 import Loader from 'react-loader-spinner';
+import View from '../components/RecipientsPage/View';
 
 
 const RecipientsPage: React.FC = () => {
@@ -13,21 +14,21 @@ const RecipientsPage: React.FC = () => {
     const post = usePost();
 
     useEffect(() => {
-        post.getReceivedPosts();
-    }, []);
+        post.getReceivedPosts(); 
+    }, []); //eslint-disable-line
+
+    useEffect(() => {
+        console.log(post.currentReceivedPost?.comment)
+    }, [post.currentReceivedPost?.comment]);
 
     return (
         <Container>
             <CenterView>
                     <Row>
-                        {!post.isLoading ? 
+                        {!post.isLoading ?
                             <PostBox receivedPosts={post.receivedPosts}
-                            currentPost={post.currentPost!}
-                            onClick={post.showReceivedOne}
-                            content={post.currentPost?.content}
-                            nickName={post.currentPost?.nickName}
-                            comment={post.currentPost?.comment}
-                            /> :
+                                     onClick={post.handleReceivedOne}
+                                     /> :
                             <LoaderBox>
                                 <Loader type="Circles"
                                         color={theme.colors.plum}
@@ -36,6 +37,10 @@ const RecipientsPage: React.FC = () => {
                                         />
                             </LoaderBox>
                         }
+                        <View currentReceivedPost={post.currentReceivedPost}
+                              commentArea={post.commentArea}
+                              sendComment={post.sendComment}
+                              />
                     </Row>
             </CenterView>
         </Container>

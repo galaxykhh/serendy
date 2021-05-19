@@ -1,37 +1,23 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { usePost } from '../../Hooks/usePost';
 import Post from './Post';
-import View from './View';
-import { ICurrentPost } from '../../Hooks/usePost';
-import { IComment } from './View';
 
 interface IPostBox {
     receivedPosts: Array<any>;
-    currentPost: ICurrentPost;
-    content: string | undefined;
-    nickName: string | undefined;
-    comment: IComment | undefined;
     onClick: (_id: string) => void;
 }
 
-const PostBox: React.FC<IPostBox> = ({
-    receivedPosts, currentPost, content, nickName, comment, onClick
-}) => {
-    const post = usePost();
-
-    useEffect(() => {
-        post.getReceivedPosts();
-    }, []); //eslint-disable-line
+const PostBox: React.FC<IPostBox> = ({ receivedPosts, onClick }) => {
 
     return (
         <>
             <ListBox>
-                {receivedPosts !== null && receivedPosts.length > 0 ? 
+                {receivedPosts && receivedPosts.length > 0 ? 
                     receivedPosts.map((x, i) => (
                         <Post nickName={x.nickName}
                               content={x.content}
                               key={i}
+                              didReply={x.comment === undefined}
                               onClick={() => onClick(x._id)}
                               />
                     )) :
@@ -40,11 +26,6 @@ const PostBox: React.FC<IPostBox> = ({
                     </Ment>
                 }
             </ListBox>
-            <View currentPost={currentPost}
-                  content={content}
-                  nickName={nickName}
-                  comment={comment}
-                  />
         </>
     )
 }

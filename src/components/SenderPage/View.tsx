@@ -4,36 +4,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ICurrentPost } from '../../Hooks/usePost';
 
-export interface IComment {
-    _id: string;
-    nickName: string | undefined;
-    content: string | undefined;
-}
-
 interface IView {
-    currentPost: ICurrentPost
-    nickName: string | undefined;
-    content: string | undefined;
-    comment: IComment | undefined;
+    currentSentPost: ICurrentPost | undefined
 }
 
-const View: React.FC<IView>= ({ currentPost, nickName, content, comment }) => {
+const View: React.FC<IView>= ({ currentSentPost }) => {
+
     return (
         <LETTER>
-            {currentPost ?
+            {currentSentPost ?
                 <>
-                    <NickName> {nickName}님의 편지 </NickName>
+                    <NickName> {currentSentPost.nickName}님의 편지 </NickName>
                     <Content>
-                        {content}
+                        {currentSentPost.content}
                     </Content>
                     <CommentBox>
-                        {comment?.nickName && comment?.content ? 
+                        {currentSentPost.comment ? 
                             <>
                                 <Column>
                                     <Icon icon={faUser} />
-                                    <UserName> 유저 누구누구 </UserName>
+                                    <UserName> {currentSentPost.comment.nickName} </UserName>
                                 </Column>
-                                <Comment> 대충 코멘트 적혀있음 </Comment>
+                                <Comment> {currentSentPost.comment.content} </Comment>
                             </> :
                             <>
                                 <Comment> 아직 답장이 오지 않았어요 </Comment>

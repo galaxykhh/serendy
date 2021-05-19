@@ -25,7 +25,7 @@ const App: React.FC = observer(() => {
 
     useEffect(() => {
         if (userStore.isSignIn) {
-            userStore.setUserSocket(io(BASE_URL));
+            userStore.setUserSocket(io('http://localhost:8000'));
             userStore.saveSocketID();
         } else {
             userStore.userSocket?.disconnect();

@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { DisplayType } from '../../type';
 
 export interface IPostList {
     nickName: string;
     content: string;
+    didReply: boolean;
     onClick: () => void;
 }
 
-const Post: React.FC<IPostList> = ({ nickName, content, onClick }) => {
-
+const Post: React.FC<IPostList> = ({ nickName, content, didReply, onClick }) => {
     return (
         <Box onClick={onClick} >
             <Icon icon={faEnvelope} />
             <Column>
-                <Stranger> 보낸 사람 : {nickName} </Stranger>
+                <FromAccount> 보낸 사람 : {nickName} </FromAccount>
                 <MessagePreview> {content}  </MessagePreview>
+                <Alert icon={faCircle} 
+                       display={didReply ? 'block' : 'none'}
+                       />
             </Column>
         </Box>
     )
@@ -41,6 +45,7 @@ const Box = styled.div`
 `;
 
 const Column = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,10 +62,10 @@ const Icon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.white};
 `;
 
-const Stranger = styled.div`
-    font-size: 17px;
+const FromAccount = styled.div`
+    font-size: 15px;
     margin-left: 10px;
-    width: 100%;
+    width: 80%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -70,9 +75,19 @@ const Stranger = styled.div`
 const MessagePreview = styled.div`
     font-size: 13px;
     margin-left: 10px;
-    width: 100%;
+    width: 80%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: ${({ theme }) => theme.colors.mainBlue};
+`;
+
+const Alert = styled(FontAwesomeIcon)<{
+    display: DisplayType,
+}>`
+    position: absolute;
+    right: 0px;
+    font-size: 15px;
+    display: ${({ display }) => display};
+    color: ${({ theme }) => theme.colors.red};
 `;

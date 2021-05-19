@@ -82,10 +82,11 @@ export const paperPlane = keyframes`
 export const setTimeFade = keyframes`
     0% {
         opacity: 0;
+        transform: scale(0);
     }
     60% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0);
     }
     100% {
         opacity: 1;

@@ -3,16 +3,16 @@ import styled  from 'styled-components';
 
 interface IPostWindow {
     postSend: () => void;
-    textArea: React.RefObject<HTMLTextAreaElement>;
+    postArea: React.RefObject<HTMLTextAreaElement>;
 }
 
-const PostWindow: React.FC<IPostWindow>= ({ postSend, textArea }) => {
+const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
 
     return (
         <Row>
             <LetterContainer>
                 <Letter>
-                    <TextArea ref={textArea} />
+                    <TextArea ref={postArea} />
                 </Letter>
                 <SendBtnBox>
                     <SendBtn onClick={postSend} >

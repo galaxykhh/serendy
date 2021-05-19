@@ -15,7 +15,7 @@ const PostPage: React.FC = observer(() => {
             <CenterView>
                 {post.isSent ? <PostSent onClick={() => post.setIsSent(false)}  /> : 
                                <PostWindow postSend={post.handlePost}
-                                           textArea={post.textArea}
+                                           postArea={post.postArea}
                                            />
                 }
             </CenterView>

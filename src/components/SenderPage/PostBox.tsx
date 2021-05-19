@@ -1,22 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Post from './Post';
-import View from './View';
-import { ICurrentPost } from '../../Hooks/usePost';
-import { IComment } from './View';
 
 interface IPostBox {
     sentPosts: Array<any>;
-    currentPost: ICurrentPost;
-    content: string | undefined;
-    nickName: string | undefined;
-    comment: IComment | undefined;
     onClick: (_id: string) => void;
 }
 
-const PostBox: React.FC<IPostBox>= ({
-    sentPosts, currentPost, content, nickName, onClick, comment,
-}) => {
+const PostBox: React.FC<IPostBox>= ({ sentPosts, onClick }) => {
 
     return (
         <>
@@ -34,11 +25,6 @@ const PostBox: React.FC<IPostBox>= ({
                     </Ment>
                 }
             </ListBox>
-            <View currentPost={currentPost}
-                  content={content}
-                  nickName={nickName}
-                  comment={comment}
-                  />
         </>
     )
 }

@@ -9,7 +9,6 @@ interface IView {
 }
 
 const View: React.FC<IView>= ({ currentSentPost }) => {
-
     return (
         <LETTER>
             {currentSentPost ?

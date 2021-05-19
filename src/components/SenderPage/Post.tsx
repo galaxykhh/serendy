@@ -10,7 +10,6 @@ export interface IPostList {
 }
 
 const Post: React.FC<IPostList> = ({ nickName, content, onClick }) => {
-
     return (
         <Box onClick={onClick} >
             <Icon icon={faEnvelope} />

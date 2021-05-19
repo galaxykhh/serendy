@@ -8,7 +8,6 @@ interface IPostBox {
 }
 
 const PostBox: React.FC<IPostBox>= ({ sentPosts, onClick }) => {
-
     return (
         <>
             <ListBox>

@@ -114,9 +114,10 @@ export const usePost = () => {
             }
             const response = await postRepository.sendComment(data);
             if ((response.data.message === 'Success')) {
-                const posts = response.data.data;
-                setReceivedPosts(posts.posts);
-                commentArea.current!.value = '';
+                const posts = response.data.posts;
+                const post = response.data.post;
+                setReceivedPosts(posts);
+                setCurrentReceivedPost(post);
             }
         } catch(err) {
             console.log(err);

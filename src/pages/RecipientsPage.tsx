@@ -10,17 +10,11 @@ import View from '../components/RecipientsPage/View';
 
 
 const RecipientsPage: React.FC = () => {
-
     const post = usePost();
 
     useEffect(() => {
         post.getReceivedPosts(); 
     }, []); //eslint-disable-line
-
-    useEffect(() => {
-        console.log(post.currentReceivedPost?.comment)
-    }, [post.currentReceivedPost?.comment]);
-
     return (
         <Container>
             <CenterView>
@@ -44,8 +38,8 @@ const RecipientsPage: React.FC = () => {
                     </Row>
             </CenterView>
         </Container>
-    )
-}
+    );
+};
 
 export default RecipientsPage;
 

@@ -19,9 +19,13 @@ const SenderPage: React.FC = () => {
             <CenterView>
                     <Row>
                         {!post.isLoading ? 
-                            <PostBox sentPosts={post.sentPosts}
-                                     onClick={post.handleSentOne}
-                                     /> :
+                            <>
+                                <PostBox sentPosts={post.sentPosts}
+                                         onClick={post.handleSentOne}
+                                         />
+                                <View currentSentPost={post.currentSentPost}
+                                      />
+                            </> :
                             <LoaderBox>
                                 <Loader type="Circles"
                                         color={theme.colors.plum}
@@ -30,8 +34,6 @@ const SenderPage: React.FC = () => {
                                         />
                             </LoaderBox>
                         }
-                        <View currentSentPost={post.currentSentPost}
-                              />
                     </Row>
             </CenterView>
         </Container>

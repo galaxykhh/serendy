@@ -20,9 +20,15 @@ const RecipientsPage: React.FC = () => {
             <CenterView>
                     <Row>
                         {!post.isLoading ?
-                            <PostBox receivedPosts={post.receivedPosts}
-                                     onClick={post.handleReceivedOne}
-                                     /> :
+                            <>
+                                <PostBox receivedPosts={post.receivedPosts}
+                                        onClick={post.handleReceivedOne}
+                                        />                        
+                                <View currentReceivedPost={post.currentReceivedPost}
+                                    commentArea={post.commentArea}
+                                    sendComment={post.sendComment}
+                                    />
+                            </> :
                             <LoaderBox>
                                 <Loader type="Circles"
                                         color={theme.colors.plum}
@@ -31,10 +37,6 @@ const RecipientsPage: React.FC = () => {
                                         />
                             </LoaderBox>
                         }
-                        <View currentReceivedPost={post.currentReceivedPost}
-                              commentArea={post.commentArea}
-                              sendComment={post.sendComment}
-                              />
                     </Row>
             </CenterView>
         </Container>

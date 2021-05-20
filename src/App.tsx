@@ -30,7 +30,7 @@ const App: React.FC = observer(() => {
         } else {
             userStore.userSocket?.disconnect();
             userStore.setSocketID(null);
-        }
+        };
     }, [userStore.isSignIn]); //eslint-disable-line
 
     return (

@@ -9,11 +9,13 @@ import { theme } from '../style/theme';
 import View from '../components/SenderPage/View';
 
 const SenderPage: React.FC = () => {
+
     const post = usePost();
 
     useEffect(() => {
         post.getSentPosts();
     }, []); //eslint-disable-line
+    
     return (
         <Container>
             <CenterView>

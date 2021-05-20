@@ -4,15 +4,14 @@ import Container from '../components/publicComponents/Container';
 import FindPWBox from '../components/FindPW/FindPWBox';
 import { TEXTLOGO_URL } from '../config';
 
-
 const FindPW: React.FC = () => {
     return (
         <Container>
             <TextLogo />
             <FindPWBox />
         </Container>
-    )
-}
+    );
+};
 
 export default FindPW;
 

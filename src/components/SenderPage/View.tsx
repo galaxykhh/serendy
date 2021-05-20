@@ -2,13 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { ICurrentPost } from '../../Hooks/usePost';
+import { IReceivedView } from '../../interfaces/index';
 
-interface IView {
-    currentSentPost: ICurrentPost | undefined
-}
-
-const View: React.FC<IView>= ({ currentSentPost }) => {
+const View: React.FC<IReceivedView>= ({ currentSentPost }) => {
     return (
         <LETTER>
             {currentSentPost ?
@@ -37,8 +33,8 @@ const View: React.FC<IView>= ({ currentSentPost }) => {
                 
             }
         </LETTER>
-    )
-}
+    );
+};
 
 export default View;
 

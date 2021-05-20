@@ -26,8 +26,8 @@ const Boxes: React.FC = () => {
             {category === false && <ChangePWBox />}
         </BoxContainer>
 
-    )
-}
+    );
+};
 
 export default Boxes;
 
@@ -42,7 +42,7 @@ const BoxContainer = styled.div`
     animation: ${fadeIn} 1s ease;
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
-    }
+    };
 `;
 
 const Row = styled.div`
@@ -64,7 +64,7 @@ const Column = styled(Row)`
     transition: 0.5s ease;
     &:hover {
         transform: scale(1.1);
-    }
+    };
 `;
 
 const Category = styled.div`

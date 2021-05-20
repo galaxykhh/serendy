@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Post from './Post';
-
-interface IPostBox {
-    receivedPosts: Array<any>;
-    onClick: (_id: string) => void;
-}
+import { IPostBox } from '../../interfaces/index';
 
 const PostBox: React.FC<IPostBox> = ({ receivedPosts, onClick }) => {
-
     return (
         <>
             <ListBox>
@@ -27,8 +22,8 @@ const PostBox: React.FC<IPostBox> = ({ receivedPosts, onClick }) => {
                 }
             </ListBox>
         </>
-    )
-}
+    );
+};
 
 export default PostBox;
 

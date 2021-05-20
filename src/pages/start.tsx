@@ -7,7 +7,9 @@ import Blocks from '../components/Start/Blocks';
 import { useHistorys } from '../Hooks/useHistorys';
 
 const Start: React.FC = () => {
+
     const history = useHistorys();
+
     useEffect(() => {
         Aos.init();
     },[]);
@@ -17,10 +19,10 @@ const Start: React.FC = () => {
             <StartLogo push={history.pushMain} />
             <Blocks push={history.pushMain} />
         </Wallpaper>
-    )
-}
+    );
+};
 
-export default Start
+export default Start;
 
 const Wallpaper = styled.div`
     display: flex;

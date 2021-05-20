@@ -40,8 +40,8 @@ const Category: React.FC = () => {
                 <Text> 보낸 편지함 </Text>
             </Box>
         </Container>
-    )
-}
+    );
+};
 
 export default Category;
 
@@ -79,7 +79,7 @@ const Text = styled.div`
     text-overflow: ellipsis;
     @media only screen and (max-width: 1115px) {
         display: none;
-    }
+    };
 `;
 
 const Box = styled.div`
@@ -99,5 +99,5 @@ const Box = styled.div`
     transition: .3s ease;
     &:hover {
         background-color: ${({ theme }) => theme.colors.main60};
-    }
+    };
 `;

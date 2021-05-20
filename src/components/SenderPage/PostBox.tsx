@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Post from './Post';
-
-interface IPostBox {
-    sentPosts: Array<any>;
-    onClick: (_id: string) => void;
-}
+import { IPostBox } from '../../interfaces/index';
 
 const PostBox: React.FC<IPostBox>= ({ sentPosts, onClick }) => {
     return (
         <>
             <ListBox>
-                {sentPosts !== null && sentPosts.length > 0 ? 
+                {sentPosts && sentPosts.length > 0 ? 
                     sentPosts.map((x, i) => (
                         <Post nickName={x.nickName}
                               content={x.content}
@@ -25,8 +21,8 @@ const PostBox: React.FC<IPostBox>= ({ sentPosts, onClick }) => {
                 }
             </ListBox>
         </>
-    )
-}
+    );
+};
 
 export default PostBox;
 

@@ -5,11 +5,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
 import { useHistorys } from '../../Hooks/useHistorys';
-
-export interface IPassword {
-    password: string;
-    passwordCheck: string;
-}
+import { IPassword } from '../../interfaces/index';
 
 const ChangePWBox: React.FC = () => {
     const history = useHistorys();
@@ -19,9 +15,9 @@ const ChangePWBox: React.FC = () => {
         const userData = {
             account: userStore.user?.account,
             ...data,
-        }
+        };
         userStore.changePW(userData, history.pushLogin);
-    }
+    };
 
     return (
         <Container>
@@ -57,8 +53,8 @@ const ChangePWBox: React.FC = () => {
                 <Button onClick={handleSubmit(onSubmit)} > 변경하기 </Button>
             </Column>
         </Container>
-    )
-}
+    );
+};
 
 export default ChangePWBox;
 
@@ -120,7 +116,7 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)`

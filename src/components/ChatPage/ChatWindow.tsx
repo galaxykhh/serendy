@@ -4,7 +4,7 @@ import { zoomIn, zoomOut } from '../../style/keyframes';
 import Loader from 'react-loader-spinner';
 import { theme } from '../../style/theme';
 import { useChat } from '../../Hooks/useChat';
-import { VisibilityType } from '../../type';
+import { VisibilityType } from '../../interfaces/index';
 import { observer } from 'mobx-react';
 import MessageBox from './MessageBox';
 import userStore from '../../store/userStore';
@@ -22,7 +22,7 @@ const ChatWindow: React.FC = observer(() => {
     useEffect(() => { 
         return () => {
             chat.stopChat();
-        }
+        };
     }, []); // eslint-disable-line
 
     useEffect(() => {
@@ -130,7 +130,7 @@ const Row = styled.div`
     height: 100%;
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
-    }
+    };
 `;
 
 const ChatBox = styled.div<{
@@ -150,7 +150,7 @@ const ChatBox = styled.div<{
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         min-height: 340px;
-    }
+    };
 `;
 
 const Screen = styled.div`
@@ -178,7 +178,7 @@ const SenderBox = styled.div`
     @media only screen and (max-width: 1450px) {
         width: 99%;
         min-width: 200px;
-    }
+    };
 `;
 
 const Input = styled.input.attrs(({
@@ -196,7 +196,7 @@ const Input = styled.input.attrs(({
     border-radius: 10px;
     @media only screen and (max-width: 400px) {
         width: 99%;
-    }
+    };
 `;
 
 const SendBtn = styled.button`
@@ -217,7 +217,7 @@ const SendBtn = styled.button`
     @media only screen and (max-width: 1450px) {
         font-size: 15px;
         width: 10%;
-    }
+    };
 `;
 
 const HandlerContainer = styled.div`
@@ -232,7 +232,7 @@ const HandlerContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.main60};
     @media only screen and (max-width: 1450px) {
         height: 70%;
-    }
+    };
 `;
 
 const Rule = styled.div`
@@ -251,7 +251,7 @@ const Ment = styled.div<{
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
-    }
+    };
 `;
 
 const BigMent = styled(Ment)`
@@ -259,7 +259,7 @@ const BigMent = styled(Ment)`
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
-    }
+    };
 `;
 
 const StartBtn = styled(SendBtn)`
@@ -268,20 +268,20 @@ const StartBtn = styled(SendBtn)`
     font-size: 20px;
     &:hover {
         color: ${({ theme }) => theme.colors.black};
-    }
+    };
     @media only screen and (max-width: 1450px) {
         width: 100px;
         height: 40px;
         font-size: 17px;
         margin-top: 15px;
-    }
+    };
 `;
 
 const CancelBtn = styled(StartBtn)`
     &:hover {
         background-color: ${({ theme }) => theme.colors.red};
         color: ${({ theme }) => theme.colors.white};
-    }
+    };
 `;
 
 const BtnBox = styled.div`
@@ -293,5 +293,5 @@ const BtnBox = styled.div`
     align-items: center;
     @media only screen and (max-width: 1450px) {
         bottom: -60px;
-    }
+    };
 `;

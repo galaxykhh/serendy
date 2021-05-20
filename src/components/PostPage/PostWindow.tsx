@@ -1,10 +1,6 @@
 import React from 'react';
 import styled  from 'styled-components';
-
-interface IPostWindow {
-    postSend: () => void;
-    postArea: React.RefObject<HTMLTextAreaElement>;
-}
+import { IPostWindow } from '../../interfaces/index';
 
 const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
 
@@ -48,7 +44,7 @@ const Row = styled.div`
     height: 100%;
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
-    }
+    };
 `;
 
 const LetterContainer = styled.div`
@@ -62,7 +58,7 @@ const LetterContainer = styled.div`
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         height: 90%;
-    }
+    };
 `;
 
 const Letter = styled.div`
@@ -106,7 +102,7 @@ const SendBtnBox = styled.div`
     @media only screen and (max-width: 1450px) {
         width: 99%;
         min-width: 200px;
-    }
+    };
 `;
 
 const SendBtn = styled.button`
@@ -123,7 +119,7 @@ const SendBtn = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.plum};
         color: ${({ theme }) => theme.colors.black};
-    }
+    };
 `;
 
 const RuleContainer = styled.div`
@@ -138,7 +134,7 @@ const RuleContainer = styled.div`
     border-radius: 10px;
     @media only screen and (max-width: 1450px) {
         height: 70%;
-    }
+    };
 `;
 
 const Rule = styled.div`
@@ -156,12 +152,12 @@ const Ment = styled.div<{
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
-    }
+    };
 `;
 
 const BigMent = styled(Ment)`
     font-size: 30px;
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
-    }
+    };
 `;

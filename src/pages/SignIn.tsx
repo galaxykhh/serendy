@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Container from '../components/publicComponents/Container';
 import SignInBox from '../components/SignIn/SignInBox';
 import { TEXTLOGO_URL } from '../config';
-import { DisplayType } from '../type';
+import { DisplayType } from '../interfaces';
 import userStore from '../store/userStore';
 import { useHistorys } from '../Hooks/useHistorys';
 

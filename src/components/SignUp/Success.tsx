@@ -17,8 +17,8 @@ const Success: React.FC = () => {
             </Msg>
             <Button onClick={history.pushLogin} > 시작하기 </Button>
         </Box>
-    )
-}
+    );
+};
 
 export default Success;
 
@@ -61,5 +61,5 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;

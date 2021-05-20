@@ -1,15 +1,10 @@
 import { serendyInstance } from './serendyInstance';
 import { AxiosResponse } from 'axios';
-import { ISignUpData } from '../components/SignUp/SignUpBox';
-import { ISignInData } from '../components/SignIn/SignInBox';
-import { IPassword } from '../components/MyPage/ChangePWBox';
-import { INickName } from '../components/MyPage/ChangeNameBox';
-import { IFindPW } from '../components/FindPW/FindPWBox';
-
+import { ISignUpData, ISignInData, IPassword, INickName, IFindPW } from '../interfaces'
 
 class AuthRepository {
 
-    private path='/api/auth'
+    private path='/api/auth';
 
     accountCheck(account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/check/${account}`);

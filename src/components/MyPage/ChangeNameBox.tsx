@@ -5,10 +5,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
 import { useHistorys } from '../../Hooks/useHistorys';
-
-export interface INickName {
-    nickName: string;
-}
+import { INickName } from '../../interfaces/index';
 
 const ChangeNameBox: React.FC = () => {
 
@@ -20,9 +17,9 @@ const ChangeNameBox: React.FC = () => {
         const userData = {
             account: userStore.user?.account,
             ...nickName,
-        }
+        };
         userStore.changeName(userData, history.pushLogin);
-    }
+    };
 
     return (
         <Container>
@@ -44,8 +41,8 @@ const ChangeNameBox: React.FC = () => {
                 <Button onClick={handleSubmit(onSubmit)} > 변경하기 </Button>
             </Column>
         </Container>
-    )
-}
+    );
+};
 
 export default ChangeNameBox;
 
@@ -109,7 +106,7 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)`

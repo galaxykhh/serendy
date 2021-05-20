@@ -26,7 +26,7 @@ export const useHistorys = () => {
 
     const pushMyPage = (): void => {
         history.push('/mypage');
-    }
+    };
 
     const pushChatPage = (): void => {
         history.push('/chat');
@@ -34,7 +34,7 @@ export const useHistorys = () => {
 
     const pushPostPage = (): void => {
         history.push('/post');
-    }
+    };
 
     const pushSenderPage = (): void => {
         history.push('/sender');
@@ -48,9 +48,9 @@ export const useHistorys = () => {
         if (userStore.isSignIn) {
             history.push('/main');
         } else {
-            return 
-        }
-    }
+            return;
+        };
+    };
 
     return {
         pushStart,
@@ -64,5 +64,5 @@ export const useHistorys = () => {
         pushSenderPage,
         pushRecipientsPage,
         pushLoggedUser,
-    }
-}
+    };
+};

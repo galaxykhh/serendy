@@ -5,7 +5,7 @@ import userStore from '../../store/userStore';
 import { slideLeft } from '../../style/keyframes';
 import Category from './Category';
 import UserInfo from './UserInfo';
-import { DisplayType } from '../../type';
+import { DisplayType } from '../../interfaces/index';
 
 const SideBar: React.FC = observer(() => {
     return (
@@ -13,7 +13,7 @@ const SideBar: React.FC = observer(() => {
             <UserInfo />
             <Category />
         </Bar>
-    )
+    );
 });
 
 export default SideBar;
@@ -41,9 +41,9 @@ const Bar = styled.div<{
     @media only screen and (max-width: 1450px) {
         min-width: 220px;
         max-width: 220px;
-    }
+    };
     @media only screen and (max-width: 1115px) {
         min-width: 100px;
         max-width: 100px;
-    }
+    };
 `;

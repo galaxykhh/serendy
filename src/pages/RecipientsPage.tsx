@@ -10,11 +10,13 @@ import View from '../components/RecipientsPage/View';
 
 
 const RecipientsPage: React.FC = () => {
+    
     const post = usePost();
 
     useEffect(() => {
         post.getReceivedPosts(); 
     }, []); //eslint-disable-line
+
     return (
         <Container>
             <CenterView>

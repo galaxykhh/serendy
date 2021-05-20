@@ -11,8 +11,8 @@ const PostSent: React.FC<{ onClick: () => void }>= ({ onClick }) => {
             <Text> 편지가 누군가에게 전달되었어요! </Text>
             <Button onClick={onClick} > 확인 </Button>
         </>
-    )
-}
+    );
+};
 
 export default PostSent;
 
@@ -45,5 +45,5 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;

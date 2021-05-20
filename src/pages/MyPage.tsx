@@ -5,7 +5,6 @@ import { observer } from 'mobx-react';
 import Boxes from '../components/MyPage/Boxes';
 
 const MyPage: React.FC = observer(() => {
-
     return (
         <Container>
             <CenterView>

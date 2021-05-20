@@ -2,14 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { DisplayType } from '../../type';
-
-export interface IPostList {
-    nickName: string;
-    content: string;
-    didReply: boolean;
-    onClick: () => void;
-}
+import { DisplayType } from '../../interfaces/index';
+import { IPostList } from '../../interfaces/index';
 
 const Post: React.FC<IPostList> = ({ nickName, content, didReply, onClick }) => {
     return (
@@ -23,8 +17,8 @@ const Post: React.FC<IPostList> = ({ nickName, content, didReply, onClick }) => 
                        />
             </Column>
         </Box>
-    )
-}
+    );
+};
 
 export default Post;
 
@@ -41,7 +35,7 @@ const Box = styled.div`
     transition: .3s ease;
     &:hover {
         background-color: ${({ theme }) => theme.colors.white10};
-    }
+    };
 `;
 
 const Column = styled.div`

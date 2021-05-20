@@ -8,8 +8,8 @@ const CenterView: React.FC = ({ children }) => {
         <Screen>
             {children}
         </Screen>
-    )
-}
+    );
+};
 
 export default CenterView;
 

@@ -100,7 +100,7 @@ const RightTail = styled.div`
 	margin-top: -15px;
 	margin-right: -18px;
 `;
-// true r 25, false left 25
+
 const OwnChatName = styled.div`
     position: absolute;
     font-size: 14px;

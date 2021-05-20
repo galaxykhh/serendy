@@ -6,13 +6,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
 import serendyRepository from '../../repository/authRepository';
 import { zoomIn } from '../../style/keyframes';
+import { ISignUpData } from '../../interfaces';
 
-export interface ISignUpData {
-    account: string;
-    password: string;
-    check: string;
-    secretMessage: string;
-}
 const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
     const [isAlready, setIsAlready] = useState<boolean>(false); // 계정 중복체크
@@ -22,8 +17,8 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
     const entered = (e: React.KeyboardEvent): void => {
         if (e.key === 'Enter') {
             signUpBtn.current?.click();
-        }
-    }
+        };
+    };
 
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
@@ -60,7 +55,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
         if (!isAlready) {
             alert('중복확인을 해주세요');
             return;
-        }
+        };
         signUp(data);
     };
 
@@ -150,8 +145,8 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
                     확인
                 </Button>
         </Box>
-    )
-}
+    );
+};
 
 export default SignUpBox;
 
@@ -210,7 +205,7 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;
 
 const DupliBtn = styled(Button)`

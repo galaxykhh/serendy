@@ -20,8 +20,8 @@ const Manual: React.FC = () => {
                     <Icon icon={faUsers} />
                 </Box>
         </Column>
-    )
-}
+    );
+};
 
 export default Manual;
 

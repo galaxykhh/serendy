@@ -2,21 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { ICurrentPost } from '../../Hooks/usePost';
+import { ISentView } from '../../interfaces/index';
 
-export interface IComment {
-    _id: string;
-    nickName: string | undefined;
-    content: string | undefined;
-}
-
-interface IView {
-    currentReceivedPost: ICurrentPost | undefined;
-    commentArea: React.RefObject<HTMLTextAreaElement>;
-    sendComment: () => Promise<void>,
-}
-
-const View: React.FC<IView>= ({ currentReceivedPost, commentArea, sendComment }) => {
+const View: React.FC<ISentView>= ({ currentReceivedPost, commentArea, sendComment }) => {
     return (
         <LETTER>
             {currentReceivedPost ?
@@ -48,8 +36,8 @@ const View: React.FC<IView>= ({ currentReceivedPost, commentArea, sendComment })
                 
             }
         </LETTER>
-    )
-}
+    );
+};
 
 export default View;
 
@@ -165,5 +153,5 @@ const SendBtn = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;

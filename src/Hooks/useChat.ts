@@ -1,12 +1,7 @@
 import { useState, useRef } from 'react'
-import { VisibilityType } from '../type';
+import { VisibilityType, IRecentChat } from '../interfaces';
 import userStore from '../store/userStore';
 
-export interface IRecentChat {
-    nickName: string;
-    message: string;
-    socketID: string;
-}
 
 export const useChat = () => {
     const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -23,16 +18,16 @@ export const useChat = () => {
     const handleEnter = (e: React.KeyboardEvent): void => {
         if (e.key === 'Enter') {
             sendBtn.current?.click();
-        }
-    }
+        };
+    };
 
     const handleCancel = (): void => {
         userStore.userSocket?.emit('cancel');
-    }
+    };
 
     const handleFind = (): void => {
         userStore.userSocket?.emit('find');
-    }
+    };
 
     const handleSearch = (): void => {
         if (!isSearching) {
@@ -41,8 +36,8 @@ export const useChat = () => {
         } else { // 도중 취소
             setIsSearching(false);
             handleCancel();
-        }
-    }
+        };
+    };
 
     const getMatchedUser = (): void => {
         userStore.userSocket?.on('matched', () => {
@@ -53,8 +48,8 @@ export const useChat = () => {
                 message: '상대와 대화가 시작되었어요!',
                 socketID: 'admin',
             }]);
-        })
-    }
+        });
+    };
 
     const handleSendMsg = (): void => {
         if (input.current?.value.length !== 0) {
@@ -63,14 +58,14 @@ export const useChat = () => {
             const data = {
                 nickName: nickName,
                 message: message,
-            }
+            };
             userStore.userSocket?.emit('chat', data);
-            input.current!.value = ''
+            input.current!.value = '';
 
         } else {
             return;
-        }
-    }
+        };
+    };
 
     const scrollToBottom = (): void => {
         if (screen.current?.scrollHeight && screen.current?.clientHeight) {
@@ -78,8 +73,8 @@ export const useChat = () => {
             screen.current?.scrollTo(0, scroll);
         } else {
             return;
-        }
-    }
+        };
+    };
 
     const handleReceiveMsg = () => {
         userStore.userSocket?.on('receive', (data, socketID)=> {
@@ -87,13 +82,13 @@ export const useChat = () => {
                 nickName: data.nickName,
                 message: data.message,
                 socketID: socketID,
-            })
-        })
-    }
+            });
+        });
+    };
 
     const handlePushChat = (): void => {
         recentChat.message.length > 0 && setChatLog([...chatLog, recentChat]);
-    }
+    };
 
     const handleFinished = () => {
         setChatFinished(true);
@@ -102,18 +97,18 @@ export const useChat = () => {
             message: '대화가 종료되었어요!',
             socketID: 'admin',
         });
-    }
+    };
 
     const stopChat = (): void => {
         userStore.userSocket?.emit('stop chat');
         handleFinished();
-    }
+    };
 
     const chatStopped = (): void => {
         userStore.userSocket?.on('is ended', () => {
             handleFinished();
-        })
-    }
+        });
+    };
 
     const reStart = (): void => {
         setChatLog([]);
@@ -121,7 +116,7 @@ export const useChat = () => {
         setChatFinished(false);
         setIsMatched(false);
         input.current!.value = '';
-    }
+    };
 
     return {
         isSearching,
@@ -146,5 +141,5 @@ export const useChat = () => {
         reStart,
         chatStopped,
         scrollToBottom,
-    }
-}
+    };
+};

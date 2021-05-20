@@ -13,8 +13,8 @@ const StartLogo: React.FC<{ push: () => void }>= ({ push }) => {
             <StartBtn onClick={push}> 시작하기 </StartBtn>
             <Arrow> ∨ </Arrow>
         </LogoBox>
-    )
-}
+    );
+};
 
 export default StartLogo;
 
@@ -58,5 +58,5 @@ const StartBtn = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;

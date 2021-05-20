@@ -9,11 +9,7 @@ import userStore from '../../store/userStore';
 import { zoomIn } from '../../style/keyframes';
 import { observer } from 'mobx-react';
 import Loader from 'react-loader-spinner';
-
-export interface ISignInData {
-    account: string;
-    password: string;
-}
+import { ISignInData } from '../../interfaces';
 
 const SignInBox: React.FC = observer(() => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
@@ -24,8 +20,8 @@ const SignInBox: React.FC = observer(() => {
     const entered = (e: React.KeyboardEvent): void => {
         if (e.key === 'Enter') {
             signInBtn.current?.click();
-        }
-    }
+        };
+    };
 
     const invalid = (): void => {
         setError('account', {
@@ -36,11 +32,11 @@ const SignInBox: React.FC = observer(() => {
             type: 'invalid',
             message: '아이디나 비밀번호를 다시 확인해주세요',
         });
-    }
+    };
 
     const onSubmit: SubmitHandler<ISignInData> = (data) => {
         userStore.signIn(data, invalid, history.pushMain);
-    }
+    };
 
     return (
         <>
@@ -166,7 +162,7 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
-    }
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)<{
@@ -188,5 +184,5 @@ const ForgotPW = styled.div`
     cursor: pointer;
     &:hover {
         text-decoration: underline;
-    }
+    };
 `;

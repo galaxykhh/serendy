@@ -48,8 +48,8 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             <Space />
             <Space />
         </BlockContainer>
-    )
-}
+    );
+};
 
 export default Blocks;
 
@@ -69,7 +69,7 @@ const Block: React.FC<{ title: string }>= ({ children, title }) => {
             </Text>
         </>
     );
-}
+};
 
 const BlockContainer = styled.div`
     display: flex;

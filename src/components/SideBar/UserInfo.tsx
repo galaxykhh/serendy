@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faDoorOpen, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import userStore from '../../store/userStore';
 import { observer } from 'mobx-react';
-import { DisplayType } from '../../type';
+import { DisplayType } from '../../interfaces/index';
 import { useHistorys } from '../../Hooks/useHistorys';
 
 const UserInfo: React.FC = observer(() => {
@@ -43,7 +43,7 @@ const Row = styled.div`
         grid-template-areas:
         'a'
         'b';
-    }
+    };
 `;
 
 const Container = styled.div`
@@ -67,9 +67,6 @@ const Icon = styled(FontAwesomeIcon)<{
 `;
 
 const UserIcon = styled(Icon)`
-    @media only screen and (max-width: 1450px) {
-         
-    }
 `;
 
 const Text = styled.span<{ 
@@ -85,7 +82,7 @@ const Text = styled.span<{
     white-space: nowrap;
     @media only screen and (max-width: 1450px) {
         display: none;
-    }
+    };
 `;
 
 const Box = styled.div`
@@ -101,8 +98,8 @@ const Box = styled.div`
     cursor: pointer;
     &:hover {
         background-color: ${({ theme }) => theme.colors.main60};
-    }
+    };
     @media only screen and (max-width: 720px) {
         min-width: 20px;
-    }
+    };
 `;

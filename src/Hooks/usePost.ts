@@ -2,34 +2,7 @@
 import { useRef, useState } from 'react'
 import userStore from '../store/userStore';
 import postRepository from '../repository/postRepository';
-
-export interface IComment {
-    _id: string | undefined;
-    nickName: string | undefined;
-    content: string | undefined;
-}
-
-export interface ISendComment {
-    _id: string | undefined;
-    toAccount: string | undefined;
-    nickName: string | null | undefined;
-    content: string | undefined;
-};
-
-export interface ISendPost {
-    account: string | null | undefined;
-    nickName: string | null | undefined;
-    content: string | undefined;
-};
-
-export interface ICurrentPost {
-    _id: string | undefined;
-    toAccount: string | undefined;
-    nickName: string | undefined;
-    fromAccount: string | undefined;
-    content: string | undefined;
-    comment: IComment | undefined;
-};
+import { ICurrentPost } from '../interfaces';
 
 export const usePost = () => {
     const postArea = useRef<HTMLTextAreaElement>(null);
@@ -52,14 +25,14 @@ export const usePost = () => {
                 account: userStore.user?.account,
                 nickName: userStore.user?.nickName,
                 content: postArea.current?.value,
-            }
+            };
             if (postArea.current?.value === '' ) {
                 return;
-            }
+            };
             const response = await postRepository.sendPost(data);
             if ((response.data.message === 'Send Success')) {
                 setIsSent(true);
-            }
+            };
         } catch(err) {
             alert('서버가 점검중이에요');
         };
@@ -108,17 +81,17 @@ export const usePost = () => {
                 toAccount: currentReceivedPost?.toAccount,
                 nickName: userStore.user?.nickName,
                 content: commentArea.current?.value,
-            }
+            };
             if (commentArea.current?.value === '') {
                 return;
-            }
+            };
             const response = await postRepository.sendComment(data);
             if ((response.data.message === 'Success')) {
                 const posts = response.data.posts;
                 const post = response.data.post;
                 setReceivedPosts(posts);
                 setCurrentReceivedPost(post);
-            }
+            };
         } catch(err) {
             console.log(err);
             alert('서버 점검중입니다');

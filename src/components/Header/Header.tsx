@@ -33,8 +33,8 @@ const LogoBox = styled.div<{
     z-index: 1;
     @media only screen and (max-height: 800px) {
         display: none;
-    }
-`
+    };
+`;
 
 const Logo = styled.div`
     width: 310px;

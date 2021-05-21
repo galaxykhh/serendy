@@ -23,17 +23,21 @@ const LogoBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     height: 100%;
+    padding-bottom: 50px;
     margin-bottom: 300px;
 `;
 
 const Logo = styled.div`
-    width: 800px;
-    height: 800px;
+    width: 700px;
+    height: 700px;
     background-image: url(${LOGO_URL});
     background-size: cover;
     background-position: center;
+    @media only screen and (max-width: 500px) {
+        width: 450px;
+        height: 450px;
+    }
 `;
 
 const Arrow = styled.div`
@@ -59,4 +63,9 @@ const StartBtn = styled.button`
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
     };
+    @media only screen and (max-width: 500px) {
+        width: 120px;
+        height: 50px;
+        font-size: 20px;
+    }
 `;

@@ -18,11 +18,10 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             <Space />
             <Block title='걱정마세요'>
                 상대방과의 모든 대화는 익명입니다<br/><br/>
-                서로를 모르는 상대와 이야기에만 집중할 수 있습니다
+                서로 모르는 상대와 이야기에만 집중할 수 있습니다
             </Block>
             <Space />
-            <Text size='50px'
-                  data-aos='fade-up'
+            <Text data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='800'>
                 경험해보세요 <br/><br/>
@@ -46,7 +45,6 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
                 시작하기
             </StartBtn>
             <Space />
-            <Space />
         </BlockContainer>
     );
 };
@@ -61,12 +59,11 @@ const Block: React.FC<{ title: string }>= ({ children, title }) => {
                   data-aos-duration='900'>
                 {title}
             </Text>
-            <Text size='28px'
-                  data-aos='fade-up'
+            <SmallText data-aos='fade-up'
                   data-aos-anchor-placement='center-center'
                   data-aos-duration='900'>
                 {children}
-            </Text>
+            </SmallText>
         </>
     );
 };
@@ -80,14 +77,26 @@ const BlockContainer = styled.div`
     height: 3000px;
 `;
 
-const Text = styled.div<{
-    size?: string, mb?: string
-}>`
-    font-size: ${({ size }) => size || '50px'};
+const Text = styled.div<{ size?: string }>`
+    font-size: 50px;
     color: ${({ theme }) => theme.colors.white};
-    margin-bottom: ${({ mb }) => mb};
     text-align: center;
+    min-height: 56px;
     margin-bottom: 50px;
+    @media only screen and (max-width: 600px) {
+        font-size: 30px;
+    };
+`;
+
+const SmallText = styled.div<{ size?: string }>`
+    font-size: 28px;
+    color: ${({ theme }) => theme.colors.white};
+    text-align: center;
+    min-height: 95px;
+    margin-bottom: 50px;
+    @media only screen and (max-width: 600px) {
+        font-size: 18px;
+    };
 `;
 
 const Space = styled.div`
@@ -106,6 +115,11 @@ const StartBtn = styled.button`
     text-align: center;
     margin-bottom: 50px;
     cursor: pointer;
+    @media only screen and (max-width: 600px) {
+        width: 120px;
+        height: 60px;
+        font-size: 20px;
+    };
 `;
 
 const TextLogo = styled.div`
@@ -114,5 +128,9 @@ const TextLogo = styled.div`
     background-image: url(${TEXTLOGO_URL});
     background-size: cover;
     background-position: center;
+    @media only screen and (max-width: 600px) {
+        width: 600px;
+        height: 100px;
+    };
 `;
 

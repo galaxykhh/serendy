@@ -44,6 +44,9 @@ const Row = styled.div`
         'a'
         'b';
     };
+    @media only screen and (max-width: 600px) {
+        margin-top: 8px;
+    };
 `;
 
 const Container = styled.div`
@@ -53,8 +56,12 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
     height: 15%;
-    min-width: 80px;
+    min-width: 40px;
     min-height: 120px;
+    @media only screen and (max-width: 600px) {
+        font-size: 15px;
+        margin-top: 50px;
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)<{
@@ -91,7 +98,7 @@ const Box = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    min-width: 60px;
+    min-width: 40px;
     padding: 5px;
     margin: 5px;
     transition: .3s ease;
@@ -99,7 +106,8 @@ const Box = styled.div`
     &:hover {
         background-color: ${({ theme }) => theme.colors.main60};
     };
-    @media only screen and (max-width: 720px) {
-        min-width: 20px;
+    @media only screen and (max-width: 600px) {
+        min-width: 40px;
+        margin-top: 10px;
     };
 `;

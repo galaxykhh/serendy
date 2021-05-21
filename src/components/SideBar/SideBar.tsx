@@ -40,10 +40,12 @@ const Bar = styled.div<{
     z-index: 1;
     @media only screen and (max-width: 1450px) {
         min-width: 220px;
-        max-width: 220px;
     };
     @media only screen and (max-width: 1115px) {
         min-width: 100px;
-        max-width: 100px;
+    };
+    @media only screen and (max-width: 600px) {
+        min-width: 40px;
+        padding: 0px;
     };
 `;

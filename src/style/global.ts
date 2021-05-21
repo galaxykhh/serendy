@@ -12,14 +12,16 @@ const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
         box-sizing: border-box;
         font-family: 'MGothic';
         -ms-overflow-style: none; // 스크롤바 없애기
         ::-webkit-scrollbar {
             display: none;
         }
+    }
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
     }
     // 자동완성 박스 색
     input:-webkit-autofill,

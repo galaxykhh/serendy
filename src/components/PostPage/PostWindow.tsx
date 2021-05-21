@@ -89,6 +89,10 @@ const TextArea = styled.textarea.attrs({
     padding: 60px;
     resize: none;
     border-radius: 10px;
+    @media only screen and (max-width: 600px) {
+        padding: 20px;
+        font-size: 14px;
+    };
 `;
 
 const SendBtnBox = styled.div`
@@ -120,6 +124,9 @@ const SendBtn = styled.button`
         background-color: ${({ theme }) => theme.colors.plum};
         color: ${({ theme }) => theme.colors.black};
     };
+    @media only screen and (max-width: 600px) {
+        font-size: 17px;
+    };
 `;
 
 const RuleContainer = styled.div`
@@ -147,17 +154,25 @@ const Rule = styled.div`
 const Ment = styled.div<{
     size?: string
 }>`
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 10px;
+    white-space: nowrap;
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
+    };
+    @media only screen and (max-width: 600px) {
+        font-size: 11px;
     };
 `;
 
 const BigMent = styled(Ment)`
     font-size: 30px;
+    color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
+    };
+    @media only screen and (max-width: 600px) {
+        font-size: 17px;
     };
 `;

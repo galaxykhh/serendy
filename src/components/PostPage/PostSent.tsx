@@ -20,12 +20,18 @@ const Icon = styled(FontAwesomeIcon)`
     font-size: 40px;
     color: ${({ theme }) => theme.colors.white};
     animation: ${paperPlane} 2s ease forwards;
+    @media only screen and (max-width: 600px) {
+        font-size: 27px;
+    };
 `;
 
 const Text = styled.div`
     color: ${({ theme }) => theme.colors.white};
     font-size: 30px;
     animation: ${setTimeFade} 2s ease;
+    @media only screen and (max-width: 600px) {
+        font-size: 20px;
+    };
 `;
 
 const Button = styled.button`
@@ -45,5 +51,10 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
+    };
+    @media only screen and (max-width: 600px) {
+        width: 150px;
+        height: 50px;
+        font-size: 17px;
     };
 `;

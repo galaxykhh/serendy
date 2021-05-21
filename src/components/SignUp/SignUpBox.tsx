@@ -248,12 +248,9 @@ const Icon = styled(FontAwesomeIcon)<{
 `;
 
 const ErrorMsg = styled.div`
-    font-size: 15px;
+    font-size: 16px;
     transform: translateY(-10px);
     color: ${({ theme }) => theme.colors.red};
-    @media only screen and (max-width: 600px) {
-        font-size: 13px;
-    };
 `;
 
 const Msg = styled(ErrorMsg)`

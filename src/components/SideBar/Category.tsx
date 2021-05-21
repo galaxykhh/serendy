@@ -54,13 +54,18 @@ const Container = styled.div`
     padding-top: 2px;
     width: 100%;
     height: 70%;
-    min-width: 80px;
+    min-width: 40px;
     min-height: 40px;
 `;
 
 const IconBox = styled.div`
-    min-width: 33px;
+    min-width: 40px;
     min-height: 26px;
+    @media only screen and (max-width: 600px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)<{
@@ -92,12 +97,15 @@ const Box = styled.div`
     width: 95%;
     min-height: 50px;
     max-height: 60px;
-    min-width: 80px;
-    min-height: 30px;
+    min-width: 40px;
     cursor: pointer;
     border-radius: 10px;
     transition: .3s ease;
     &:hover {
         background-color: ${({ theme }) => theme.colors.main60};
+    };
+    @media only screen and (max-width: 600px) {
+        justify-content: center;
+        padding: 0px;
     };
 `;

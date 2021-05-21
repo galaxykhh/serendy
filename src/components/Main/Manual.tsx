@@ -41,12 +41,18 @@ const Box = styled.div`
     align-items: center;
     width: 400px;
     margin-top: 20px;
+    @media only screen and (max-width: 600px) {
+        justify-content: center;
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.white};
     margin-right: 20px;
-    font-size: 60px;
+    font-size: 50px;
+    @media only screen and (max-width: 600px) {
+        font-size: 30px;
+    };
 `;
 
 const LogoBox = styled.div`
@@ -56,6 +62,10 @@ const LogoBox = styled.div`
     flex-direction: center;
     align-items: center;
     margin-bottom: 50px;
+    @media only screen and (max-width: 600px) {
+        width: 250px;
+        height: 250px;
+    };
 `;
 
 
@@ -68,4 +78,8 @@ const Logo = styled.div`
     background-size: cover;
     background-position: center;
     animation: ${whalePop} .5s ease-out alternate infinite;
+    @media only screen and (max-width: 600px) {
+        min-width: 250px;
+        height: 250px;
+    };
 `;

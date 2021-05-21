@@ -31,9 +31,6 @@ const LogoBox = styled.div<{
     display: ${({ visible }) => visible};
     cursor: pointer;
     z-index: 1;
-    @media only screen and (max-height: 800px) {
-        display: none;
-    };
 `;
 
 const Logo = styled.div`
@@ -42,4 +39,12 @@ const Logo = styled.div`
     background-image: url(${TEXTLOGO_URL});
     background-size: cover;
     background-position: center;
+    @media only screen and (max-height: 700px) {
+        width: 220px;
+        height: 90px;
+    };
+    @media only screen and (max-width: 600px) {
+        width: 150px;
+        height: 60px;
+    };
 `;

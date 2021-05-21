@@ -39,6 +39,10 @@ const Row = styled.div<{
     width: 100%;
     min-height: 60px;
     margin-bottom: 10px;
+    @media only screen and (max-width: 600px) {
+        min-height: 40px;
+        margin-bottom: 5px;
+    };
 `;
 
 const OthersBalloon = styled.div`
@@ -55,6 +59,10 @@ const OthersBalloon = styled.div`
     color: ${({ theme }) => theme.colors.black};
     font-size: 17px;
 	border-radius: 15px;
+    @media only screen and (max-width: 600px) {
+        font-size: 14px;
+        max-width: 200px;
+    };
 `;
 
 const OwnBalloon = styled.div`
@@ -71,6 +79,10 @@ const OwnBalloon = styled.div`
     color: ${({ theme }) => theme.colors.white};
     font-size: 17px;
 	border-radius: 15px;
+    @media only screen and (max-width: 600px) {
+        font-size: 14px;
+        max-width: 200px;
+    };
 `;
 
 const LeftTail = styled.div`

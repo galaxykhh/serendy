@@ -74,14 +74,13 @@ const BlockContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 3000px;
+    height: 100%;
 `;
 
 const Text = styled.div<{ size?: string }>`
     font-size: 50px;
     color: ${({ theme }) => theme.colors.white};
     text-align: center;
-    min-height: 56px;
     margin-bottom: 50px;
     @media only screen and (max-width: 600px) {
         font-size: 30px;
@@ -92,7 +91,6 @@ const SmallText = styled.div<{ size?: string }>`
     font-size: 28px;
     color: ${({ theme }) => theme.colors.white};
     text-align: center;
-    min-height: 95px;
     margin-bottom: 50px;
     @media only screen and (max-width: 600px) {
         font-size: 18px;

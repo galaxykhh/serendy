@@ -93,7 +93,7 @@ const ChatWindow: React.FC = observer(() => {
                             </> : 
                             <>
                                 <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있어요 </BigMent>
-                                <Loader type="Circles" color={theme.colors.plum} height={60} width={60} />
+                                <Loader type="Circles" color={theme.colors.plum} height='40px' width='40px' />
                                 <BtnBox>
                                     <CancelBtn onClick={chat.handleSearch} > 취소하기 </CancelBtn>
                                 </BtnBox>
@@ -131,6 +131,9 @@ const Row = styled.div`
     @media only screen and (max-width: 1450px) {
         flex-direction: column;
     };
+    @media only screen and (max-width: 600px) {
+        flex-direction: column-reverse;
+    };
 `;
 
 const ChatBox = styled.div<{
@@ -150,6 +153,9 @@ const ChatBox = styled.div<{
     @media only screen and (max-width: 1450px) {
         margin-right: 0px;
         min-height: 340px;
+    };
+    @media only screen and (max-width: 600px) {
+        height: 100%;
     };
 `;
 
@@ -194,8 +200,9 @@ const Input = styled.input.attrs(({
     color: ${({ theme }) => theme.colors.white};
     background-color: ${({ theme }) => theme.colors.white10};
     border-radius: 10px;
-    @media only screen and (max-width: 400px) {
-        width: 99%;
+    @media only screen and (max-width: 600px) {
+        width: 70%;
+        font-size: 15px;
     };
 `;
 
@@ -218,9 +225,13 @@ const SendBtn = styled.button`
         font-size: 15px;
         width: 10%;
     };
+    @media only screen and (max-width: 600px) {
+        width: 18%;
+    };
 `;
 
 const HandlerContainer = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -252,6 +263,9 @@ const Ment = styled.div<{
     @media only screen and (max-width: 1520px) {
         font-size: 15px;
     };
+    @media only screen and (max-width: 600px) {
+        font-size: 11px;
+    };
 `;
 
 const BigMent = styled(Ment)`
@@ -259,6 +273,9 @@ const BigMent = styled(Ment)`
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
+    };
+    @media only screen and (max-width: 600px) {
+        font-size: 17px;
     };
 `;
 
@@ -274,6 +291,11 @@ const StartBtn = styled(SendBtn)`
         height: 40px;
         font-size: 17px;
         margin-top: 15px;
+    };
+    @media only screen and (max-width: 600px) {
+        width: 90px;
+        height: 25px;
+        font-size: 13px;
     };
 `;
 
@@ -292,6 +314,9 @@ const BtnBox = styled.div`
     justify-content: center;
     align-items: center;
     @media only screen and (max-width: 1450px) {
-        bottom: -60px;
+        bottom: 10px;
+    };
+    @media only screen and (max-width: 600px) {
+        bottom: 0px;
     };
 `;

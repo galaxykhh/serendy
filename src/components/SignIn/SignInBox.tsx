@@ -193,10 +193,6 @@ const Icon = styled(FontAwesomeIcon)<{
 const ErrorMsg = styled.div`
     font-size: 16px;
     color: ${({ theme }) => theme.colors.red};
-    @media only screen and (max-width: 600px) {
-        font-size: 13px;
-    };
-
 `;
 
 const ForgotPW = styled.div`

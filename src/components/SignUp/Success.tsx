@@ -30,6 +30,9 @@ const Box = styled.div`
     width: 600px;
     height: 640px;
     animation: ${zoomIn} .5s ease;
+    @media only screen and (max-width: 600px) {
+        width: 400px;
+    };
 `;
 
 const Msg = styled.div`
@@ -37,12 +40,18 @@ const Msg = styled.div`
     margin-bottom: 30px;
     font-size: 35px;
     color: ${({ theme }) => theme.colors.white};
+    @media only screen and (max-width: 600px) {
+        font-size: 24px;
+    };
 `;
 
 const BoldMsg = styled.span`
     font-size: 35px;
     font-weight: 900;
     color: ${({ theme }) => theme.colors.white};
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+    };
 `;
 
 const Button = styled.button`
@@ -61,5 +70,10 @@ const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
+    };
+    @media only screen and (max-width: 600px) {
+        width: 160px;
+        height: 60px;
+        font-size: 20px;
     };
 `;

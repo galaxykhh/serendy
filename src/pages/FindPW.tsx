@@ -21,5 +21,9 @@ const TextLogo = styled.div`
     background-image: url(${TEXTLOGO_URL});
     background-size: cover;
     background-position: center;
-    margin-bottom: 40px;
+    @media only screen and (max-width: 600px) {
+        margin-top: 80px;
+        width: 300px;
+        height: 130px;
+    };
 `;

@@ -36,4 +36,9 @@ const TextLogo = styled.div<{
     background-position: center;
     margin-bottom: 40px;
     display: ${({ display }) => display};
+    @media only screen and (max-width: 600px) {
+        margin-top: 80px;
+        width: 300px;
+        height: 130px;
+    };
 `;

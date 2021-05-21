@@ -66,6 +66,6 @@ const StartBtn = styled.button`
     @media only screen and (max-width: 500px) {
         width: 120px;
         height: 50px;
-        font-size: 20px;
+        font-size: 17px;
     }
 `;

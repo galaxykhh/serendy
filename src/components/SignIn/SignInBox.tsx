@@ -127,6 +127,9 @@ const Row = styled.div`
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.white};
+    @media only screen and (max-width: 600px) {
+        width: 320px;
+    };
 `;
 
 const ButtonBox = styled.div`
@@ -135,6 +138,9 @@ const ButtonBox = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 460px;
+    @media only screen and (max-width: 600px) {
+        width: 320px;
+    };
 `;
 
 const Input = styled.input`
@@ -144,6 +150,10 @@ const Input = styled.input`
     font-size: 21px;
     padding-left: 20px;
     color: ${({ theme }) => theme.colors.white};
+    @media only screen and (max-width: 600px) {
+        width: 260px;
+        font-size: 17px;
+    };
 `;
 
 const Button = styled.button`
@@ -163,19 +173,30 @@ const Button = styled.button`
         background-color: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.mainBlue};
     };
+    @media only screen and (max-width: 600px) {
+        width: 120px;
+        height: 45px;
+        font-size: 17px;
+    };
 `;
 
 const Icon = styled(FontAwesomeIcon)<{
     color: string
 }>`
     font-size: 35px;
-    transform: translateY(-5px);
     color: ${({ color }) => color};
+    @media only screen and (max-width: 600px) {
+        font-size: 25px;
+    };
 `;
 
 const ErrorMsg = styled.div`
     font-size: 16px;
     color: ${({ theme }) => theme.colors.red};
+    @media only screen and (max-width: 600px) {
+        font-size: 13px;
+    };
+
 `;
 
 const ForgotPW = styled.div`

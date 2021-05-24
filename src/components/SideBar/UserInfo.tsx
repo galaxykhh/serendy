@@ -5,11 +5,11 @@ import { faClipboard, faDoorOpen, faUserAlt } from '@fortawesome/free-solid-svg-
 import userStore from '../../store/userStore';
 import { observer } from 'mobx-react';
 import { DisplayType } from '../../interfaces/index';
-import { pushHistory } from '../../Hooks/pushHistory';
+import { usePush } from '../../hook/usePush';
 
 const UserInfo: React.FC = observer(() => {
 
-    const history = pushHistory();
+    const push = usePush();
 
     return (
         <Container>
@@ -18,11 +18,11 @@ const UserInfo: React.FC = observer(() => {
                 <Text ml='7px' size='16px' > {userStore.user?.nickName} </Text>
             </Row>
             <Row>
-                <Box onClick={history.pushMyPage} >
+                <Box onClick={push.pushMyPage} >
                     <Icon icon={faClipboard} iconsize='24px' />
                     <Text mt='8px' size='14px' > 정보변경 </Text>
                 </Box>
-                <Box onClick={() => userStore.signOut(history.pushStart)} >
+                <Box onClick={() => userStore.signOut(push.pushStart)} >
                     <Icon icon={faDoorOpen} iconsize='24px' />
                     <Text mt='8px' size='14px' > 로그아웃 </Text>
                 </Box>

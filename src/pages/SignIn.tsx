@@ -6,14 +6,14 @@ import SignInBox from '../components/SignIn/SignInBox';
 import { TEXTLOGO_URL } from '../config';
 import { DisplayType } from '../interfaces';
 import userStore from '../store/userStore';
-import { pushHistory } from '../Hooks/pushHistory';
+import { usePush } from '../hook/usePush';
 
 const SignIn: React.FC = observer(() => {
 
-    const history = pushHistory();
+    const push = usePush();
 
     useEffect(() => {
-        userStore.signInWithToken(history.pushLoggedUser);
+        userStore.signInWithToken(push.pushLoggedUser);
     }, []); //eslint-disable-line
 
     return (

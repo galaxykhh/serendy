@@ -37,6 +37,12 @@ export interface ICurrentPost {
     comment: IComment | undefined;
 };
 
+export interface IMessageBox {
+    nickName: string;
+    message: string;
+    socketID: boolean;
+};
+
 export interface IFindPW {
     account: string;
     secretMessage: string;
@@ -69,37 +75,49 @@ export interface IUser {
 };
 
 export interface IUserStore {
-    isLogging: boolean;
     isSignIn: boolean;
     user: IUser | null;
     userSocket: Socket | null;
     socketID: string | null;
 };
 
-export interface IReceivedView {
-    currentSentPost: ICurrentPost | undefined
+export interface ISentView {
+    currentSentPost: ICurrentPost | null;
 };
 
-export interface ISentView {
-    currentReceivedPost: ICurrentPost | undefined;
-    commentArea: React.RefObject<HTMLTextAreaElement>;
-    sendComment: () => Promise<void>,
+export interface IReceivedView {
+    currentReceivedPost: ICurrentPost | null;
+    commentInput?: React.RefObject<HTMLTextAreaElement>;
+    sendComment?: () => Promise<void>,
 };
 
 export interface IPostList {
     nickName: string;
     content: string;
     didReply?: boolean;
-    onClick: () => void;
+    showPost: () => void;
 };
 
 export interface IPostBox {
     sentPosts?: Array<any>;
     receivedPosts?: Array<any>;
-    onClick: (_id: string) => void;
+    showPost: (_id: string) => void;
 }
 
 export interface IPostWindow {
     postSend: () => void;
     postArea: React.RefObject<HTMLTextAreaElement>;
+};
+
+export interface ICategories {
+    setCategory: (boolean: boolean) => void;
+    icon: any;
+    text: string;
+    boolean: boolean;
+};
+
+export interface IMatchHandler {
+    isSearching: boolean;
+    isMatched: boolean;
+    isFinished: boolean;
 };

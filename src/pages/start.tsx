@@ -4,11 +4,11 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 import StartLogo from '../components/Start/StartLogo';
 import Blocks from '../components/Start/Blocks';
-import { pushHistory } from '../Hooks/pushHistory';
+import { usePush } from '../hook/usePush';
 
 const Start: React.FC = () => {
 
-    const history = pushHistory();
+    const push = usePush();
 
     useEffect(() => {
         Aos.init();
@@ -16,8 +16,8 @@ const Start: React.FC = () => {
 
     return (
         <Wallpaper>
-            <StartLogo push={history.pushMain} />
-            <Blocks push={history.pushMain} />
+            <StartLogo push={push.pushMain} />
+            <Blocks push={push.pushMain} />
         </Wallpaper>
     );
 };

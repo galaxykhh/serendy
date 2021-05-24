@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { pushHistory } from '../../Hooks/pushHistory';
+import { usePush } from '../../hook/usePush';
 import { zoomIn } from '../../style/keyframes';
 
 const Success: React.FC = () => {
 
-    const history = pushHistory();
+    const push = usePush();
 
     return (
         <Box>
@@ -15,7 +15,7 @@ const Success: React.FC = () => {
                 <BoldMsg>완료</BoldMsg>
                 되었습니다
             </Msg>
-            <Button onClick={history.pushLogin} > 시작하기 </Button>
+            <Button onClick={push.pushLogin} > 시작하기 </Button>
         </Box>
     );
 };

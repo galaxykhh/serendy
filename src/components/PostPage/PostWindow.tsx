@@ -1,9 +1,28 @@
 import React from 'react';
 import styled  from 'styled-components';
 import { IPostWindow } from '../../interfaces/index';
+import Ments from '../publicComponents/Ments';
+
+const postMent = [
+    {
+        id: 1,
+        ment: '· 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요',
+    },
+    {
+        id: 2,
+        ment: '· 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요',
+    },
+    {
+        id: 3,
+        ment: '· 편지를 받으면 자동으로 보관함에 저장돼요',
+    },
+    {
+        id: 4,
+        ment: '· 한 편지에 답장은 한 번만 가능해요',
+    },
+];
 
 const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
-
     return (
         <Row>
             <LetterContainer>
@@ -19,14 +38,13 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
 
             <RuleContainer>
                         <BigMent> 어떤 사람이 내 편지를 받게 될까요 ? </BigMent>
-                        <br />
                         <Rule>
-                            <Ment size='18px'> · 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요 </Ment>
-                            <Ment size='18px'> · 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요 </Ment>
-                            <Ment size='18px'> · 편지를 받으면 자동으로 보관함에 저장돼요 </Ment>
-                            <Ment size='18px'> · 한 편지에 답장은 한 번만 가능해요 </Ment>
+                            {postMent.map(x => (
+                                <Ments ment={x.ment}
+                                    key={x.id}
+                                />
+                            ))}
                         </Rule>
-                        <br />
             </RuleContainer>
             
         </Row>
@@ -151,9 +169,7 @@ const Rule = styled.div`
     align-items: flex-start;
 `;
 
-const Ment = styled.div<{
-    size?: string
-}>`
+const Ment = styled.div<{ size?: string }>`
     font-size: 17px;
     margin-bottom: 10px;
     white-space: nowrap;
@@ -165,14 +181,16 @@ const Ment = styled.div<{
         font-size: 11px;
     };
 `;
-
 const BigMent = styled(Ment)`
     font-size: 30px;
+    margin-bottom: 40px;
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
+        margin-bottom: 30px;
     };
     @media only screen and (max-width: 600px) {
         font-size: 17px;
+        margin-bottom: 20px;
     };
 `;

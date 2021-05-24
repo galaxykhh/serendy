@@ -5,25 +5,53 @@ import { faPaperPlane, faComments, faUsers, faPlus, faEquals} from '@fortawesome
 import { WHALE } from '../../config';
 import { whalePop, zoomIn } from '../../style/keyframes';
 
-const Manual: React.FC = () => {
+const iconList = [
+    {
+        id: 1,
+        icon: faPaperPlane,
+    },
+    {
+        id: 2,
+        icon: faPlus,
+    },
+    {
+        id: 3,
+        icon: faComments,
+    },
+    {
+        id: 4,
+        icon: faEquals,
+    },
+    {
+        id: 5,
+        icon: faUsers,
+    },
+];
 
+const Manual: React.FC = () => {
     return (
         <Column>
             <LogoBox>
             <Logo />
             </LogoBox>
                 <Box>
-                    <Icon icon={faPaperPlane} />
-                    <Icon icon={faPlus} />
-                    <Icon icon={faComments} />
-                    <Icon icon={faEquals} />
-                    <Icon icon={faUsers} />
+                    {iconList.map(x => (
+                        <Icons icon={x.icon}
+                            key={x.id}
+                        />
+                    ))}
                 </Box>
         </Column>
     );
 };
 
 export default Manual;
+
+const Icons: React.FC<{ icon: any }>= ({icon}) => {
+    return (
+        <Icon icon={icon} />
+    )
+}
 
 const Column = styled.div`
     display: flex;

@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faPaperPlane, faSignInAlt, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
-import { pushHistory } from '../../Hooks/pushHistory';
+import { usePush } from '../../hook/usePush';
 import { theme } from '../../style/theme';
 
 const Category: React.FC = () => {
 
-    const history = pushHistory();
+    const push = usePush();
 
     return (
         <Container>
-            <Box onClick={history.pushChatPage}>
+            <Box onClick={push.pushChatPage}>
                 <IconBox>
                     <Icon color={theme.colors.plum}
                         icon={faComments}
@@ -19,7 +19,7 @@ const Category: React.FC = () => {
                 </IconBox>
                 <Text> 대화 하기 </Text>
             </Box>
-            <Box onClick={history.pushPostPage} >
+            <Box onClick={push.pushPostPage} >
                 <IconBox>
                     <Icon color={theme.colors.plum}
                         icon={faPaperPlane}
@@ -27,7 +27,7 @@ const Category: React.FC = () => {
                 </IconBox>
                 <Text> 편지 보내기 </Text>
             </Box>
-            <Box onClick={history.pushRecipientsPage} >
+            <Box onClick={push.pushRecipientsPage} >
                 <IconBox>
                     <Icon color={theme.colors.yellow}
                         icon={faEnvelopeOpenText}
@@ -35,7 +35,7 @@ const Category: React.FC = () => {
                 </IconBox>
                 <Text> 받은 편지함 </Text>
             </Box>
-            <Box onClick={history.pushSenderPage} >
+            <Box onClick={push.pushSenderPage} >
                 <IconBox>
                     <Icon color={theme.colors.yellow}
                         icon={faSignInAlt}

@@ -3,25 +3,23 @@ import styled from 'styled-components';
 import Post from './Post';
 import { IPostBox } from '../../interfaces/index';
 
-const PostBox: React.FC<IPostBox> = ({ receivedPosts, onClick }) => {
+const PostBox: React.FC<IPostBox> = ({ receivedPosts, showPost }) => {
     return (
-        <>
-            <ListBox>
-                {receivedPosts && receivedPosts.length > 0 ? 
-                    receivedPosts.map((x, i) => (
-                        <Post nickName={x.nickName}
-                              content={x.content}
-                              key={i}
-                              didReply={x.comment === undefined}
-                              onClick={() => onClick(x._id)}
-                              />
-                    )) :
-                    <Ment>
-                        아직 받은 편지가 없어요
-                    </Ment>
-                }
-            </ListBox>
-        </>
+        <ListBox>
+            {receivedPosts && receivedPosts.length > 0 ? 
+                receivedPosts.map((x, i) => (
+                    <Post nickName={x.nickName}
+                        content={x.content}
+                        key={i}
+                        didReply={x.comment === undefined}
+                        showPost={() => showPost(x._id)}
+                    />
+                )) :
+                <Ment>
+                    아직 받은 편지가 없어요
+                </Ment>
+            }
+        </ListBox>
     );
 };
 

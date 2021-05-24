@@ -5,6 +5,22 @@ import ChangePWBox from './ChangePWBox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { fadeIn } from '../../style/keyframes';
+import { ICategories } from '../../interfaces';
+
+const categoryList = [
+    {
+        id: 1,
+        icon: faUser,
+        boolean: true,
+        text: '닉네임 변경',
+    },
+    {
+        id: 2,
+        icon: faLock,
+        boolean: false,
+        text: '비밀번호 변경',
+    },
+];
 
 const Boxes: React.FC = () => {
     const [category, setCategory] = useState<boolean | string>('none');
@@ -13,14 +29,14 @@ const Boxes: React.FC = () => {
         <BoxContainer>
             <Ment> 원하시는 항목을 골라주세요 </Ment>
             <Row>
-                <Column onClick={() => setCategory(true)} >
-                    <Icon icon={faUser} />
-                    <Category> 닉네임 변경 </Category>
-                </Column>
-                <Column onClick={() => setCategory(false)} >
-                    <Icon icon={faLock} />
-                    <Category> 비밀번호 변경 </Category>
-                </Column>
+                {categoryList.map(x => (
+                    <Categories icon={x.icon}
+                        text={x.text}
+                        setCategory={setCategory}
+                        boolean={x.boolean}
+                        key={x.id}
+                    />
+                ))}
             </Row>
             {category === true && <ChangeNameBox />}
             {category === false && <ChangePWBox />}
@@ -30,6 +46,15 @@ const Boxes: React.FC = () => {
 };
 
 export default Boxes;
+
+const Categories: React.FC<ICategories> = ({ setCategory, icon, text, boolean }) => {
+    return (
+        <Column onClick={() => setCategory(boolean)} >
+            <Icon icon={icon} />
+            <Category>{text}</Category>
+        </Column>
+    )
+}
 
 const BoxContainer = styled.div`
     display: flex;

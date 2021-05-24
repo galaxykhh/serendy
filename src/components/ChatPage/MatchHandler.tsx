@@ -4,12 +4,7 @@ import BeforeChat from './BeforeChat';
 import FinishedChat from './FinishedChat';
 import MatchedChat from './MatchedChat';
 import SearchingChat from './SearchingChat';
-
-interface IMatchHandler {
-    isSearching: boolean;
-    isMatched: boolean;
-    isFinished: boolean;
-};
+import { IMatchHandler } from '../../interfaces/index';
 
 const MatchHandler: React.FC<IMatchHandler> = ({ isSearching, isMatched, isFinished }) => {
     if (!isSearching && !isMatched && !isFinished) return <BeforeChat />
@@ -43,12 +38,15 @@ export const Ment = styled.div<{ size?: string }>`
 
 export const BigMent = styled(Ment)`
     font-size: 30px;
+    margin-bottom: 40px;
     color: ${({ theme }) => theme.colors.white};
     @media only screen and (max-width: 1520px) {
         font-size: 25px;
+        margin-bottom: 30px;
     };
     @media only screen and (max-width: 600px) {
         font-size: 17px;
+        margin-bottom: 20px;
     };
 `;
 
@@ -82,8 +80,8 @@ export const StartBtn = styled.button`
 export const CancelBtn = styled.button`
     all: unset;
     width: 150px;
-    height: 50px;
-    font-size: 18px;
+    height: 70px;
+    font-size: 20px;
     text-align: center;
     background-color: ${({ theme }) => theme.colors.main60};
     border-radius: 10px;

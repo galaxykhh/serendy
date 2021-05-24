@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
-import { pushHistory } from '../../Hooks/pushHistory';
+import { usePush } from '../../hook/usePush';
 import userStore from '../../store/userStore';
 import { zoomIn } from '../../style/keyframes';
 import { observer } from 'mobx-react';
@@ -13,7 +13,7 @@ import { ISignInData } from '../../interfaces';
 
 const SignInBox: React.FC = observer(() => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
-    const history = pushHistory();
+    const push = usePush();
 
     const invalid = (): void => {
         setError('account', {
@@ -27,7 +27,7 @@ const SignInBox: React.FC = observer(() => {
     };
 
     const onSubmit: SubmitHandler<ISignInData> = (data) => {
-        userStore.signIn(data, invalid, history.pushMain);
+        userStore.signIn(data, invalid, push.pushMain);
     };
 
     return (
@@ -71,9 +71,9 @@ const SignInBox: React.FC = observer(() => {
                         <Button type='submit'>
                             로그인
                         </Button>
-                        <Button onClick={history.pushSignUp}>회원가입</Button>
+                        <Button onClick={push.pushSignUp}>회원가입</Button>
                     </ButtonBox>
-                        <ForgotPW onClick={history.pushFindPW} >
+                        <ForgotPW onClick={push.pushFindPW} >
                             비밀번호가 기억이 안나시나요?
                         </ForgotPW>
                     </Box> 

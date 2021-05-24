@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { paperPlane, setTimeFade } from '../../style/keyframes';
 
-const PostSent: React.FC<{ onClick: () => void }>= ({ onClick }) => {
+const PostSent: React.FC<{ reset: () => void }>= ({ reset }) => {
     return (
         <>
             <Icon icon={faPaperPlane} />
             <Text> 편지가 누군가에게 전달되었어요! </Text>
-            <Button onClick={onClick} > 확인 </Button>
+            <Button onClick={reset} > 확인 </Button>
         </>
     );
 };

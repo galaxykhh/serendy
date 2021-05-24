@@ -1,23 +1,28 @@
+import React, { useRef, useState } from 'react'
 import { observer } from 'mobx-react';
-import React from 'react'
 import CenterView from '../components/publicComponents/CenterView'
 import Container from '../components/publicComponents/Container'
 import PostWindow from '../components/PostPage/PostWindow';
 import PostSent from '../components/PostPage/PostSent';
-import { usePost } from '../Hooks/usePost';
+import postStore from '../store/postStore';
 
 const PostPage: React.FC = observer(() => {
+    const [isSent , setIsSent] = useState<boolean>(false);
+    const postArea = useRef<HTMLTextAreaElement>(null);
 
-    const post = usePost();
+    const toggleIsSent = () => {
+        setIsSent(!isSent);
+        console.log(isSent);
+    };
 
     return (
         <Container>
             <CenterView>
-                {post.isSent ? 
-                    <PostSent onClick={() => post.setIsSent(false)} /> : 
-                    <PostWindow postSend={post.handlePost}
-                                postArea={post.postArea}
-                                />
+                {isSent ? 
+                    <PostSent reset={toggleIsSent} /> : 
+                    <PostWindow postSend={() => postStore.handlePost(postArea.current?.value, () => toggleIsSent)}
+                        postArea={postArea}
+                    />
                 }
             </CenterView>
         </Container>

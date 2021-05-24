@@ -3,43 +3,46 @@ import styled from 'styled-components';
 import PostBox from '../components/SenderPage/PostBox';
 import CenterView from '../components/publicComponents/CenterView';
 import Container from '../components/publicComponents/Container';
-import { usePost } from '../Hooks/usePost';
 import Loader from 'react-loader-spinner';
 import { theme } from '../style/theme';
 import View from '../components/SenderPage/View';
+import postStore from '../store/postStore';
+import { observer } from 'mobx-react';
 
-const SenderPage: React.FC = () => {
-
-    const post = usePost();
+const SenderPage: React.FC = observer(() => {
 
     useEffect(() => {
-        post.getSentPosts();
+        postStore.getSentPosts();
     }, []); //eslint-disable-line
-    
+
+    useEffect(() => {
+        return () => {
+            postStore.resetSentPosts();
+        }
+    }, []); //eslint-disable-line
+
     return (
         <Container>
             <CenterView>
+                {postStore.isLoading ?
+                    <LoaderBox>
+                        <Loader type="Circles"
+                            color={theme.colors.plum}
+                            height={60}
+                            width={60}
+                        />
+                    </LoaderBox> :
                     <Row>
-                        {!post.isLoading ? 
-                            <>
-                                <PostBox sentPosts={post.sentPosts}
-                                    onClick={post.handleSentOne}
-                                />
-                                <View currentSentPost={post.currentSentPost} />
-                            </> :
-                            <LoaderBox>
-                                <Loader type="Circles"
-                                    color={theme.colors.plum}
-                                    height={60}
-                                    width={60}
-                                />
-                            </LoaderBox>
-                        }
+                        <PostBox sentPosts={postStore.sentPosts}
+                            showPost={postStore.handleSentOne}
+                        />
+                        <View currentSentPost={postStore.currentSentPost} />
                     </Row>
+                }
             </CenterView>
         </Container>
     );
-};
+});
 
 export default SenderPage;
 

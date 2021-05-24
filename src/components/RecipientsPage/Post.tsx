@@ -5,16 +5,16 @@ import { faCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { DisplayType } from '../../interfaces/index';
 import { IPostList } from '../../interfaces/index';
 
-const Post: React.FC<IPostList> = ({ nickName, content, didReply, onClick }) => {
+const Post: React.FC<IPostList> = ({ nickName, content, didReply, showPost }) => {
     return (
-        <Box onClick={onClick} >
+        <Box onClick={showPost} >
             <Icon icon={faEnvelope} />
             <Column>
                 <FromAccount> 보낸 사람 : {nickName} </FromAccount>
                 <MessagePreview> {content}  </MessagePreview>
                 <Alert icon={faCircle} 
-                       display={didReply ? 'block' : 'none'}
-                       />
+                    display={didReply ? 'block' : 'none'}
+                />
             </Column>
         </Box>
     );

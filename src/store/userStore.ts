@@ -7,18 +7,18 @@ class UserStore implements IUserStore {
 
     private _isSignIn: boolean = false;
     private _user: IUser | null = null;
-    private _isLogging: boolean = false;
     private _userSocket: Socket | null = null;
     private _socketID: string | null = null;
+    
+    public isLogging: boolean = false;
 
     constructor() {
-        makeObservable<UserStore, '_isLogging' | '_isSignIn' | '_user' | '_userSocket' | '_socketID'>(this, {
-            _isLogging: observable,
+        makeObservable<UserStore, '_isSignIn' | '_user' | '_userSocket' | '_socketID'>(this, {
             _isSignIn: observable,
             _user: observable,
             _userSocket: observable,
             _socketID: observable,
-            isLogging: computed,
+            isLogging: observable,
             isSignIn: computed,
             user: computed,
             userSocket: computed,
@@ -43,10 +43,6 @@ class UserStore implements IUserStore {
         return this._user;
     };
 
-    public get isLogging(): boolean {
-        return this._isLogging;
-    };
-
     public get userSocket(): Socket | null {
         return this._userSocket;
     };
@@ -64,7 +60,7 @@ class UserStore implements IUserStore {
     };
 
     public setIsLogging(boolean: boolean): void {
-        this._isLogging = boolean;
+        this.isLogging = boolean;
     };
 
     public setUserSocket(data: Socket | null): void {

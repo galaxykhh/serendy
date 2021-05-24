@@ -1,44 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { IReceivedView } from '../../interfaces/index';
+import { ISentView } from '../../interfaces/index';
+import HaveComment from './HaveComment';
+import NoneComment from './NoneComment';
 
-const View: React.FC<IReceivedView>= ({ currentSentPost }) => {
-    return (
-        <LETTER>
-            {currentSentPost ?
-                <>
-                    <NickName> {currentSentPost.nickName}님의 편지 </NickName>
-                    <Content>
-                        {currentSentPost.content}
-                    </Content>
-                    <CommentBox>
-                        {currentSentPost.comment ? 
-                            <>
-                                <Column>
-                                    <Icon icon={faUser} />
-                                    <UserName> {currentSentPost.comment.nickName} </UserName>
-                                </Column>
-                                <Comment> {currentSentPost.comment.content} </Comment>
-                            </> :
-                            <>
-                                <Comment> 아직 답장이 오지 않았어요 </Comment>
-                            </>
-                        }
-                    </CommentBox>
-                </> :
-                <>
-                </>
-                
-            }
-        </LETTER>
-    );
+const View: React.FC<ISentView>= ({ currentSentPost }) => {
+    if (currentSentPost && currentSentPost.comment) {
+        return <HaveComment currentSentPost={currentSentPost} />
+    };
+    if (currentSentPost && !currentSentPost.comment) {
+        return <NoneComment currentSentPost={currentSentPost} />
+    };
+    return null;
 };
 
 export default View;
 
-const LETTER = styled.div`
+export const LETTER = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
@@ -54,7 +33,7 @@ const LETTER = styled.div`
     background-color: ${({ theme }) => theme.colors.white10};
 `;
 
-const NickName = styled.div`
+export const NickName = styled.div`
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -64,7 +43,7 @@ const NickName = styled.div`
     color: ${({ theme }) => theme.colors.white};
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
     width: 80%;
     min-height: 500px;
     font-size: 18px;
@@ -74,7 +53,7 @@ const Content = styled.div`
     color: ${({ theme }) => theme.colors.white};
 `;
 
-const CommentBox = styled.div`
+export const CommentBox = styled.div`
     position: absolute;
     bottom: 20px;
     display: flex;
@@ -89,26 +68,26 @@ const CommentBox = styled.div`
     overflow: auto;
 `;
 
-const Column = styled.div`
+export const Column = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 `;
 
-const Icon = styled(FontAwesomeIcon)`
+export const Icon = styled(FontAwesomeIcon)`
     font-size: 30px;
     color: ${({ theme }) => theme.colors.white};
 `;
 
-const UserName = styled.div`
+export const UserName = styled.div`
     font-size: 16px;
     text-align: center;
     margin-top: 10px;
     color: ${({ theme }) => theme.colors.white};
 `;
 
-const Comment = styled.div`
+export const Comment = styled.div`
     margin-left: 20px;
     font-size: 18px;
     color: ${({ theme }) => theme.colors.white};

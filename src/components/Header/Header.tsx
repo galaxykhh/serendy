@@ -3,17 +3,15 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react';
 import { TEXTLOGO_URL } from '../../config';
 import userStore from '../../store/userStore';
-import { pushHistory } from '../../Hooks/pushHistory';
-
-type DisplayType = 'block' | 'none';
+import { usePush } from '../../hook/usePush';
+import { DisplayType } from '../../interfaces';
 
 const Header: React.FC = observer(() => {
-
-    const history = pushHistory();
+    const push = usePush();
 
     return (
         <LogoBox visible={userStore.isSignIn ? 'block' : 'none'}
-            onClick={history.pushMain}
+            onClick={push.pushMain}
         >
             <Logo />
         </LogoBox>

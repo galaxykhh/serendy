@@ -26,7 +26,7 @@ class ChatStore {
             handleFind: action,
             handleSearch: action.bound,
             handleMatched: action,
-            handleReceiveMsg: action.bound,
+            handleReceiveMsg: action,
             handlePushChat: action,
             handleFinished: action,
             stopChat: action.bound,

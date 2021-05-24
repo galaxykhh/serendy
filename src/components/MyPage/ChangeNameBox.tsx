@@ -4,12 +4,12 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
-import { pushHistory } from '../../Hooks/pushHistory';
+import { usePush } from '../../hook/usePush';
 import { INickName } from '../../interfaces/index';
 
 const ChangeNameBox: React.FC = () => {
 
-    const history = pushHistory();
+    const push = usePush();
 
     const { register, handleSubmit, formState: { errors } } = useForm<INickName>();
 
@@ -18,29 +18,34 @@ const ChangeNameBox: React.FC = () => {
             account: userStore.user?.account,
             ...nickName,
         };
-        userStore.changeName(userData, history.pushLogin);
+        userStore.changeName(userData, push.pushLogin);
     };
 
     return (
-        <Container>
-            <Column>
-                <Text> 변경할 닉네임을 입력해주세요 </Text>
-                <Text style={{ color: 'plum', fontSize: '16px' }} > (닉네임은 중복이 가능합니다) </Text>
-                <InputBox>
-                    <Icon icon={faPen} />
-                    <Input {...register('nickName', {
-                        required: '변경할 닉네임을 입력해주세요',
-                        pattern: { value: /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/, message: '닉네임에 적합한 문자가 아닙니다'},
-                        minLength: { value: 2, message: '닉네임이 너무 짧아요' },
-                        maxLength: { value: 19, message: '닉네임이 너무 길어요' },
-                    })} />
-                </InputBox>
-                <TextBox>
-                    {errors.nickName && <ErrorMsg> {errors.nickName.message} </ErrorMsg>}
-                </TextBox>
-                <Button onClick={handleSubmit(onSubmit)} > 변경하기 </Button>
-            </Column>
-        </Container>
+        <form onSubmit={handleSubmit(onSubmit)} >
+            <Container>
+                <Column>
+                    <Text> 변경할 닉네임을 입력해주세요 </Text>
+                    <Text style={{ color: 'plum', fontSize: '16px' }} > (닉네임은 중복이 가능합니다) </Text>
+                    <InputBox>
+                        <Icon icon={faPen} />
+                        <Input {...register('nickName', {
+                            required: '변경할 닉네임을 입력해주세요',
+                            pattern: { value: /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/, message: '닉네임에 적합한 문자가 아닙니다'},
+                            minLength: { value: 2, message: '닉네임이 너무 짧아요' },
+                            maxLength: { value: 19, message: '닉네임이 너무 길어요' },
+                        })} />
+                    </InputBox>
+                    <TextBox>
+                        {errors.nickName && <ErrorMsg> {errors.nickName.message} </ErrorMsg>}
+                    </TextBox>
+                    <Button onClick={handleSubmit(onSubmit)}
+                        type='submit'
+                    >
+                        변경하기</Button>
+                </Column>
+            </Container>
+        </form>
     );
 };
 

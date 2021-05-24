@@ -1,49 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PostBox from '../components/RecipientsPage/PostBox';
 import CenterView from '../components/publicComponents/CenterView';
 import Container from '../components/publicComponents/Container';
-import { usePost } from '../Hooks/usePost';
 import { theme } from '../style/theme';
 import Loader from 'react-loader-spinner';
 import View from '../components/RecipientsPage/View';
+import postStore from '../store/postStore';
+import { observer } from 'mobx-react';
 
-
-const RecipientsPage: React.FC = () => {
-    
-    const post = usePost();
+const RecipientsPage: React.FC = observer(() => {
+    const commentInput = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
-        post.getReceivedPosts(); 
+        postStore.getReceivedPosts(); 
+    }, []); //eslint-disable-line
+
+    useEffect(() => {
+        return () => {
+            postStore.resetReceivedPosts();
+        }
     }, []); //eslint-disable-line
 
     return (
         <Container>
             <CenterView>
+                {postStore.isLoading ?
+                    <LoaderBox>
+                        <Loader type="Circles"
+                            color={theme.colors.plum}
+                            height={60}
+                            width={60}
+                        />
+                    </LoaderBox> :
                     <Row>
-                        {!post.isLoading ?
-                            <>
-                                <PostBox receivedPosts={post.receivedPosts}
-                                        onClick={post.handleReceivedOne}
-                                        />                        
-                                <View currentReceivedPost={post.currentReceivedPost}
-                                    commentArea={post.commentArea}
-                                    sendComment={post.sendComment}
-                                    />
-                            </> :
-                            <LoaderBox>
-                                <Loader type="Circles"
-                                        color={theme.colors.plum}
-                                        height={60}
-                                        width={60}
-                                        />
-                            </LoaderBox>
-                        }
-                    </Row>
+                        <PostBox receivedPosts={postStore.receivedPosts}
+                            showPost={postStore.handleReceivedOne}
+                        />                        
+                        <View currentReceivedPost={postStore.currentReceivedPost}
+                            commentInput={commentInput}
+                            sendComment={() => postStore.sendComment(commentInput.current?.value)}
+                        />
+                    </Row>   
+                }
             </CenterView>
         </Container>
     );
-};
+});
 
 export default RecipientsPage;
 

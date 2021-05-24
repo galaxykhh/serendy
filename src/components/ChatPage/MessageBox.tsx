@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-interface IMessageBox {
-    nickName: string;
-    message: string;
-    socketID: boolean;
-};
+import { IMessageBox } from '../../interfaces';
 
 const MessageBox: React.FC<IMessageBox>= ({ nickName, message, socketID }) => {
     return (

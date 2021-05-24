@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { IPostList } from '../../interfaces/index';
 
-const Post: React.FC<IPostList> = ({ nickName, content, onClick }) => {
+const Post: React.FC<IPostList> = ({ nickName, content, showPost }) => {
     return (
-        <Box onClick={onClick} >
+        <Box onClick={showPost} >
             <Icon icon={faEnvelope} />
             <Column>
                 <Stranger> 보낸 사람 : {nickName} </Stranger>

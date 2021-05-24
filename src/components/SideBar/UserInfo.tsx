@@ -5,11 +5,11 @@ import { faClipboard, faDoorOpen, faUserAlt } from '@fortawesome/free-solid-svg-
 import userStore from '../../store/userStore';
 import { observer } from 'mobx-react';
 import { DisplayType } from '../../interfaces/index';
-import { useHistorys } from '../../Hooks/useHistorys';
+import { pushHistory } from '../../Hooks/pushHistory';
 
 const UserInfo: React.FC = observer(() => {
 
-    const history = useHistorys();
+    const history = pushHistory();
 
     return (
         <Container>
@@ -64,10 +64,7 @@ const Container = styled.div`
     };
 `;
 
-const Icon = styled(FontAwesomeIcon)<{
-    iconsize: string
-    visible?: DisplayType;
-}>`
+const Icon = styled(FontAwesomeIcon)<{ iconsize: string, visible?: DisplayType }>`
     font-size: ${({ iconsize }) => iconsize};
     color: ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
@@ -76,12 +73,14 @@ const Icon = styled(FontAwesomeIcon)<{
 const UserIcon = styled(Icon)`
 `;
 
-const Text = styled.span<{ 
+interface IText {
     size?: string;
     color?: string;
     ml?: string;
     mt?: string;
-}>`
+};
+
+const Text = styled.span<IText>`
     font-size: ${({ size }) => size};
     color: ${({ theme }) => theme.colors.white};
     margin-left: ${({ ml }) => ml};

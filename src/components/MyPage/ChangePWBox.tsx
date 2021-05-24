@@ -4,11 +4,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
-import { useHistorys } from '../../Hooks/useHistorys';
+import { pushHistory } from '../../Hooks/pushHistory';
 import { IPassword } from '../../interfaces/index';
 
 const ChangePWBox: React.FC = () => {
-    const history = useHistorys();
+    const history = pushHistory();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IPassword>();
 
     const onSubmit: SubmitHandler<IPassword> = (data) => {
@@ -26,13 +26,13 @@ const ChangePWBox: React.FC = () => {
                 <InputBox>
                     <Icon icon={faLock} />
                     <Input placeholder='변경할 비밀번호'
-                           type='password'
-                           {...register('password', {
-                           required: '변경할 비밀번호를 입력해주세요',
-                           minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
-                           maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' },
+                        type='password'
+                        {...register('password', {
+                            required: '변경할 비밀번호를 입력해주세요',
+                            minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
+                            maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' },
                         })}
-                          />
+                    />
                 </InputBox>
                 <TextBox>
                     {errors.password && <ErrorMsg> {errors.password.message} </ErrorMsg>}
@@ -40,12 +40,12 @@ const ChangePWBox: React.FC = () => {
                 <InputBox style={{ marginTop: '-15px' }} >
                     <Icon icon={faLock} />
                     <Input placeholder='비밀번호 확인'
-                           type='password'
-                           {...register('passwordCheck', {
-                               required: true,
-                               validate: check => check === watch('password'),
-                           })}
-                           />
+                        type='password'
+                        {...register('passwordCheck', {
+                            required: true,
+                            validate: check => check === watch('password'),
+                        })}
+                    />
                 </InputBox>
                 <TextBox>
                 {!errors.password && errors.passwordCheck ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : <ErrorMsg>ㅤ</ErrorMsg>}

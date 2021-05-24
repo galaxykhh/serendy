@@ -30,9 +30,7 @@ const MessageBox: React.FC<IMessageBox>= ({ nickName, message, socketID }) => {
 
 export default MessageBox;
 
-const Row = styled.div<{
-    fd: string
-}>`
+const Row = styled.div<{ fd: string }>`
     position: relative;
     display: flex;
     flex-direction: ${({ fd }) => fd};

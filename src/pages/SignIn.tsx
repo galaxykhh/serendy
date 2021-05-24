@@ -6,11 +6,11 @@ import SignInBox from '../components/SignIn/SignInBox';
 import { TEXTLOGO_URL } from '../config';
 import { DisplayType } from '../interfaces';
 import userStore from '../store/userStore';
-import { useHistorys } from '../Hooks/useHistorys';
+import { pushHistory } from '../Hooks/pushHistory';
 
 const SignIn: React.FC = observer(() => {
 
-    const history = useHistorys();
+    const history = pushHistory();
 
     useEffect(() => {
         userStore.signInWithToken(history.pushLoggedUser);
@@ -26,9 +26,7 @@ const SignIn: React.FC = observer(() => {
 
 export default SignIn;
 
-const TextLogo = styled.div<{
-    display: DisplayType
-}>`
+const TextLogo = styled.div<{ display: DisplayType }>`
     width: 600px;
     height: 200px;
     background-image: url(${TEXTLOGO_URL});

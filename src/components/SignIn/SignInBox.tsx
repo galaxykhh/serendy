@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
-import { useHistorys } from '../../Hooks/useHistorys';
+import { pushHistory } from '../../Hooks/pushHistory';
 import userStore from '../../store/userStore';
 import { zoomIn } from '../../style/keyframes';
 import { observer } from 'mobx-react';
@@ -14,7 +14,7 @@ import { ISignInData } from '../../interfaces';
 const SignInBox: React.FC = observer(() => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
     const signInBtn = useRef<HTMLButtonElement>(null);
-    const history = useHistorys();
+    const history = pushHistory();
 
     // 엔터 인지
     const entered = (e: React.KeyboardEvent): void => {
@@ -46,15 +46,17 @@ const SignInBox: React.FC = observer(() => {
                     <Row>
                         <Icon icon={faUserAlt}
                             color={errors.account ? (theme.colors.red) : (theme.colors.white)}
+                        />
+                        <form>
+                            <Input placeholder='아이디'
+                                {...register('account', {
+                                    required: '아이디를 입력해주세요',
+                                    pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
+                                    minLength: { value: 5, message: '아이디가 너무 짧아요' },
+                                    maxLength: { value: 19, message: '아이디가 너무 길어요' },
+                                    })}
                             />
-                        <Input placeholder='아이디'
-                            {...register('account', {
-                                required: '아이디를 입력해주세요',
-                                pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
-                                minLength: { value: 5, message: '아이디가 너무 짧아요' },
-                                maxLength: { value: 19, message: '아이디가 너무 길어요' },
-                                })}
-                                />
+                        </form>
                     </Row>
                     {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
                 </Column>
@@ -63,14 +65,17 @@ const SignInBox: React.FC = observer(() => {
                     <Row>
                         <Icon icon={faLock}
                             color={errors.password ? (theme.colors.red) : (theme.colors.white)}
+                        />
+                        <form>
+                            <Input placeholder='비밀번호'
+                                autoComplete='off'
+                                type='password'
+                                onKeyPress={entered}
+                                {...register('password', {
+                                    required: '비밀번호를 입력해주세요',
+                                })}
                             />
-                        <Input placeholder='비밀번호'
-                            type='password'
-                            onKeyPress={entered}
-                            {...register('password', {
-                                required: '비밀번호를 입력해주세요',
-                            })}
-                            />
+                        </form>
                     </Row>
                     {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : 'ㅤ'}
                 </Column>
@@ -79,7 +84,7 @@ const SignInBox: React.FC = observer(() => {
 
                     <Button onClick={handleSubmit(onSubmit)}
                             ref={signInBtn}
-                            >
+                    >
                         로그인
                     </Button>
                 </ButtonBox>
@@ -89,10 +94,10 @@ const SignInBox: React.FC = observer(() => {
                 </ForgotPW>
             </Box> : 
             <Loader type="Circles"
-                    color={theme.colors.plum}
-                    height={60}
-                    width={60}
-                    />
+                color={theme.colors.plum}
+                height={60}
+                width={60}
+            />
             }
         </>
     );
@@ -145,7 +150,7 @@ const ButtonBox = styled.div`
 
 const Input = styled.input`
     all: unset;
-    width: 400px;
+    width: 350px;
     height: 40px;
     font-size: 21px;
     padding-left: 20px;

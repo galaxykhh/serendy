@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistorys } from '../../Hooks/useHistorys';
+import { pushHistory } from '../../Hooks/pushHistory';
 import { zoomIn } from '../../style/keyframes';
 
 const Success: React.FC = () => {
 
-    const history = useHistorys();
+    const history = pushHistory();
 
     return (
         <Box>

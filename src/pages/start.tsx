@@ -4,11 +4,11 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 import StartLogo from '../components/Start/StartLogo';
 import Blocks from '../components/Start/Blocks';
-import { useHistorys } from '../Hooks/useHistorys';
+import { pushHistory } from '../Hooks/pushHistory';
 
 const Start: React.FC = () => {
 
-    const history = useHistorys();
+    const history = pushHistory();
 
     useEffect(() => {
         Aos.init();

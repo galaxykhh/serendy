@@ -23,17 +23,16 @@ const SenderPage: React.FC = () => {
                         {!post.isLoading ? 
                             <>
                                 <PostBox sentPosts={post.sentPosts}
-                                         onClick={post.handleSentOne}
-                                         />
-                                <View currentSentPost={post.currentSentPost}
-                                      />
+                                    onClick={post.handleSentOne}
+                                />
+                                <View currentSentPost={post.currentSentPost} />
                             </> :
                             <LoaderBox>
                                 <Loader type="Circles"
-                                        color={theme.colors.plum}
-                                        height={60}
-                                        width={60}
-                                        />
+                                    color={theme.colors.plum}
+                                    height={60}
+                                    width={60}
+                                />
                             </LoaderBox>
                         }
                     </Row>

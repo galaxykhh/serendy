@@ -12,7 +12,7 @@ const SignUp: React.FC = observer(() => {
     return (
         <Container>
             <TextLogo />
-            {isSuccess ? <Success /> : <SignUpBox success={() => setIsSuccess(true)} />}
+            {isSuccess ? <Success /> : <SignUpBox submit={() => setIsSuccess(true)} />}
         </Container>
     );
 });

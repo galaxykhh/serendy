@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import userStore from '../store/userStore';
 
-export const useHistorys = () => {
+export const pushHistory = () => {
     const history = useHistory();
 
     const pushStart = ():void => {

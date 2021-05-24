@@ -2,40 +2,44 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faPaperPlane, faSignInAlt, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
-import { useHistorys } from '../../Hooks/useHistorys';
+import { pushHistory } from '../../Hooks/pushHistory';
 import { theme } from '../../style/theme';
 
 const Category: React.FC = () => {
 
-    const history = useHistorys();
+    const history = pushHistory();
 
     return (
         <Container>
             <Box onClick={history.pushChatPage}>
                 <IconBox>
                     <Icon color={theme.colors.plum}
-                          icon={faComments} />
+                        icon={faComments}
+                    />
                 </IconBox>
                 <Text> 대화 하기 </Text>
             </Box>
             <Box onClick={history.pushPostPage} >
                 <IconBox>
                     <Icon color={theme.colors.plum}
-                          icon={faPaperPlane} />
+                        icon={faPaperPlane}
+                    />
                 </IconBox>
                 <Text> 편지 보내기 </Text>
             </Box>
             <Box onClick={history.pushRecipientsPage} >
                 <IconBox>
                     <Icon color={theme.colors.yellow}
-                          icon={faEnvelopeOpenText} />
+                        icon={faEnvelopeOpenText}
+                    />
                 </IconBox>
                 <Text> 받은 편지함 </Text>
             </Box>
             <Box onClick={history.pushSenderPage} >
                 <IconBox>
                     <Icon color={theme.colors.yellow}
-                          icon={faSignInAlt} />
+                        icon={faSignInAlt}
+                    />
                 </IconBox>
                 <Text> 보낸 편지함 </Text>
             </Box>

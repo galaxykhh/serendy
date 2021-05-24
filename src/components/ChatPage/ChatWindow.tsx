@@ -1,145 +1,102 @@
-import React, { useEffect }  from 'react';
-import styled, { Keyframes } from 'styled-components';
-import { zoomIn, zoomOut } from '../../style/keyframes';
-import Loader from 'react-loader-spinner';
-import { theme } from '../../style/theme';
-import { useChat } from '../../Hooks/useChat';
-import { VisibilityType } from '../../interfaces/index';
-import { observer } from 'mobx-react';
-import MessageBox from './MessageBox';
-import userStore from '../../store/userStore';
+import React, { useRef, useEffect } from 'react'
+import styled, { Keyframes } from 'styled-components'
+import { observer } from 'mobx-react'
+import { VisibilityType } from '../../interfaces'
+import { zoomIn, zoomOut } from '../../style/keyframes'
+import userStore from '../../store/userStore'
+import chatStore from '../../store/chatStore'
+import MessageBox from './MessageBox'
 
 const ChatWindow: React.FC = observer(() => {
+    const sendBtn = useRef<HTMLButtonElement>(null);
+    const input = useRef<HTMLInputElement>(null);
+    const screen = useRef<HTMLDivElement>(null);
 
-    const chat = useChat();
+    const resetInput = (): void => {
+        input.current!.value = '';
+    };
+
+    const handleEnter = (e: React.KeyboardEvent): void => {
+        if (e.key === 'Enter') {
+            sendBtn.current?.click();
+        };
+    };
+
+    const handleSendMsg = (): void => {
+        if (input.current?.value.length !== 0) {
+            const nickName = userStore.user?.nickName;
+            const message = input.current?.value;
+            const data = { nickName, message };
+            userStore.userSocket?.emit('chat', data);
+            input.current!.value = '';
+        } else {
+            return;
+        };
+    };
+
+    const scrollToBottom = (): void => {
+        if (screen.current?.scrollHeight && screen.current?.clientHeight) {
+            const scroll = screen.current.scrollHeight - screen.current.clientHeight;
+            screen.current?.scrollTo(0, scroll);
+        } else {
+            return;
+        };
+    };
 
     useEffect(() => {
-        chat.getMatchedUser();
-        chat.handleReceiveMsg();
-        chat.chatStopped(); // 상대방이 대화종료를 했을때
-    }, []); // eslint-disable-line
-
-    useEffect(() => { 
-        return () => {
-            chat.stopChat();
-        };
+        chatStore.handleMatched();
+        chatStore.handleReceiveMsg();
+        chatStore.chatStopped();
     }, []); // eslint-disable-line
 
     useEffect(() => {
-        chat.handlePushChat();
+        resetInput();
+    }, [chatStore.isFinished]) // eslint-disable-line
+
+    useEffect(() => {
         return () => {
-            chat.setRecentChat({ nickName: '', message: '', socketID: '' });
-            chat.scrollToBottom();
-        };
-    }, [chat.recentChat.message]); // eslint-disable-line
+            chatStore.stopChat();
+            chatStore.reset();
+        }
+    }, []); // eslint-disable-line
+
+    useEffect(() => {
+        chatStore.handlePushChat();
+        scrollToBottom();
+        chatStore.resetRecentChat();
+    }, [chatStore.recentChat.message]); // eslint-disable-line
 
     return (
-        <Row>
-            <ChatBox animation={chat.isMatched ? zoomIn : zoomOut}
-                     visibility={chat.display}
-                     >
-                <Screen ref={chat.screen} >
-                    {chat.chatLog.map((data, index) => (
-                        <MessageBox message={data.message}
-                                    nickName={data.nickName}
-                                    socketID={data.socketID === userStore.socketID}
-                                    key={index}
-                                    />
-                    ))}
-                </Screen>
-                <SenderBox>
-                    <Input ref={chat.input}
-                           onKeyPress={chat.handleEnter}
-                           />
-                    <SendBtn ref={chat.sendBtn}
-                             onClick={chat.handleSendMsg}
-                             disabled={chat.chatFinished ? true : false}
-                             >
-                        전송
-                    </SendBtn>
-                </SenderBox>
-            </ChatBox>
-
-            <HandlerContainer>
-                {chat.isSearching ? 
-                    <>
-                        {chat.isMatched ? 
-                            <>
-                                {chat.chatFinished ? 
-                                    <>
-                                        <BigMent> 대화가 종료되었어요 </BigMent>
-                                        <br />
-                                        <br />
-                                        <Ment size='18px' > 상대방은 어떤 사람이었을까요? </Ment>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <BtnBox>
-                                            <StartBtn onClick={chat.reStart} > 다시하기 </StartBtn>
-                                        </BtnBox>
-                                    </> :
-                                    <>
-                                        <BigMent> 상대와 연결되었어요 </BigMent>
-                                        <br />
-                                        <br />
-                                        <Ment size='18px'> 먼저 인사 해보시는 건 어떠세요? </Ment>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <BtnBox>
-                                            <CancelBtn onClick={chat.stopChat}> 대화방 나가기 </CancelBtn>
-                                        </BtnBox>
-                                    </>}
-                            </> : 
-                            <>
-                                <BigMent style={{ marginBottom: '30px' }} > 상대를 찾고 있어요 </BigMent>
-                                <Loader type="Circles" color={theme.colors.plum} height='40px' width='40px' />
-                                <BtnBox>
-                                    <CancelBtn onClick={chat.handleSearch} > 취소하기 </CancelBtn>
-                                </BtnBox>
-                            </>}
-                    </> :
-                    <>
-                        <BigMent> 상대를 찾고 대화를 시작하세요 ! </BigMent>
-                        <br />
-                        
-                        <Rule>
-                            <Ment size='18px'> · 대화는 서로가 설정한 이름으로 진행돼요 </Ment>
-                            <Ment size='18px'> · 중간에 대화를 나가지 않으면 대화를 계속 할 수 있어요 </Ment>
-                            <Ment size='18px'> · 누군가 대화방을 나가게 되면 대화가 종료돼요 </Ment>
-                        </Rule>
-                        <br />
-                        <BtnBox>
-                            <StartBtn onClick={chat.handleSearch} > 상대 찾기 </StartBtn>
-                        </BtnBox>
-                    </>}
-            </HandlerContainer>
-            
-        </Row>
+        <ChatBox animation={chatStore.isMatched ? zoomIn : zoomOut}
+            visibility={chatStore.visible}
+        >
+            <Screen ref={screen} >
+                {chatStore.chatLog.map((data, i) => (
+                    <MessageBox message={data.message}
+                        nickName={data.nickName}
+                        socketID={data.socketID === userStore.socketID}
+                        key={i}
+                    />
+                ))}
+            </Screen>
+            <SenderBox>
+                <Input ref={input}
+                    onKeyPress={handleEnter}
+                />
+                <SendBtn ref={sendBtn}
+                    onClick={handleSendMsg}
+                    disabled={chatStore.isFinished ? true : false}
+                >
+                    전송
+                </SendBtn>
+            </SenderBox>
+        </ChatBox>
     );
 });
 
 export default ChatWindow;
 
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    @media only screen and (max-width: 1450px) {
-        flex-direction: column;
-    };
-    @media only screen and (max-width: 600px) {
-        flex-direction: column-reverse;
-    };
-`;
-
-const ChatBox = styled.div<{
-    animation: Keyframes,
-    visibility: VisibilityType,
-}>`
+const ChatBox = styled.div<{ animation: Keyframes, visibility: VisibilityType }>`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -227,96 +184,5 @@ const SendBtn = styled.button`
     };
     @media only screen and (max-width: 600px) {
         width: 18%;
-    };
-`;
-
-const HandlerContainer = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-width: 300px;
-    height: 740px;
-    border-radius: 10px;
-    background-color: ${({ theme }) => theme.colors.main60};
-    @media only screen and (max-width: 1450px) {
-        height: 70%;
-    };
-`;
-
-const Rule = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-`;
-
-const Ment = styled.div<{
-    size?: string
-}>`
-    font-size: 17px;
-    margin-bottom: 10px;
-    white-space: nowrap;
-    color: ${({ theme }) => theme.colors.white};
-    @media only screen and (max-width: 1520px) {
-        font-size: 15px;
-    };
-    @media only screen and (max-width: 600px) {
-        font-size: 11px;
-    };
-`;
-
-const BigMent = styled(Ment)`
-    font-size: 30px;
-    color: ${({ theme }) => theme.colors.white};
-    @media only screen and (max-width: 1520px) {
-        font-size: 25px;
-    };
-    @media only screen and (max-width: 600px) {
-        font-size: 17px;
-    };
-`;
-
-const StartBtn = styled(SendBtn)`
-    width: 150px;
-    height: 70px;
-    font-size: 20px;
-    &:hover {
-        color: ${({ theme }) => theme.colors.black};
-    };
-    @media only screen and (max-width: 1450px) {
-        width: 100px;
-        height: 40px;
-        font-size: 17px;
-        margin-top: 15px;
-    };
-    @media only screen and (max-width: 600px) {
-        width: 90px;
-        height: 25px;
-        font-size: 13px;
-    };
-`;
-
-const CancelBtn = styled(StartBtn)`
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.red};
-        color: ${({ theme }) => theme.colors.white};
-    };
-`;
-
-const BtnBox = styled.div`
-    position: absolute;
-    bottom: 70px;
-    height: 35%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @media only screen and (max-width: 1450px) {
-        bottom: 10px;
-    };
-    @media only screen and (max-width: 600px) {
-        bottom: 0px;
     };
 `;

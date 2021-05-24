@@ -6,12 +6,12 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zoomIn } from '../../style/keyframes';
 import { theme } from '../../style/theme';
 import userStore from '../../store/userStore';
-import { useHistorys } from '../../Hooks/useHistorys';
+import { pushHistory } from '../../Hooks/pushHistory';
 import { IFindPW } from '../../interfaces/index';
 
 const FindPWBox: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFindPW>();
-    const history = useHistorys();
+    const history = pushHistory();
     const findBtn = useRef<HTMLButtonElement>(null);
 
     const entered = (e: React.KeyboardEvent): void => {
@@ -29,13 +29,13 @@ const FindPWBox: React.FC = () => {
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
-                          color={errors.account ? (theme.colors.red) : (theme.colors.white)}
+                        color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                     />
                     <Input placeholder='아이디'
-                           {...register('account', {
-                               required: '아이디를 입력해주세요',
-                            })}
-                            />
+                        {...register('account', {
+                            required: '아이디를 입력해주세요',
+                        })}
+                    />
                 </Row>
                 {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
             </Column>
@@ -43,22 +43,22 @@ const FindPWBox: React.FC = () => {
             <Column>
                 <Row>
                     <Icon icon={faUserSecret}
-                          color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
-                          />
+                        color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
+                    />
                     <Input placeholder='암호 메세지'
-                           onKeyPress={entered}
-                           {...register('secretMessage', {
-                               required: '암호 메세지를 작성해주세요',
-                           })}
-                           />
+                        onKeyPress={entered}
+                        {...register('secretMessage', {
+                            required: '암호 메세지를 작성해주세요',
+                        })}
+                    />
                 </Row>
                 {errors.secretMessage && <ErrorMsg> {errors.secretMessage.message} </ErrorMsg>}
             </Column>
             <Button onClick={handleSubmit(onSubmit)}
-                    ref={findBtn}
-                    >
+                ref={findBtn}
+            >
                 비밀번호 찾기
-                </Button>
+            </Button>
         </Box>
     );
 };

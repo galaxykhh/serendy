@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { theme } from '../../style/theme';
-import serendyRepository from '../../repository/authRepository';
+import authRepository from '../../repository/authRepository';
 import { zoomIn } from '../../style/keyframes';
 import { ISignUpData } from '../../interfaces';
 
-const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
+const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
     const [isAlready, setIsAlready] = useState<boolean>(false); // 계정 중복체크
     const signUpBtn = useRef<HTMLButtonElement>(null);
@@ -23,9 +23,9 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
         try{
-            const response = await serendyRepository.signUp(data);
+            const response = await authRepository.signUp(data);
             if ((response.data.message = 'SignUp Success')) {
-                success(); // SignIn props
+                submit();
             }
         } catch(err) {
             alert('현재 서버가 점검중입니다');
@@ -39,7 +39,7 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
             return
         } else {
             const account = watch('account');
-            const response = await serendyRepository.accountCheck(account);
+            const response = await authRepository.accountCheck(account);
             if ((response.data.message === 'available' )) {
                 return setIsAlready(true);
             } else if ((response.data.message === 'already exist')){
@@ -69,16 +69,18 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
-                          color={errors.account ? (theme.colors.red) : (theme.colors.white)}
-                          />
-                    <Input placeholder='아이디'
-                           {...register('account', {
-                               required: '아이디를 입력해주세요',
-                               pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
-                               minLength: { value: 6, message: '아이디는 최소 6자리입니다' },
-                               maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
-                           })}
-                           />
+                        color={errors.account ? (theme.colors.red) : (theme.colors.white)}
+                    />
+                    <form>
+                        <Input placeholder='아이디'
+                            {...register('account', {
+                                required: '아이디를 입력해주세요',
+                                pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
+                                minLength: { value: 6, message: '아이디는 최소 6자리입니다' },
+                                maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
+                            })}
+                        />
+                    </form>
                     <DupliBtn onClick={accountCheck}> 중복확인 </DupliBtn>
                 </Row>
                 {!isAlready ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg style={{ color: theme.colors.green }}> 사용가능한 아이디입니다 </Msg> }
@@ -86,57 +88,63 @@ const SignUpBox: React.FC<{ success: () => void }>= ({ success }) => {
             <Column>
                 <Row>
                     <Icon icon={faLock}
-                          color={errors.password ? (theme.colors.red) : (theme.colors.white)}
-                          />
-                    <Input placeholder='비밀번호'
-                           type='password'
-                           {...register('password', {
-                               required: '비밀번호를 입력해주세요',
-                               minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
-                               maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' }
-                           })}
-                           />
+                        color={errors.password ? (theme.colors.red) : (theme.colors.white)}
+                    />
+                    <form>
+                        <Input placeholder='비밀번호'
+                            autoComplete='off'
+                            type='password'
+                            {...register('password', {
+                                required: '비밀번호를 입력해주세요',
+                                minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
+                                maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' }
+                            })}
+                        />
+                    </form>
                 </Row>
                 {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
             <Column>
                 <Row>
                     <Icon icon={faCheck}
-                          color={errors.check ? (theme.colors.red) : (theme.colors.white)}
-                          />
-                    <Input placeholder='비밀번호 확인'
-                           type='password'
-                           {...register('check', {
-                               required: true,
-                               validate: check => check === watch('password'),
-                           })}
-                           />
+                        color={errors.check ? (theme.colors.red) : (theme.colors.white)}
+                    />
+                    <form>
+                        <Input placeholder='비밀번호 확인'
+                            autoComplete='off'
+                            type='password'
+                            {...register('check', {
+                                required: true,
+                                validate: check => check === watch('password'),
+                            })}
+                        />
+                    </form>
                 </Row>
                 {!errors.password && errors.check ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
             <Column>
                 <Row>
                     <Icon icon={faUserSecret}
-                          color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
-                          />
+                        color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
+                    />
                     <Input placeholder='암호 메세지'
-                           onKeyPress={entered}
-                           {...register('secretMessage', {
-                               required: '암호 메세지를 작성해주세요',
-                               minLength: { value: 3, message: '암호 메세지는 최소 3자 입니다' },
-                               maxLength: { value: 20, message: '암호 메시지는 최대 20자 입니다' }
-                           })}
-                           />
+                        onKeyPress={entered}
+                        {...register('secretMessage', {
+                            required: '암호 메세지를 작성해주세요',
+                            minLength: { value: 3, message: '암호 메세지는 최소 3자 입니다' },
+                            maxLength: { value: 20, message: '암호 메시지는 최대 20자 입니다' }
+                        })}
+                    />
                 </Row>
                 {errors.secretMessage ? 
-                                        <>
-                                            <ErrorMsg> {errors.secretMessage.message} </ErrorMsg>
-                                            <Msg>ㅤ</Msg>
-                                        </> :
-                                        <>
-                                            <Msg> 암호 메세지는 나중에 비밀번호 찾기에 사용됩니다 </Msg>
-                                            <Msg> 자신만의 개성 넘치는 단어로 설정해보세요! </Msg>
-                                        </>
+                    <>
+                        <ErrorMsg> {errors.secretMessage.message} </ErrorMsg>
+                        <Msg>ㅤ</Msg>
+                    </> :
+                    <>
+                        <Msg> 암호 메세지는 나중에 비밀번호 찾기에 사용됩니다 </Msg>
+                        <Msg> 자신만의 개성 넘치는 단어로 설정해보세요! </Msg>
+                    </>
                 }
             </Column>
                 <Button onClick={handleSubmit(onSubmit)}
@@ -186,7 +194,7 @@ const Row = styled.div`
 
 const Input = styled.input`
     all: unset;
-    width: 400px;
+    width: 350px;
     height: 40px;
     font-size: 21px;
     padding-left: 20px;
@@ -225,7 +233,7 @@ const DupliBtn = styled(Button)`
     position: absolute;
     right: 0px;
     top: 0px;
-    width: 120px;
+    width: 90px;
     height: 40px;
     font-size: 19px;
     margin-bottom: 10px;
@@ -237,9 +245,7 @@ const DupliBtn = styled(Button)`
     };
 `;
 
-const Icon = styled(FontAwesomeIcon)<{
-    color: string
-}>`
+const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 35px;
     color: ${({ color }) => color};
     @media only screen and (max-width: 600px) {

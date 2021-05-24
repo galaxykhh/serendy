@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import authRepository from '../repository/authRepository';
 import { ISignInData, IPassword, INickName, IFindPW, IUserStore, IUser } from '../interfaces';
 import { Socket } from 'socket.io-client';
@@ -92,21 +92,20 @@ class UserStore implements IUserStore {
             if (!token) {
                 this.setIsLogging(false);
                 return;
-            } else if (token) {
-                const response = await authRepository.signInWidthToken();
-                if ((response.data.message === 'Invalid Token')) { // 토큰만료 또는 없음
-                    this.setIsLogging(false);
-                    return;
-                } else if ((response.data.message === 'SignIn Success')) {
-                    this.setUser({
-                        account: response.data.account,
-                        nickName: response.data.nickName,
-                    });
-                    this.setIsSignIn(true);
-                    localStorage.setItem('SerendyToken', response.data.token);
-                    this.setIsLogging(false);
-                    push();
-                };
+            } else {
+                const { data: {message, account, nickName, token}} = await authRepository.signInWidthToken();
+                runInAction(() => {
+                    if ((message === 'Invalid Token')) { // 토큰만료 또는 없음
+                        this.setIsLogging(false);
+                        return;
+                    } else if ((message === 'SignIn Success')) {
+                        this.setUser({ account , nickName });
+                        this.setIsSignIn(true);
+                        localStorage.setItem('SerendyToken', token);
+                        this.setIsLogging(false);
+                        push();
+                    };
+                });
             };
         } catch(err) {
             this.setIsLogging(false);
@@ -117,20 +116,24 @@ class UserStore implements IUserStore {
     public async signIn(userData: ISignInData, setError: () => void, push: () => void): Promise<void> {
         this.setIsLogging(true);
         try {
-            const response = await authRepository.signIn(userData);
-            if ((response.data.message === 'SignIn Fail')) {
-                this.setIsLogging(false);
-                setError();
-            } else if ((response.data.message === 'SignIn Success')) {
-                this.setUser({
-                    account: response.data.account,
-                    nickName: response.data.nickName,
-                });
-                this.setIsSignIn(true);
-                localStorage.setItem('SerendyToken', response.data.token);
-                this.setIsLogging(false);
-                push();
-            };
+            const { data: { message, account, nickName, token }} = await authRepository.signIn(userData);
+            runInAction(() => {
+                if ((message === 'SignIn Fail')) {
+                    this.setIsLogging(false);
+                    setError();
+                    return;
+                }
+                if ((message === 'SignIn Success')) {
+                    this.setUser({
+                        account: account,
+                        nickName: nickName,
+                    });
+                    this.setIsSignIn(true);
+                    localStorage.setItem('SerendyToken', token);
+                    this.setIsLogging(false);
+                    push();
+                };
+            });
         } catch(err) {
             this.setIsLogging(false);
             alert('서버 점검중입니다');
@@ -146,11 +149,13 @@ class UserStore implements IUserStore {
 
     public async changePW(data: IPassword, push: () => void): Promise<void> {
         try {
-            const response = await authRepository.changePassword(data);
-            if ((response.data.message === 'Changed')) {
-                alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
-                this.signOut(push);
-            };
+            const { data: { message }} = await authRepository.changePassword(data);
+            runInAction(() => {
+                if ((message === 'Changed')) {
+                    alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
+                    this.signOut(push);
+                };
+            });
         } catch(err) {
             alert('서버가 점검중이에요');
         };
@@ -158,11 +163,13 @@ class UserStore implements IUserStore {
 
     public async changeName(nickName: INickName, push: () => void): Promise<void> {
         try {
-            const response = await authRepository.changeName(nickName);
-            if ((response.data.message === 'Changed')) {
-                alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
-                this.signOut(push);
-            };
+            const { data: { message }} = await authRepository.changeName(nickName);
+            runInAction(() => {
+                if ((message === 'Changed')) {
+                    alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
+                    this.signOut(push);
+                };
+            });
         } catch(err) {
             alert('서버가 점검중이에요');
         };
@@ -170,13 +177,17 @@ class UserStore implements IUserStore {
 
     public async findPW(data: IFindPW, push: () => void): Promise<void> {
         try {
-            const response = await authRepository.findPW(data);
-            if ((response.data.message === 'Not Exist')) {
-                return alert('일치하는 정보가 없습니다');
-            } else if ((response.data.message === 'Valid User')) {
-                alert(`임시로 암호 메세지가\n비밀번호로 설정되었습니다\n비밀번호 변경을 꼭 해주세요`);
-                push();
-            };
+            const { data: { message }} = await authRepository.findPW(data);
+            runInAction(() => {
+                if ((message === 'Not Exist')) {
+                    alert('일치하는 정보가 없습니다');
+                    return 
+                }
+                if ((message === 'Valid User')) {
+                    alert(`임시로 암호 메세지가\n비밀번호로 설정되었습니다\n비밀번호 변경을 꼭 해주세요`);
+                    push();
+                };
+            });        
         } catch (err) {
             alert('서버가 점검중이에요');
         };

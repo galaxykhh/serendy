@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
@@ -11,19 +11,11 @@ import { ISignUpData } from '../../interfaces';
 const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
     const [isAlready, setIsAlready] = useState<boolean>(false); // 계정 중복체크
-    const signUpBtn = useRef<HTMLButtonElement>(null);
-
-    // 엔터 누를시 버튼 클릭
-    const entered = (e: React.KeyboardEvent): void => {
-        if (e.key === 'Enter') {
-            signUpBtn.current?.click();
-        };
-    };
 
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
         try{
-            const response = await authRepository.signUp(data);
+            const  response = await authRepository.signUp(data);
             if ((response.data.message = 'SignUp Success')) {
                 submit();
             }
@@ -65,22 +57,21 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
     }, [watch('account')]); // eslint-disable-line
 
     return (
+        <form onSubmit={handleSubmit(onSubmit)} >
         <Box>
             <Column>
                 <Row>
                     <Icon icon={faUserAlt}
                         color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                     />
-                    <form>
-                        <Input placeholder='아이디'
-                            {...register('account', {
-                                required: '아이디를 입력해주세요',
-                                pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
-                                minLength: { value: 6, message: '아이디는 최소 6자리입니다' },
-                                maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
-                            })}
-                        />
-                    </form>
+                    <Input placeholder='아이디'
+                        {...register('account', {
+                            required: '아이디를 입력해주세요',
+                            pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
+                            minLength: { value: 6, message: '아이디는 최소 6자리입니다' },
+                            maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
+                        })}
+                    />
                     <DupliBtn onClick={accountCheck}> 중복확인 </DupliBtn>
                 </Row>
                 {!isAlready ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg style={{ color: theme.colors.green }}> 사용가능한 아이디입니다 </Msg> }
@@ -90,17 +81,16 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                     <Icon icon={faLock}
                         color={errors.password ? (theme.colors.red) : (theme.colors.white)}
                     />
-                    <form>
-                        <Input placeholder='비밀번호'
-                            autoComplete='off'
-                            type='password'
-                            {...register('password', {
-                                required: '비밀번호를 입력해주세요',
-                                minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
-                                maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' }
-                            })}
-                        />
-                    </form>
+                    
+                    <Input placeholder='비밀번호'
+                        autoComplete='off'
+                        type='password'
+                        {...register('password', {
+                            required: '비밀번호를 입력해주세요',
+                            minLength: { value: 8, message: '비밀번호는 최소 8자리입니다' },
+                            maxLength: { value: 20, message: '비밀번호는 최대 20자리입니다' }
+                        })}
+                    />
                 </Row>
                 {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
@@ -109,16 +99,14 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                     <Icon icon={faCheck}
                         color={errors.check ? (theme.colors.red) : (theme.colors.white)}
                     />
-                    <form>
-                        <Input placeholder='비밀번호 확인'
-                            autoComplete='off'
-                            type='password'
-                            {...register('check', {
-                                required: true,
-                                validate: check => check === watch('password'),
-                            })}
-                        />
-                    </form>
+                    <Input placeholder='비밀번호 확인'
+                        autoComplete='off'
+                        type='password'
+                        {...register('check', {
+                            required: true,
+                            validate: check => check === watch('password'),
+                        })}
+                    />
                 </Row>
                 {!errors.password && errors.check ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : <Msg>ㅤ</Msg>}
             </Column>
@@ -128,7 +116,6 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                         color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
                     />
                     <Input placeholder='암호 메세지'
-                        onKeyPress={entered}
                         {...register('secretMessage', {
                             required: '암호 메세지를 작성해주세요',
                             minLength: { value: 3, message: '암호 메세지는 최소 3자 입니다' },
@@ -147,12 +134,11 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                     </>
                 }
             </Column>
-                <Button onClick={handleSubmit(onSubmit)}
-                        ref={signUpBtn}
-                        >
+                <Button type='submit'>
                     확인
                 </Button>
         </Box>
+        </form>
     );
 };
 

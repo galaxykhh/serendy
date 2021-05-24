@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
@@ -13,15 +13,7 @@ import { ISignInData } from '../../interfaces';
 
 const SignInBox: React.FC = observer(() => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
-    const signInBtn = useRef<HTMLButtonElement>(null);
     const history = pushHistory();
-
-    // 엔터 인지
-    const entered = (e: React.KeyboardEvent): void => {
-        if (e.key === 'Enter') {
-            signInBtn.current?.click();
-        };
-    };
 
     const invalid = (): void => {
         setError('account', {
@@ -41,63 +33,56 @@ const SignInBox: React.FC = observer(() => {
     return (
         <>
             {!userStore.isLogging ? 
-                <Box>
-                <Column>
-                    <Row>
-                        <Icon icon={faUserAlt}
-                            color={errors.account ? (theme.colors.red) : (theme.colors.white)}
-                        />
-                        <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Box>
+                    <Column>
+                        <Row>
+                            <Icon icon={faUserAlt}
+                                color={errors.account ? (theme.colors.red) : (theme.colors.white)}
+                            />
                             <Input placeholder='아이디'
                                 {...register('account', {
                                     required: '아이디를 입력해주세요',
                                     pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
                                     minLength: { value: 5, message: '아이디가 너무 짧아요' },
                                     maxLength: { value: 19, message: '아이디가 너무 길어요' },
-                                    })}
+                                })}
                             />
-                        </form>
-                    </Row>
-                    {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
-                </Column>
+                        </Row>
+                        {errors.account ? <ErrorMsg> {errors.account.message} </ErrorMsg> : 'ㅤ'}
+                    </Column>
 
-                <Column>
-                    <Row>
-                        <Icon icon={faLock}
-                            color={errors.password ? (theme.colors.red) : (theme.colors.white)}
-                        />
-                        <form>
+                    <Column>
+                        <Row>
+                            <Icon icon={faLock}
+                                color={errors.password ? (theme.colors.red) : (theme.colors.white)}
+                            />
                             <Input placeholder='비밀번호'
                                 autoComplete='off'
                                 type='password'
-                                onKeyPress={entered}
                                 {...register('password', {
                                     required: '비밀번호를 입력해주세요',
                                 })}
                             />
-                        </form>
-                    </Row>
-                    {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : 'ㅤ'}
-                </Column>
-                <ButtonBox>
-                    <Button onClick={history.pushSignUp} > 회원가입 </Button>
-
-                    <Button onClick={handleSubmit(onSubmit)}
-                            ref={signInBtn}
-                    >
-                        로그인
-                    </Button>
-                </ButtonBox>
-                
-                <ForgotPW onClick={history.pushFindPW} >
-                    비밀번호가 기억이 안나시나요?
-                </ForgotPW>
-            </Box> : 
-            <Loader type="Circles"
-                color={theme.colors.plum}
-                height={60}
-                width={60}
-            />
+                        </Row>
+                        {errors.password ? <ErrorMsg> {errors.password.message} </ErrorMsg> : 'ㅤ'}
+                    </Column>
+                    <ButtonBox>
+                        <Button type='submit'>
+                            로그인
+                        </Button>
+                        <Button onClick={history.pushSignUp}>회원가입</Button>
+                    </ButtonBox>
+                        <ForgotPW onClick={history.pushFindPW} >
+                            비밀번호가 기억이 안나시나요?
+                        </ForgotPW>
+                    </Box> 
+                </form> : 
+                <Loader type="Circles"
+                    color={theme.colors.plum}
+                    height={60}
+                    width={60}
+                />
             }
         </>
     );
@@ -185,9 +170,7 @@ const Button = styled.button`
     };
 `;
 
-const Icon = styled(FontAwesomeIcon)<{
-    color: string
-}>`
+const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 35px;
     color: ${({ color }) => color};
     @media only screen and (max-width: 600px) {

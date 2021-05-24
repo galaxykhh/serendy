@@ -5,9 +5,6 @@ import Container from '../components/PublicComponents/Container'
 import PostWindow from '../components/PostPage/PostWindow';
 import PostSent from '../components/PostPage/PostSent';
 import postStore from '../store/postStore';
-import userStore from '../store/userStore';
-import postRepository from '../repository/postRepository';
-
 
 const PostPage: React.FC = observer(() => {
     const [isSent , setIsSent] = useState<boolean>(false);
@@ -15,7 +12,6 @@ const PostPage: React.FC = observer(() => {
 
     const toggleIsSent = () => {
         setIsSent(!isSent);
-        console.log(isSent);
     };
 
     return (
@@ -23,7 +19,7 @@ const PostPage: React.FC = observer(() => {
             <CenterView>
                 {isSent ? 
                     <PostSent reset={toggleIsSent} /> : 
-                    <PostWindow postSend={() => postStore.sendPost(postArea.current?.value, () => toggleIsSent)}
+                    <PostWindow postSend={() => postStore.sendPost(postArea.current?.value, toggleIsSent)}
                         postArea={postArea}
                     />
                 }

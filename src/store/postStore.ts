@@ -63,7 +63,7 @@ class PostStore {
                 nickName: userStore.user?.nickName,
                 content: content,
             };
-            const { data: message } = await postRepository.sendPost(data);
+            const { data: { message }} = await postRepository.sendPost(data);
             runInAction(() => {
                 if ((message === 'Send Success')) {
                     setIsSent();

@@ -15,8 +15,8 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
         try{
-            const  response = await authRepository.signUp(data);
-            if ((response.data.message = 'SignUp Success')) {
+            const { data: { message }} = await authRepository.signUp(data);
+            if ((message === 'SignUp Success')) {
                 submit();
             }
         } catch(err) {
@@ -31,10 +31,10 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
             return
         } else {
             const account = watch('account');
-            const response = await authRepository.accountCheck(account);
-            if ((response.data.message === 'available' )) {
+            const { data: { message }} = await authRepository.accountCheck(account);
+            if ((message === 'available' )) {
                 return setIsAlready(true);
-            } else if ((response.data.message === 'already exist')){
+            } else if ((message === 'already exist')){
                 setError('account', {
                     message: '이미 사용중인 아이디입니다'
                 });

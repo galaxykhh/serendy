@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 import { ISignUpData, ISignInData, IPassword, INickName, IFindPW } from '../interfaces'
 
 class AuthRepository {
-
     private path='/api/auth';
 
     public accountCheck(account: string): Promise<AxiosResponse> {

@@ -11,7 +11,13 @@ const PostPage: React.FC = observer(() => {
     const postArea = useRef<HTMLTextAreaElement>(null);
 
     const toggleIsSent = () => {
-        setIsSent(!isSent);
+        if (isSent) {
+            setIsSent(false);
+            postArea.current!.disabled = false;
+        } else {
+            setIsSent(true);
+            postArea.current!.disabled = true;
+        };
     };
 
     return (

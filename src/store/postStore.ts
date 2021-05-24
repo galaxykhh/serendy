@@ -54,6 +54,7 @@ class PostStore {
     };
 
     public async sendPost(content: string | undefined, setIsSent: () => void): Promise<void> {
+        setIsSent();
         try {
             if (content?.length === 0) {
                 return;
@@ -66,7 +67,7 @@ class PostStore {
             const { data: { message }} = await postRepository.sendPost(data);
             runInAction(() => {
                 if ((message === 'Send Success')) {
-                    setIsSent();
+                    return;
                 };
             })
         } catch(err) {

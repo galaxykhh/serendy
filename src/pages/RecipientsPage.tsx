@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PostBox from '../components/RecipientsPage/PostBox';
-import CenterView from '../components/publicComponents/CenterView';
-import Container from '../components/publicComponents/Container';
+import CenterView from '../components/PublicComponents/CenterView';
+import Container from '../components/PublicComponents/Container';
 import { theme } from '../style/theme';
 import Loader from 'react-loader-spinner';
 import View from '../components/RecipientsPage/View';

@@ -8,7 +8,6 @@ import { DisplayType } from '../../interfaces/index';
 import { usePush } from '../../hook/usePush';
 
 const UserInfo: React.FC = observer(() => {
-
     const push = usePush();
 
     return (

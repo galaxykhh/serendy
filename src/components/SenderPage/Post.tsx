@@ -9,8 +9,8 @@ const Post: React.FC<IPostList> = ({ nickName, content, showPost }) => {
         <Box onClick={showPost} >
             <Icon icon={faEnvelope} />
             <Column>
-                <Stranger> 보낸 사람 : {nickName} </Stranger>
-                <MessagePreview> {content}  </MessagePreview>
+                <Stranger>보낸 사람 : {nickName}</Stranger>
+                <MessagePreview>{content}</MessagePreview>
             </Column>
         </Box>
     );

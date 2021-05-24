@@ -7,7 +7,6 @@ import Blocks from '../components/Start/Blocks';
 import { usePush } from '../hook/usePush';
 
 const Start: React.FC = () => {
-
     const push = usePush();
 
     useEffect(() => {

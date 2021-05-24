@@ -8,8 +8,8 @@ const PostSent: React.FC<{ reset: () => void }>= ({ reset }) => {
     return (
         <>
             <Icon icon={faPaperPlane} />
-            <Text> 편지가 누군가에게 전달되었어요! </Text>
-            <Button onClick={reset} > 확인 </Button>
+            <Text>편지가 누군가에게 전달되었어요!</Text>
+            <Button onClick={reset} >확인</Button>
         </>
     );
 };

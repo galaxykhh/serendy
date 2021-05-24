@@ -27,7 +27,7 @@ const Boxes: React.FC = () => {
 
     return (
         <BoxContainer>
-            <Ment> 원하시는 항목을 골라주세요 </Ment>
+            <Ment>원하시는 항목을 골라주세요</Ment>
             <Row>
                 {categoryList.map(x => (
                     <Categories icon={x.icon}

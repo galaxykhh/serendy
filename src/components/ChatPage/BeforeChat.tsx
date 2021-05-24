@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import React from "react";
 import chatStore from "../../store/chatStore";
 import { BigMent, Rule, BtnBox, StartBtn } from "./MatchHandler";
-import Ments from '../publicComponents/Ments';
+import Ments from '../PublicComponents/Ments';
 
 const beforeMent = [
     {
@@ -22,7 +22,7 @@ const beforeMent = [
 const BeforeChat: React.FC = observer(() => {
     return (
         <>
-        <BigMent> 상대를 찾고 대화를 시작하세요 ! </BigMent>
+        <BigMent>상대를 찾고 대화를 시작하세요 !</BigMent>
         <Rule>
             {beforeMent.map(x => (
                 <Ments ment={x.ment}
@@ -31,7 +31,7 @@ const BeforeChat: React.FC = observer(() => {
             ))}
         </Rule>
         <BtnBox>
-            <StartBtn onClick={chatStore.handleSearch} > 상대 찾기 </StartBtn>
+            <StartBtn onClick={chatStore.handleSearch} >상대 찾기</StartBtn>
         </BtnBox>
         </>
     );

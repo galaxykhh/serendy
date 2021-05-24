@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { fadeIn } from '../../style/keyframes';
 
 const CenterView: React.FC = ({ children }) => {
-
     return (
         <Screen>
             {children}

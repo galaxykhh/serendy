@@ -22,26 +22,26 @@ const Blocks: React.FC<{push: () => void}>= ({push}) => {
             </Block>
             <Space />
             <Text data-aos='fade-up'
-                  data-aos-anchor-placement='center-center'
-                  data-aos-duration='800'>
+                data-aos-anchor-placement='center-center'
+                data-aos-duration='800'>
                 경험해보세요 <br/><br/>
             </Text>
             <Space />
             <Text data-aos='fade-up'
-                  data-aos-anchor-placement='center-center'
-                  data-aos-duration='800'>
+                data-aos-anchor-placement='center-center'
+                data-aos-duration='800'>
                 당신의 행운 또는 우연을 위한
             </Text>
             <Space />
             <Space />
             <TextLogo data-aos='fade-down-right'
-                      data-aos-duration='1000'
-                      data-aos-anchor-placement='bottom-bottom'
-                      />
+                data-aos-duration='1000'
+                data-aos-anchor-placement='bottom-bottom'
+            />
             <StartBtn data-aos='fade-in'
-                      data-aos-duration='1000'
-                      onClick={push}
-                      >
+                data-aos-duration='1000'
+                onClick={push}
+            >
                 시작하기
             </StartBtn>
             <Space />
@@ -55,13 +55,13 @@ const Block: React.FC<{ title: string }>= ({ children, title }) => {
     return (
         <>
             <Text data-aos='fade-up'
-                  data-aos-anchor-placement='center-center'
-                  data-aos-duration='900'>
+                data-aos-anchor-placement='center-center'
+                data-aos-duration='900'>
                 {title}
             </Text>
             <SmallText data-aos='fade-up'
-                  data-aos-anchor-placement='center-center'
-                  data-aos-duration='900'>
+                data-aos-anchor-placement='center-center'
+                data-aos-duration='900'>
                 {children}
             </SmallText>
         </>

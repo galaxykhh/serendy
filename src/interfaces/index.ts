@@ -121,3 +121,12 @@ export interface IMatchHandler {
     isMatched: boolean;
     isFinished: boolean;
 };
+
+export interface IBoxes {
+    item: {
+        push: () => void;
+        color: string;
+        icon: any;
+        text: string;
+    };
+};

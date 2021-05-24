@@ -15,9 +15,7 @@ const PostBox: React.FC<IPostBox> = ({ receivedPosts, showPost }) => {
                         showPost={() => showPost(x._id)}
                     />
                 )) :
-                <Ment>
-                    아직 받은 편지가 없어요
-                </Ment>
+                <Ment>아직 받은 편지가 없어요</Ment>
             }
         </ListBox>
     );

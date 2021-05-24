@@ -4,50 +4,68 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faPaperPlane, faSignInAlt, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 import { usePush } from '../../hook/usePush';
 import { theme } from '../../style/theme';
+import { IBoxes } from '../../interfaces';
 
 const Category: React.FC = () => {
-
     const push = usePush();
+
+    const categoryList = [
+        {
+            id: 1,
+            color: theme.colors.plum,
+            icon: faComments,
+            text: '대화 하기',
+            push: push.pushChatPage,
+        },
+        {
+            id: 2,
+            color: theme.colors.plum,
+            icon: faPaperPlane,
+            text: '편지 보내기',
+            push: push.pushPostPage,
+        },
+        {
+            id: 3,
+            color: theme.colors.yellow,
+            icon: faEnvelopeOpenText,
+            text: '받은 편지함',
+            push: push.pushRecipientsPage,
+        },
+        {
+            id: 4,
+            color: theme.colors.yellow,
+            icon: faSignInAlt,
+            text: '보낸 편지함',
+            push: push.pushSenderPage,
+        },
+    ];
 
     return (
         <Container>
-            <Box onClick={push.pushChatPage}>
-                <IconBox>
-                    <Icon color={theme.colors.plum}
-                        icon={faComments}
-                    />
-                </IconBox>
-                <Text> 대화 하기 </Text>
-            </Box>
-            <Box onClick={push.pushPostPage} >
-                <IconBox>
-                    <Icon color={theme.colors.plum}
-                        icon={faPaperPlane}
-                    />
-                </IconBox>
-                <Text> 편지 보내기 </Text>
-            </Box>
-            <Box onClick={push.pushRecipientsPage} >
-                <IconBox>
-                    <Icon color={theme.colors.yellow}
-                        icon={faEnvelopeOpenText}
-                    />
-                </IconBox>
-                <Text> 받은 편지함 </Text>
-            </Box>
-            <Box onClick={push.pushSenderPage} >
-                <IconBox>
-                    <Icon color={theme.colors.yellow}
-                        icon={faSignInAlt}
-                    />
-                </IconBox>
-                <Text> 보낸 편지함 </Text>
-            </Box>
+            {categoryList.map(item => (
+                <Boxes item={item}
+                    key={item.id}
+                />
+            ))}
         </Container>
     );
 };
 
 export default Category;
+
+const Boxes: React.FC<IBoxes>= ({ item }) => {
+    const { push, color, icon, text } = item; 
+    return (
+        <Box onClick={push} >
+            <IconBox>
+                <Icon color={color}
+                    icon={icon}
+                />
+            </IconBox>
+            <Text>{text}</Text>
+        </Box>
+    );
+};
 
 const Container = styled.div`
     display: flex;
@@ -72,9 +90,7 @@ const IconBox = styled.div`
     };
 `;
 
-const Icon = styled(FontAwesomeIcon)<{
-    color: string,
-}>`
+const Icon = styled(FontAwesomeIcon)<{ color: string }>`
     font-size: 26px;
     color: ${({ color }) => color};
 `;

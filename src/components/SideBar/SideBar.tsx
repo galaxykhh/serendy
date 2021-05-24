@@ -18,9 +18,7 @@ const SideBar: React.FC = observer(() => {
 
 export default SideBar;
 
-const Bar = styled.div<{
-    visible: DisplayType
-}>`
+const Bar = styled.div<{ visible: DisplayType }>`
     position: fixed;
     right: 0;
     display: flex;

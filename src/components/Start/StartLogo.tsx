@@ -8,10 +8,10 @@ const StartLogo: React.FC<{ push: () => void }>= ({ push }) => {
     return (
         <LogoBox>
             <Logo data-aos='zoom-in-down'
-                  data-aos-duration='1000'
-                  />
-            <StartBtn onClick={push}> 시작하기 </StartBtn>
-            <Arrow> ∨ </Arrow>
+                data-aos-duration='1000'
+            />
+            <StartBtn onClick={push}>시작하기</StartBtn>
+            <Arrow>∨</Arrow>
         </LogoBox>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled  from 'styled-components';
 import { IPostWindow } from '../../interfaces/index';
-import Ments from '../publicComponents/Ments';
+import Ments from '../PublicComponents/Ments';
 
 const postMent = [
     {
@@ -37,7 +37,7 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
             </LetterContainer>
 
             <RuleContainer>
-                        <BigMent> 어떤 사람이 내 편지를 받게 될까요 ? </BigMent>
+                        <BigMent>어떤 사람이 내 편지를 받게 될까요 ?</BigMent>
                         <Rule>
                             {postMent.map(x => (
                                 <Ments ment={x.ment}

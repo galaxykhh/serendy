@@ -15,14 +15,12 @@ import {
 const HaveComment: React.FC<ISentView>= ({ currentSentPost }) => {
     return (
         <LETTER>
-            <NickName> {currentSentPost?.nickName}님의 편지 </NickName>
-            <Content>
-                {currentSentPost?.content}
-            </Content>
+            <NickName>{currentSentPost?.nickName}님의 편지</NickName>
+            <Content>{currentSentPost?.content}</Content>
             <CommentBox>
                 <Column>
                     <Icon icon={faUser} />
-                    <UserName> {currentSentPost?.comment?.nickName} </UserName>
+                    <UserName>{currentSentPost?.comment?.nickName}</UserName>
                 </Column>
                 <Comment> {currentSentPost?.comment?.content} </Comment>
             </CommentBox>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Container from '../components/publicComponents/Container';
+import Container from '../components/PublicComponents/Container';
 import SignUpBox from '../components/SignUp/SignUpBox';
 import Success from '../components/SignUp/Success';
 import { TEXTLOGO_URL } from '../config';

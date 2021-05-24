@@ -6,31 +6,31 @@ class AuthRepository {
 
     private path='/api/auth';
 
-    accountCheck(account: string): Promise<AxiosResponse> {
+    public accountCheck(account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/check/${account}`);
     };
 
-    signUp(data: ISignUpData): Promise<AxiosResponse> {
+    public signUp(data: ISignUpData): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/signup`, data);
     };
 
-    signIn(data: ISignInData): Promise<AxiosResponse> {
+    public signIn(data: ISignInData): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/signin`, data);
     };
 
-    signInWidthToken(): Promise<AxiosResponse> {
+    public signInWidthToken(): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/refresh`);
     };
 
-    changePassword(data: IPassword): Promise<AxiosResponse> {
+    public changePassword(data: IPassword): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/changepw`, data);
     };
 
-    changeName(nickName: INickName): Promise<AxiosResponse> {
+    public changeName(nickName: INickName): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/changename`, nickName);
     };
 
-    findPW(data: IFindPW): Promise<AxiosResponse> {
+    public findPW(data: IFindPW): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/findpw`, data);
     };
 };

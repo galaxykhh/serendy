@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Container from '../components/publicComponents/Container';
+import Container from '../components/PublicComponents/Container';
 import SignInBox from '../components/SignIn/SignInBox';
 import { TEXTLOGO_URL } from '../config';
 import { DisplayType } from '../interfaces';

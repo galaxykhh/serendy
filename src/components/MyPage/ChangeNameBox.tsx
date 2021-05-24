@@ -25,8 +25,8 @@ const ChangeNameBox: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} >
             <Container>
                 <Column>
-                    <Text> 변경할 닉네임을 입력해주세요 </Text>
-                    <Text style={{ color: 'plum', fontSize: '16px' }} > (닉네임은 중복이 가능합니다) </Text>
+                    <Text>변경할 닉네임을 입력해주세요</Text>
+                    <Text style={{ color: 'plum', fontSize: '16px' }} >(닉네임은 중복이 가능합니다)</Text>
                     <InputBox>
                         <Icon icon={faPen} />
                         <Input {...register('nickName', {
@@ -37,7 +37,7 @@ const ChangeNameBox: React.FC = () => {
                         })} />
                     </InputBox>
                     <TextBox>
-                        {errors.nickName && <ErrorMsg> {errors.nickName.message} </ErrorMsg>}
+                        {errors.nickName && <ErrorMsg>{errors.nickName.message}</ErrorMsg>}
                     </TextBox>
                     <Button onClick={handleSubmit(onSubmit)}
                         type='submit'

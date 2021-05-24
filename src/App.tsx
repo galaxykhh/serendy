@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/global';
 import { useEffect } from 'react';
-import PrivateRoute from './components/publicComponents/PrivateRoute';
+import PrivateRoute from './components/PublicComponents/PrivateRoute';
 import { theme } from './style/theme';
 import Start from './pages/Start';
 import Main from './pages/Main';

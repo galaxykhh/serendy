@@ -3,26 +3,25 @@ import { AxiosResponse } from 'axios';
 import { ISendPost, ISendComment } from '../interfaces';
 
 class PostRepository {
-
     private path='/api/post';
 
-    sendPost(data: ISendPost): Promise<AxiosResponse> {
+    public sendPost(data: ISendPost): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/send`, data);
     };
 
-    getSentPosts(account: string | null | undefined): Promise<AxiosResponse> {
+    public getSentPosts(account: string | null | undefined): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/sentposts/${account}`);
     };
 
-    getReceivePosts(account: string | null | undefined): Promise<AxiosResponse> {
+    public getReceivePosts(account: string | null | undefined): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/receivedposts/${account}`);
     };
 
-    showClickedOne(_Id: string, account: string): Promise<AxiosResponse> {
+    public showClickedOne(_Id: string, account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/showone/${_Id}/${account}`);
     };
 
-    sendComment(data: ISendComment): Promise<AxiosResponse> {
+    public sendComment(data: ISendComment): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/sendcomment`, data);
     };
 };

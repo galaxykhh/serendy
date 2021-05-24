@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Container from '../components/publicComponents/Container';
+import Container from '../components/PublicComponents/Container';
 import FindPWBox from '../components/FindPW/FindPWBox';
 import { TEXTLOGO_URL } from '../config';
 

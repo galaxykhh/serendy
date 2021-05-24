@@ -7,9 +7,9 @@ const MatchedChat: React.FC = observer(() => {
     return (
         <>
             <BigMent> 상대와 연결되었어요 </BigMent>
-            <Ment size='18px'> 먼저 인사 해보시는 건 어떠세요? </Ment>
+            <Ment size='18px'>먼저 인사 해보시는 건 어떠세요?</Ment>
             <BtnBox>
-                <CancelBtn onClick={chatStore.stopChat}> 대화방 나가기 </CancelBtn>
+                <CancelBtn onClick={chatStore.stopChat}>대화방 나가기</CancelBtn>
             </BtnBox>
         </>
     );

@@ -36,7 +36,7 @@ const ChangePWBox: React.FC = () => {
                         />
                     </InputBox>
                     <TextBox>
-                        {errors.password && <ErrorMsg> {errors.password.message} </ErrorMsg>}
+                        {errors.password && <ErrorMsg>{errors.password.message}</ErrorMsg>}
                     </TextBox>
                     <InputBox style={{ marginTop: '-15px' }} >
                         <Icon icon={faLock} />
@@ -49,7 +49,7 @@ const ChangePWBox: React.FC = () => {
                         />
                     </InputBox>
                     <TextBox>
-                    {!errors.password && errors.passwordCheck ? <ErrorMsg> 비밀번호가 일치하지 않습니다 </ErrorMsg> : <ErrorMsg>ㅤ</ErrorMsg>}
+                    {!errors.password && errors.passwordCheck ? <ErrorMsg>비밀번호가 일치하지 않습니다</ErrorMsg> : <ErrorMsg>ㅤ</ErrorMsg>}
                     </TextBox>
                     <Button onClick={handleSubmit(onSubmit)}
                         type='submit'

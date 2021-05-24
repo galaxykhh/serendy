@@ -11,12 +11,12 @@ import {
 const NoneComment: React.FC<ISentView> = ({ currentSentPost }) => {
     return (
         <LETTER>
-            <NickName> {currentSentPost?.nickName}님의 편지 </NickName>
+            <NickName>{currentSentPost?.nickName}님의 편지</NickName>
             <Content>
                 {currentSentPost?.content}
             </Content>
             <CommentBox>
-                <Comment> 아직 답장이 오지 않았어요 </Comment>
+                <Comment>아직 답장이 오지 않았어요</Comment>
             </CommentBox>
         </LETTER>
     );

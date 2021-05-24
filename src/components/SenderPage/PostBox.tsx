@@ -5,22 +5,18 @@ import { IPostBox } from '../../interfaces/index';
 
 const PostBox: React.FC<IPostBox>= ({ sentPosts, showPost }) => {
     return (
-        <>
-            <ListBox>
-                {sentPosts && sentPosts.length > 0 ? 
-                    sentPosts.map((x, i) => (
-                        <Post nickName={x.nickName}
-                            content={x.content}
-                            key={i}
-                            showPost={() => showPost(x._id)}
-                        />
-                    )) :
-                    <Ment>
-                        아직 보낸 편지가 없어요
-                    </Ment>
-                }
-            </ListBox>
-        </>
+        <ListBox>
+            {sentPosts && sentPosts.length > 0 ? 
+                sentPosts.map((x, i) => (
+                    <Post nickName={x.nickName}
+                        content={x.content}
+                        key={i}
+                        showPost={() => showPost(x._id)}
+                    />
+                )) :
+                <Ment>아직 보낸 편지가 없어요</Ment>
+            }
+        </ListBox>
     );
 };
 

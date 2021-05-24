@@ -1,7 +1,7 @@
 import { action, makeObservable, observable, runInAction } from 'mobx';
 import { ICurrentPost } from '../interfaces/index';
 import userStore from './userStore';
-import postRespository from '../repository/postRepository'
+import postRepository from '../repository/postRepository'
 
 class PostStore {
     public sentPosts: ICurrentPost[] = [];
@@ -22,7 +22,7 @@ class PostStore {
             setCurrentSentPost: action,
             setCurrentReceivedPost: action,
             setIsLoading: action,
-            handlePost: action,
+            sendPost: action,
             getSentPosts: action,
             getReceivedPosts: action,
             handleSentOne: action.bound,
@@ -53,7 +53,7 @@ class PostStore {
         this.isLoading = boolean;
     };
 
-    public async handlePost(content: string | undefined, setIsSent: () => void): Promise<void> {
+    public async sendPost(content: string | undefined, setIsSent: () => void): Promise<void> {
         try {
             if (content?.length === 0) {
                 return;
@@ -63,13 +63,14 @@ class PostStore {
                 nickName: userStore.user?.nickName,
                 content: content,
             };
-            const { data: message } = await postRespository.sendPost(data);
+            const { data: message } = await postRepository.sendPost(data);
             runInAction(() => {
                 if ((message === 'Send Success')) {
                     setIsSent();
                 };
             })
         } catch(err) {
+            console.log(err);
             alert('서버가 점검중이에요');
         };
     };
@@ -77,7 +78,7 @@ class PostStore {
     public async getSentPosts(): Promise<void> {
         this.setIsLoading(true);
         try {
-            const { data } = await postRespository.getSentPosts(userStore.user?.account);
+            const { data } = await postRepository.getSentPosts(userStore.user?.account);
             runInAction(() => {
                 this.setSentPosts(data);
                 this.setIsLoading(false);
@@ -92,10 +93,9 @@ class PostStore {
     public async getReceivedPosts(): Promise<void> {
         this.setIsLoading(true);
         try {
-            const { data } = await postRespository.getReceivePosts(userStore.user?.account);
+            const { data } = await postRepository.getReceivePosts(userStore.user?.account);
             runInAction(() => {
                 this.setReceivedPosts(data);
-                console.log(data);
                 this.setIsLoading(false);
             });
         } catch(err) {
@@ -126,7 +126,7 @@ class PostStore {
                 nickName: userStore.user?.nickName,
                 content: content,
             };
-            const { data: { message, receivedPosts, currentReceivedPost}} = await postRespository.sendComment(data);
+            const { data: { message, receivedPosts, currentReceivedPost}} = await postRepository.sendComment(data);
             if ((message === 'Success')) {
                 this.setReceivedPosts(receivedPosts);
                 this.setCurrentReceivedPost(currentReceivedPost);

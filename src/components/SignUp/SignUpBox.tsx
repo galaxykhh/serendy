@@ -10,7 +10,7 @@ import { ISignUpData } from '../../interfaces';
 
 const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
-    const [ isAlready, setIsAlready ] = useState<boolean>(false); // 계정 중복체크
+    const [ isChecked, setIsChecked ] = useState<boolean>(false); // 계정 중복체크
 
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {
@@ -33,27 +33,26 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
             const account = watch('account');
             const { data: { message }} = await authRepository.accountCheck(account);
             if ((message === 'available' )) {
-                return setIsAlready(true);
+                return setIsChecked(true);
             } else if ((message === 'already exist')){
                 setError('account', {
                     message: '이미 사용중인 아이디입니다'
                 });
-                setIsAlready(false);
+                setIsChecked(false);
             };
         };
     };
 
     const onSubmit: SubmitHandler<ISignUpData> = (data) => {
-        if (!isAlready) {
+        if (!isChecked) {
             alert('중복확인을 해주세요');
             return;
         };
         signUp(data);
     };
 
-    // account 인풋창 변경시 중복확인 해제
     useEffect(() => {
-        setIsAlready(false);
+        setIsChecked(false);
     }, [watch('account')]); // eslint-disable-line
 
     return (
@@ -74,7 +73,7 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                     />
                     <DupliBtn onClick={accountCheck}> 중복확인 </DupliBtn>
                 </Row>
-                {!isAlready ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg style={{ color: theme.colors.green }}> 사용가능한 아이디입니다 </Msg> }
+                {!isChecked ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg style={{ color: theme.colors.green }}> 사용가능한 아이디입니다 </Msg> }
             </Column>
             <Column>
                 <Row>

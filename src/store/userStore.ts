@@ -81,7 +81,7 @@ class UserStore implements IUserStore {
     // 유효한 토큰을 가지고 있을 시 로그인을 유지하며 새로운 토큰을 발급받아 저장 (expiresIn 30m)
     // 서버쪽 토큰 유효성검사를 하는 미들웨어에서 토큰이 만료되었거나 없으면 403을 띄우면서 종료되어서
     // App 컴포넌트에서 쓰이는 이 메소드와 아래의 signIn 메소드를 따로 분리해서 만들었음.
-    public async signInWithToken(push: () => void) {
+    public async signInWithToken(push: () => void): Promise<void> {
         this.setIsLogging(true);
         try {
             const token = localStorage.getItem('SerendyToken');
@@ -91,7 +91,7 @@ class UserStore implements IUserStore {
             } else {
                 const { data: {message, account, nickName, token}} = await authRepository.signInWidthToken();
                 runInAction(() => {
-                    if ((message === 'Invalid Token')) { // 토큰만료 또는 없음
+                    if (message === 'Invalid Token') { // 토큰만료 또는 없음
                         this.setIsLogging(false);
                         return;
                     } else if ((message === 'SignIn Success')) {
@@ -114,16 +114,13 @@ class UserStore implements IUserStore {
         try {
             const { data: { message, account, nickName, token }} = await authRepository.signIn(userData);
             runInAction(() => {
-                if ((message === 'SignIn Fail')) {
+                if (message === 'SignIn Fail') {
                     this.setIsLogging(false);
                     setError();
                     return;
                 }
-                if ((message === 'SignIn Success')) {
-                    this.setUser({
-                        account: account,
-                        nickName: nickName,
-                    });
+                if (message === 'SignIn Success') {
+                    this.setUser({ account, nickName });
                     this.setIsSignIn(true);
                     localStorage.setItem('SerendyToken', token);
                     this.setIsLogging(false);
@@ -147,7 +144,7 @@ class UserStore implements IUserStore {
         try {
             const { data: { message }} = await authRepository.changePassword(data);
             runInAction(() => {
-                if ((message === 'Changed')) {
+                if (message === 'Changed') {
                     alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
                     this.signOut(push);
                 };
@@ -161,7 +158,7 @@ class UserStore implements IUserStore {
         try {
             const { data: { message }} = await authRepository.changeName(nickName);
             runInAction(() => {
-                if ((message === 'Changed')) {
+                if (message === 'Changed') {
                     alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
                     this.signOut(push);
                 };
@@ -175,11 +172,11 @@ class UserStore implements IUserStore {
         try {
             const { data: { message }} = await authRepository.findPW(data);
             runInAction(() => {
-                if ((message === 'Not Exist')) {
+                if (message === 'Not Exist') {
                     alert('일치하는 정보가 없습니다');
                     return 
                 }
-                if ((message === 'Valid User')) {
+                if (message === 'Valid User') {
                     alert(`임시로 암호 메세지가\n비밀번호로 설정되었습니다\n비밀번호 변경을 꼭 해주세요`);
                     push();
                 };

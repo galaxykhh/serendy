@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import PostBox from '../components/RecipientsPage/PostBox';
 import CenterView from '../components/PublicComponents/CenterView';
 import Container from '../components/PublicComponents/Container';
-import { theme } from '../style/theme';
-import Loader from 'react-loader-spinner';
 import View from '../components/RecipientsPage/View';
 import postStore from '../store/postStore';
 import { observer } from 'mobx-react';
+import CircleLoader from '../components/PublicComponents/CircleLoader';
 
 const RecipientsPage: React.FC = observer(() => {
     const commentInput = useRef<HTMLTextAreaElement>(null);
@@ -26,13 +25,7 @@ const RecipientsPage: React.FC = observer(() => {
         <Container>
             <CenterView>
                 {postStore.isLoading ?
-                    <LoaderBox>
-                        <Loader type="Circles"
-                            color={theme.colors.plum}
-                            height={60}
-                            width={60}
-                        />
-                    </LoaderBox> :
+                    <CircleLoader /> :
                     <Row>
                         <PostBox receivedPosts={postStore.receivedPosts}
                             showPost={postStore.handleReceivedOne}
@@ -57,13 +50,5 @@ const Row = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-`;
-
-const LoaderBox = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
 `;

@@ -10,7 +10,7 @@ import { ISignUpData } from '../../interfaces';
 
 const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
-    const [isAlready, setIsAlready] = useState<boolean>(false); // 계정 중복체크
+    const [ isAlready, setIsAlready ] = useState<boolean>(false); // 계정 중복체크
 
     // 회원가입
     const signUp = async (data: ISignUpData): Promise<void> => {

@@ -37,16 +37,15 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
             </LetterContainer>
 
             <RuleContainer>
-                        <BigMent>어떤 사람이 내 편지를 받게 될까요 ?</BigMent>
-                        <Rule>
-                            {postMent.map(x => (
-                                <Ments ment={x.ment}
-                                    key={x.id}
-                                />
-                            ))}
-                        </Rule>
+                <BigMent>어떤 사람이 내 편지를 받게 될까요 ?</BigMent>
+                    <Rule>
+                        {postMent.map(x => (
+                            <Ments ment={x.ment}
+                                key={x.id}
+                            />
+                        ))}
+                    </Rule>
             </RuleContainer>
-            
         </Row>
     );
 };

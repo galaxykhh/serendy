@@ -2,6 +2,7 @@ import { Socket } from 'socket.io-client';
 
 export type DisplayType = 'block' | 'none';
 export type VisibilityType = 'visible' | 'hidden';
+export type MyPageType = 'none' | true | false;
 
 export interface IRecentChat {
     nickName: string;

@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import PostBox from '../components/SenderPage/PostBox';
 import CenterView from '../components/PublicComponents/CenterView';
 import Container from '../components/PublicComponents/Container';
-import Loader from 'react-loader-spinner';
-import { theme } from '../style/theme';
 import View from '../components/SenderPage/View';
 import postStore from '../store/postStore';
 import { observer } from 'mobx-react';
+import CircleLoader from '../components/PublicComponents/CircleLoader';
 
 const SenderPage: React.FC = observer(() => {
 
@@ -25,13 +24,7 @@ const SenderPage: React.FC = observer(() => {
         <Container>
             <CenterView>
                 {postStore.isLoading ?
-                    <LoaderBox>
-                        <Loader type="Circles"
-                            color={theme.colors.plum}
-                            height={60}
-                            width={60}
-                        />
-                    </LoaderBox> :
+                    <CircleLoader /> :
                     <Row>
                         <PostBox sentPosts={postStore.sentPosts}
                             showPost={postStore.handleSentOne}

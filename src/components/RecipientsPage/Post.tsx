@@ -76,9 +76,7 @@ const MessagePreview = styled.div`
     color: ${({ theme }) => theme.colors.mainBlue};
 `;
 
-const Alert = styled(FontAwesomeIcon)<{
-    display: DisplayType,
-}>`
+const Alert = styled(FontAwesomeIcon)<{ display: DisplayType }>`
     position: absolute;
     right: 0px;
     font-size: 15px;

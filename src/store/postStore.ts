@@ -53,12 +53,13 @@ class PostStore {
         this.isLoading = boolean;
     };
 
-    public async sendPost(content: string | undefined, setIsSent: () => void): Promise<void> {
-        setIsSent();
+    public async sendPost(content: string | undefined, setIsSending: () => void, setIsSent: () => void): Promise<void> {
+        if (content?.length === 0) {
+            return;
+        };
         try {
-            if (content?.length === 0) {
-                return;
-            };
+            setIsSending();
+            console.log('true');
             const data = {
                 account: userStore.user?.account,
                 nickName: userStore.user?.nickName,
@@ -67,10 +68,14 @@ class PostStore {
             const { data: { message }} = await postRepository.sendPost(data);
             runInAction(() => {
                 if ((message === 'Send Success')) {
-                    return;
+                    setIsSending();
+                    console.log('false');
+                    setIsSent();
                 };
             })
         } catch(err) {
+            setIsSending();
+            console.log('false');
             console.log(err);
             alert('서버가 점검중이에요');
         };

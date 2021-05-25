@@ -5,7 +5,7 @@ import ChangePWBox from './ChangePWBox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { fadeIn } from '../../style/keyframes';
-import { ICategories } from '../../interfaces';
+import { ICategories, MyPageType } from '../../interfaces';
 
 const categoryList = [
     {
@@ -23,7 +23,7 @@ const categoryList = [
 ];
 
 const Boxes: React.FC = () => {
-    const [category, setCategory] = useState<boolean | string>('none');
+    const [category, setCategory] = useState<MyPageType>('none');
 
     return (
         <BoxContainer>
@@ -41,7 +41,6 @@ const Boxes: React.FC = () => {
             {category === true && <ChangeNameBox />}
             {category === false && <ChangePWBox />}
         </BoxContainer>
-
     );
 };
 

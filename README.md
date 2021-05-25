@@ -1,5 +1,7 @@
 # Serendy
 
+https://serendy.netlify.app/
+
 ## Client
 * React + TypeScript
 * Styled Components

@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { ISendPost, ISendComment } from '../interfaces';
 
 class PostRepository {
-    private path='/api/post';
+    private path = '/api/post';
 
     public sendPost(data: ISendPost): Promise<AxiosResponse> {
         return serendyInstance.post(`${this.path}/send`, data);

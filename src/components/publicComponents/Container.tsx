@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Container: React.FC = ({ children }) => {
     return (
-
         <Flex>
             {children}
         </Flex>

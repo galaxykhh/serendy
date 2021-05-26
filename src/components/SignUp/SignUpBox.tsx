@@ -71,7 +71,11 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                             maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
                         })}
                     />
-                    <DupliBtn onClick={accountCheck}> 중복확인 </DupliBtn>
+                    <DupliBtn onClick={accountCheck}
+                        type='button'
+                    >
+                        중복확인
+                    </DupliBtn>
                 </Row>
                 {!isChecked ? (!errors.account ? <Msg>ㅤ</Msg> : <ErrorMsg> {errors.account.message} </ErrorMsg>) : <Msg style={{ color: theme.colors.green }}> 사용가능한 아이디입니다 </Msg> }
             </Column>

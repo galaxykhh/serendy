@@ -4,11 +4,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
-import { usePush } from '../../hook/usePush';
 import { IPassword } from '../../interfaces/index';
 
 const ChangePWBox: React.FC = () => {
-    const push = usePush();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IPassword>();
 
     const onSubmit: SubmitHandler<IPassword> = (data) => {
@@ -16,7 +14,7 @@ const ChangePWBox: React.FC = () => {
             account: userStore.user?.account,
             ...data,
         };
-        userStore.changePW(userData, push.pushLogin);
+        userStore.changePW(userData);
     };
 
     return (
@@ -26,7 +24,8 @@ const ChangePWBox: React.FC = () => {
                     <Text> 변경할 비밀번호를 입력해주세요 </Text>
                     <InputBox>
                         <Icon icon={faLock} />
-                        <Input placeholder='변경할 비밀번호'
+                        <Input
+                            placeholder='변경할 비밀번호'
                             type='password'
                             {...register('password', {
                                 required: '변경할 비밀번호를 입력해주세요',
@@ -40,7 +39,8 @@ const ChangePWBox: React.FC = () => {
                     </TextBox>
                     <InputBox style={{ marginTop: '-15px' }} >
                         <Icon icon={faLock} />
-                        <Input placeholder='비밀번호 확인'
+                        <Input
+                            placeholder='비밀번호 확인'
                             type='password'
                             {...register('passwordCheck', {
                                 required: true,
@@ -51,7 +51,8 @@ const ChangePWBox: React.FC = () => {
                     <TextBox>
                     {!errors.password && errors.passwordCheck ? <ErrorMsg>비밀번호가 일치하지 않습니다</ErrorMsg> : <ErrorMsg>ㅤ</ErrorMsg>}
                     </TextBox>
-                    <Button onClick={handleSubmit(onSubmit)}
+                    <Button
+                        onClick={handleSubmit(onSubmit)}
                         type='submit'
                     > 
                         변경하기

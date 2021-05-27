@@ -13,9 +13,11 @@ import { ISignInData } from '../../interfaces';
 
 const SignInBox: React.FC = observer(() => {
     const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
-    const push = usePush();
+    const main = usePush('main');
+    const findPW = usePush('findpw');
+    const signUp = usePush('signup');
 
-    const invalid = (): void => {
+    const setErrors = (): void => {
         setError('account', {
             type: 'invalid',
             message: 'ㅤ'
@@ -26,8 +28,13 @@ const SignInBox: React.FC = observer(() => {
         });
     };
 
-    const onSubmit: SubmitHandler<ISignInData> = (data) => {
-        userStore.signIn(data, invalid, push.pushMain);
+    const onSubmit: SubmitHandler<ISignInData> = async (data) => {
+        const isSuccess = await userStore.signIn(data);
+        if (isSuccess) {
+            main.push();
+        } else {
+            setErrors();
+        };
     };
 
     return (
@@ -37,10 +44,12 @@ const SignInBox: React.FC = observer(() => {
                     <Box>
                     <Column>
                         <Row>
-                            <Icon icon={faUserAlt}
+                            <Icon
+                                icon={faUserAlt}
                                 color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                             />
-                            <Input placeholder='아이디'
+                            <Input
+                                placeholder='아이디'
                                 {...register('account', {
                                     required: '아이디를 입력해주세요',
                                     pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
@@ -54,10 +63,12 @@ const SignInBox: React.FC = observer(() => {
 
                     <Column>
                         <Row>
-                            <Icon icon={faLock}
+                            <Icon
+                                icon={faLock}
                                 color={errors.password ? (theme.colors.red) : (theme.colors.white)}
                             />
-                            <Input placeholder='비밀번호'
+                            <Input 
+                                placeholder='비밀번호'
                                 autoComplete='off'
                                 type='password'
                                 {...register('password', {
@@ -71,9 +82,9 @@ const SignInBox: React.FC = observer(() => {
                         <Button type='submit'>
                             로그인
                         </Button>
-                        <Button onClick={push.pushSignUp}>회원가입</Button>
+                        <Button onClick={signUp.push}>회원가입</Button>
                     </ButtonBox>
-                        <ForgotPW onClick={push.pushFindPW} >
+                        <ForgotPW onClick={findPW.push} >
                             비밀번호가 기억이 안나시나요?
                         </ForgotPW>
                     </Box> 

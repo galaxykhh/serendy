@@ -8,7 +8,8 @@ const PostBox: React.FC<IPostBox>= ({ sentPosts, showPost }) => {
         <ListBox>
             {sentPosts && sentPosts.length > 0 ? 
                 sentPosts.map((x, i) => (
-                    <Post nickName={x.nickName}
+                    <Post
+                        nickName={x.nickName}
                         content={x.content}
                         key={i}
                         showPost={() => showPost(x._id)}

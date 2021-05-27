@@ -24,14 +24,14 @@ import SenderPage from './pages/SenderPage';
 const App: React.FC = observer(() => {
 
     useEffect(() => {
-        if (userStore.isSignIn) {
+        if (userStore.user) {
             userStore.setUserSocket(io(BASE_URL));
             userStore.saveSocketID();
         } else {
             userStore.userSocket?.disconnect();
             userStore.setSocketID(null);
         };
-    }, [userStore.isSignIn]); //eslint-disable-line
+    }, [userStore.user]); //eslint-disable-line
 
     return (
         <>
@@ -44,7 +44,7 @@ const App: React.FC = observer(() => {
                         <Route exact path='/'>
                             <Start />
                         </Route>
-                        <Route exact path='/login'>
+                        <Route exact path='/signin'>
                             <SignIn />
                         </Route>
                         <Route exact path='/signup'>

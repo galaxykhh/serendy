@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faLock, faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -7,20 +8,22 @@ import { theme } from '../../style/theme';
 import authRepository from '../../repository/authRepository';
 import { zoomIn } from '../../style/keyframes';
 import { ISignUpData } from '../../interfaces';
+import { flowResult } from 'mobx';
+import userStore from '../../store/userStore';
 
-const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
+const SignUpBox: React.FC<{ submit: () => void }> = observer(({ submit }) => {
     const { register, handleSubmit, watch, setError, trigger, formState: { errors } } = useForm<ISignUpData>();
     const [ isChecked, setIsChecked ] = useState<boolean>(false); // 계정 중복체크
 
     // 회원가입
-    const signUp = async (data: ISignUpData): Promise<void> => {
+    const signUp = async (data: ISignUpData) => {
         try{
-            const { data: { message }} = await authRepository.signUp(data);
-            if ((message === 'SignUp Success')) {
+            const isSuccess = await flowResult(authRepository.signUp(data));
+            if (isSuccess) {
                 submit();
-            }
+            };
         } catch(err) {
-            alert('현재 서버가 점검중입니다');
+            alert('서버 점검중입니다');
         };
     };
 
@@ -31,10 +34,10 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
             return
         } else {
             const account = watch('account');
-            const { data: { message }} = await authRepository.accountCheck(account);
-            if ((message === 'available' )) {
+            const isAvailable = await flowResult(userStore.checkAccount(account))
+            if (isAvailable) {
                 return setIsChecked(true);
-            } else if ((message === 'already exist')){
+            } else {
                 setError('account', {
                     message: '이미 사용중인 아이디입니다'
                 });
@@ -60,10 +63,12 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
         <Box>
             <Column>
                 <Row>
-                    <Icon icon={faUserAlt}
+                    <Icon
+                        icon={faUserAlt}
                         color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                     />
-                    <Input placeholder='아이디'
+                    <Input
+                        placeholder='아이디'
                         {...register('account', {
                             required: '아이디를 입력해주세요',
                             pattern: { value: /^[a-zA-Z0-9]+$/, message: '영문과 숫자만을 조합하여 입력해주세요'},
@@ -71,7 +76,8 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
                             maxLength: { value: 15, message: '아이디는 최대 15자리입니다' },
                         })}
                     />
-                    <DupliBtn onClick={accountCheck}
+                    <DupliBtn
+                        onClick={accountCheck}
                         type='button'
                     >
                         중복확인
@@ -81,11 +87,13 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
             </Column>
             <Column>
                 <Row>
-                    <Icon icon={faLock}
+                    <Icon
+                        icon={faLock}
                         color={errors.password ? (theme.colors.red) : (theme.colors.white)}
                     />
                     
-                    <Input placeholder='비밀번호'
+                    <Input
+                        placeholder='비밀번호'
                         autoComplete='off'
                         type='password'
                         {...register('password', {
@@ -99,10 +107,12 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
             </Column>
             <Column>
                 <Row>
-                    <Icon icon={faCheck}
+                    <Icon
+                        icon={faCheck}
                         color={errors.check ? (theme.colors.red) : (theme.colors.white)}
                     />
-                    <Input placeholder='비밀번호 확인'
+                    <Input
+                        placeholder='비밀번호 확인'
                         autoComplete='off'
                         type='password'
                         {...register('check', {
@@ -115,10 +125,12 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
             </Column>
             <Column>
                 <Row>
-                    <Icon icon={faUserSecret}
+                    <Icon
+                        icon={faUserSecret}
                         color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
                     />
-                    <Input placeholder='암호 메세지'
+                    <Input
+                        placeholder='암호 메세지'
                         {...register('secretMessage', {
                             required: '암호 메세지를 작성해주세요',
                             minLength: { value: 3, message: '암호 메세지는 최소 3자 입니다' },
@@ -143,7 +155,7 @@ const SignUpBox: React.FC<{ submit: () => void }>= ({ submit }) => {
         </Box>
         </form>
     );
-};
+});
 
 export default SignUpBox;
 

@@ -48,11 +48,3 @@ const Row = styled.div`
     justify-content: space-between;
     align-items: center;
 `;
-
-const LoaderBox = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;

@@ -6,8 +6,8 @@ const Container: React.FC = ({ children }) => {
         <Flex>
             {children}
         </Flex>
-    )
-}
+    );
+};
 
 export default Container;
 

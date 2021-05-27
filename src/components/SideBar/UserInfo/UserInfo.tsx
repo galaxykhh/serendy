@@ -1,30 +1,58 @@
 import React from 'react';
 import styled from 'styled-components';
+import { observer } from 'mobx-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faDoorOpen, faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import userStore from '../../store/userStore';
-import { observer } from 'mobx-react';
-import { DisplayType } from '../../interfaces/index';
-import { usePush } from '../../hook/usePush';
+import { DisplayType } from '../../../interfaces/index';
+import { usePush } from '../../../hook/usePush';
+import userStore from '../../../store/userStore';
+import Menu from './Menu';
 
 const UserInfo: React.FC = observer(() => {
-    const push = usePush();
+    const start = usePush();
+    const mypage = usePush('mypage');
+
+    const signOut = () => {
+        const isSuccess = userStore.signOut();
+        if (isSuccess) start.push();
+    };
+    
+    const menus = [
+        {
+            id: 1,
+            onClick: mypage.push,
+            icon: faClipboard,
+            text: '정보변경',    
+        },
+        {
+            id: 2,
+            onClick: signOut,
+            icon: faDoorOpen,
+            text: '로그아웃',
+        },
+    ];
 
     return (
         <Container>
             <Row style={{ marginTop: '10px' }} >
-                <UserIcon icon={faUserAlt} iconsize='24px' />
-                <Text ml='7px' size='16px' > {userStore.user?.nickName} </Text>
+                <UserIcon 
+                    icon={faUserAlt}
+                    iconsize='24px'
+                />
+                <Text
+                    ml='7px'
+                    size='16px'
+                >
+                    {userStore.user?.nickName}
+                </Text>
             </Row>
             <Row>
-                <Box onClick={push.pushMyPage} >
-                    <Icon icon={faClipboard} iconsize='24px' />
-                    <Text mt='8px' size='14px' > 정보변경 </Text>
-                </Box>
-                <Box onClick={() => userStore.signOut(push.pushStart)} >
-                    <Icon icon={faDoorOpen} iconsize='24px' />
-                    <Text mt='8px' size='14px' > 로그아웃 </Text>
-                </Box>
+                {menus.map(item => (
+                    <Menu
+                        item={item}
+                        key={item.id}
+                    />
+                ))}
             </Row>
         </Container>
     );
@@ -63,7 +91,7 @@ const Container = styled.div`
     };
 `;
 
-const Icon = styled(FontAwesomeIcon)<{ iconsize: string, visible?: DisplayType }>`
+export const Icon = styled(FontAwesomeIcon)<{ iconsize: string, visible?: DisplayType }>`
     font-size: ${({ iconsize }) => iconsize};
     color: ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
@@ -79,7 +107,7 @@ interface IText {
     mt?: string;
 };
 
-const Text = styled.span<IText>`
+export const Text = styled.span<IText>`
     font-size: ${({ size }) => size};
     color: ${({ theme }) => theme.colors.white};
     margin-left: ${({ ml }) => ml};
@@ -87,25 +115,5 @@ const Text = styled.span<IText>`
     white-space: nowrap;
     @media only screen and (max-width: 1450px) {
         display: none;
-    };
-`;
-
-const Box = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    min-width: 40px;
-    padding: 5px;
-    margin: 5px;
-    transition: .3s ease;
-    cursor: pointer;
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.main60};
-    };
-    @media only screen and (max-width: 600px) {
-        min-width: 40px;
-        margin-top: 10px;
     };
 `;

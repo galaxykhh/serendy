@@ -6,8 +6,8 @@ const Ments: React.FC<{ ment: string }> = ({ ment }) => {
         <Ment size='18px' >
             {ment}
         </Ment>
-    )
-}
+    );
+};
 
 export default Ments;
 

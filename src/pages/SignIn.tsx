@@ -1,5 +1,6 @@
-import { observer } from 'mobx-react';
 import React, { useEffect } from 'react';
+import { flowResult } from 'mobx';
+import { observer } from 'mobx-react';
 import styled from 'styled-components';
 import Container from '../components/PublicComponents/Container';
 import SignInBox from '../components/SignIn/SignInBox';
@@ -7,13 +8,16 @@ import { TEXTLOGO_URL } from '../config';
 import { DisplayType } from '../interfaces';
 import userStore from '../store/userStore';
 import { usePush } from '../hook/usePush';
-
 const SignIn: React.FC = observer(() => {
+    const { push } = usePush('main');
 
-    const push = usePush();
+    const signInWithToken = async () => {
+        const isSuccess = await flowResult(userStore.signInWithToken());
+        if (isSuccess) push();
+    };
 
     useEffect(() => {
-        userStore.signInWithToken(push.pushLoggedUser);
+        signInWithToken();
     }, []); //eslint-disable-line
 
     return (

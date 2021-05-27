@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { fadeIn } from '../../style/keyframes';
 import { ICategories, MyPageType } from '../../interfaces';
+import { observer } from 'mobx-react';
 
 const categoryList = [
     {
@@ -22,7 +23,7 @@ const categoryList = [
     },
 ];
 
-const Boxes: React.FC = () => {
+const Boxes: React.FC = observer(() => {
     const [category, setCategory] = useState<MyPageType>('none');
 
     return (
@@ -30,7 +31,8 @@ const Boxes: React.FC = () => {
             <Ment>원하시는 항목을 골라주세요</Ment>
             <Row>
                 {categoryList.map(x => (
-                    <Categories icon={x.icon}
+                    <Categories
+                        icon={x.icon}
                         text={x.text}
                         setCategory={setCategory}
                         boolean={x.boolean}
@@ -38,11 +40,11 @@ const Boxes: React.FC = () => {
                     />
                 ))}
             </Row>
-            {category === true && <ChangeNameBox />}
-            {category === false && <ChangePWBox />}
+            {category && <ChangeNameBox />}
+            {!category && <ChangePWBox />}
         </BoxContainer>
     );
-};
+});
 
 export default Boxes;
 

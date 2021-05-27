@@ -4,13 +4,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
-import { usePush } from '../../hook/usePush';
 import { INickName } from '../../interfaces/index';
 
 const ChangeNameBox: React.FC = () => {
-
-    const push = usePush();
-
     const { register, handleSubmit, formState: { errors } } = useForm<INickName>();
 
     const onSubmit: SubmitHandler<INickName> = (nickName) => {
@@ -18,7 +14,7 @@ const ChangeNameBox: React.FC = () => {
             account: userStore.user?.account,
             ...nickName,
         };
-        userStore.changeName(userData, push.pushLogin);
+        userStore.changeName(userData);
     };
 
     return (
@@ -39,7 +35,8 @@ const ChangeNameBox: React.FC = () => {
                     <TextBox>
                         {errors.nickName && <ErrorMsg>{errors.nickName.message}</ErrorMsg>}
                     </TextBox>
-                    <Button onClick={handleSubmit(onSubmit)}
+                    <Button
+                        onClick={handleSubmit(onSubmit)}
                         type='submit'
                     >
                         변경하기</Button>

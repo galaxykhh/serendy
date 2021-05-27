@@ -1,20 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { observer } from 'mobx-react';
+import { flowResult } from 'mobx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zoomIn } from '../../style/keyframes';
 import { theme } from '../../style/theme';
-import userStore from '../../store/userStore';
 import { usePush } from '../../hook/usePush';
 import { IFindPW } from '../../interfaces/index';
+import userStore from '../../store/userStore';
 
-const FindPWBox: React.FC = () => {
+const FindPWBox: React.FC = observer(() => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFindPW>();
-    const push = usePush();
+    const { push } = usePush('signin');
 
-    const onSubmit: SubmitHandler<IFindPW> = (data) => {
-        userStore.findPW(data, push.pushLogin);
+    const onSubmit: SubmitHandler<IFindPW> = async (data) => {
+        const isSuccess =  await flowResult(userStore.findPW(data));
+        if (isSuccess) push();
     };
 
     return (
@@ -22,10 +25,12 @@ const FindPWBox: React.FC = () => {
             <Box>
                 <Column>
                     <Row>
-                        <Icon icon={faUserAlt}
+                        <Icon
+                            icon={faUserAlt}
                             color={errors.account ? (theme.colors.red) : (theme.colors.white)}
                         />
-                        <Input placeholder='아이디'
+                        <Input
+                            placeholder='아이디'
                             {...register('account', {
                                 required: '아이디를 입력해주세요',
                             })}
@@ -36,10 +41,12 @@ const FindPWBox: React.FC = () => {
 
                 <Column>
                     <Row>
-                        <Icon icon={faUserSecret}
+                        <Icon
+                            icon={faUserSecret}
                             color={errors.secretMessage ? (theme.colors.red) : (theme.colors.white)}
                         />
-                        <Input placeholder='암호 메세지'
+                        <Input
+                            placeholder='암호 메세지'
                             {...register('secretMessage', {
                                 required: '암호 메세지를 작성해주세요',
                             })}
@@ -47,7 +54,8 @@ const FindPWBox: React.FC = () => {
                     </Row>
                     {errors.secretMessage && <ErrorMsg> {errors.secretMessage.message} </ErrorMsg>}
                 </Column>
-                <Button onClick={handleSubmit(onSubmit)}
+                <Button
+                    onClick={handleSubmit(onSubmit)}
                     type='submit'
                 >
                     비밀번호 찾기
@@ -55,7 +63,7 @@ const FindPWBox: React.FC = () => {
             </Box>
         </form>
     );
-};
+});
 export default FindPWBox;
 
 const Box = styled.div`

@@ -6,7 +6,7 @@ import userStore from '../../store/userStore';
 const PrivateRoute: React.FC<any>= observer(({ children }) => {
     return (
         <Route
-            render={() => userStore.isSignIn ? (children) : (<Redirect to='/login' />)}
+            render={() => userStore.user ? (children) : (<Redirect to='/signin' />)}
         />
     );
 });

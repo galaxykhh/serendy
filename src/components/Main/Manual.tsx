@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IconBox from './Icon';
 import { faPaperPlane, faComments, faUsers, faPlus, faEquals} from '@fortawesome/free-solid-svg-icons';
 import { WHALE } from '../../config';
 import { whalePop, zoomIn } from '../../style/keyframes';
@@ -36,7 +36,8 @@ const Manual: React.FC = () => {
             </LogoBox>
                 <Box>
                     {iconList.map(x => (
-                        <Icons icon={x.icon}
+                        <IconBox
+                            icon={x.icon}
                             key={x.id}
                         />
                     ))}
@@ -46,12 +47,6 @@ const Manual: React.FC = () => {
 };
 
 export default Manual;
-
-const Icons: React.FC<{ icon: any }>= ({icon}) => {
-    return (
-        <Icon icon={icon} />
-    )
-}
 
 const Column = styled.div`
     display: flex;
@@ -71,15 +66,6 @@ const Box = styled.div`
     margin-top: 20px;
     @media only screen and (max-width: 600px) {
         justify-content: center;
-    };
-`;
-
-const Icon = styled(FontAwesomeIcon)`
-    color: ${({ theme }) => theme.colors.white};
-    margin-right: 20px;
-    font-size: 50px;
-    @media only screen and (max-width: 600px) {
-        font-size: 30px;
     };
 `;
 

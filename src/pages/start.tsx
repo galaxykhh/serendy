@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import StartLogo from '../components/Start/StartLogo';
-import Blocks from '../components/Start/Blocks';
+import Layout from '../components/Start/Layout';
 import { usePush } from '../hook/usePush';
 
 const Start: React.FC = () => {
-    const push = usePush();
+    const { push } = usePush('main');
 
     useEffect(() => {
         Aos.init();
@@ -15,8 +15,8 @@ const Start: React.FC = () => {
 
     return (
         <Wallpaper>
-            <StartLogo push={push.pushMain} />
-            <Blocks push={push.pushMain} />
+            <StartLogo push={push} />
+            <Layout push={push} />
         </Wallpaper>
     );
 };

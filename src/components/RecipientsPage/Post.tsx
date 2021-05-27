@@ -12,7 +12,8 @@ const Post: React.FC<IPostList> = ({ nickName, content, didReply, showPost }) =>
             <Column>
                 <FromAccount>보낸 사람 : {nickName}</FromAccount>
                 <MessagePreview> {content}  </MessagePreview>
-                <Alert icon={faCircle} 
+                <Alert
+                    icon={faCircle} 
                     display={didReply ? 'block' : 'none'}
                 />
             </Column>

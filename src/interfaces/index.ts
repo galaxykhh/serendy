@@ -76,7 +76,6 @@ export interface IUser {
 };
 
 export interface IUserStore {
-    isSignIn: boolean;
     user: IUser | null;
     userSocket: Socket | null;
     socketID: string | null;
@@ -123,11 +122,27 @@ export interface IMatchHandler {
     isFinished: boolean;
 };
 
-export interface IBoxes {
+export interface IBox {
     item: {
-        push: () => void;
+        // push: () => void;
         color: string;
         icon: any;
         text: string;
+        push: () => void;
+    };
+};
+
+export interface IMenu {
+    item: {
+        onClick: () => void;
+        icon: any;
+        text: string;
+    };
+};
+
+export interface IBigBlock {
+    item: {
+        title: string;
+        subtitle: string;
     };
 };

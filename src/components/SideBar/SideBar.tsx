@@ -3,13 +3,13 @@ import React from 'react';
 import styled from 'styled-components';
 import userStore from '../../store/userStore';
 import { slideLeft } from '../../style/keyframes';
-import Category from './Category';
-import UserInfo from './UserInfo';
+import Category from './Category/Category';
+import UserInfo from './UserInfo/UserInfo';
 import { DisplayType } from '../../interfaces/index';
 
 const SideBar: React.FC = observer(() => {
     return (
-        <Bar visible={userStore.isSignIn ? 'block' : 'none'} >
+        <Bar visible={userStore.user ? 'block' : 'none'} >
             <UserInfo />
             <Category />
         </Bar>

@@ -6,7 +6,8 @@ import { theme } from '../../style/theme';
 const CircleLoader: React.FC = () => {
     return (
         <LoaderBox>
-            <Loader type="Circles"
+            <Loader
+                type="Circles"
                 color={theme.colors.plum}
                 height={60}
                 width={60}

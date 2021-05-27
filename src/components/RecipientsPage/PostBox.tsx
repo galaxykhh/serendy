@@ -8,7 +8,8 @@ const PostBox: React.FC<IPostBox> = ({ receivedPosts, showPost }) => {
         <ListBox>
             {receivedPosts && receivedPosts.length > 0 ? 
                 receivedPosts.map((x, i) => (
-                    <Post nickName={x.nickName}
+                    <Post
+                        nickName={x.nickName}
                         content={x.content}
                         key={i}
                         didReply={x.comment === undefined}

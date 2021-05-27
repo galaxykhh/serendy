@@ -5,7 +5,7 @@ import { ISignUpData, ISignInData, IPassword, INickName, IFindPW } from '../inte
 class AuthRepository {
     private path = '/api/auth';
 
-    public accountCheck(account: string): Promise<AxiosResponse> {
+    public checkAccount(account: string): Promise<AxiosResponse> {
         return serendyInstance.get(`${this.path}/check/${account}`);
     };
 

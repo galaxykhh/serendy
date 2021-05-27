@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/global';
-import { useEffect } from 'react';
 import PrivateRoute from './components/PublicComponents/PrivateRoute';
 import { theme } from './style/theme';
 import Start from './pages/Start';
@@ -16,23 +15,9 @@ import ChatPage from './pages/ChatPage';
 import PostPage from './pages/PostPage';
 import RecipientsPage from './pages/RecipientsPage';
 import FindPW from './pages/FindPW';
-import userStore from './store/userStore';
-import { io } from 'socket.io-client';
-import { BASE_URL } from './config';
 import SenderPage from './pages/SenderPage';
 
 const App: React.FC = observer(() => {
-
-    useEffect(() => {
-        if (userStore.user) {
-            userStore.setUserSocket(io(BASE_URL));
-            userStore.saveSocketID();
-        } else {
-            userStore.userSocket?.disconnect();
-            userStore.setSocketID(null);
-        };
-    }, [userStore.user]); //eslint-disable-line
-
     return (
         <>
             <ThemeProvider theme={theme} >

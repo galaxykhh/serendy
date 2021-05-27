@@ -113,8 +113,6 @@ class ChatStore {
                 message: '대화가 종료되었어요!',
                 socketID: 'admin',
             };
-        } else {
-            return;
         };
     };
 

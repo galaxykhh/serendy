@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import CenterView from '../components/PublicComponents/CenterView'
 import Container from '../components/PublicComponents/Container'
@@ -6,8 +6,36 @@ import MatchHandler from '../components/ChatPage/MatchHandler';
 import ChatWindow from '../components/ChatPage/ChatWindow';
 import chatStore from '../store/chatStore';
 import { observer } from 'mobx-react';
+import userStore from '../store/userStore';
+import { io } from 'socket.io-client';
+import { BASE_URL } from '../config';
 
 const ChatPage: React.FC = observer(() => {
+
+    useEffect(() => {
+        if (userStore.user) {
+            userStore.setUserSocket(io(BASE_URL));
+            userStore.saveSocketID();
+        }; 
+        return () => {
+            userStore.userSocket?.disconnect();
+            userStore.setSocketID(null);
+        };
+    }, [userStore.user]); //eslint-disable-line
+
+    useEffect(() => {
+        chatStore.handleMatched();
+        chatStore.handleReceiveMsg();
+        chatStore.chatStopped();
+    }, []); // eslint-disable-line
+
+    useEffect(() => {
+        return () => {
+            chatStore.stopChat();
+            chatStore.reset();
+        };
+    }, []); // eslint-disable-line
+
     return (
         <Container>
             <CenterView>

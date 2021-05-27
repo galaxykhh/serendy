@@ -44,21 +44,8 @@ const ChatWindow: React.FC = observer(() => {
     };
 
     useEffect(() => {
-        chatStore.handleMatched();
-        chatStore.handleReceiveMsg();
-        chatStore.chatStopped();
-    }, []); // eslint-disable-line
-
-    useEffect(() => {
         resetInput();
     }, [chatStore.isFinished]) // eslint-disable-line
-
-    useEffect(() => {
-        return () => {
-            chatStore.stopChat();
-            chatStore.reset();
-        }
-    }, []); // eslint-disable-line
 
     useEffect(() => {
         chatStore.handlePushChat();

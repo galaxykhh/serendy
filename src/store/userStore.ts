@@ -30,6 +30,7 @@ class UserStore implements IUserStore {
             setIsLogging: action,
             setUserSocket: action,
             setSocketID: action,
+            saveSocketID: action,
         });
     };
 
@@ -68,9 +69,6 @@ class UserStore implements IUserStore {
         });
     };
 
-    // 유효한 토큰을 가지고 있을 시 로그인을 유지하며 새로운 토큰을 발급받아 저장 (expiresIn 30m)
-    // 서버쪽 토큰 유효성검사를 하는 미들웨어에서 토큰이 만료되었거나 없으면 403을 띄우면서 종료되어서
-    // App 컴포넌트에서 쓰이는 이 메소드와 아래의 signIn 메소드를 따로 분리해서 만들었음.
     public *signInWithToken() {
         this.setIsLogging(true);
         try {

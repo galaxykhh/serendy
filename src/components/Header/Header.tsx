@@ -7,7 +7,7 @@ import { usePush } from '../../hook/usePush';
 import { DisplayType } from '../../interfaces';
 
 const Header: React.FC = observer(() => {
-    const { push } = usePush();
+    const { push } = usePush('main');
 
     return (
         <LogoBox

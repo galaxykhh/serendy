@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import PostBox from '../components/RecipientsPage/PostBox';
 import CenterView from '../components/PublicComponents/CenterView';
 import Container from '../components/PublicComponents/Container';
-import View from '../components/RecipientsPage/View';
+import ReceivedPostViewer from '../components/RecipientsPage/ReceivedPostViewer';
 import postStore from '../store/postStore';
 import { observer } from 'mobx-react';
 import CircleLoader from '../components/PublicComponents/CircleLoader';
+import PostBox from '../components/PublicComponents/PostComponents/PostList';
 
 const RecipientsPage: React.FC = observer(() => {
     const commentInput = useRef<HTMLTextAreaElement>(null);
@@ -26,15 +26,16 @@ const RecipientsPage: React.FC = observer(() => {
             <CenterView>
                 {postStore.isLoading ?
                     <CircleLoader /> :
-                    <Row>
-                        <PostBox receivedPosts={postStore.receivedPosts}
+                    <Box>
+                        <PostBox posts={postStore.receivedPosts}
                             showPost={postStore.handleReceivedOne}
+                            whatPage='recipients'
                         />                        
-                        <View post={postStore.currentReceivedPost}
+                        <ReceivedPostViewer post={postStore.currentReceivedPost}
                             commentInput={commentInput}
                             sendComment={() => postStore.sendComment(commentInput.current?.value)}
                         />
-                    </Row>   
+                    </Box>   
                 }
             </CenterView>
         </Container>
@@ -43,7 +44,7 @@ const RecipientsPage: React.FC = observer(() => {
 
 export default RecipientsPage;
 
-const Row = styled.div`
+const Box = styled.div`
     min-width: 100%;
     max-width: 100%;
     height: 100%;

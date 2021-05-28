@@ -1,5 +1,5 @@
 import React from 'react';
-import { IView } from '../../interfaces/index';
+import { IView } from '../../../interfaces';
 import {
     LETTER,
     NickName,

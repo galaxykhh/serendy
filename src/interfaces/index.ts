@@ -3,6 +3,7 @@ import { Socket } from 'socket.io-client';
 export type DisplayType = 'block' | 'none';
 export type VisibilityType = 'visible' | 'hidden';
 export type MyPageType = 'none' | true | false;
+type WhatPageType = 'sender' | 'recipients';
 
 export interface IRecentChat {
     nickName: string;
@@ -83,23 +84,24 @@ export interface IUserStore {
 
 export interface IView {
     post: ICurrentPost | null;
-    whatPage?: 'sender' | 'recipients';
+    whatPage?: WhatPageType;
     commentInput?: React.RefObject<HTMLTextAreaElement>;
     sendComment?: () => Promise<void>,
 };
 
-export interface IPostList {
-    nickName: string;
-    content: string;
-    didReply?: boolean;
+export interface IPost {
+    nickName: string | undefined;
+    content: string | undefined;
+    replied: boolean;
+    whatPage: WhatPageType;
     showPost: () => void;
 };
 
 export interface IPostBox {
-    sentPosts?: Array<any>;
-    receivedPosts?: Array<any>;
+    posts: ICurrentPost[];
+    whatPage: WhatPageType;
     showPost: (_id: string) => void;
-}
+};
 
 export interface IPostWindow {
     postSend: () => void;

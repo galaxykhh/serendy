@@ -1,9 +1,9 @@
 import React from 'react';
 import { IView } from '../../interfaces/index';
-import HaveComment from '../PublicComponents/HaveComment';
-import NoneComment from '../PublicComponents/NoneComment';
+import HaveComment from '../PublicComponents/PostComponents/HaveComment';
+import NoneComment from '../PublicComponents/PostComponents/NoneComment';
 
-const View: React.FC<IView>= ({ post, commentInput, sendComment }) => {
+const ReceivedPostViewer: React.FC<IView>= ({ post, commentInput, sendComment }) => {
         if (post && post.comment) {
             return <HaveComment post={post} />
         };
@@ -17,4 +17,4 @@ const View: React.FC<IView>= ({ post, commentInput, sendComment }) => {
     return null;
 };
 
-export default View;
+export default ReceivedPostViewer;

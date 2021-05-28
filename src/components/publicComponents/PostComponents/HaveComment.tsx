@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { IView } from '../../interfaces';
+import { IView } from '../../../interfaces';
 
 const HaveComment: React.FC<IView>= ({ post }) => {
     return (

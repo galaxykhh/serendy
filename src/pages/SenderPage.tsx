@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import PostBox from '../components/SenderPage/PostBox';
 import CenterView from '../components/PublicComponents/CenterView';
 import Container from '../components/PublicComponents/Container';
-import View from '../components/SenderPage/View';
+import SentPostViewer from '../components/SenderPage/SentPostViewer';
 import postStore from '../store/postStore';
 import { observer } from 'mobx-react';
 import CircleLoader from '../components/PublicComponents/CircleLoader';
+import PostBox from '../components/PublicComponents/PostComponents/PostList';
 
 const SenderPage: React.FC = observer(() => {
 
@@ -25,12 +25,13 @@ const SenderPage: React.FC = observer(() => {
             <CenterView>
                 {postStore.isLoading ?
                     <CircleLoader /> :
-                    <Row>
-                        <PostBox sentPosts={postStore.sentPosts}
+                    <Box>
+                        <PostBox posts={postStore.sentPosts}
                             showPost={postStore.handleSentOne}
+                            whatPage='sender'
                         />
-                        <View post={postStore.currentSentPost} />
-                    </Row>
+                        <SentPostViewer post={postStore.currentSentPost} />
+                    </Box>
                 }
             </CenterView>
         </Container>
@@ -39,7 +40,7 @@ const SenderPage: React.FC = observer(() => {
 
 export default SenderPage;
 
-const Row = styled.div`
+const Box = styled.div`
     min-width: 100%;
     max-width: 100%;
     height: 100%;

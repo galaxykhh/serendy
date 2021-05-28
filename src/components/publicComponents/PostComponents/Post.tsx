@@ -2,20 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { DisplayType } from '../../interfaces/index';
-import { IPostList } from '../../interfaces/index';
+import { DisplayType } from '../../../interfaces';
+import { IPost } from '../../../interfaces';
 
-const Post: React.FC<IPostList> = ({ nickName, content, didReply, showPost }) => {
+const Post: React.FC<IPost> = ({ nickName, content, whatPage, replied, showPost }) => {
     return (
         <Box onClick={showPost} >
             <Icon icon={faEnvelope} />
             <Column>
                 <FromAccount>보낸 사람 : {nickName}</FromAccount>
                 <MessagePreview> {content}  </MessagePreview>
-                <Alert
-                    icon={faCircle} 
-                    display={didReply ? 'block' : 'none'}
-                />
+                {whatPage === 'sender' &&
+                    <Alert
+                        icon={faCircle}
+                        display={!replied ? 'block' : 'none'}
+                    />
+                }
+                {whatPage === 'recipients' &&
+                    <Alert
+                        icon={faCircle} 
+                        display={replied ? 'block' : 'none'}
+                    />
+                }
             </Column>
         </Box>
     );

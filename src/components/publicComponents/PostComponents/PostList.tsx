@@ -1,30 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 import Post from './Post';
-import { IPostBox } from '../../interfaces/index';
+import { IPostBox } from '../../../interfaces';
 
-const PostBox: React.FC<IPostBox> = ({ receivedPosts, showPost }) => {
+const PostBox: React.FC<IPostBox> = ({ posts, whatPage,showPost }) => {
     return (
-        <ListBox>
-            {receivedPosts && receivedPosts.length > 0 ? 
-                receivedPosts.map((x, i) => (
+        <Container>
+            {Array.isArray(posts) && posts.length > 0 ?
+                posts.map((x, i) => (
                     <Post
                         nickName={x.nickName}
                         content={x.content}
                         key={i}
-                        didReply={x.comment === undefined}
-                        showPost={() => showPost(x._id)}
+                        replied={x.comment === undefined}
+                        showPost={() => showPost(x._id!)}
+                        whatPage={whatPage}
                     />
                 )) :
                 <Announce>아직 받은 편지가 없어요</Announce>
             }
-        </ListBox>
+        </Container>
     );
 };
 
 export default PostBox;
 
-const ListBox = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

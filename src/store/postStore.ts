@@ -41,11 +41,11 @@ class PostStore {
         this.receivedPosts = data;
     };
 
-    public setCurrentSentPost(data: ICurrentPost): void {
+    public setCurrentSentPost(data: ICurrentPost | null): void {
         this.currentSentPost = data;
     };
 
-    public setCurrentReceivedPost(data: ICurrentPost): void {
+    public setCurrentReceivedPost(data: ICurrentPost | null): void {
         this.currentReceivedPost = data;
     };
 
@@ -144,12 +144,15 @@ class PostStore {
     };
 
     public resetReceivedPosts(): void {
+        this.setCurrentReceivedPost(null);
         this.setReceivedPosts([]);
     };
 
     public resetSentPosts(): void {
+        this.setCurrentSentPost(null);
         this.setSentPosts([]);
     };
+
 };
 
 const postStore = new PostStore();

@@ -34,7 +34,8 @@ const UserInfo: React.FC = observer(() => {
 
     return (
         <Container>
-            <Row style={{ marginTop: '10px' }} >
+
+            <InfoBox style={{ marginTop: '10px' }} >
                 <UserIcon 
                     icon={faUserAlt}
                     iconSize='24px'
@@ -45,22 +46,23 @@ const UserInfo: React.FC = observer(() => {
                 >
                     {userStore.user?.nickName}
                 </Text>
-            </Row>
-            <Row>
+            </InfoBox>
+            <MenuBox>
                 {menus.map(item => (
                     <Menu
                         item={item}
                         key={item.id}
                     />
                 ))}
-            </Row>
+            </MenuBox>
+
         </Container>
     );
 });
 
 export default UserInfo;
 
-const Row = styled.div`
+const InfoBox = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -75,6 +77,8 @@ const Row = styled.div`
         margin-top: 8px;
     };
 `;
+
+const MenuBox = styled(InfoBox)``;
 
 const Container = styled.div`
     display: flex;

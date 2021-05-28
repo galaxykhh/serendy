@@ -141,7 +141,7 @@ class UserStore implements IUserStore {
             const { data: { message }} = yield authRepository.changePassword(data);
             if (message === 'Changed') {
                 alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
-                this.signOut();
+                return this.signOut();
             };
         } catch(err) {
             alert('서버가 점검중이에요');
@@ -153,7 +153,7 @@ class UserStore implements IUserStore {
             const { data: { message }} = yield authRepository.changeName(nickName);
             if (message === 'Changed') {
                 alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
-                this.signOut();
+                return this.signOut();
             };
         } catch(err) {
             alert('서버가 점검중이에요');
@@ -165,7 +165,7 @@ class UserStore implements IUserStore {
             const { data: { message }} = yield authRepository.findPW(data);
             if (message === 'Not Exist') {
                 alert('일치하는 정보가 없습니다');
-                return;
+                return false;
             }
             if (message === 'Valid User') {
                 alert(`임시로 암호 메세지가\n비밀번호로 설정되었습니다\n비밀번호 변경을 꼭 해주세요`);

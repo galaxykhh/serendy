@@ -5,16 +5,20 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
 import { IPassword } from '../../interfaces/index';
+import { flowResult } from 'mobx';
+import { usePush } from '../../hook/usePush';
 
 const ChangePWBox: React.FC = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IPassword>();
+    const { push } = usePush('signin');
 
-    const onSubmit: SubmitHandler<IPassword> = (data) => {
+    const onSubmit: SubmitHandler<IPassword> = async (data) => {
         const userData = {
             account: userStore.user?.account,
             ...data,
         };
-        userStore.changePW(userData);
+        const isSuccess = await flowResult(userStore.changePW(userData));
+        if (isSuccess) push();
     };
 
     return (

@@ -5,16 +5,20 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import userStore from '../../store/userStore';
 import { INickName } from '../../interfaces/index';
+import { flowResult } from 'mobx';
+import { usePush } from '../../hook/usePush';
 
 const ChangeNameBox: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<INickName>();
+    const { push } = usePush('signin');
 
-    const onSubmit: SubmitHandler<INickName> = (nickName) => {
+    const onSubmit: SubmitHandler<INickName> = async (nickName) => {
         const userData = {
             account: userStore.user?.account,
             ...nickName,
         };
-        userStore.changeName(userData);
+        const isSuccess = await flowResult(userStore.changeName(userData));
+        if (isSuccess) push();
     };
 
     return (

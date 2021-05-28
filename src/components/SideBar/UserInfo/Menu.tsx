@@ -9,7 +9,7 @@ const Menu: React.FC<IMenu> = ({ item }) => {
         <Container onClick={onClick} >
             <Icon
                 icon={icon}
-                iconsize='24px'
+                iconSize='24px'
             />
             <Text
                 mt='8px'

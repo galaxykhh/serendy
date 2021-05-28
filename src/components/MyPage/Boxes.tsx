@@ -28,7 +28,7 @@ const Boxes: React.FC = observer(() => {
 
     return (
         <BoxContainer>
-            <Ment>원하시는 항목을 골라주세요</Ment>
+            <Announce>원하시는 항목을 골라주세요</Announce>
             <Row>
                 {categoryList.map(x => (
                     <Categories
@@ -104,7 +104,7 @@ const Icon = styled(FontAwesomeIcon)`
     color: ${({ theme }) => theme.colors.white};
 `;
 
-const Ment = styled.div`
+const Announce = styled.div`
     font-size: 36px;
     color: ${({ theme }) => theme.colors.white};
     margin-bottom: 40px;

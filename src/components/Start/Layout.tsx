@@ -4,7 +4,7 @@ import { TEXTLOGO_URL } from '../../config';
 import BigBlock from './BigBlock';
 import SmallBlock from './SmallBlock';
 
-const bigBlockMent = [
+const bigBlockAnnounce = [
     {   
         title: '말해보세요',
         subtitle: `주변 사람들에게 선뜻 말하기 힘든 고민이 있다면\n\n낯선 누군가에게 부담 없이 말해보세요`,
@@ -19,7 +19,7 @@ const bigBlockMent = [
     },
 ];
 
-const smallBlockMent = [
+const smallBlockAnnounce = [
     {
         text: '경험해보세요',
     },
@@ -31,13 +31,13 @@ const smallBlockMent = [
 const Layout: React.FC<{push: () => void}>= ({push}) => {
     return (
         <BlockContainer>
-            {bigBlockMent.map(item => (
+            {bigBlockAnnounce.map(item => (
                 <BigBlock
                     item={item}
                     key={item.title}
                 />
             ))}
-            {smallBlockMent.map(item => (
+            {smallBlockAnnounce.map(item => (
                 <SmallBlock
                     text={item.text}
                     key={item.text}

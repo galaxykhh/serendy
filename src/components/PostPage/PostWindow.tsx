@@ -1,24 +1,24 @@
 import React from 'react';
 import styled  from 'styled-components';
 import { IPostWindow } from '../../interfaces/index';
-import Ments from '../PublicComponents/Ments';
+import Announces from '../PublicComponents/Announce';
 
-const postMent = [
+const postAnnounce = [
     {
         id: 1,
-        ment: '· 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요',
+        announce: '· 편지는 수신자를 정할 수 없고 무작위로 한 사람에게 전달돼요',
     },
     {
         id: 2,
-        ment: '· 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요',
+        announce: '· 누군가 편지를 받게되면 나에게 답장을 보낼 수 있어요',
     },
     {
         id: 3,
-        ment: '· 편지를 받으면 자동으로 보관함에 저장돼요',
+        announce: '· 편지를 받으면 자동으로 보관함에 저장돼요',
     },
     {
         id: 4,
-        ment: '· 한 편지에 답장은 한 번만 가능해요',
+        announce: '· 한 편지에 답장은 한 번만 가능해요',
     },
 ];
 
@@ -37,10 +37,10 @@ const PostWindow: React.FC<IPostWindow>= ({ postSend, postArea }) => {
             </LetterContainer>
 
             <RuleContainer>
-                <BigMent>어떤 사람이 내 편지를 받게 될까요 ?</BigMent>
+                <BigAnnounce>어떤 사람이 내 편지를 받게 될까요 ?</BigAnnounce>
                     <Rule>
-                        {postMent.map(x => (
-                            <Ments ment={x.ment}
+                        {postAnnounce.map(x => (
+                            <Announces announce={x.announce}
                                 key={x.id}
                             />
                         ))}
@@ -168,7 +168,7 @@ const Rule = styled.div`
     align-items: flex-start;
 `;
 
-const Ment = styled.div<{ size?: string }>`
+const Announce = styled.div<{ size?: string }>`
     font-size: 17px;
     margin-bottom: 10px;
     white-space: nowrap;
@@ -180,7 +180,7 @@ const Ment = styled.div<{ size?: string }>`
         font-size: 11px;
     };
 `;
-const BigMent = styled(Ment)`
+const BigAnnounce = styled(Announce)`
     font-size: 30px;
     margin-bottom: 40px;
     color: ${({ theme }) => theme.colors.white};

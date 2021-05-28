@@ -23,7 +23,7 @@ export const Rule = styled.div`
     align-items: flex-start;
 `;
 
-export const Ment = styled.div<{ size?: string }>`
+export const Announce = styled.div<{ size?: string }>`
     font-size: 17px;
     margin-bottom: 10px;
     white-space: nowrap;
@@ -36,7 +36,7 @@ export const Ment = styled.div<{ size?: string }>`
     };
 `;
 
-export const BigMent = styled(Ment)`
+export const BigAnnounce = styled(Announce)`
     font-size: 30px;
     margin-bottom: 40px;
     color: ${({ theme }) => theme.colors.white};

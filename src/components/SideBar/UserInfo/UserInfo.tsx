@@ -10,7 +10,7 @@ import Menu from './Menu';
 
 const UserInfo: React.FC = observer(() => {
     const start = usePush();
-    const mypage = usePush('mypage');
+    const myPage = usePush('mypage');
 
     const signOut = () => {
         const isSuccess = userStore.signOut();
@@ -20,7 +20,7 @@ const UserInfo: React.FC = observer(() => {
     const menus = [
         {
             id: 1,
-            onClick: mypage.push,
+            onClick: myPage.push,
             icon: faClipboard,
             text: '정보변경',    
         },
@@ -37,7 +37,7 @@ const UserInfo: React.FC = observer(() => {
             <Row style={{ marginTop: '10px' }} >
                 <UserIcon 
                     icon={faUserAlt}
-                    iconsize='24px'
+                    iconSize='24px'
                 />
                 <Text
                     ml='7px'
@@ -91,8 +91,8 @@ const Container = styled.div`
     };
 `;
 
-export const Icon = styled(FontAwesomeIcon)<{ iconsize: string, visible?: DisplayType }>`
-    font-size: ${({ iconsize }) => iconsize};
+export const Icon = styled(FontAwesomeIcon)<{ iconSize: string, visible?: DisplayType }>`
+    font-size: ${({ iconSize }) => iconSize};
     color: ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
 `;

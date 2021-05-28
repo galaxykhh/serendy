@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Ments: React.FC<{ ment: string }> = ({ ment }) => {
+const Announce: React.FC<{ announce: string }> = ({ announce }) => {
     return (
-        <Ment size='18px' >
-            {ment}
-        </Ment>
+        <Container size='18px' >
+            {announce}
+        </Container>
     );
 };
 
-export default Ments;
+export default Announce;
 
-export const Ment = styled.div<{ size?: string }>`
+export const Container = styled.div<{ size?: string }>`
     font-size: 17px;
     margin-bottom: 10px;
     white-space: nowrap;

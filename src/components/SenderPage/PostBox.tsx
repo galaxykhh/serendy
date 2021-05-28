@@ -15,7 +15,7 @@ const PostBox: React.FC<IPostBox>= ({ sentPosts, showPost }) => {
                         showPost={() => showPost(x._id)}
                     />
                 )) :
-                <Ment>아직 보낸 편지가 없어요</Ment>
+                <Announce>아직 보낸 편지가 없어요</Announce>
             }
         </ListBox>
     );
@@ -38,7 +38,7 @@ const ListBox = styled.div`
     background-color: ${({ theme }) => theme.colors.white10};
 `;
 
-const Ment = styled.div`
+const Announce = styled.div`
     color: ${({ theme }) => theme.colors.white};
     font-size: 18px;
     text-align: center;

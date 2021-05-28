@@ -70,10 +70,10 @@ class UserStore implements IUserStore {
     };
 
     public *signInWithToken() {
-        this.setIsLogging(true);
         try {
             const token = localStorage.getItem('SerendyToken');
             if (token) {
+                this.setIsLogging(true);
                 const { data: {message, account, nickName, token}} = yield authRepository.signInWidthToken();
                     if (message === 'SignIn Success') {
                         this.setUser({ account , nickName });
@@ -82,7 +82,6 @@ class UserStore implements IUserStore {
                         return true;
                     };
             };
-            this.setIsLogging(false);
             return false;
         } catch(err) {
             this.setIsLogging(false);
@@ -127,9 +126,8 @@ class UserStore implements IUserStore {
             const { data: { message } } = yield authRepository.checkAccount(account);
             if (message === 'available') {
                 return true;
-            } else { // message = 'already exist'
-                return false;
             };
+            return false; // message = 'already exist'
         } catch(err) {
             console.log(err);
             alert('서버 점검중입니다');

@@ -38,7 +38,7 @@ const UserInfo: React.FC = observer(() => {
             <InfoBox style={{ marginTop: '10px' }} >
                 <UserIcon 
                     icon={faUserAlt}
-                    iconSize='24px'
+                    iconsize='24px'
                 />
                 <Text
                     ml='7px'
@@ -95,8 +95,8 @@ const Container = styled.div`
     };
 `;
 
-export const Icon = styled(FontAwesomeIcon)<{ iconSize: string, visible?: DisplayType }>`
-    font-size: ${({ iconSize }) => iconSize};
+export const Icon = styled(FontAwesomeIcon)<{ iconsize: string, visible?: DisplayType }>`
+    font-size: ${({ iconsize }) => iconsize};
     color: ${({ theme }) => theme.colors.white};
     display: ${({ visible }) => visible};
 `;

@@ -69,7 +69,6 @@ class PostStore {
             runInAction(() => {
                 if ((message === 'Send Success')) {
                     setIsSending();
-                    console.log('false');
                     setIsSent();
                 };
             })

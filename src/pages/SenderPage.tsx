@@ -29,7 +29,7 @@ const SenderPage: React.FC = observer(() => {
                         <PostBox sentPosts={postStore.sentPosts}
                             showPost={postStore.handleSentOne}
                         />
-                        <View currentSentPost={postStore.currentSentPost} />
+                        <View post={postStore.currentSentPost} />
                     </Row>
                 }
             </CenterView>

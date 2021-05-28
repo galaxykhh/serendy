@@ -81,12 +81,9 @@ export interface IUserStore {
     socketID: string | null;
 };
 
-export interface ISentView {
-    currentSentPost: ICurrentPost | null;
-};
-
-export interface IReceivedView {
-    currentReceivedPost: ICurrentPost | null;
+export interface IView {
+    post: ICurrentPost | null;
+    whatPage?: 'sender' | 'recipients';
     commentInput?: React.RefObject<HTMLTextAreaElement>;
     sendComment?: () => Promise<void>,
 };

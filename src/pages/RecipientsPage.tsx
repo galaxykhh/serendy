@@ -30,7 +30,7 @@ const RecipientsPage: React.FC = observer(() => {
                         <PostBox receivedPosts={postStore.receivedPosts}
                             showPost={postStore.handleReceivedOne}
                         />                        
-                        <View currentReceivedPost={postStore.currentReceivedPost}
+                        <View post={postStore.currentReceivedPost}
                             commentInput={commentInput}
                             sendComment={() => postStore.sendComment(commentInput.current?.value)}
                         />

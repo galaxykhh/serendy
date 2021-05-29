@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/global';
-import PrivateRoute from './components/PublicComponents/PrivateRoute';
+import PrivateRoute from './components/SharedComponents/PrivateRoute';
 import { theme } from './style/theme';
 import Start from './pages/Start';
 import Main from './pages/Main';

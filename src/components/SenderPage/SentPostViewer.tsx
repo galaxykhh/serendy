@@ -1,7 +1,7 @@
 import React from 'react';
 import { IView } from '../../interfaces/index';
-import HaveComment from '../PublicComponents/PostComponents/HaveComment';
-import NoneComment from '../PublicComponents/PostComponents/NoneComment';
+import HaveComment from '../SharedComponents/PostComponents/HaveComment';
+import NoneComment from '../SharedComponents/PostComponents/NoneComment';
 
 const SentPostViewer: React.FC<IView>= ({ post }) => {
     if (post && post.comment) {

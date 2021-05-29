@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { observer } from 'mobx-react';
-import CenterView from '../components/PublicComponents/CenterView'
-import Container from '../components/PublicComponents/Container'
+import CenterView from '../components/SharedComponents/CenterView'
+import Container from '../components/SharedComponents/Container'
 import PostWindow from '../components/PostPage/PostWindow';
 import PostSent from '../components/PostPage/PostSent';
 import postStore from '../store/postStore';
-import CircleLoader from '../components/PublicComponents/CircleLoader';
+import CircleLoader from '../components/SharedComponents/CircleLoader';
 
 const PostPage: React.FC = observer(() => {
     const [isSending, setIsSending] = useState<boolean>(false);

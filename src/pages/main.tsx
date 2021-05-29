@@ -1,7 +1,7 @@
 import React from 'react'
-import Container from '../components/PublicComponents/Container';
+import Container from '../components/SharedComponents/Container';
 import Manual from '../components/Main/Manual';
-import CenterView from '../components/PublicComponents/CenterView';
+import CenterView from '../components/SharedComponents/CenterView';
 
 const Main: React.FC = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled  from 'styled-components';
 import { IPostWindow } from '../../interfaces/index';
-import Announces from '../PublicComponents/Announce';
+import Announces from '../SharedComponents/Announce';
 
 const postAnnounce = [
     {

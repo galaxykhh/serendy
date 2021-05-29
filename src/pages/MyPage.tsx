@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '../components/PublicComponents/Container';
-import CenterView from '../components/PublicComponents/CenterView';
+import Container from '../components/SharedComponents/Container';
+import CenterView from '../components/SharedComponents/CenterView';
 import { observer } from 'mobx-react';
 import Boxes from '../components/MyPage/Boxes';
 

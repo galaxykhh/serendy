@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import CenterView from '../components/PublicComponents/CenterView';
-import Container from '../components/PublicComponents/Container';
+import CenterView from '../components/SharedComponents/CenterView';
+import Container from '../components/SharedComponents/Container';
 import ReceivedPostViewer from '../components/RecipientsPage/ReceivedPostViewer';
 import postStore from '../store/postStore';
 import { observer } from 'mobx-react';
-import CircleLoader from '../components/PublicComponents/CircleLoader';
-import PostBox from '../components/PublicComponents/PostComponents/PostList';
+import CircleLoader from '../components/SharedComponents/CircleLoader';
+import PostBox from '../components/SharedComponents/PostComponents/PostList';
 
 const RecipientsPage: React.FC = observer(() => {
     const commentInput = useRef<HTMLTextAreaElement>(null);

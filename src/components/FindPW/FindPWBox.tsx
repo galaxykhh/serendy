@@ -10,6 +10,7 @@ import { theme } from '../../style/theme';
 import { usePush } from '../../hook/usePush';
 import { IFindPW } from '../../interfaces/index';
 import userStore from '../../store/userStore';
+import { TextLogo } from '../SharedComponents/TextLogo';
 
 const FindPWBox: React.FC = observer(() => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFindPW>();
@@ -22,6 +23,7 @@ const FindPWBox: React.FC = observer(() => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
+            <TextLogo />
             <Box>
                 <Column>
                     <Row>
@@ -74,6 +76,10 @@ const Box = styled.div`
     width: 600px;
     height: 600px;
     animation: ${zoomIn} .6s ease;
+    @media only screen and (max-width: 600px) {
+        justify-content: center;
+        height: 450px;
+    };
 `;
 
 const Column = styled.div`

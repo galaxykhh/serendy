@@ -82,6 +82,7 @@ class UserStore implements IUserStore {
                         return true;
                     };
             };
+            this.setIsLogging(false);
             return false;
         } catch(err) {
             this.setIsLogging(false);

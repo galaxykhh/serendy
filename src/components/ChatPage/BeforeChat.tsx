@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import React from "react";
 import chatStore from "../../store/chatStore";
 import { BigAnnounce, Rule, BtnBox, StartBtn } from "./MatchHandler";
-import Announce from '../PublicComponents/Announce';
+import Announce from '../SharedComponents/Announce';
 
 const beforeAnnounce = [
     {

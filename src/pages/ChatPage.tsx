@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import CenterView from '../components/PublicComponents/CenterView'
-import Container from '../components/PublicComponents/Container'
+import CenterView from '../components/SharedComponents/CenterView'
+import Container from '../components/SharedComponents/Container'
 import MatchHandler from '../components/ChatPage/MatchHandler';
 import ChatWindow from '../components/ChatPage/ChatWindow';
 import chatStore from '../store/chatStore';

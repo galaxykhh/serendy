@@ -30,5 +30,6 @@ const Wallpaper = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
     background-color: ${({ theme }) => theme.colors.black};
 `;

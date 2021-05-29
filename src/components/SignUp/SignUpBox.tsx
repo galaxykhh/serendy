@@ -167,6 +167,9 @@ const Box = styled.div`
     width: 600px;
     height: 640px;
     animation: ${zoomIn} .6s ease;
+    @media only screen and (max-width: 600px) {
+        height: 550px;
+    };
 `;
 
 const Column = styled.div`

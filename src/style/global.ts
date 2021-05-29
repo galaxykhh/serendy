@@ -18,11 +18,7 @@ const GlobalStyle = createGlobalStyle`
         ::-webkit-scrollbar {
             display: none;
         }
-    }
-    body {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+    };
     // 자동완성 박스 색
     input:-webkit-autofill,
     input:-webkit-autofill:hover,

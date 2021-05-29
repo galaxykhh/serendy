@@ -2,7 +2,7 @@ import { Socket } from 'socket.io-client';
 
 export type DisplayType = 'block' | 'none';
 export type VisibilityType = 'visible' | 'hidden';
-export type MyPageType = 'none' | true | false;
+export type MyPageType = 'none' | 'changeName' | 'changePW';
 type WhatPageType = 'sender' | 'recipients';
 
 export interface IRecentChat {
@@ -109,10 +109,17 @@ export interface IPostWindow {
 };
 
 export interface ICategories {
-    setCategory: (boolean: boolean) => void;
+    setSelectedCategory: (category: MyPageType) => void;
     icon: any;
     text: string;
-    boolean: boolean;
+    category: MyPageType;
+};
+
+export interface ICategoryList {
+    id: number;
+    icon: any;
+    category: MyPageType;
+    text: string;
 };
 
 export interface IMatchHandler {

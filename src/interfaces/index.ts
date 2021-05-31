@@ -86,7 +86,7 @@ export interface IView {
     post: ICurrentPost | null;
     whatPage?: WhatPageType;
     commentInput?: React.RefObject<HTMLTextAreaElement>;
-    sendComment?: () => Promise<void>,
+    sendComment?: () => void,
 };
 
 export interface IPost {

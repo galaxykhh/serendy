@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, runInAction } from 'mobx';
+import { action, makeObservable, observable, flow } from 'mobx';
 import { ICurrentPost } from '../interfaces/index';
 import userStore from './userStore';
 import postRepository from '../repository/postRepository'
@@ -22,12 +22,12 @@ class PostStore {
             setCurrentSentPost: action,
             setCurrentReceivedPost: action,
             setIsLoading: action,
-            sendPost: action,
-            getSentPosts: action,
-            getReceivedPosts: action,
+            sendPost: flow,
+            getSentPosts: flow,
+            getReceivedPosts: flow,
             handleSentOne: action.bound,
             handleReceivedOne: action.bound,
-            sendComment: action,
+            sendComment: flow,
             resetReceivedPosts: action,
             resetSentPosts: action,
         });
@@ -53,41 +53,32 @@ class PostStore {
         this.isLoading = boolean;
     };
 
-    public async sendPost(content: string | undefined, setIsSending: () => void, setIsSent: () => void): Promise<void> {
+    public *sendPost(content: string | undefined) {
         if (content?.length === 0) {
             return;
         };
         try {
-            setIsSending();
-            console.log('true');
             const data = {
                 account: userStore.user?.account,
                 nickName: userStore.user?.nickName,
                 content: content,
             };
-            const { data: { message }} = await postRepository.sendPost(data);
-            runInAction(() => {
-                if ((message === 'Send Success')) {
-                    setIsSending();
-                    setIsSent();
-                };
-            })
+            const { data: { message }} = yield postRepository.sendPost(data);
+            if ((message === 'Send Success')) {
+                return true
+            };
         } catch(err) {
-            setIsSending();
-            console.log('false');
             console.log(err);
             alert('서버가 점검중이에요');
         };
     };
 
-    public async getSentPosts(): Promise<void> {
+    public *getSentPosts() {
         this.setIsLoading(true);
         try {
-            const { data } = await postRepository.getSentPosts(userStore.user?.account);
-            runInAction(() => {
-                this.setSentPosts(data);
-                this.setIsLoading(false);
-            });
+            const { data } = yield postRepository.getSentPosts(userStore.user?.account);
+            this.setSentPosts(data);
+            this.setIsLoading(false);
         } catch(err) {
             console.log(err);
             alert('오류가 발생하였습니다');
@@ -95,14 +86,12 @@ class PostStore {
         };
     };
 
-    public async getReceivedPosts(): Promise<void> {
+    public *getReceivedPosts() {
         this.setIsLoading(true);
         try {
-            const { data } = await postRepository.getReceivePosts(userStore.user?.account);
-            runInAction(() => {
-                this.setReceivedPosts(data);
-                this.setIsLoading(false);
-            });
+            const { data } = yield postRepository.getReceivePosts(userStore.user?.account);
+            this.setReceivedPosts(data);
+            this.setIsLoading(false);
         } catch(err) {
             console.log(err);
             alert('오류가 발생하였습니다');
@@ -120,7 +109,7 @@ class PostStore {
         post && this.setCurrentReceivedPost(post);
     };
 
-    public async sendComment(content: string | undefined): Promise<void> {
+    public *sendComment(content: string | undefined) {
         try {
             if (content?.length === 0) {
                 return;
@@ -131,7 +120,7 @@ class PostStore {
                 nickName: userStore.user?.nickName,
                 content: content,
             };
-            const { data: { message, receivedPosts, currentReceivedPost}} = await postRepository.sendComment(data);
+            const { data: { message, receivedPosts, currentReceivedPost}} = yield postRepository.sendComment(data);
             if ((message === 'Success')) {
                 this.setReceivedPosts(receivedPosts);
                 this.setCurrentReceivedPost(currentReceivedPost);

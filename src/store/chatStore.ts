@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { VisibilityType, IRecentChat } from '../interfaces/index';
 import userStore from "./userStore";
 
@@ -75,27 +75,23 @@ class ChatStore {
 
     public handleMatched(): void {
         userStore.userSocket?.on('matched', () => {
-            runInAction(() => {
-                this.setIsMatched(true);
-                this.setVisible('visible');
-                this.chatLog = [{
-                nickName: 'SERENDY',
-                message: '상대와 대화가 시작되었어요!',
-                socketID: 'admin',
-                }];
-            })
+            this.setIsMatched(true);
+            this.setVisible('visible');
+            this.chatLog = [{
+            nickName: 'SERENDY',
+            message: '상대와 대화가 시작되었어요!',
+            socketID: 'admin',
+            }];
         });
     };
 
     public handleReceiveMsg(): void {
         userStore.userSocket?.on('receive', (data, socketID) => {
-            runInAction(() => {
-                this.recentChat = {
-                    nickName: data.nickName,
-                    message: data.message,
-                    socketID: socketID
-                };
-            });
+            this.recentChat = {
+                nickName: data.nickName,
+                message: data.message,
+                socketID: socketID
+            };
         });
     };
 

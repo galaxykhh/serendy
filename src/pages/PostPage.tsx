@@ -6,6 +6,7 @@ import PostWindow from '../components/PostPage/PostWindow';
 import PostSent from '../components/PostPage/PostSent';
 import postStore from '../store/postStore';
 import CircleLoader from '../components/SharedComponents/CircleLoader';
+import { flowResult } from 'mobx';
 
 const PostPage: React.FC = observer(() => {
     const [isSending, setIsSending] = useState<boolean>(false);
@@ -20,10 +21,21 @@ const PostPage: React.FC = observer(() => {
         setIsSending(!isSending);
     };
 
+    const sendPost = async () => {
+        toggleIsSending();
+        const isSuccess = await flowResult(postStore.sendPost(postArea.current?.value));
+        if (isSuccess) {
+            toggleIsSending();
+            toggleIsSent();
+        };
+    };
+
     const reset = (): void => {
         setIsSent(false);
         setIsSending(false);
     };
+
+
 
     if (isSending && !isSent) {
         return (
@@ -39,7 +51,7 @@ const PostPage: React.FC = observer(() => {
                 <CenterView>
                     {isSent ? 
                         <PostSent reset={reset} /> : 
-                        <PostWindow postSend={() => postStore.sendPost(postArea.current?.value, toggleIsSending, toggleIsSent)}
+                        <PostWindow postSend={sendPost}
                             postArea={postArea}
                         />
                     }

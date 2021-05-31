@@ -9,7 +9,7 @@ const FinishedChat: React.FC = observer(() => {
             <BigAnnounce> 대화가 종료되었어요 </BigAnnounce>
             <Announce size='18px' >상대방은 어떤 사람이었을까요?</Announce>
             <BtnBox>
-                <StartBtn onClick={chatStore.reset} >다시하기</StartBtn>
+                <StartBtn onClick={chatStore.reset} >대화방 나가기</StartBtn>
             </BtnBox>
         </>
     );

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import StartLogo from '../components/Start/StartLogo';
-import Layout from '../components/Start/Layout';
+import Announces from '../components/Start/Announces';
 import { usePush } from '../hook/usePush';
 
 const Start: React.FC = () => {
@@ -16,7 +16,7 @@ const Start: React.FC = () => {
     return (
         <Wallpaper>
             <StartLogo push={push} />
-            <Layout push={push} />
+            <Announces push={push} />
         </Wallpaper>
     );
 };

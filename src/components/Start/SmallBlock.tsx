@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Space } from './Layout';
+import { Text, Space } from './Announces';
 
 const SmallBlock: React.FC<{ text: string }>= ({ text }) => {
     return (

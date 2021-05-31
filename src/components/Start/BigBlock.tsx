@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Space } from './Layout'
+import { Text, Space } from './Announces'
 import { IBigBlock } from '../../interfaces';
 const BigBlock: React.FC<IBigBlock> = ({ item }) => {
     const { title, subtitle } = item;

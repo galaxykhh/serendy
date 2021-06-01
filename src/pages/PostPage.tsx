@@ -27,6 +27,8 @@ const PostPage: React.FC = observer(() => {
         if (isSuccess) {
             toggleIsSending();
             toggleIsSent();
+        } else {
+            toggleIsSending();
         };
     };
 

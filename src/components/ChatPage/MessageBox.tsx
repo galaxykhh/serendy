@@ -4,7 +4,7 @@ import { IMessageBox } from '../../interfaces';
 
 const MessageBox: React.FC<IMessageBox>= ({ nickName, message, socketID }) => {
     return (
-        <Row fd={socketID ? 'row-reverse' : 'row'} >
+        <Container fd={socketID ? 'row-reverse' : 'row'} >
             {socketID ?  
                 <OwnChatName> { nickName } </OwnChatName> :
                 <OthersName> { nickName }</OthersName>
@@ -19,13 +19,13 @@ const MessageBox: React.FC<IMessageBox>= ({ nickName, message, socketID }) => {
                     {message}
                 </OthersBalloon>
             }
-        </Row>
+        </Container>
     );
 };
 
 export default MessageBox;
 
-const Row = styled.div<{ fd: string }>`
+const Container = styled.div<{ fd: string }>`
     position: relative;
     display: flex;
     flex-direction: ${({ fd }) => fd};

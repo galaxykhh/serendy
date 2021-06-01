@@ -10,7 +10,6 @@ const SignIn: React.FC = observer(() => {
 
     const signInWithToken = async () => {
         const isSuccess = await flowResult(userStore.signInWithToken());
-        console.log(isSuccess);
         if (isSuccess) push();
     };
 

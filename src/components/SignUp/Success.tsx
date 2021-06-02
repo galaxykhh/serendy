@@ -4,7 +4,7 @@ import { usePush } from '../../hook/usePush';
 import { zoomIn } from '../../style/keyframes';
 
 const Success: React.FC = () => {
-    const { push } = usePush('signin');
+    const { push } = usePush();
 
     return (
         <Box>
@@ -14,7 +14,7 @@ const Success: React.FC = () => {
                 <BoldMsg>완료</BoldMsg>
                 되었습니다
             </Msg>
-            <Button onClick={push} > 시작하기 </Button>
+            <Button onClick={() => push('signin')} > 시작하기 </Button>
         </Box>
     );
 };

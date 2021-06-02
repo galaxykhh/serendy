@@ -10,7 +10,7 @@ import { usePush } from '../../hook/usePush';
 
 const ChangeNameBox: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<INickName>();
-    const { push } = usePush('signin');
+    const { push } = usePush();
 
     const onSubmit: SubmitHandler<INickName> = async (nickName) => {
         const userData = {
@@ -18,7 +18,7 @@ const ChangeNameBox: React.FC = () => {
             ...nickName,
         };
         const isSuccess = await flowResult(userStore.changeName(userData));
-        if (isSuccess) push();
+        if (isSuccess) push('signin');
     };
 
     return (

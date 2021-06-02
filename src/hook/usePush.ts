@@ -1,9 +1,9 @@
 import { useHistory } from 'react-router-dom';
 
-export const usePush = (path?: string | undefined) => {
+export const usePush = () => {
     const history = useHistory();
 
-    const push = () => {
+    const push = (path?: string | undefined) => {
         switch (path) {
             case 'main':
                 history.push('/main');

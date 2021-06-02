@@ -7,12 +7,12 @@ import { usePush } from '../../hook/usePush';
 import { DisplayType } from '../../interfaces';
 
 const Header: React.FC = observer(() => {
-    const { push } = usePush('main');
+    const { push } = usePush();
 
     return (
         <LogoBox
             visible={userStore.user ? 'block' : 'none'}
-            onClick={push}
+            onClick={() => push('main')}
         >
             <Logo />
         </LogoBox>

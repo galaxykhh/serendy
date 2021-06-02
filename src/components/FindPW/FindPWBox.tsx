@@ -1,25 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react';
-import { flowResult } from 'mobx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt, faUserSecret } from '@fortawesome/free-solid-svg-icons';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zoomIn } from '../../style/keyframes';
 import { theme } from '../../style/theme';
-import { usePush } from '../../hook/usePush';
-import { IFindPW } from '../../interfaces/index';
-import userStore from '../../store/userStore';
+import { IFindPW, IFindPWBox } from '../../interfaces/index';
 import { TextLogo } from '../SharedComponents/TextLogo';
 
-const FindPWBox: React.FC = observer(() => {
+const FindPWBox: React.FC<IFindPWBox>= observer(({ onSubmit }) => {
     const { register, handleSubmit, formState: { errors } } = useForm<IFindPW>();
-    const { push } = usePush('signin');
-
-    const onSubmit: SubmitHandler<IFindPW> = async (data) => {
-        const isSuccess =  await flowResult(userStore.findPW(data));
-        if (isSuccess) push();
-    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
@@ -141,9 +132,7 @@ const Button = styled.button`
     };
 `;
 
-const Icon = styled(FontAwesomeIcon) <{
-    color: string
-}>`
+const Icon = styled(FontAwesomeIcon) <{color: string}>`
     font-size: 35px;
     color: ${({ color }) => color};
     @media only screen and (max-width: 600px) {

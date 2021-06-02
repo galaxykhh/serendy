@@ -1,3 +1,4 @@
+import { SubmitHandler } from 'react-hook-form';
 import { Socket } from 'socket.io-client';
 
 export type DisplayType = 'block' | 'none';
@@ -45,6 +46,10 @@ export interface IMessageBox {
     socketID: boolean;
 };
 
+export interface IFindPWBox {
+    onSubmit: SubmitHandler<IFindPW>;
+};
+
 export interface IFindPW {
     account: string;
     secretMessage: string;
@@ -80,6 +85,12 @@ export interface IUserStore {
     user: IUser | null;
     userSocket: Socket | null;
     socketID: string | null;
+};
+
+export interface ISignInBox {
+    onSubmit: SubmitHandler<ISignInData>;
+    pushSignUp: () => void;
+    pushFindPW: () => void;
 };
 
 export interface IView {

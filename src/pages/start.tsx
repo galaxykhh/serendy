@@ -7,7 +7,7 @@ import Announces from '../components/Start/Announces';
 import { usePush } from '../hook/usePush';
 
 const Start: React.FC = () => {
-    const { push } = usePush('main');
+    const { push } = usePush();
 
     useEffect(() => {
         Aos.init();
@@ -15,8 +15,8 @@ const Start: React.FC = () => {
 
     return (
         <Wallpaper>
-            <StartLogo push={push} />
-            <Announces push={push} />
+            <StartLogo push={() => push('main')} />
+            <Announces push={() => push('main')} />
         </Wallpaper>
     );
 };

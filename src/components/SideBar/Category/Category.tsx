@@ -6,10 +6,7 @@ import { theme } from '../../../style/theme';
 import Box from './Box';
 
 const Category: React.FC = () => {
-    const chat = usePush('chat');
-    const post = usePush('post');
-    const recipients = usePush('recipients');
-    const sender = usePush('sender');
+    const { push } = usePush();
 
     const categoryList = [
         {
@@ -17,14 +14,14 @@ const Category: React.FC = () => {
             color: theme.colors.plum,
             icon: faComments,
             text: '대화 하기',
-            push: chat.push,
+            push: () => push('chat'),
         },
         {
             id: 2,
             color: theme.colors.plum,
             icon: faPaperPlane,
             text: '편지 보내기',
-            push: post.push,
+            push: () => push('post'),
 
         },
         {
@@ -32,14 +29,14 @@ const Category: React.FC = () => {
             color: theme.colors.yellow,
             icon: faEnvelopeOpenText,
             text: '받은 편지함',
-            push: recipients.push,
+            push: () => push('recipients'),
         },
         {
             id: 4,
             color: theme.colors.yellow,
             icon: faSignInAlt,
             text: '보낸 편지함',
-            push: sender.push,
+            push: () => push('sender'),
         },
     ];
 

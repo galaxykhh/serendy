@@ -42,7 +42,8 @@ const ChatPage: React.FC = observer(() => {
                 <ChatBox>
                     <ChatWindow />
                     <HandlerBox>
-                        <MatchHandler isSearching={chatStore.isSearching} 
+                        <MatchHandler
+                            isSearching={chatStore.isSearching} 
                             isMatched={chatStore.isMatched}
                             isFinished={chatStore.isFinished}
                         />

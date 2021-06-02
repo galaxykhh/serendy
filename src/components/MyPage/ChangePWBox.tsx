@@ -10,7 +10,7 @@ import { usePush } from '../../hook/usePush';
 
 const ChangePWBox: React.FC = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IPassword>();
-    const { push } = usePush('signin');
+    const { push } = usePush();
 
     const onSubmit: SubmitHandler<IPassword> = async (data) => {
         const userData = {
@@ -18,7 +18,7 @@ const ChangePWBox: React.FC = () => {
             ...data,
         };
         const isSuccess = await flowResult(userStore.changePW(userData));
-        if (isSuccess) push();
+        if (isSuccess) push('signin');
     };
 
     return (

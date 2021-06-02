@@ -9,18 +9,17 @@ import userStore from '../../../store/userStore';
 import Menu from './Menu';
 
 const UserInfo: React.FC = observer(() => {
-    const start = usePush();
-    const myPage = usePush('mypage');
+    const { push } = usePush();
 
     const signOut = () => {
         const isSuccess = userStore.signOut();
-        if (isSuccess) start.push();
+        if (isSuccess) push();
     };
     
     const menus = [
         {
             id: 1,
-            onClick: myPage.push,
+            onClick: () => push('mypage'),
             icon: faClipboard,
             text: '정보변경',    
         },

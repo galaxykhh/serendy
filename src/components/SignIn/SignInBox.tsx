@@ -2,41 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { theme } from '../../style/theme';
-import { usePush } from '../../hook/usePush';
 import userStore from '../../store/userStore';
 import { zoomIn } from '../../style/keyframes';
 import { observer } from 'mobx-react';
 import Loader from 'react-loader-spinner';
 import { ISignInData } from '../../interfaces';
 import { TextLogo } from '../SharedComponents/TextLogo';
+import { ISignInBox } from '../../interfaces';
 
-const SignInBox: React.FC = observer(() => {
-    const { register, handleSubmit, setError, formState: { errors } } = useForm<ISignInData>();
-    const main = usePush('main');
-    const findPW = usePush('findpw');
-    const signUp = usePush('signup');
-
-    const setErrors = (): void => {
-        setError('account', {
-            type: 'invalid',
-            message: 'ㅤ'
-        });
-        setError('password', {
-            type: 'invalid',
-            message: '아이디나 비밀번호를 다시 확인해주세요',
-        });
-    };
-
-    const onSubmit: SubmitHandler<ISignInData> = async (data) => {
-        const isSuccess = await userStore.signIn(data);
-        if (isSuccess) {
-            main.push();
-        } else {
-            setErrors();
-        };
-    };
+const SignInBox: React.FC<ISignInBox> = observer(({ onSubmit, pushSignUp, pushFindPW }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<ISignInData>();
 
     return (
         <>
@@ -84,9 +61,9 @@ const SignInBox: React.FC = observer(() => {
                         <Button type='submit'>
                             로그인
                         </Button>
-                        <Button onClick={signUp.push}>회원가입</Button>
+                        <Button onClick={pushSignUp}>회원가입</Button>
                     </ButtonBox>
-                        <ForgotPW onClick={findPW.push} >
+                        <ForgotPW onClick={pushFindPW} >
                             비밀번호가 기억이 안나시나요?
                         </ForgotPW>
                     </Box> 

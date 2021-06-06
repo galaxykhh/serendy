@@ -78,9 +78,9 @@ class ChatStore {
             this.setIsMatched(true);
             this.setVisible('visible');
             this.chatLog = [{
-            nickName: 'SERENDY',
-            message: '상대와 대화가 시작되었어요!',
-            socketID: 'admin',
+                nickName: 'SERENDY',
+                message: '상대와 대화가 시작되었어요!',
+                socketID: 'admin',
             }];
         });
     };

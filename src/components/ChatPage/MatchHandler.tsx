@@ -5,14 +5,15 @@ import FinishedChat from './FinishedChat';
 import MatchedChat from './MatchedChat';
 import SearchingChat from './SearchingChat';
 import { IMatchHandler } from '../../interfaces/index';
+import { observer } from 'mobx-react';
 
-const MatchHandler: React.FC<IMatchHandler> = ({ isSearching, isMatched, isFinished }) => {
+const MatchHandler: React.FC<IMatchHandler> = observer(({ isSearching, isMatched, isFinished }) => {
     if (!isSearching && !isMatched && !isFinished) return <BeforeChat />
     if (isSearching && !isMatched && !isFinished) return <SearchingChat />
     if (isSearching && isMatched && !isFinished) return <MatchedChat />
     if (isSearching && isMatched && isFinished) return <FinishedChat />
     return null;
-};
+});
 
 export default MatchHandler;
 

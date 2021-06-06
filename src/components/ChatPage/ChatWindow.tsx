@@ -29,8 +29,6 @@ const ChatWindow: React.FC = observer(() => {
             const data = { nickName, message };
             userStore.userSocket?.emit('chat', data);
             input.current!.value = '';
-        } else {
-            return;
         };
     };
 
@@ -38,8 +36,6 @@ const ChatWindow: React.FC = observer(() => {
         if (screen.current?.scrollHeight && screen.current?.clientHeight) {
             const scroll = screen.current.scrollHeight - screen.current.clientHeight;
             screen.current?.scrollTo(0, scroll);
-        } else {
-            return;
         };
     };
 
@@ -49,8 +45,8 @@ const ChatWindow: React.FC = observer(() => {
 
     useEffect(() => {
         chatStore.handlePushChat();
-        scrollToBottom();
         chatStore.resetRecentChat();
+        scrollToBottom();
     }, [chatStore.recentChat.message]); // eslint-disable-line
 
     return (

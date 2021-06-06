@@ -55,6 +55,12 @@ export interface IFindPW {
     secretMessage: string;
 };
 
+export interface ISignInBox {
+    onSubmit: SubmitHandler<ISignInData>;
+    pushSignUp: () => void;
+    pushFindPW: () => void;
+};
+
 export interface INickName {
     nickName: string;
 };
@@ -85,12 +91,6 @@ export interface IUserStore {
     user: IUser | null;
     userSocket: Socket | null;
     socketID: string | null;
-};
-
-export interface ISignInBox {
-    onSubmit: SubmitHandler<ISignInData>;
-    pushSignUp: () => void;
-    pushFindPW: () => void;
 };
 
 export interface IView {

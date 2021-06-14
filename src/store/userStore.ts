@@ -1,4 +1,4 @@
-import { action, computed, flow, makeObservable, observable } from "mobx";
+import { action, computed, flow, makeObservable, observable, runInAction } from "mobx";
 import authRepository from '../repository/authRepository';
 import { ISignInData, IPassword, INickName, IFindPW, IUserStore, IUser, ISignUpData } from '../interfaces';
 import { Socket } from 'socket.io-client';
@@ -74,9 +74,9 @@ class UserStore implements IUserStore {
             const token = localStorage.getItem('SerendyToken');
             if (token) {
                 this.setIsLogging(true);
-                const { data: { message, account, nickName, token } } = yield authRepository.signInWidthToken();
-                    if (message === 'SignIn Success') {
-                        this.setUser({ account , nickName });
+                const { data: { message, account, nickname, token } } = yield authRepository.signInWidthToken();
+                    if (message === 'signin success') {
+                        this.setUser({ account , nickname });
                         localStorage.setItem('SerendyToken', token);
                         this.setIsLogging(false);
                         return true;
@@ -92,9 +92,9 @@ class UserStore implements IUserStore {
     public *signIn(userData: ISignInData) {
         this.setIsLogging(true);
         try {
-            const { data: { message, account, nickName, token } } = yield authRepository.signIn(userData);
-            if (message === 'SignIn Success') {
-                this.setUser({ account, nickName });
+            const { data: { message, account, nickname, token } } = yield authRepository.signIn(userData);
+            if (message === 'signin success') {
+                this.setUser({ account, nickname });
                 localStorage.setItem('SerendyToken', token);
                 return true;
             };
@@ -110,7 +110,7 @@ class UserStore implements IUserStore {
     public *signUp(userData: ISignUpData) {
         try {
             const { data: { message } } = yield authRepository.signUp(userData);
-            if (message === 'SignUp Success') {
+            if (message === 'signup success') {
                 return true;
             };
             return false;
@@ -136,7 +136,7 @@ class UserStore implements IUserStore {
     public *changePW(data: IPassword) {
         try {
             const { data: { message }} = yield authRepository.changePassword(data);
-            if (message === 'Changed') {
+            if (message === 'changed') {
                 alert(`비밀번호가 변경되었습니다\n다시 로그인 해주세요`);
                 return this.signOut();
             };
@@ -145,10 +145,10 @@ class UserStore implements IUserStore {
         };
     };
     
-    public *changeName(nickName: INickName) {
+    public *changeName(nickname: INickName) {
         try {
-            const { data: { message }} = yield authRepository.changeName(nickName);
-            if (message === 'Changed') {
+            const { data: { message }} = yield authRepository.changeName(nickname);
+            if (message === 'changed') {
                 alert(`닉네임이 변경되었습니다\n다시 로그인 해주세요`)
                 return this.signOut();
             };
@@ -160,11 +160,11 @@ class UserStore implements IUserStore {
     public *findPW(data: IFindPW) {
         try {
             const { data: { message }} = yield authRepository.findPW(data);
-            if (message === 'Not Exist') {
+            if (message === 'not exist') {
                 alert('일치하는 정보가 없습니다');
                 return false;
             }
-            if (message === 'Valid User') {
+            if (message === 'valid user') {
                 alert(`임시로 암호 메세지가\n비밀번호로 설정되었습니다\n비밀번호 변경을 꼭 해주세요`);
                 return this.signOut();
             };

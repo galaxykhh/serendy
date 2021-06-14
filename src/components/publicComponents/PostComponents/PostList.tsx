@@ -9,7 +9,7 @@ const PostBox: React.FC<IPostBox> = ({ posts, whatPage,showPost }) => {
             {Array.isArray(posts) && posts.length > 0 ?
                 posts.map((x, i) => (
                     <Post
-                        nickName={x.nickName}
+                        nickname={x.nickname}
                         content={x.content}
                         key={i}
                         replied={x.comment === undefined}

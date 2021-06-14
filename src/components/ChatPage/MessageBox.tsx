@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { IMessageBox } from '../../interfaces';
 
-const MessageBox: React.FC<IMessageBox>= ({ nickName, message, socketID }) => {
+const MessageBox: React.FC<IMessageBox>= ({ nickname, message, socketID }) => {
     return (
         <Container fd={socketID ? 'row-reverse' : 'row'} >
             {socketID ?  
-                <OwnChatName> { nickName } </OwnChatName> :
-                <OthersName> { nickName }</OthersName>
+                <OwnChatName> { nickname } </OwnChatName> :
+                <OthersName> { nickname }</OthersName>
             }
             {socketID ? 
                 <OwnBalloon>

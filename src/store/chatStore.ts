@@ -8,7 +8,7 @@ class ChatStore {
     public isFinished: boolean = false;
     public visible: VisibilityType = 'hidden';
     public chatLog: IRecentChat[] = [];
-    public recentChat: IRecentChat = { nickName: '', message: '', socketID: '' };
+    public recentChat: IRecentChat = { nickname: '', message: '', socketID: '' };
 
     constructor() {
         makeObservable(this, {
@@ -52,7 +52,7 @@ class ChatStore {
     }
 
     public resetRecentChat(): void {
-        this.recentChat = { nickName: '', message: '', socketID: '' };
+        this.recentChat = { nickname: '', message: '', socketID: '' };
     };
 
     public handleCancel(): void {
@@ -78,7 +78,7 @@ class ChatStore {
             this.setIsMatched(true);
             this.setVisible('visible');
             this.chatLog = [{
-                nickName: 'SERENDY',
+                nickname: 'SERENDY',
                 message: '상대와 대화가 시작되었어요!',
                 socketID: 'admin',
             }];
@@ -88,7 +88,7 @@ class ChatStore {
     public handleReceiveMsg(): void {
         userStore.userSocket?.on('receive', (data, socketID) => {
             this.recentChat = {
-                nickName: data.nickName,
+                nickname: data.nickname,
                 message: data.message,
                 socketID: socketID
             };
@@ -105,7 +105,7 @@ class ChatStore {
         if (this.isSearching && this.isMatched && !this.isFinished) {
             this.setIsFinished(true);
             this.recentChat = {
-                nickName: 'SERENDY',
+                nickname: 'SERENDY',
                 message: '대화가 종료되었어요!',
                 socketID: 'admin',
             };

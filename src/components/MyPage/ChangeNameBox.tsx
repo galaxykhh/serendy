@@ -12,10 +12,10 @@ const ChangeNameBox: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<INickName>();
     const { push } = usePush();
 
-    const onSubmit: SubmitHandler<INickName> = async (nickName) => {
+    const onSubmit: SubmitHandler<INickName> = async (nickname) => {
         const userData = {
             account: userStore.user?.account,
-            ...nickName,
+            ...nickname,
         };
         const isSuccess = await flowResult(userStore.changeName(userData));
         if (isSuccess) push('signin');
@@ -29,7 +29,7 @@ const ChangeNameBox: React.FC = () => {
                     <Text style={{ color: 'plum', fontSize: '16px' }} >(닉네임은 중복이 가능합니다)</Text>
                     <InputBox>
                         <Icon icon={faPen} />
-                        <Input {...register('nickName', {
+                        <Input {...register('nickname', {
                             required: '변경할 닉네임을 입력해주세요',
                             pattern: { value: /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/, message: '닉네임에 적합한 문자가 아닙니다'},
                             minLength: { value: 2, message: '닉네임이 너무 짧아요' },
@@ -37,7 +37,7 @@ const ChangeNameBox: React.FC = () => {
                         })} />
                     </InputBox>
                     <TextBox>
-                        {errors.nickName && <ErrorMsg>{errors.nickName.message}</ErrorMsg>}
+                        {errors.nickname && <ErrorMsg>{errors.nickname.message}</ErrorMsg>}
                     </TextBox>
                     <Button
                         onClick={handleSubmit(onSubmit)}

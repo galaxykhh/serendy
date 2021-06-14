@@ -14,6 +14,7 @@ class AuthRepository {
     };
 
     public signIn(data: ISignInData): Promise<AxiosResponse> {
+        console.log(data);
         return serendyInstance.post(`${this.path}/signin`, data);
     };
 
@@ -25,8 +26,8 @@ class AuthRepository {
         return serendyInstance.post(`${this.path}/changepw`, data);
     };
 
-    public changeName(nickName: INickName): Promise<AxiosResponse> {
-        return serendyInstance.post(`${this.path}/changename`, nickName);
+    public changeName(nickname: INickName): Promise<AxiosResponse> {
+        return serendyInstance.post(`${this.path}/changename`, nickname);
     };
 
     public findPW(data: IFindPW): Promise<AxiosResponse> {

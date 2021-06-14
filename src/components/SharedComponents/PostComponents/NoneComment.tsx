@@ -2,7 +2,7 @@ import React from 'react';
 import { IView } from '../../../interfaces';
 import {
     LETTER,
-    NickName,
+    nickname,
     Content,
     CommentBox,
     Comment,
@@ -13,7 +13,7 @@ import {
 const NoneComment: React.FC<IView> = ({ post, whatPage, commentInput, sendComment }) => {
     return (
         <LETTER>
-            <NickName>{post?.nickName}님의 편지</NickName>
+            <nickname>{post?.nickname}님의 편지</nickname>
             <Content>
                 {post?.content}
             </Content>

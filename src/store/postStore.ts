@@ -60,11 +60,11 @@ class PostStore {
         try {
             const data = {
                 account: userStore.user?.account,
-                nickName: userStore.user?.nickName,
+                nickname: userStore.user?.nickname,
                 content: content,
             };
             const { data: { message }} = yield postRepository.sendPost(data);
-            if ((message === 'Send Success')) {
+            if ((message === 'send success')) {
                 return true
             };
         } catch(err) {
@@ -115,11 +115,11 @@ class PostStore {
             const data = {
                 _id: this.currentReceivedPost?._id,
                 toAccount: this.currentReceivedPost?.toAccount,
-                nickName: userStore.user?.nickName,
+                nickname: userStore.user?.nickname,
                 content: content,
             };
             const { data: { message, receivedPosts, currentReceivedPost}} = yield postRepository.sendComment(data);
-            if ((message === 'Success')) {
+            if ((message === 'success')) {
                 this.setReceivedPosts(receivedPosts);
                 this.setCurrentReceivedPost(currentReceivedPost);
             };

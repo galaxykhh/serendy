@@ -5,12 +5,12 @@ import { faCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { DisplayType } from '../../../interfaces';
 import { IPost } from '../../../interfaces';
 
-const Post: React.FC<IPost> = ({ nickName, content, whatPage, replied, showPost }) => {
+const Post: React.FC<IPost> = ({ nickname, content, whatPage, replied, showPost }) => {
     return (
         <Box onClick={showPost} >
             <Icon icon={faEnvelope} />
             <Column>
-                <FromAccount>보낸 사람 : {nickName}</FromAccount>
+                <FromAccount>보낸 사람 : {nickname}</FromAccount>
                 <MessagePreview> {content}  </MessagePreview>
                 {whatPage === 'sender' &&
                     <Alert

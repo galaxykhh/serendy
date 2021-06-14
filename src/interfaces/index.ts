@@ -7,41 +7,41 @@ export type MyPageType = 'none' | 'changeName' | 'changePW';
 type WhatPageType = 'sender' | 'recipients';
 
 export interface IRecentChat {
-    nickName: string;
+    nickname: string;
     message: string;
     socketID: string;
 };
 
 export interface IComment {
     _id: string | undefined;
-    nickName: string | undefined;
+    nickname: string | undefined;
     content: string | undefined;
 };
 
 export interface ISendComment {
     _id: string | undefined;
     toAccount: string | undefined;
-    nickName: string | null | undefined;
+    nickname: string | null | undefined;
     content: string | undefined;
 };
 
 export interface ISendPost {
     account: string | null | undefined;
-    nickName: string | null | undefined;
+    nickname: string | null | undefined;
     content: string | undefined;
 };
 
 export interface ICurrentPost {
     _id: string | undefined;
     toAccount: string | undefined;
-    nickName: string | undefined;
+    nickname: string | undefined;
     fromAccount: string | undefined;
     content: string | undefined;
     comment: IComment | undefined;
 };
 
 export interface IMessageBox {
-    nickName: string;
+    nickname: string;
     message: string;
     socketID: boolean;
 };
@@ -62,7 +62,7 @@ export interface ISignInBox {
 };
 
 export interface INickName {
-    nickName: string;
+    nickname: string;
 };
 
 export interface IPassword {
@@ -84,7 +84,7 @@ export interface ISignUpData {
 
 export interface IUser {
     account: string | null;
-    nickName: string | null;
+    nickname: string | null;
 };
 
 export interface IUserStore {
@@ -101,7 +101,7 @@ export interface IView {
 };
 
 export interface IPost {
-    nickName: string | undefined;
+    nickname: string | undefined;
     content: string | undefined;
     replied: boolean;
     whatPage: WhatPageType;

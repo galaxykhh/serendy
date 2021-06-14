@@ -43,7 +43,7 @@ const UserInfo: React.FC = observer(() => {
                     ml='7px'
                     size='16px'
                 >
-                    {userStore.user?.nickName}
+                    {userStore.user?.nickname}
                 </Text>
             </InfoBox>
             <MenuBox>

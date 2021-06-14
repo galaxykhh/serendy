@@ -7,12 +7,12 @@ import { IView } from '../../../interfaces';
 const HaveComment: React.FC<IView>= ({ post }) => {
     return (
         <LETTER>
-            <NickName> {post?.nickName}님의 편지 </NickName>
+            <nickname> {post?.nickname}님의 편지 </nickname>
             <Content>{post?.content}</Content>
             <CommentBox>
                     <Column>
                         <Icon icon={faUser} />
-                        <UserName> {post?.comment?.nickName} </UserName>
+                        <UserName> {post?.comment?.nickname} </UserName>
                     </Column>
                     <Comment> {post?.comment?.content} </Comment>
             </CommentBox>
@@ -39,7 +39,7 @@ export const LETTER = styled.div`
     background-color: ${({ theme }) => theme.colors.white10};
 `;
 
-export const NickName = styled.div`
+export const nickname = styled.div`
     width: 100%;
     height: 50px;
     line-height: 50px;

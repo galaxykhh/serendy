@@ -24,9 +24,9 @@ const ChatWindow: React.FC = observer(() => {
 
     const handleSendMsg = (): void => {
         if (input.current?.value.length !== 0) {
-            const nickName = userStore.user?.nickName;
+            const nickname = userStore.user?.nickname;
             const message = input.current?.value;
-            const data = { nickName, message };
+            const data = { nickname, message };
             userStore.userSocket?.emit('chat', data);
             input.current!.value = '';
         };
@@ -56,7 +56,7 @@ const ChatWindow: React.FC = observer(() => {
             <Screen ref={screen} >
                 {chatStore.chatLog.map((data, i) => (
                     <MessageBox message={data.message}
-                        nickName={data.nickName}
+                        nickname={data.nickname}
                         socketID={data.socketID === userStore.socketID}
                         key={i}
                     />

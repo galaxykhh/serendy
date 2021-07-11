@@ -2,6 +2,8 @@
 
 https://serendy.netlify.app/
 
+* 현재 서버가 내려갔습니다.
+
 ## Client
 * React + TypeScript
 * Styled Components
